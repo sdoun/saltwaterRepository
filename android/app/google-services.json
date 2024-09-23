@@ -1,0 +1,114 @@
+{
+  "project_info": {
+    "project_number": "333207855339",
+    "project_id": "salt-water-beta-ver1-4dujup",
+    "storage_bucket": "salt-water-beta-ver1-4dujup.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:333207855339:android:7e5e4f618564e71aaedeae",
+        "android_client_info": {
+          "package_name": "com.mycompany.saltwaterbetaver1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "333207855339-ae7a5una2gansskcoct3braauih3bpuv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.saltwaterbetaver1",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "333207855339-cpkg9nim9vuea3rfa0uule6g4ojtim2b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.saltwaterbetaver1",
+            "certificate_hash": "5eaae432921764b96b73fd2c33a23a8a50bc2b2c"
+          }
+        },
+        {
+          "client_id": "333207855339-bu1a8v0k0lq8vdju1udlg1a8p90o6ah5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYsIZg_YVh4-PpAUejf5rMdy7zz3Jk78c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "333207855339-bu1a8v0k0lq8vdju1udlg1a8p90o6ah5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "333207855339-mlaeb3m53qjfdk0c81rma61tam015sb7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.saltwaterbetaver1"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:333207855339:android:7dde8454a7d20c23aedeae",
+        "android_client_info": {
+          "package_name": "com.mycompany.saltwaterpoint"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "333207855339-br154av1vg5ju2moq2dfghhqo8dhfmes.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.saltwaterpoint",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "333207855339-v97jsbfg0km7s75f9eh0k6a3v9dg7eli.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.saltwaterpoint",
+            "certificate_hash": "5eaae432921764b96b73fd2c33a23a8a50bc2b2c"
+          }
+        },
+        {
+          "client_id": "333207855339-bu1a8v0k0lq8vdju1udlg1a8p90o6ah5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYsIZg_YVh4-PpAUejf5rMdy7zz3Jk78c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "333207855339-bu1a8v0k0lq8vdju1udlg1a8p90o6ah5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "333207855339-mlaeb3m53qjfdk0c81rma61tam015sb7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.saltwaterbetaver1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

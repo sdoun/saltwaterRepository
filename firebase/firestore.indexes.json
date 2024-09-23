@@ -1,0 +1,98 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "TB_chat",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {
+          "fieldPath": "chat_isRead",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "chat_chatRoom",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "chat_createdBy",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "TB_chatRoom",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "room_used",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "room_participant",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "room_createdAt",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "TB_chat",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "chat_chatRoom",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "chat_sendBy",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "chat_createdAt",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "TB_chatRoom",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "room_postDocID",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "room_participants",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "room_createdAt",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": [
+    {
+      "collectionGroup": "fcm_tokens",
+      "fieldPath": "fcm_token",
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "TB_userReview_point",
+      "fieldPath": "review_written_by",
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    }
+  ]
+}

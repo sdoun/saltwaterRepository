@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>333207855339-mlaeb3m53qjfdk0c81rma61tam015sb7.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.333207855339-mlaeb3m53qjfdk0c81rma61tam015sb7</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>333207855339-ae7a5una2gansskcoct3braauih3bpuv.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDkoN5VSILFb7Zh6-rkXjudORqtQ9wqNg8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>333207855339</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mycompany.saltwaterbetaver1</string>
+	<key>PROJECT_ID</key>
+	<string>salt-water-beta-ver1-4dujup</string>
+	<key>STORAGE_BUCKET</key>
+	<string>salt-water-beta-ver1-4dujup.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:333207855339:ios:e8f1ba91d32bc0e4aedeae</string>
+</dict>
+</plist>
