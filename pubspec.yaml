@@ -133,6 +133,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
+  flutter_chat_bubble: ^2.0.2
 
 dependency_overrides:
   http: 1.2.1
@@ -168,6 +169,15 @@ flutter:
     - assets/rive_animations/
     - assets/pdfs/
   fonts:
+    - family: 'AugroSeriesBold'
+      fonts:
+      - asset: assets/fonts/SB-어그로-B.ttf
+    - family: 'AugroSeriesMediun'
+      fonts:
+        - asset: assets/fonts/SB-어그로-M.ttf
+    - family: 'AugroSeriesLight'
+      fonts:
+        - asset: assets/fonts/SB-어그로-L.ttf
     - family: 'PretendardSeries'
       fonts:
         - asset: assets/fonts/Pretendard-Thin.otf

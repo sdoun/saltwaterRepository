@@ -39,7 +39,7 @@ Future<List<String>?> sWFilterSumString(
     for (final documentSnapshot in querySnapshot.docs) {
       // Get the 'point_tags' field value and convert to a List<String>
       final tags = List<String>.from(
-          documentSnapshot.get('point_tags') as List<dynamic>);
+          documentSnapshot.get('point_tags') as List<dynamic>) + documentSnapshot.get('point_fishes') as List<dynamic>;
 
       // Add true items from 'point_tags_boolen' to tagsFromBoolenStruct
 

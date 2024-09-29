@@ -46,7 +46,7 @@ abstract class FlutterFlowTheme {
   @Deprecated('Use tertiary instead')
   Color get tertiaryColor => tertiary;
 
-  late Color primary;
+  Color primary = const Color(0xff1576FB);
   late Color secondary;
   late Color tertiary;
   late Color alternate;

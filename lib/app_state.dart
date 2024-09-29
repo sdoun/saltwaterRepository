@@ -471,7 +471,7 @@ class FFAppState extends ChangeNotifier {
     updateFn(_termsAgreement);
   }
 
-  String _mapTypeString = '일반';
+  String _mapTypeString = '하이브리드';
   String get mapTypeString => _mapTypeString;
   set mapTypeString(String value) {
     _mapTypeString = value;

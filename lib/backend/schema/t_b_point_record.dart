@@ -102,6 +102,8 @@ class TBPointRecord extends FirestoreRecord {
 
   // "point_involvedVideo" field.
   List<String>? _pointInvolvedVideo;
+
+  var pointIntroductionab;
   List<String> get pointInvolvedVideo => _pointInvolvedVideo ?? const [];
   bool hasPointInvolvedVideo() => _pointInvolvedVideo != null;
 
@@ -119,7 +121,7 @@ class TBPointRecord extends FirestoreRecord {
     _pointFishing = getDataList(snapshotData['point_fishing']);
     _pointFishes = getDataList(snapshotData['point_fishes']);
     _pointInvolvedLink = getDataList(snapshotData['point_involvedLink']);
-    _pointIntroduction = snapshotData['point_introduction'] as String?;
+    _pointIntroduction = snapshotData['pont_introduction'] as String?;
     _pointSpecialNote = snapshotData['point_specialNote'] as String?;
     _pointArround = snapshotData['point_arround'] as String?;
     _pointImages = getDataList(snapshotData['point_images']);
@@ -183,7 +185,7 @@ Map<String, dynamic> createTBPointRecordData({
       'point_address': pointAddress,
       'point_notfree': pointNotfree,
       'point_iconpath': pointIconpath,
-      'point_introduction': pointIntroduction,
+      'pont_introduction': pointIntroduction,
       'point_specialNote': pointSpecialNote,
       'point_arround': pointArround,
     }.withoutNulls,

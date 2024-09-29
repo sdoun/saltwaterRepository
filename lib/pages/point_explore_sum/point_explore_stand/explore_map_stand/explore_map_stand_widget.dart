@@ -24,6 +24,7 @@ export 'explore_map_stand_model.dart';
 
 import 'package:salt_water_beta_ver1/reusable/pointExplore/standFilterButton.dart';
 import 'package:salt_water_beta_ver1/reusable/pointExplore/fishChoiceChips.dart';
+import 'package:salt_water_beta_ver1/reusable/pointExplore/mapSelectButton.dart';
 
 class ExploreMapStandWidget extends StatefulWidget {
   const ExploreMapStandWidget({super.key});
@@ -199,6 +200,7 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
                                                   BorderRadius.circular(8.0),
                                               border: Border.all(
                                                 color: FlutterFlowTheme.of(context).primary,
+                                                width: 2,
                                               ),
                                             ),
                                             alignment:
@@ -386,7 +388,7 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
                                         0.0, 0.0, 0.0, 0.0),
                                     iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
-                                    color: Colors.black,
+                                    color: FlutterFlowTheme.of(context).primary,
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(
@@ -479,60 +481,7 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
                                       },
                                     ),
                                   ),
-                                  Align(
-                                    alignment: const AlignmentDirectional(1.0, -1.0),
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 8.0, 8.0, 0.0),
-                                      child: InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          await showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            backgroundColor: Colors.transparent,
-                                            enableDrag: false,
-                                            context: context,
-                                            builder: (context) {
-                                              return WebViewAware(
-                                                child: GestureDetector(
-                                                  onTap: () =>
-                                                      FocusScope.of(context)
-                                                          .unfocus(),
-                                                  child: Padding(
-                                                    padding:
-                                                        MediaQuery.viewInsetsOf(
-                                                            context),
-                                                    child:
-                                                        const MapTypeSelectWidget(),
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ).then(
-                                              (value) => safeSetState(() {}));
-                                        },
-                                        child: Container(
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
-                                                  0.08,
-                                          height:
-                                              MediaQuery.sizeOf(context).width *
-                                                  0.08,
-                                          clipBehavior: Clip.antiAlias,
-                                          decoration: const BoxDecoration(
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Image.asset(
-                                            'assets/images/KakaoTalk_20240717_160550314.png',
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  const Mapselectbutton(),
                                 ],
                               ),
                             ),

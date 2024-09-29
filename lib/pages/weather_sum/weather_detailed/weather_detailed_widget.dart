@@ -243,7 +243,6 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                       children: [
                                         Material(
                                           color: Colors.transparent,
-                                          elevation: 4.0,
                                           shape: const RoundedRectangleBorder(
                                             borderRadius: BorderRadius.only(
                                               bottomLeft: Radius.circular(12.0),
@@ -260,57 +259,35 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
-                                              borderRadius: const BorderRadius.only(
-                                                bottomLeft:
-                                                    Radius.circular(12.0),
-                                                bottomRight:
-                                                    Radius.circular(12.0),
-                                                topLeft: Radius.circular(12.0),
-                                                topRight: Radius.circular(12.0),
-                                              ),
                                             ),
                                             child: Padding(
                                               padding: const EdgeInsetsDirectional
                                                   .fromSTEB(8.0, 0.0, 8.0, 0.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Icon(
-                                                    Icons.pin_drop_outlined,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    size: 32.0,
-                                                  ),
-                                                  Text(
-                                                    weatherDetailedTBWeatherPointRecord
-                                                        .name,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          fontSize: 18.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
-                                                        ),
-                                                  ),
-                                                ].divide(const SizedBox(width: 8.0)),
+                                              child: Text(
+                                                weatherDetailedTBWeatherPointRecord
+                                                    .name,
+                                                style: FlutterFlowTheme.of(
+                                                    context)
+                                                    .bodyMedium
+                                                    .override(
+                                                  fontFamily:
+                                                  FlutterFlowTheme.of(
+                                                      context)
+                                                      .bodyMediumFamily,
+                                                  color: FlutterFlowTheme
+                                                      .of(context)
+                                                      .secondaryText,
+                                                  fontSize: 18.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                  FontWeight.w600,
+                                                  useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                      .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                          context)
+                                                          .bodyMediumFamily),
+                                                ),
                                               ),
                                             ),
                                           ),

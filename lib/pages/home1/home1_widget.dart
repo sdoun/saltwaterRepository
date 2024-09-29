@@ -1,3 +1,4 @@
+import 'package:salt_water_beta_ver1/reusable/home1/pointAdsPageview.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '/auth/firebase_auth/auth_util.dart';
@@ -88,83 +89,105 @@ class _Home1WidgetState extends State<Home1Widget> {
             appBar: AppBar(
               backgroundColor: Colors.white,
               automaticallyImplyLeading: false,
+              leadingWidth: 180.0,
               leading: Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(
                     12, 0, 0, 0
                   ),
-                child: Image.asset('assets/images/KakaoTalk_20240913_183755149.png'),
+                child: Row(
+                  children: [
+                    Image.asset('assets/images/KakaoTalk_20240913_183755149.png'),
+                    Text(
+                      '짠물투어',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontFamily: 'AugroSeriesBold',
+                        color: FlutterFlowTheme.of(context).primary,
+                      ),
+                    )
+                  ],
+                ),
               ),
-              title: Align(
-                alignment: const AlignmentDirectional(1.0, 0.0),
-                child: StreamBuilder<List<TBChatRecord>>(
-                  stream: queryTBChatRecord(
-                    queryBuilder: (tBChatRecord) => tBChatRecord
-                        .where(
+              title: const Align(
+                alignment: AlignmentDirectional(1.0, 0.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [],
+                ),
+              ),
+              actions: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    StreamBuilder<List<TBChatRecord>>(
+                      stream: queryTBChatRecord(
+                        queryBuilder: (tBChatRecord) => tBChatRecord
+                            .where(
                           'chat_isRead',
                           isEqualTo: false,
                         )
-                        .whereIn(
+                            .whereIn(
                             'chat_chatRoom',
                             home1TBChatRoomRecordList
                                 .map((e) => e.reference)
                                 .toList())
-                        .where(
+                            .where(
                           'chat_createdBy',
                           isNotEqualTo: currentUserReference,
                         ),
-                  ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return const Center(
-                        child: SizedBox(
-                          width: 50.0,
-                          height: 36.0,
-                        ),
-                      );
-                    }
-                    List<TBChatRecord> badgeTBChatRecordList = snapshot.data!;
+                      ),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return const Center(
+                            child: SizedBox(
+                              width: 50.0,
+                              height: 36.0,
+                            ),
+                          );
+                        }
+                        List<TBChatRecord> badgeTBChatRecordList = snapshot.data!;
 
-                    return InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        await showModalBottomSheet(
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          enableDrag: false,
-                          context: context,
-                          builder: (context) {
-                            return WebViewAware(
-                              child: GestureDetector(
-                                onTap: () => FocusScope.of(context).unfocus(),
-                                child: Padding(
-                                  padding: MediaQuery.viewInsetsOf(context),
-                                  child: SizedBox(
-                                    height: 480.0,
-                                    child: UnReadChatWidget(
-                                      unReadChat: badgeTBChatRecordList
-                                          .map((e) => e.reference)
-                                          .toList(),
+                        return InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            await showModalBottomSheet(
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              enableDrag: false,
+                              context: context,
+                              builder: (context) {
+                                return WebViewAware(
+                                  child: GestureDetector(
+                                    onTap: () => FocusScope.of(context).unfocus(),
+                                    child: Padding(
+                                      padding: MediaQuery.viewInsetsOf(context),
+                                      child: SizedBox(
+                                        height: 480.0,
+                                        child: UnReadChatWidget(
+                                          unReadChat: badgeTBChatRecordList
+                                              .map((e) => e.reference)
+                                              .toList(),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                            );
+                                );
+                              },
+                            ).then((value) => safeSetState(() {}));
                           },
-                        ).then((value) => safeSetState(() {}));
-                      },
-                      child: badges.Badge(
-                        badgeContent: Text(
-                          valueOrDefault<String>(
-                            badgeTBChatRecordList.length.toString(),
-                            '0',
-                          ),
-                          style: FlutterFlowTheme.of(context)
-                              .titleSmall
-                              .override(
+                          child: badges.Badge(
+                            badgeContent: Text(
+                              valueOrDefault<String>(
+                                badgeTBChatRecordList.length.toString(),
+                                '0',
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
                                 fontFamily: FlutterFlowTheme.of(context)
                                     .titleSmallFamily,
                                 color: FlutterFlowTheme.of(context)
@@ -174,41 +197,36 @@ class _Home1WidgetState extends State<Home1Widget> {
                                     FlutterFlowTheme.of(context)
                                         .titleSmallFamily),
                               ),
-                        ),
-                        showBadge: true,
-                        shape: badges.BadgeShape.circle,
-                        badgeColor: FlutterFlowTheme.of(context).primary,
-                        elevation: 4.0,
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(4.0, 8.0, 4.0, 8.0),
-                        position: badges.BadgePosition.topEnd(),
-                        animationType: badges.BadgeAnimationType.scale,
-                        toAnimate: true,
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 20.0, 0.0),
-                          child: Container(
-                            width: 36.0,
-                            height: 36.0,
-                            clipBehavior: Clip.antiAlias,
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
                             ),
-                            child: Image.asset(
-                              'assets/images/q3052_.png',
-                              fit: BoxFit.cover,
+                            showBadge: true,
+                            shape: badges.BadgeShape.circle,
+                            badgeColor: FlutterFlowTheme.of(context).primary,
+                            elevation: 4.0,
+                            padding:
+                            const EdgeInsetsDirectional.fromSTEB(4.0, 4.0, 4.0, 4.0),
+                            position: badges.BadgePosition.topEnd(),
+                            animationType: badges.BadgeAnimationType.scale,
+                            toAnimate: true,
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              child: Container(
+                                width: 36.0,
+                                height: 36.0,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Image.asset(
+                                  'assets/images/q3052_.png',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              actions: [
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
+                        );
+                      },
+                    ),
                     InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -290,8 +308,8 @@ class _Home1WidgetState extends State<Home1Widget> {
                                                 .override(
                                                   fontFamily:
                                                       'PretendardSeries',
-                                                  color: Colors.black,
-                                                  fontSize: 20.0,
+                                                  color: FlutterFlowTheme.of(context).primaryText,
+                                                  fontSize: 15.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w800,
                                                   useGoogleFonts: GoogleFonts
@@ -301,12 +319,11 @@ class _Home1WidgetState extends State<Home1Widget> {
                                                 ),
                                           ),
                                         ),
-                                        Icon(
-                                          Icons.local_fire_department_sharp,
-                                          color: FlutterFlowTheme.of(context)
-                                              .accent1,
-                                          size: 24.0,
-                                        ),
+                                        Image.asset(
+                                          'assets/images/검색.png',
+                                          width: 30,
+                                          height: 30,
+                                        )
                                       ],
                                     ),
                                     Padding(
@@ -394,6 +411,14 @@ class _Home1WidgetState extends State<Home1Widget> {
                                 ),
                               ),
                             ),
+                            const Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  12.0, 8.0, 12.0, 0.0),
+                              child: Divider(
+                                color: Color(0xffbbbbbb),
+                                thickness: 1.5,
+                              ),
+                            ),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   12.0, 8.0, 12.0, 0.0),
@@ -418,8 +443,8 @@ class _Home1WidgetState extends State<Home1Widget> {
                                                 .override(
                                                   fontFamily:
                                                       'PretendardSeries',
-                                                  color: Colors.black,
-                                                  fontSize: 20.0,
+                                                  color: FlutterFlowTheme.of(context).primaryText,
+                                                  fontSize: 15.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w800,
                                                   useGoogleFonts: GoogleFonts
@@ -429,12 +454,11 @@ class _Home1WidgetState extends State<Home1Widget> {
                                                 ),
                                           ),
                                         ),
-                                        Icon(
-                                          Icons.settings_outlined,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          size: 24.0,
-                                        ),
+                                        Image.asset(
+                                          'assets/images/전문가용낚시.png',
+                                          width: 30,
+                                          height: 30,
+                                        )
                                       ],
                                     ),
                                     Padding(
@@ -450,7 +474,7 @@ class _Home1WidgetState extends State<Home1Widget> {
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                              MainAxisAlignment.spaceEvenly,
                                           children: [
                                             Fishbutton(
                                                 text: '돔',
@@ -479,8 +503,8 @@ class _Home1WidgetState extends State<Home1Widget> {
                           ],
                         ),
                       ),
-                      const Homeadspageview(
-                      ),
+
+                      const PointAdsPageview(),
                     ],
                   ),
                   Align(

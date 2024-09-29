@@ -47,6 +47,7 @@ class _StandfilterbuttonState extends State<Standfilterbutton> {
                   ? FlutterFlowTheme.of(context)
                   .primary
                   : const Color(0xff949494),
+              width: 2,
             ),
           ),
           alignment:

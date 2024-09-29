@@ -104,7 +104,7 @@ class _ServiceIsNotReadyWidgetState extends State<ServiceIsNotReadyWidget> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
-                        'assets/images/preparation_1.png',
+                        'assets/images/서비스준비중.png',
                         width: 320.0,
                         height: 200.0,
                         fit: BoxFit.cover,

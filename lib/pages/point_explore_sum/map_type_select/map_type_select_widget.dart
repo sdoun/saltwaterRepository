@@ -43,7 +43,7 @@ class _MapTypeSelectWidgetState extends State<MapTypeSelectWidget> {
 
     return Container(
       width: double.infinity,
-      height: MediaQuery.sizeOf(context).height * 0.3,
+      height: MediaQuery.sizeOf(context).height * 0.33,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
         borderRadius: const BorderRadius.only(
@@ -58,6 +58,7 @@ class _MapTypeSelectWidgetState extends State<MapTypeSelectWidget> {
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 '지도 설정',
@@ -246,10 +247,35 @@ class _MapTypeSelectWidgetState extends State<MapTypeSelectWidget> {
                                         .bodyMediumFamily),
                               ),
                         ),
+
                       ],
                     ),
                   ),
                 ],
+              ),
+              InkWell(
+                child: Container(
+                  margin: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                  alignment: const Alignment(0, 0),
+                  height: MediaQuery.of(context).size.height*0.05,
+                  width: MediaQuery.of(context).size.width*0.25,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: FlutterFlowTheme.of(context).primary,
+                  ),
+                  child: const Text(
+                    '선택완료',
+                    style: TextStyle(
+                      fontFamily: 'PretendardSeries',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                onTap: () async{
+                  Navigator.pop(context);
+                },
               ),
             ].divide(const SizedBox(height: 4.0)),
           ),

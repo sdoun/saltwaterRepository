@@ -119,7 +119,7 @@ class _NaverMapWidgetPointCopyState extends State<NaverMapWidgetPointCopy> {
           widget.onClickMarker
               .call(widget.pointList![int.parse(marker.info.id)]);
         });
-        setState(() async {
+        setState((){
           NOverlayImage image;
           image = createMarkerIcon(marker);
           marker.setIcon(image);

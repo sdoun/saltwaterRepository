@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'ocean2nd_filter_model.dart';
 export 'ocean2nd_filter_model.dart';
 
+import 'package:salt_water_beta_ver1/reusable/pointExplore/filterCheckBox.dart';
+
 class Ocean2ndFilterWidget extends StatefulWidget {
   const Ocean2ndFilterWidget({super.key});
 
@@ -26,6 +28,11 @@ class _Ocean2ndFilterWidgetState extends State<Ocean2ndFilterWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => Ocean2ndFilterModel());
+    _model.checkboxValue1 = false;
+    _model.checkboxValue2 = false;
+    _model.checkboxValue3 = false;
+    _model.checkboxValue4 = false;
+    _model.checkboxValue5 = false;
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -46,15 +53,15 @@ class _Ocean2ndFilterWidgetState extends State<Ocean2ndFilterWidget> {
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
-          topLeft: Radius.circular(12.0),
-          topRight: Radius.circular(12.0),
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
         ),
       ),
       child: Container(
         width: 351.0,
         height: 380.0,
         decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).secondaryBackground,
+          color: FlutterFlowTheme.of(context).primaryBackground,
           borderRadius: const BorderRadius.only(
             bottomLeft: Radius.circular(0.0),
             bottomRight: Radius.circular(0.0),
@@ -70,13 +77,13 @@ class _Ocean2ndFilterWidgetState extends State<Ocean2ndFilterWidget> {
               Text(
                 '인근편의시설',
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                      fontSize: 20.0,
-                      letterSpacing: 0.0,
-                      fontWeight: FontWeight.w600,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).bodyMediumFamily),
-                    ),
+                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                  fontSize: 19.0,
+                  letterSpacing: 0.0,
+                  fontWeight: FontWeight.w700,
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                      FlutterFlowTheme.of(context).bodyMediumFamily),
+                ),
               ),
               Divider(
                 thickness: 1.0,
@@ -86,407 +93,54 @@ class _Ocean2ndFilterWidgetState extends State<Ocean2ndFilterWidget> {
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 1.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-                      child: Container(
-                        height: 44.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(8.0),
-                            bottomRight: Radius.circular(8.0),
-                            topLeft: Radius.circular(8.0),
-                            topRight: Radius.circular(8.0),
-                          ),
-                          border: Border.all(
-                            color: const Color(0xFF545454),
-                            width: 1.0,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              5.0, 0.0, 8.0, 0.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Align(
-                                alignment: const AlignmentDirectional(0.0, 0.0),
-                                child: Theme(
-                                  data: ThemeData(
-                                    checkboxTheme: CheckboxThemeData(
-                                      visualDensity: VisualDensity.compact,
-                                      materialTapTargetSize:
-                                          MaterialTapTargetSize.shrinkWrap,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(4.0),
-                                      ),
-                                    ),
-                                    unselectedWidgetColor:
-                                        FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                  ),
-                                  child: Checkbox(
-                                    value: _model.checkboxValue1 ??= false,
-                                    onChanged: (newValue) async {
-                                      safeSetState(() =>
-                                          _model.checkboxValue1 = newValue!);
-                                    },
-                                    side: BorderSide(
-                                      width: 2,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                    ),
-                                    activeColor: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    checkColor: Colors.black,
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: const AlignmentDirectional(0.0, 0.0),
-                                child: Text(
-                                  '식당',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'PretendardSeries',
-                                        fontSize: 17.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w600,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey('PretendardSeries'),
-                                      ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                    Filtercheckbox(
+                        filterText: '식   당',
+                        checkBoxValue: _model.checkboxValue1,
+                        onChecked: (newValue) async {
+                          safeSetState(() =>
+                          _model.checkboxValue1 = newValue!);
+                        },
                     ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-                      child: Container(
-                        height: 44.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(8.0),
-                            bottomRight: Radius.circular(8.0),
-                            topLeft: Radius.circular(8.0),
-                            topRight: Radius.circular(8.0),
-                          ),
-                          border: Border.all(
-                            color: const Color(0xFF545454),
-                            width: 1.0,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              5.0, 0.0, 8.0, 0.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Align(
-                                alignment: const AlignmentDirectional(0.0, 0.0),
-                                child: Theme(
-                                  data: ThemeData(
-                                    checkboxTheme: CheckboxThemeData(
-                                      visualDensity: VisualDensity.compact,
-                                      materialTapTargetSize:
-                                          MaterialTapTargetSize.shrinkWrap,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(4.0),
-                                      ),
-                                    ),
-                                    unselectedWidgetColor:
-                                        FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                  ),
-                                  child: Checkbox(
-                                    value: _model.checkboxValue2 ??= false,
-                                    onChanged: (newValue) async {
-                                      safeSetState(() =>
-                                          _model.checkboxValue2 = newValue!);
-                                    },
-                                    side: BorderSide(
-                                      width: 2,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                    ),
-                                    activeColor: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    checkColor: Colors.black,
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: const AlignmentDirectional(0.0, 0.0),
-                                child: Text(
-                                  '매점',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'PretendardSeries',
-                                        color: Colors.black,
-                                        fontSize: 17.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w600,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey('PretendardSeries'),
-                                      ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                    Filtercheckbox(
+                      filterText: '매   점',
+                      checkBoxValue: _model.checkboxValue2,
+                      onChecked: (newValue) async {
+                        safeSetState(() =>
+                        _model.checkboxValue2 = newValue!);
+                      },
                     ),
-                    Container(
-                      height: 44.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(8.0),
-                          bottomRight: Radius.circular(8.0),
-                          topLeft: Radius.circular(8.0),
-                          topRight: Radius.circular(8.0),
-                        ),
-                        border: Border.all(
-                          color: const Color(0xFF545454),
-                          width: 1.0,
-                        ),
-                      ),
-                      child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 8.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
-                              child: Theme(
-                                data: ThemeData(
-                                  checkboxTheme: CheckboxThemeData(
-                                    visualDensity: VisualDensity.compact,
-                                    materialTapTargetSize:
-                                        MaterialTapTargetSize.shrinkWrap,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4.0),
-                                    ),
-                                  ),
-                                  unselectedWidgetColor:
-                                      FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                ),
-                                child: Checkbox(
-                                  value: _model.checkboxValue3 ??= false,
-                                  onChanged: (newValue) async {
-                                    safeSetState(() =>
-                                        _model.checkboxValue3 = newValue!);
-                                  },
-                                  side: BorderSide(
-                                    width: 2,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                  ),
-                                  activeColor: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  checkColor: Colors.black,
-                                ),
-                              ),
-                            ),
-                            Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
-                              child: Text(
-                                '낚시방',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'PretendardSeries',
-                                      color: Colors.black,
-                                      fontSize: 17.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w600,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey('PretendardSeries'),
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    Filtercheckbox(
+                      filterText: '낚시방',
+                      checkBoxValue: _model.checkboxValue3,
+                      onChecked: (newValue) async {
+                        safeSetState(() =>
+                        _model.checkboxValue3 = newValue!);
+                      },
                     ),
                   ],
                 ),
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-                    child: Container(
-                      height: 44.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(8.0),
-                          bottomRight: Radius.circular(8.0),
-                          topLeft: Radius.circular(8.0),
-                          topRight: Radius.circular(8.0),
-                        ),
-                        border: Border.all(
-                          color: const Color(0xFF545454),
-                          width: 1.0,
-                        ),
-                      ),
-                      child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 8.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
-                              child: Theme(
-                                data: ThemeData(
-                                  checkboxTheme: CheckboxThemeData(
-                                    visualDensity: VisualDensity.compact,
-                                    materialTapTargetSize:
-                                        MaterialTapTargetSize.shrinkWrap,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4.0),
-                                    ),
-                                  ),
-                                  unselectedWidgetColor:
-                                      FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                ),
-                                child: Checkbox(
-                                  value: _model.checkboxValue4 ??= false,
-                                  onChanged: (newValue) async {
-                                    safeSetState(() =>
-                                        _model.checkboxValue4 = newValue!);
-                                  },
-                                  side: BorderSide(
-                                    width: 2,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                  ),
-                                  activeColor: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  checkColor: Colors.black,
-                                ),
-                              ),
-                            ),
-                            Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
-                              child: Text(
-                                '숙소',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'PretendardSeries',
-                                      color: Colors.black,
-                                      fontSize: 17.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w600,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey('PretendardSeries'),
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                  Filtercheckbox(
+                    filterText: '숙   소',
+                    checkBoxValue: _model.checkboxValue4,
+                    onChecked: (newValue) async {
+                      safeSetState(() =>
+                      _model.checkboxValue4 = newValue!);
+                    },
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-                    child: Container(
-                      height: 44.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(8.0),
-                          bottomRight: Radius.circular(8.0),
-                          topLeft: Radius.circular(8.0),
-                          topRight: Radius.circular(8.0),
-                        ),
-                        border: Border.all(
-                          color: const Color(0xFF545454),
-                          width: 1.0,
-                        ),
-                      ),
-                      child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 8.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
-                              child: Theme(
-                                data: ThemeData(
-                                  checkboxTheme: CheckboxThemeData(
-                                    visualDensity: VisualDensity.compact,
-                                    materialTapTargetSize:
-                                        MaterialTapTargetSize.shrinkWrap,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4.0),
-                                    ),
-                                  ),
-                                  unselectedWidgetColor:
-                                      FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                ),
-                                child: Checkbox(
-                                  value: _model.checkboxValue5 ??= false,
-                                  onChanged: (newValue) async {
-                                    safeSetState(() =>
-                                        _model.checkboxValue5 = newValue!);
-                                  },
-                                  side: BorderSide(
-                                    width: 2,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                  ),
-                                  activeColor: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  checkColor: Colors.black,
-                                ),
-                              ),
-                            ),
-                            Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
-                              child: Text(
-                                '화장실',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'PretendardSeries',
-                                      fontSize: 17.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w600,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey('PretendardSeries'),
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                  Filtercheckbox(
+                    filterText: '화장실',
+                    checkBoxValue: _model.checkboxValue5,
+                    onChecked: (newValue) async {
+                      safeSetState(() =>
+                      _model.checkboxValue5 = newValue!);
+                    },
                   ),
                 ],
               ),
@@ -512,30 +166,25 @@ class _Ocean2ndFilterWidgetState extends State<Ocean2ndFilterWidget> {
                 child: Container(
                   width: 100.0,
                   height: 43.0,
-                  decoration: const BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(8.0),
-                      bottomRight: Radius.circular(8.0),
-                      topLeft: Radius.circular(8.0),
-                      topRight: Radius.circular(8.0),
-                    ),
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).primary,
+                    borderRadius: BorderRadius.circular(15),
                   ),
                   child: Align(
                     alignment: const AlignmentDirectional(0.0, 0.0),
                     child: Text(
                       '선택완료',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyMediumFamily,
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            fontSize: 17.0,
-                            letterSpacing: 0.0,
-                            fontWeight: FontWeight.w500,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyMediumFamily),
-                          ),
+                        fontFamily:
+                        'PretendardSeries',
+                        color: FlutterFlowTheme.of(context)
+                            .primaryBackground,
+                        fontSize: 15.0,
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.w500,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            'PretendardSeries'),
+                      ),
                     ),
                   ),
                 ),

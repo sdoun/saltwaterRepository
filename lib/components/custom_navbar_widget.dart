@@ -41,13 +41,13 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
     return Align(
       alignment: const AlignmentDirectional(0.0, 1.0),
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
         child: Container(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height * 0.08,
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).primaryBackground,
-            borderRadius: BorderRadius.circular(12.0),
+            borderRadius: BorderRadius.circular(0.0),
           ),
           child: Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
