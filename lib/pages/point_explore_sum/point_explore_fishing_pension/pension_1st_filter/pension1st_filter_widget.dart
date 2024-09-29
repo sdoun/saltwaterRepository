@@ -97,6 +97,7 @@ class _Pension1stFilterWidgetState extends State<Pension1stFilterWidget> {
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Filtercheckbox(
                           filterText: '민박형',
@@ -132,7 +133,7 @@ class _Pension1stFilterWidgetState extends State<Pension1stFilterWidget> {
                     },
                     child: Container(
                       width: 100.0,
-                      height: 43.0,
+                      height: 40.0,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).primary,
                         borderRadius: BorderRadius.circular(15),

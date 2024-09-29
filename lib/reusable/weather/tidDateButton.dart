@@ -33,7 +33,7 @@ class _TiddatebuttonState extends State<Tiddatebutton> {
               12.0),
         ),
         child: Container(
-          width: 80.0,
+          width: 60.0,
           height: 31.0,
           decoration: BoxDecoration(
             color: widget.color,
@@ -49,26 +49,16 @@ class _TiddatebuttonState extends State<Tiddatebutton> {
               0.0, 0.0),
           child: Text(
             widget.text,
-            style: FlutterFlowTheme.of(
-                context)
-                .bodyMedium
-                .override(
+            style: FlutterFlowTheme.of(context).bodyMedium.override(
               fontFamily:
-              FlutterFlowTheme.of(
-                  context)
-                  .bodyMediumFamily,
-              color: FlutterFlowTheme
-                  .of(context)
+              'PretendardSeries',
+              color: FlutterFlowTheme.of(context)
                   .primaryText,
+              fontSize: 14.0,
               letterSpacing: 0.0,
-              fontWeight:
-              FontWeight.w500,
-              useGoogleFonts: GoogleFonts
-                  .asMap()
-                  .containsKey(
-                  FlutterFlowTheme.of(
-                      context)
-                      .bodyMediumFamily),
+              fontWeight: FontWeight.w500,
+              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                  'PretendardSeries'),
             ),
           ),
         ),

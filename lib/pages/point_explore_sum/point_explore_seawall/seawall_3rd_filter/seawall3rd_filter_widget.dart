@@ -144,7 +144,7 @@ class _Seawall3rdFilterWidgetState extends State<Seawall3rdFilterWidget> {
                   },
                   child: Container(
                     width: 100.0,
-                    height: 43.0,
+                    height: 40.0,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).primary,
                       borderRadius: BorderRadius.circular(15),

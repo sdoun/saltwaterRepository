@@ -157,7 +157,7 @@ class _Park2ndFilterWidgetState extends State<Park2ndFilterWidget> {
                   },
                   child: Container(
                     width: 100.0,
-                    height: 43.0,
+                    height: 40.0,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).primary,
                       borderRadius: BorderRadius.circular(15),

@@ -26,10 +26,10 @@ class LoginTextForm extends StatefulWidget {
 
 
   @override
-  State<LoginTextForm> createState() => _loginTextFormState();
+  State<LoginTextForm> createState() => _LoginTextFormState();
 }
 
-class _loginTextFormState extends State<LoginTextForm> {
+class _LoginTextFormState extends State<LoginTextForm> {
 
   bool obscureText = false;
 
@@ -61,21 +61,16 @@ class _loginTextFormState extends State<LoginTextForm> {
           obscureText: false,
           decoration: InputDecoration(
             labelText: widget.labelText,
-            labelStyle: FlutterFlowTheme
-                .of(context)
-                .labelLarge
-                .override(
+            labelStyle: FlutterFlowTheme.of(context).bodyLarge.override(
               fontFamily:
-              FlutterFlowTheme.of(
-                  context)
-                  .labelLargeFamily,
+              'PretendardSeries',
+              color: FlutterFlowTheme.of(context)
+                  .secondaryText,
+              fontSize: 15.0,
               letterSpacing: 0.0,
-              useGoogleFonts: GoogleFonts
-                  .asMap()
-                  .containsKey(
-                  FlutterFlowTheme.of(
-                      context)
-                      .labelLargeFamily),
+              fontWeight: FontWeight.w400,
+              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                  'PretendardSeries'),
             ),
             enabledBorder:
             OutlineInputBorder(
@@ -130,7 +125,7 @@ class _loginTextFormState extends State<LoginTextForm> {
                   12.0),
             ),
             contentPadding:
-            const EdgeInsets.all(24.0),
+            const EdgeInsets.all(20.0),
             suffixIcon: widget.isPassword ?
             InkWell(
               onTap: (){
@@ -141,21 +136,16 @@ class _loginTextFormState extends State<LoginTextForm> {
               child: widget.icon,
             ) : null,
           ),
-          style: FlutterFlowTheme.of(
-              context)
-              .bodyLarge
-              .override(
+          style: FlutterFlowTheme.of(context).bodyLarge.override(
             fontFamily:
-            FlutterFlowTheme.of(
-                context)
-                .bodyLargeFamily,
+            'PretendardSeries',
+            color: FlutterFlowTheme.of(context)
+                .secondaryText,
+            fontSize: 15.0,
             letterSpacing: 0.0,
-            useGoogleFonts: GoogleFonts
-                .asMap()
-                .containsKey(
-                FlutterFlowTheme.of(
-                    context)
-                    .bodyLargeFamily),
+            fontWeight: FontWeight.w400,
+            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                'PretendardSeries'),
           ),
           keyboardType: widget.keyboardType ?? TextInputType
               .emailAddress,

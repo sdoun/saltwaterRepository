@@ -199,7 +199,7 @@ String? datetimeToTimeString(String dateTimeString) {
   int minute = dateTime.minute;
 
   if (minute <= 40) {
-    hour - 1;
+    hour = hour - 1;
   }
   hour = hour * 100;
   String hourString = hour.toString();
@@ -311,7 +311,7 @@ dynamic findItemFromStacdeLay1(
       return item;
     }
   }
-  return null;
+  return wtrTmpJsonList[0];
 }
 
 List<String>? ocean2ndFilterBottomsheet(

@@ -92,6 +92,7 @@ class _Pension2ndFilterWidgetState extends State<Pension2ndFilterWidget> {
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Filtercheckbox(
                         filterText: '식   당',
@@ -116,6 +117,7 @@ class _Pension2ndFilterWidgetState extends State<Pension2ndFilterWidget> {
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Filtercheckbox(
                       filterText: '주변낚시터',
@@ -154,7 +156,7 @@ class _Pension2ndFilterWidgetState extends State<Pension2ndFilterWidget> {
                   },
                   child: Container(
                     width: 100.0,
-                    height: 43.0,
+                    height: 40.0,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).primary,
                       borderRadius: BorderRadius.circular(15),

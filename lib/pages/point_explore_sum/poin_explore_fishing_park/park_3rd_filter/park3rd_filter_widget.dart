@@ -124,15 +124,10 @@ class _Park3rdFilterWidgetState extends State<Park3rdFilterWidget> {
                   },
                   child: Container(
                     width: 100.0,
-                    height: 43.0,
-                    decoration: const BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(8.0),
-                        bottomRight: Radius.circular(8.0),
-                        topLeft: Radius.circular(8.0),
-                        topRight: Radius.circular(8.0),
-                      ),
+                    height: 40.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primary,
+                      borderRadius: BorderRadius.circular(15),
                     ),
                     child: Align(
                       alignment: const AlignmentDirectional(0.0, 0.0),

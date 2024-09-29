@@ -38,7 +38,7 @@ class _FiltercheckboxState extends State<Filtercheckbox> {
           padding: const EdgeInsetsDirectional.fromSTEB(
               5.0, 0.0, 8.0, 0.0),
           child: Row(
-            mainAxisSize: MainAxisSize.max,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Align(
                 alignment: const AlignmentDirectional(0.0, 0.0),

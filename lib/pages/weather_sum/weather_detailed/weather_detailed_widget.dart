@@ -184,9 +184,8 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                           final containerRealtimeWeatherAPIResponse =
                               snapshot.data!;
 
+                          //초단기실황 불러오는 Contaier
                           return Container(
-                            width: 100.0,
-                            height: 336.0,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .primaryBackground,
@@ -228,18 +227,19 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                 final containerFcstWeatherApiResponse =
                                     snapshot.data!;
 
+                                //단기예보 불러오는 Contaier
                                 return Container(
-                                  width: 100.0,
-                                  height: 100.0,
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
                                         .primaryBackground,
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 20.0, 16.0, 0.0),
+                                        16.0, 20.0, 16.0, 24.0),
+
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Material(
                                           color: Colors.transparent,
@@ -253,41 +253,36 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                             ),
                                           ),
                                           child: Container(
-                                            width: 148.0,
                                             height: 47.0,
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
                                             ),
-                                            child: Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(8.0, 0.0, 8.0, 0.0),
-                                              child: Text(
-                                                weatherDetailedTBWeatherPointRecord
-                                                    .name,
-                                                style: FlutterFlowTheme.of(
+                                            child: Text(
+                                              weatherDetailedTBWeatherPointRecord
+                                                  .name,
+                                              style: FlutterFlowTheme.of(
+                                                  context)
+                                                  .bodyMedium
+                                                  .override(
+                                                fontFamily:
+                                                FlutterFlowTheme.of(
                                                     context)
-                                                    .bodyMedium
-                                                    .override(
-                                                  fontFamily:
-                                                  FlutterFlowTheme.of(
-                                                      context)
-                                                      .bodyMediumFamily,
-                                                  color: FlutterFlowTheme
-                                                      .of(context)
-                                                      .secondaryText,
-                                                  fontSize: 18.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight:
-                                                  FontWeight.w600,
-                                                  useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                      .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                          context)
-                                                          .bodyMediumFamily),
-                                                ),
+                                                    .bodyMediumFamily,
+                                                color: FlutterFlowTheme
+                                                    .of(context)
+                                                    .secondaryText,
+                                                fontSize: 17.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                FontWeight.w700,
+                                                useGoogleFonts: GoogleFonts
+                                                    .asMap()
+                                                    .containsKey(
+                                                    FlutterFlowTheme.of(
+                                                        context)
+                                                        .bodyMediumFamily),
                                               ),
                                             ),
                                           ),
@@ -295,120 +290,101 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                         Padding(
                                           padding:
                                               const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 20.0, 0.0, 0.0),
-                                          child: Container(
-                                            width: double.infinity,
-                                            height: 100.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
-                                            ),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          16.0, 0.0, 16.0, 0.0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(12.0),
-                                                        child: Container(
-                                                          width: 115.0,
-                                                          height: 93.0,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryBackground,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        12.0),
-                                                          ),
-                                                          child: ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8.0),
-                                                            child:
-                                                                Image.network(
-                                                              functions
-                                                                  .skyToImageLinkCopy(functions
-                                                                      .fcsSkyForTommorow(
-                                                                          FcstWeatherApiCall.itemList(
-                                                                            containerFcstWeatherApiResponse.jsonBody,
-                                                                          )?.toList(),
-                                                                          functions.datetimeToDateCopy(getCurrentTimestamp.toString()).toString(),
-                                                                          0)
-                                                                      ?.first
-                                                                      ?.toString())
-                                                                  .first,
-                                                              width: 300.0,
-                                                              height: 200.0,
-                                                              fit: BoxFit.cover,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Align(
-                                                        alignment:
-                                                            const AlignmentDirectional(
-                                                                0.0, -1.0),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      28.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          child: Text(
-                                                            valueOrDefault<
-                                                                String>(
-                                                              '${RealtimeWeatherAPICall.dataList(
-                                                                containerRealtimeWeatherAPIResponse
-                                                                    .jsonBody,
-                                                              )?[3]}℃',
-                                                              '서버 응답없음',
-                                                            ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily,
-                                                                  fontSize:
-                                                                      20.0,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily),
-                                                                ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
+                                                  16.0, 20.0, 16.0, 0.0),
+                                          child:  Row(
+                                            mainAxisSize:
+                                            MainAxisSize.max,
+                                            mainAxisAlignment:
+                                            MainAxisAlignment
+                                                .center,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                BorderRadius
+                                                    .circular(12.0),
+                                                child: Container(
+                                                  width: 115.0,
+                                                  height: 93.0,
+                                                  decoration:
+                                                  BoxDecoration(
+                                                    color: FlutterFlowTheme
+                                                        .of(context)
+                                                        .primaryBackground,
+                                                    borderRadius:
+                                                    BorderRadius
+                                                        .circular(
+                                                        12.0),
+                                                  ),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                    BorderRadius
+                                                        .circular(
+                                                        8.0),
+                                                    child:
+                                                    Image.network(
+                                                      functions
+                                                          .skyToImageLinkCopy(functions
+                                                          .fcsSkyForTommorow(
+                                                          FcstWeatherApiCall.itemList(
+                                                            containerFcstWeatherApiResponse.jsonBody,
+                                                          )?.toList(),
+                                                          functions.datetimeToDateCopy(getCurrentTimestamp.toString()).toString(),
+                                                          0)
+                                                          ?.first
+                                                          ?.toString())
+                                                          .first,
+                                                      width: 300.0,
+                                                      height: 200.0,
+                                                      fit: BoxFit.cover,
+                                                    ),
                                                   ),
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                              Align(
+                                                alignment:
+                                                const AlignmentDirectional(
+                                                    0.0, -1.0),
+                                                child: Padding(
+                                                  padding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                      28.0,
+                                                      0.0,
+                                                      0.0,
+                                                      0.0),
+                                                  child: Text(
+                                                    valueOrDefault<
+                                                        String>(
+                                                      '${RealtimeWeatherAPICall.dataList(
+                                                        containerRealtimeWeatherAPIResponse
+                                                            .jsonBody,
+                                                      )?[3]}℃',
+                                                      '서버 응답없음',
+                                                    ),
+                                                    style: FlutterFlowTheme
+                                                        .of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                      fontFamily: FlutterFlowTheme.of(
+                                                          context)
+                                                          .bodyMediumFamily,
+                                                      fontSize:
+                                                      20.0,
+                                                      letterSpacing:
+                                                      0.0,
+                                                      fontWeight:
+                                                      FontWeight
+                                                          .w600,
+                                                      useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                          .containsKey(
+                                                          FlutterFlowTheme.of(context)
+                                                              .bodyMediumFamily),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                         SingleChildScrollView(
@@ -1038,497 +1014,395 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                           );
                         },
                       ),
-                      Container(
-                        width: 100.0,
-                        height: 831.0,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            FutureBuilder<ApiCallResponse>(
-                              future: FFAppState().wtrTmpCache(
-                                requestFn: () => RealtimeWtrTmpCall.call(
-                                  staCde: weatherDetailedTBWeatherPointRecord
-                                      .staCde,
-                                ),
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          FutureBuilder<ApiCallResponse>(
+                            future: FFAppState().wtrTmpCache(
+                              requestFn: () => RealtimeWtrTmpCall.call(
+                                staCde: weatherDetailedTBWeatherPointRecord
+                                    .staCde,
                               ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                          FlutterFlowTheme.of(context).primary,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }
-                                final containerRealtimeWtrTmpResponse =
-                                    snapshot.data!;
-
-                                return Material(
-                                  color: const Color(0xffDDEFFF),
-                                  elevation: 2.0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: Container(
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 0.8,
-                                    height: 56.0,
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xffDDEFFF),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      border: Border.all(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                      ),
-                                    ),
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          28.0, 0.0, 28.0, 0.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            width: 117.0,
-                                            height: double.infinity,
-                                            decoration: const BoxDecoration(
-                                              color:
-                                                Color(0xffDDEFFF),
-                                            ),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    FaIcon(
-                                                      FontAwesomeIcons
-                                                          .temperatureFull,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondary,
-                                                      size: 36.0,
-                                                    ),
-                                                    Text(
-                                                      '수온',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily,
-                                                                fontSize: 18.0,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                useGoogleFonts: GoogleFonts
-                                                                        .asMap()
-                                                                    .containsKey(
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .bodyMediumFamily),
-                                                              ),
-                                                    ),
-                                                  ].divide(
-                                                      const SizedBox(width: 8.0)),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Container(
-                                            height: 42.0,
-                                            decoration: const BoxDecoration(
-                                              color:
-                                                  Color(0xffDDEFFF),
-                                              borderRadius: BorderRadius.only(
-                                                bottomLeft:
-                                                    Radius.circular(8.0),
-                                                bottomRight:
-                                                    Radius.circular(8.0),
-                                                topLeft: Radius.circular(8.0),
-                                                topRight: Radius.circular(8.0),
-                                              ),
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 8.0, 0.0, 0.0),
-                                              child: Text(
-                                                '${functions.wrttempFromJson(functions.findItemFromStacdeLay1(RealtimeWtrTmpCall.jsonItems(
-                                                      containerRealtimeWtrTmpResponse
-                                                          .jsonBody,
-                                                    )?.toList(), weatherDetailedTBWeatherPointRecord.staCde))}℃',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily,
-                                                          fontSize: 18.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
-                                                        ),
-                                              ),
-                                            ),
-                                          ),
-                                        ].divide(const SizedBox(width: 16.0)),
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CircularProgressIndicator(
+                                      valueColor:
+                                      AlwaysStoppedAnimation<Color>(
+                                        FlutterFlowTheme.of(context).primary,
                                       ),
                                     ),
                                   ),
                                 );
-                              },
-                            ),
-                            FutureBuilder<ApiCallResponse>(
-                              future: TidalFcstCall.call(
-                                date: _model.tidDateString,
-                                dataType: 'tideObsPreTab',
-                                obsCode: weatherDetailedTBWeatherPointRecord
-                                    .tidObsCode,
-                                resultType: 'json',
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                          FlutterFlowTheme.of(context).primary,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }
-                                final containerTidalFcstResponse =
-                                    snapshot.data!;
+                              }
+                              final containerRealtimeWtrTmpResponse =
+                              snapshot.data!;
 
-                                return Container(
-                                  width: double.infinity,
-                                  height: 262.0,
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xffF9FAFF)
+                              return Material(
+                                color: const Color(0xffDDEFFF),
+                                elevation: 0.0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: Container(
+                                  width:
+                                  MediaQuery.sizeOf(context).width * 0.8,
+                                  height: 48.0,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xffDDEFFF),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    border: Border.all(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                    ),
                                   ),
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
                                   child: Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    child: Column(
+                                        28.0, 0.0, 28.0, 0.0),
+                                    child: Row(
                                       mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.center,
                                       children: [
-                                        Container(
-                                          width: double.infinity,
-                                          height: 68.0,
-                                          decoration: BoxDecoration(
+                                        Row(
+                                          mainAxisSize:
+                                          MainAxisSize.max,
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.end,
+                                          children: [
+                                            FaIcon(
+                                              FontAwesomeIcons
+                                                  .temperatureFull,
+                                              color:
+                                              FlutterFlowTheme.of(
+                                                  context)
+                                                  .secondary,
+                                              size: 36.0,
+                                            ),
+                                            Text(
+                                              '  현재 수온',
+                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                fontFamily:
+                                                'PretendardSeries',
+                                                color: FlutterFlowTheme.of(context)
+                                                    .primaryText,
+                                                fontSize: 18.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w700,
+                                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                    'PretendardSeries'),
+                                              ),
+                                            ),
+                                          ].divide(
+                                              const SizedBox(width: 8.0)),
+                                        ),
+                                        Text(
+                                          '${functions.wrttempFromJson(functions.findItemFromStacdeLay1(RealtimeWtrTmpCall.jsonItems(
+                                            containerRealtimeWtrTmpResponse
+                                                .jsonBody,
+                                          )?.toList(), weatherDetailedTBWeatherPointRecord.staCde))}℃',
+                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                            fontFamily:
+                                            'PretendardSeries',
                                             color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                          ),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-
-                                              Text(
-                                                '만조 및 간조',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily,
-                                                          fontSize: 18.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
-                                                        ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        16.0, 0.0, 0.0, 0.0),
-                                                child: Text(
-                                                  '날짜: ${_model.tidDateString == functions.datetimeToDateCopy(getCurrentTimestamp.toString()).toString() ? '오늘' : functions.formatTidDate(_model.tidDateString!)}',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
-                                                ),
-                                              ),
-                                            ],
+                                                .primaryText,
+                                            fontSize: 18.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                'PretendardSeries'),
                                           ),
                                         ),
-                                        Builder(
-                                          builder: (context) {
-                                            final tidList = functions
-                                                    .tidStructListFromJson(
-                                                        TidalFcstCall.dataList(
-                                                      containerTidalFcstResponse
-                                                          .jsonBody,
-                                                    )?.toList())
-                                                    ?.toList() ??
-                                                [];
+                                      ].divide(const SizedBox(width: 16.0)),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          FutureBuilder<ApiCallResponse>(
+                            future: TidalFcstCall.call(
+                              date: _model.tidDateString,
+                              dataType: 'tideObsPreTab',
+                              obsCode: weatherDetailedTBWeatherPointRecord
+                                  .tidObsCode,
+                              resultType: 'json',
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CircularProgressIndicator(
+                                      valueColor:
+                                      AlwaysStoppedAnimation<Color>(
+                                        FlutterFlowTheme.of(context).primary,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+                              final containerTidalFcstResponse =
+                              snapshot.data!;
 
-                                            return SingleChildScrollView(
-                                              scrollDirection: Axis.horizontal,
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: List.generate(
-                                                    tidList.length,
-                                                    (tidListIndex) {
-                                                  final tidListItem =
-                                                      tidList[tidListIndex];
-                                                  return Padding(
-                                                    padding:
-                                                        const EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 8.0,
-                                                                0.0, 8.0),
-                                                    child: Material(
-                                                      color: Colors.transparent,
-                                                      elevation: 2.0,
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(12.0),
-                                                      ),
-                                                      child: Container(
-                                                        constraints:
-                                                            BoxConstraints(
-                                                          maxWidth: (MediaQuery
-                                                                          .sizeOf(
-                                                                              context)
-                                                                      .width -
-                                                                  52.0) *
-                                                              0.25,
-                                                        ),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryBackground,
-                                                          boxShadow: const [
-                                                            BoxShadow(
-                                                              blurRadius: 4.0,
-                                                              color: Color(
-                                                                  0x33000000),
-                                                              offset: Offset(
-                                                                2.0,
-                                                                2.0,
-                                                              ),
-                                                              spreadRadius: 1.0,
-                                                            )
-                                                          ],
+                              return Container(
+                                width: double.infinity,
+                                height: 262.0,
+                                decoration: const BoxDecoration(
+                                    color: Color(0xffF9FAFF)
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      20.0, 0.0, 20.0, 0.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      SizedBox(
+                                        width: double.infinity,
+                                        height: 68.0,
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              '만조 및 간조',
+                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                fontFamily:
+                                                'PretendardSeries',
+                                                color: FlutterFlowTheme.of(context)
+                                                    .primaryText,
+                                                fontSize: 17.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w700,
+                                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                    'PretendardSeries'),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                  16.0, 0.0, 0.0, 0.0),
+                                              child: Text(
+                                                '날짜: ${_model.tidDateString == functions.datetimeToDateCopy(getCurrentTimestamp.toString()).toString() ? '오늘' : functions.formatTidDate(_model.tidDateString!)}',
+                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                  fontFamily:
+                                                  'PretendardSeries',
+                                                  color: FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                                  fontSize: 14.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.w500,
+                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                      'PretendardSeries'),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Builder(
+                                        builder: (context) {
+                                          final tidList = functions
+                                              .tidStructListFromJson(
+                                              TidalFcstCall.dataList(
+                                                containerTidalFcstResponse
+                                                    .jsonBody,
+                                              )?.toList())
+                                              ?.toList() ??
+                                              [];
+
+                                          return SingleChildScrollView(
+                                            scrollDirection: Axis.horizontal,
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: List.generate(
+                                                  tidList.length,
+                                                      (tidListIndex) {
+                                                    final tidListItem =
+                                                    tidList[tidListIndex];
+                                                    return Padding(
+                                                      padding:
+                                                      const EdgeInsetsDirectional
+                                                          .fromSTEB(0.0, 8.0,
+                                                          0.0, 8.0),
+                                                      child: Material(
+                                                        color: Colors.transparent,
+                                                        elevation: 2.0,
+                                                        shape:
+                                                        RoundedRectangleBorder(
                                                           borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      12.0),
+                                                          BorderRadius
+                                                              .circular(12.0),
                                                         ),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      8.0,
-                                                                      8.0,
-                                                                      8.0,
-                                                                      8.0),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Align(
-                                                                alignment:
-                                                                    const AlignmentDirectional(
-                                                                        -1.0,
-                                                                        0.0),
-                                                                child: Text(
-                                                                  '${functions.formatTidDate(_model.tidDateString!)}',
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                        color: const Color(
-                                                                            0xFF4D4D4D),
-                                                                        fontSize:
-                                                                            12.0,
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                        fontWeight:
-                                                                            FontWeight.w600,
-                                                                        useGoogleFonts:
-                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                      ),
+                                                        child: Container(
+                                                          constraints:
+                                                          BoxConstraints(
+                                                            maxWidth: (MediaQuery
+                                                                .sizeOf(
+                                                                context)
+                                                                .width -
+                                                                52.0) *
+                                                                0.25,
+                                                          ),
+                                                          decoration:
+                                                          BoxDecoration(
+                                                            color: FlutterFlowTheme
+                                                                .of(context)
+                                                                .primaryBackground,
+                                                            boxShadow: const [
+                                                              BoxShadow(
+                                                                blurRadius: 4.0,
+                                                                color: Color(
+                                                                    0x33000000),
+                                                                offset: Offset(
+                                                                  2.0,
+                                                                  2.0,
                                                                 ),
-                                                              ),
-                                                              Text(
-                                                                tidListItem
-                                                                    .timeString,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily,
-                                                                      fontSize:
-                                                                          11.0,
-                                                                      letterSpacing:
-                                                                          0.1,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                    ),
-                                                              ),
-                                                              Text(
-                                                                tidListItem
-                                                                    .tidType,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                    ),
-                                                              ),
-                                                              Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  ClipRRect(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            8.0),
-                                                                    child: Image
-                                                                        .network(
-                                                                      tidListItem.tidType ==
-                                                                              '저조'
-                                                                          ? 'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%EB%82%A0%EC%94%A8%EC%95%84%EC%9D%B4%EC%BD%98%2F%EC%A0%80%EC%A1%B0.png?alt=media&token=e66d459d-2e26-4041-af11-dc7d236bc380'
-                                                                          : 'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%EB%82%A0%EC%94%A8%EC%95%84%EC%9D%B4%EC%BD%98%2F%EA%B3%A0%EC%A1%B0.png?alt=media&token=b5f1d918-8f87-46fc-a695-ee645f77586e',
-                                                                      width:
-                                                                          24.0,
-                                                                      height:
-                                                                          24.0,
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                    ),
-                                                                  ),
-                                                                  Text(
-                                                                    '${tidListItem.tidLevel}cm',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
+                                                                spreadRadius: 1.0,
+                                                              )
+                                                            ],
+                                                            borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                12.0),
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                8.0,
+                                                                8.0,
+                                                                8.0,
+                                                                8.0),
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                              MainAxisSize
+                                                                  .max,
+                                                              mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                              crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                              children: [
+                                                                Align(
+                                                                  alignment:
+                                                                  const AlignmentDirectional(
+                                                                      -1.0,
+                                                                      0.0),
+                                                                  child: Text(
+                                                                    '${functions.formatTidDate(_model.tidDateString!)}',
+                                                                    style: FlutterFlowTheme.of(context)
                                                                         .bodyMedium
                                                                         .override(
-                                                                          fontFamily:
-                                                                              FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                          color: tidListItem.tidType == '저조'
-                                                                              ? FlutterFlowTheme.of(context).primary
-                                                                              : const Color(0xFFFF0000),
-                                                                          fontSize:
-                                                                              12.0,
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          useGoogleFonts:
-                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                        ),
+                                                                      fontFamily: 'PretendardSeries',
+                                                                      fontSize: 12,
+                                                                      letterSpacing: 0.0,
+                                                                      fontWeight: FontWeight.w600,
+                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                    ),
                                                                   ),
-                                                                ].divide(const SizedBox(
-                                                                    width:
-                                                                        4.0)),
-                                                              ),
-                                                            ].divide(const SizedBox(
-                                                                height: 4.0)),
+                                                                ),
+                                                                Text(
+                                                                  tidListItem
+                                                                      .timeString,
+                                                                  style: FlutterFlowTheme.of(context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                    fontFamily: 'PretendardSeries',
+                                                                    fontSize: 13.5,
+                                                                    letterSpacing: 0.0,
+                                                                    fontWeight: FontWeight.w600,
+                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  tidListItem
+                                                                      .tidType,
+                                                                  style: FlutterFlowTheme.of(context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                    fontFamily: 'PretendardSeries',
+                                                                    fontSize: 13.5,
+                                                                    letterSpacing: 0.0,
+                                                                    fontWeight: FontWeight.w600,
+                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                  ),
+                                                                ),
+                                                                Row(
+                                                                  mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                                  children: [
+                                                                    ClipRRect(
+                                                                      borderRadius:
+                                                                      BorderRadius.circular(
+                                                                          8.0),
+                                                                      child: Image
+                                                                          .network(
+                                                                        tidListItem.tidType ==
+                                                                            '저조'
+                                                                            ? 'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%EB%82%A0%EC%94%A8%EC%95%84%EC%9D%B4%EC%BD%98%2F%EC%A0%80%EC%A1%B0.png?alt=media&token=e66d459d-2e26-4041-af11-dc7d236bc380'
+                                                                            : 'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%EB%82%A0%EC%94%A8%EC%95%84%EC%9D%B4%EC%BD%98%2F%EA%B3%A0%EC%A1%B0.png?alt=media&token=b5f1d918-8f87-46fc-a695-ee645f77586e',
+                                                                        width:
+                                                                        22.0,
+                                                                        height:
+                                                                        22.0,
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                      ),
+                                                                    ),
+                                                                    Text(
+                                                                      '${tidListItem.tidLevel}cm',
+                                                                      style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                        fontFamily: 'PretendardSeries',
+                                                                        color: tidListItem.tidType == '저조'
+                                                                            ? FlutterFlowTheme.of(context).primary
+                                                                            : const Color(0xFFFF0000),
+                                                                        fontSize: 12.0,
+                                                                        fontWeight: FontWeight.w400,
+                                                                        letterSpacing: 0.0,
+                                                                        useGoogleFonts:
+                                                                        GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                      ),
+                                                                    ),
+                                                                  ].divide(const SizedBox(
+                                                                      width:
+                                                                      4.0)),
+                                                                ),
+                                                              ].divide(const SizedBox(
+                                                                  height: 4.0)),
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  );
-                                                }).divide(const SizedBox(width: 4.0)),
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Tiddatebutton(
+                                                    );
+                                                  }).divide(const SizedBox(width: 4.0)),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                      Padding(
+                                          padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Tiddatebutton(
                                                 color: const Color(0xffF9FAFF),
                                                 text: '전날',
                                                 borderColor: const Color(0xff949494),
@@ -1542,8 +1416,8 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                                           _model.tidDateString!);
                                                   safeSetState(() {});
                                                 },
-                                            ),
-                                            Tiddatebutton(
+                                              ),
+                                              Tiddatebutton(
                                                 color: const Color(0xffF9FAFF),
                                                 text: '다음날',
                                                 borderColor: const Color(0xff949494),
@@ -1558,1677 +1432,1676 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                                           _model.tidDateString!);
                                                   safeSetState(() {});
                                                 },
-                                            ),
-                                          ],
-                                        ),
-                                      ].divide(const SizedBox(height: 8.0)),
+                                              ),
+                                            ],
+                                          ),
+                                      ),
+
+                                    ].divide(const SizedBox(height: 8.0)),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          Text(
+                            '단기 날씨 예보',
+                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily:
+                              'PretendardSeries',
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryText,
+                              fontSize: 17.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w700,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  'PretendardSeries'),
+                            ),
+                          ),
+                          FutureBuilder<ApiCallResponse>(
+                            future: FcstWeatherApiCall.call(
+                              numOfRows: 1000,
+                              dataType: 'JSON',
+                              nx: weatherDetailedTBWeatherPointRecord.nx,
+                              ny: weatherDetailedTBWeatherPointRecord.ny,
+                              baseDate: functions
+                                  .datetimeToDateCopyFcst(
+                                  getCurrentTimestamp.toString())
+                                  .last,
+                              baseTime: functions
+                                  .datetimeToDateCopyFcst(
+                                  getCurrentTimestamp.toString())
+                                  .first,
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CircularProgressIndicator(
+                                      valueColor:
+                                      AlwaysStoppedAnimation<Color>(
+                                        FlutterFlowTheme.of(context).primary,
+                                      ),
                                     ),
                                   ),
                                 );
-                              },
-                            ),
-                            Text(
-                              '단기 날씨 예보',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    fontSize: 20.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w600,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                  ),
-                            ),
-                            SizedBox(
-                              width: 300.0,
-                              child: Divider(
-                                thickness: 3.0,
-                                color: FlutterFlowTheme.of(context).primaryText,
-                              ),
-                            ),
-                            FutureBuilder<ApiCallResponse>(
-                              future: FcstWeatherApiCall.call(
-                                numOfRows: 1000,
-                                dataType: 'JSON',
-                                nx: weatherDetailedTBWeatherPointRecord.nx,
-                                ny: weatherDetailedTBWeatherPointRecord.ny,
-                                baseDate: functions
-                                    .datetimeToDateCopyFcst(
-                                        getCurrentTimestamp.toString())
-                                    .last,
-                                baseTime: functions
-                                    .datetimeToDateCopyFcst(
-                                        getCurrentTimestamp.toString())
-                                    .first,
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                          FlutterFlowTheme.of(context).primary,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }
-                                final containerFcstWeatherApiResponse =
-                                    snapshot.data!;
+                              }
+                              final containerFcstWeatherApiResponse =
+                              snapshot.data!;
 
-                                return Container(
-                                  width: double.infinity,
-                                  height: 372.0,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
+                              return Container(
+                                width: double.infinity,
+                                height: 372.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                ),
+                                child: FutureBuilder<ApiCallResponse>(
+                                  future: MidTmpCall.call(
+                                    regId: weatherDetailedTBWeatherPointRecord
+                                        .midRegId,
+                                    tmFc: '0600',
                                   ),
-                                  child: FutureBuilder<ApiCallResponse>(
-                                    future: MidTmpCall.call(
-                                      regId: weatherDetailedTBWeatherPointRecord
-                                          .midRegId,
-                                      tmFc: '0600',
-                                    ),
-                                    builder: (context, snapshot) {
-                                      // Customize what your widget looks like when it's loading.
-                                      if (!snapshot.hasData) {
-                                        return Center(
-                                          child: SizedBox(
-                                            width: 50.0,
-                                            height: 50.0,
-                                            child: CircularProgressIndicator(
-                                              valueColor:
-                                                  AlwaysStoppedAnimation<Color>(
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
-                                              ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
                                             ),
                                           ),
-                                        );
-                                      }
-                                      final containerMidTmpResponse =
-                                          snapshot.data!;
-
-                                      return Container(
-                                        width: 100.0,
-                                        height: 100.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
                                         ),
-                                        child: FutureBuilder<ApiCallResponse>(
-                                          future: MidFcstCall.call(
-                                            numOfRows: 1,
-                                            pageNo: 1,
-                                            dataType: 'JSON',
-                                            regId: functions.midFcstCodeTrans(
-                                                weatherDetailedTBWeatherPointRecord
-                                                    .midRegId),
-                                            tmFc:
-                                                '${functions.datetimeToDateCopy(getCurrentTimestamp.toString()).toString()}0600',
-                                          ),
-                                          builder: (context, snapshot) {
-                                            // Customize what your widget looks like when it's loading.
-                                            if (!snapshot.hasData) {
-                                              return Center(
-                                                child: SizedBox(
-                                                  width: 50.0,
-                                                  height: 50.0,
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    valueColor:
-                                                        AlwaysStoppedAnimation<
-                                                            Color>(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary,
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                            }
-                                            final containerMidFcstResponse =
-                                                snapshot.data!;
+                                      );
+                                    }
+                                    final containerMidTmpResponse =
+                                    snapshot.data!;
 
-                                            return Container(
-                                              width: 100.0,
-                                              height: 440.0,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .alternate,
-                                              ),
-                                              child: Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        20.0, 12.0, 20.0, 12.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Align(
-                                                      alignment:
-                                                          const AlignmentDirectional(
-                                                              -1.0, -1.0),
-                                                      child: Text(
-                                                        valueOrDefault<String>(
-                                                          '${valueOrDefault<String>(
-                                                            weatherDetailedTBWeatherPointRecord
-                                                                .name,
-                                                            '지역',
-                                                          )}일주일간 예보',
-                                                          '일주일 예보',
-                                                        ),
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'PretendardSeries',
-                                                              fontSize: 17.0,
-                                                              letterSpacing:
-                                                                  0.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              useGoogleFonts: GoogleFonts
-                                                                      .asMap()
-                                                                  .containsKey(
-                                                                      'PretendardSeries'),
-                                                            ),
-                                                      ),
-                                                    ),
-                                                    SingleChildScrollView(
-                                                      scrollDirection:
-                                                          Axis.horizontal,
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        8.0,
-                                                                        0.0,
-                                                                        8.0),
-                                                            child: Material(
-                                                              color: Colors
-                                                                  .transparent,
-                                                              elevation: 4.0,
-                                                              shape:
-                                                                  const RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .only(
-                                                                  bottomLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  bottomRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                ),
-                                                              ),
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    const BorderRadius
-                                                                        .only(
-                                                                  bottomLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  bottomRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                ),
-                                                                child:
-                                                                    Container(
-                                                                  width: 124.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryBackground,
-                                                                    boxShadow: const [
-                                                                      BoxShadow(
-                                                                        blurRadius:
-                                                                            4.0,
-                                                                        color: Color(
-                                                                            0x33000000),
-                                                                        offset:
-                                                                            Offset(
-                                                                          0.0,
-                                                                          2.0,
-                                                                        ),
-                                                                      )
-                                                                    ],
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      bottomLeft:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                      bottomRight:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              8.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0,
-                                                                            8.0),
-                                                                    child:
-                                                                        Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      children:
-                                                                          [
-                                                                        Text(
-                                                                          '1일 후 날씨',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'PretendardSeries',
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
-                                                                              ),
-                                                                        ),
-                                                                        ClipRRect(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8.0),
-                                                                          child:
-                                                                              Image.network(
-                                                                            functions
-                                                                                .skyToImageLinkCopy(functions
-                                                                                    .fcsSkyForTommorow(
-                                                                                        FcstWeatherApiCall.itemList(
-                                                                                          containerFcstWeatherApiResponse.jsonBody,
-                                                                                        )?.toList(),
-                                                                                        functions.datetimeToDateCopy(getCurrentTimestamp.toString()).toString(),
-                                                                                        1)
-                                                                                    ?.first
-                                                                                    ?.toString())
-                                                                                .first,
-                                                                            width:
-                                                                                MediaQuery.sizeOf(context).width * 0.2,
-                                                                            height:
-                                                                                73.0,
-                                                                            fit:
-                                                                                BoxFit.cover,
-                                                                          ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            '${functions.fcsTmpForTommorow(FcstWeatherApiCall.itemList(
-                                                                                  containerFcstWeatherApiResponse.jsonBody,
-                                                                                )?.toList(), functions.datetimeToDateCopy(getCurrentTimestamp.toString()).toString(), 1)?.first?.toString()}℃',
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            '강수량: ${functions.fcstListForCategory(FcstWeatherApiCall.itemList(
-                                                                                  containerFcstWeatherApiResponse.jsonBody,
-                                                                                )?.toList(), getCurrentTimestamp.toString(), 1, 'PCP')?.first?.toString()}',
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            '풍향: ${functions.vecToString(functions.fcstListForCategory(FcstWeatherApiCall.itemList(
-                                                                                  containerFcstWeatherApiResponse.jsonBody,
-                                                                                )?.toList(), getCurrentTimestamp.toString(), 1, 'VEC')?.first?.toString())}',
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            '풍속: ${functions.fcstListForCategory(FcstWeatherApiCall.itemList(
-                                                                                  containerFcstWeatherApiResponse.jsonBody,
-                                                                                )?.toList(), getCurrentTimestamp.toString(), 1, 'WSD')?.first?.toString()}m/s',
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                      ].divide(const SizedBox(
-                                                                              height: 4.0)),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        8.0,
-                                                                        0.0,
-                                                                        8.0),
-                                                            child: Material(
-                                                              color: Colors
-                                                                  .transparent,
-                                                              elevation: 4.0,
-                                                              shape:
-                                                                  const RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .only(
-                                                                  bottomLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  bottomRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                ),
-                                                              ),
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    const BorderRadius
-                                                                        .only(
-                                                                  bottomLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  bottomRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                ),
-                                                                child:
-                                                                    Container(
-                                                                  width: 124.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryBackground,
-                                                                    boxShadow: const [
-                                                                      BoxShadow(
-                                                                        blurRadius:
-                                                                            4.0,
-                                                                        color: Color(
-                                                                            0x33000000),
-                                                                        offset:
-                                                                            Offset(
-                                                                          0.0,
-                                                                          2.0,
-                                                                        ),
-                                                                      )
-                                                                    ],
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      bottomLeft:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                      bottomRight:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              8.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0,
-                                                                            8.0),
-                                                                    child:
-                                                                        Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      children:
-                                                                          [
-                                                                        Text(
-                                                                          '2일 후 날씨',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'PretendardSeries',
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
-                                                                              ),
-                                                                        ),
-                                                                        ClipRRect(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8.0),
-                                                                          child:
-                                                                              Image.network(
-                                                                            functions
-                                                                                .skyToImageLinkCopy(functions
-                                                                                    .fcsSkyForTommorow(
-                                                                                        FcstWeatherApiCall.itemList(
-                                                                                          containerFcstWeatherApiResponse.jsonBody,
-                                                                                        )?.toList(),
-                                                                                        functions.datetimeToDateCopy(getCurrentTimestamp.toString()).toString(),
-                                                                                        2)
-                                                                                    ?.first
-                                                                                    ?.toString())
-                                                                                .first,
-                                                                            width:
-                                                                                MediaQuery.sizeOf(context).width * 0.2,
-                                                                            height:
-                                                                                73.0,
-                                                                            fit:
-                                                                                BoxFit.cover,
-                                                                          ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            '${functions.fcsTmpForTommorow(FcstWeatherApiCall.itemList(
-                                                                                  containerFcstWeatherApiResponse.jsonBody,
-                                                                                )?.toList(), functions.datetimeToDateCopy(getCurrentTimestamp.toString()).toString(), 2)?.first?.toString()}℃',
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            '강수량:${functions.fcstListForCategory(FcstWeatherApiCall.itemList(
-                                                                                  containerFcstWeatherApiResponse.jsonBody,
-                                                                                )?.toList(), getCurrentTimestamp.toString(), 2, 'PCP')?.first?.toString()}',
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            '풍향: ${functions.vecToString(functions.fcstListForCategory(FcstWeatherApiCall.itemList(
-                                                                                  containerFcstWeatherApiResponse.jsonBody,
-                                                                                )?.toList(), getCurrentTimestamp.toString(), 2, 'VEC')?.first?.toString())}',
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            '풍속: ${functions.fcstListForCategory(FcstWeatherApiCall.itemList(
-                                                                                  containerFcstWeatherApiResponse.jsonBody,
-                                                                                )?.toList(), getCurrentTimestamp.toString(), 2, 'WSD')?.first?.toString()}m/s',
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                      ].divide(const SizedBox(
-                                                                              height: 4.0)),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        8.0,
-                                                                        0.0,
-                                                                        8.0),
-                                                            child: Material(
-                                                              color: Colors
-                                                                  .transparent,
-                                                              elevation: 4.0,
-                                                              shape:
-                                                                  const RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .only(
-                                                                  bottomLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  bottomRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                ),
-                                                              ),
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    const BorderRadius
-                                                                        .only(
-                                                                  bottomLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  bottomRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                ),
-                                                                child:
-                                                                    Container(
-                                                                  width: 124.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryBackground,
-                                                                    boxShadow: const [
-                                                                      BoxShadow(
-                                                                        blurRadius:
-                                                                            4.0,
-                                                                        color: Color(
-                                                                            0x33000000),
-                                                                        offset:
-                                                                            Offset(
-                                                                          0.0,
-                                                                          2.0,
-                                                                        ),
-                                                                      )
-                                                                    ],
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      bottomLeft:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                      bottomRight:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              8.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0,
-                                                                            8.0),
-                                                                    child:
-                                                                        Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      children:
-                                                                          [
-                                                                        Text(
-                                                                          '3일 후 날씨',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'PretendardSeries',
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
-                                                                              ),
-                                                                        ),
-                                                                        ClipRRect(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8.0),
-                                                                          child:
-                                                                              Image.network(
-                                                                            valueOrDefault<String>(
-                                                                              functions.midFcstToImage(MidFcstCall.am3(
-                                                                                containerMidFcstResponse.jsonBody,
-                                                                              )),
-                                                                              'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%EB%82%A0%EC%94%A8%EC%9E%84%EC%8B%9C%2F%EB%A7%91%EC%9D%8C.png?alt=media&token=f967054c-0b4c-45ee-8364-3e928f218edf',
-                                                                            ),
-                                                                            width:
-                                                                                MediaQuery.sizeOf(context).width * 0.2,
-                                                                            height:
-                                                                                73.0,
-                                                                            fit:
-                                                                                BoxFit.cover,
-                                                                          ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            MidFcstCall.am3(
-                                                                              containerMidFcstResponse.jsonBody,
-                                                                            ),
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          '강수량:${MidFcstCall.rnSt3Am(
-                                                                            containerMidFcstResponse.jsonBody,
-                                                                          )?.toString()}mm',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            '풍향: ',
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            '풍속: m/s',
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                      ].divide(const SizedBox(
-                                                                              height: 4.0)),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        8.0,
-                                                                        0.0,
-                                                                        8.0),
-                                                            child: Material(
-                                                              color: Colors
-                                                                  .transparent,
-                                                              elevation: 4.0,
-                                                              shape:
-                                                                  const RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .only(
-                                                                  bottomLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  bottomRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                ),
-                                                              ),
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    const BorderRadius
-                                                                        .only(
-                                                                  bottomLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  bottomRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                ),
-                                                                child:
-                                                                    Container(
-                                                                  width: 124.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryBackground,
-                                                                    boxShadow: const [
-                                                                      BoxShadow(
-                                                                        blurRadius:
-                                                                            4.0,
-                                                                        color: Color(
-                                                                            0x33000000),
-                                                                        offset:
-                                                                            Offset(
-                                                                          0.0,
-                                                                          2.0,
-                                                                        ),
-                                                                      )
-                                                                    ],
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      bottomLeft:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                      bottomRight:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              8.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0,
-                                                                            8.0),
-                                                                    child:
-                                                                        Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      children:
-                                                                          [
-                                                                        Text(
-                                                                          '4일 후 날씨',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'PretendardSeries',
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
-                                                                              ),
-                                                                        ),
-                                                                        ClipRRect(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8.0),
-                                                                          child:
-                                                                              Image.network(
-                                                                            valueOrDefault<String>(
-                                                                              functions.midFcstToImage(MidFcstCall.am4(
-                                                                                containerMidFcstResponse.jsonBody,
-                                                                              )),
-                                                                              'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%EB%82%A0%EC%94%A8%EC%9E%84%EC%8B%9C%2F%EB%A7%91%EC%9D%8C.png?alt=media&token=f967054c-0b4c-45ee-8364-3e928f218edf',
-                                                                            ),
-                                                                            width:
-                                                                                MediaQuery.sizeOf(context).width * 0.2,
-                                                                            height:
-                                                                                73.0,
-                                                                            fit:
-                                                                                BoxFit.cover,
-                                                                          ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            valueOrDefault<String>(
-                                                                              MidFcstCall.am4(
-                                                                                containerMidFcstResponse.jsonBody,
-                                                                              ),
-                                                                              '예보 응답없음',
-                                                                            ),
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          '강수량:${MidFcstCall.rnSt4Am(
-                                                                            containerMidFcstResponse.jsonBody,
-                                                                          )?.toString()}mm',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            '풍향: ',
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            '풍속: m/s',
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                      ].divide(const SizedBox(
-                                                                              height: 4.0)),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        8.0,
-                                                                        0.0,
-                                                                        8.0),
-                                                            child: Material(
-                                                              color: Colors
-                                                                  .transparent,
-                                                              elevation: 4.0,
-                                                              shape:
-                                                                  const RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .only(
-                                                                  bottomLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  bottomRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                ),
-                                                              ),
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    const BorderRadius
-                                                                        .only(
-                                                                  bottomLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  bottomRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                ),
-                                                                child:
-                                                                    Container(
-                                                                  width: 124.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryBackground,
-                                                                    boxShadow: const [
-                                                                      BoxShadow(
-                                                                        blurRadius:
-                                                                            4.0,
-                                                                        color: Color(
-                                                                            0x33000000),
-                                                                        offset:
-                                                                            Offset(
-                                                                          0.0,
-                                                                          2.0,
-                                                                        ),
-                                                                      )
-                                                                    ],
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      bottomLeft:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                      bottomRight:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              8.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0,
-                                                                            8.0),
-                                                                    child:
-                                                                        Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      children:
-                                                                          [
-                                                                        Text(
-                                                                          '5일 후 날씨',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'PretendardSeries',
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
-                                                                              ),
-                                                                        ),
-                                                                        ClipRRect(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8.0),
-                                                                          child:
-                                                                              Image.network(
-                                                                            valueOrDefault<String>(
-                                                                              functions.midFcstToImage(MidFcstCall.am5(
-                                                                                containerMidFcstResponse.jsonBody,
-                                                                              )),
-                                                                              'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%EB%82%A0%EC%94%A8%EC%9E%84%EC%8B%9C%2F%EB%A7%91%EC%9D%8C.png?alt=media&token=f967054c-0b4c-45ee-8364-3e928f218edf',
-                                                                            ),
-                                                                            width:
-                                                                                MediaQuery.sizeOf(context).width * 0.2,
-                                                                            height:
-                                                                                73.0,
-                                                                            fit:
-                                                                                BoxFit.cover,
-                                                                          ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            MidFcstCall.am5(
-                                                                              containerMidFcstResponse.jsonBody,
-                                                                            ),
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          '강수량:${MidFcstCall.rnSt5Am(
-                                                                            containerMidFcstResponse.jsonBody,
-                                                                          )?.toString()}mm',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            '풍향: ',
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            '풍속: m/s',
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                      ].divide(const SizedBox(
-                                                                              height: 4.0)),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        8.0,
-                                                                        0.0,
-                                                                        8.0),
-                                                            child: Material(
-                                                              color: Colors
-                                                                  .transparent,
-                                                              elevation: 4.0,
-                                                              shape:
-                                                                  const RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .only(
-                                                                  bottomLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  bottomRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                ),
-                                                              ),
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    const BorderRadius
-                                                                        .only(
-                                                                  bottomLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  bottomRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                ),
-                                                                child:
-                                                                    Container(
-                                                                  width: 124.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryBackground,
-                                                                    boxShadow: const [
-                                                                      BoxShadow(
-                                                                        blurRadius:
-                                                                            4.0,
-                                                                        color: Color(
-                                                                            0x33000000),
-                                                                        offset:
-                                                                            Offset(
-                                                                          0.0,
-                                                                          2.0,
-                                                                        ),
-                                                                      )
-                                                                    ],
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      bottomLeft:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                      bottomRight:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              8.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0,
-                                                                            8.0),
-                                                                    child:
-                                                                        Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      children:
-                                                                          [
-                                                                        Text(
-                                                                          '6일 후 날씨',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'PretendardSeries',
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
-                                                                              ),
-                                                                        ),
-                                                                        ClipRRect(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8.0),
-                                                                          child:
-                                                                              Image.network(
-                                                                            valueOrDefault<String>(
-                                                                              functions.midFcstToImage(MidFcstCall.am6(
-                                                                                containerMidFcstResponse.jsonBody,
-                                                                              )),
-                                                                              'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%EB%82%A0%EC%94%A8%EC%9E%84%EC%8B%9C%2F%EB%A7%91%EC%9D%8C.png?alt=media&token=f967054c-0b4c-45ee-8364-3e928f218edf',
-                                                                            ),
-                                                                            width:
-                                                                                MediaQuery.sizeOf(context).width * 0.2,
-                                                                            height:
-                                                                                73.0,
-                                                                            fit:
-                                                                                BoxFit.cover,
-                                                                          ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            MidFcstCall.am6(
-                                                                              containerMidFcstResponse.jsonBody,
-                                                                            ),
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          '강수량:${MidFcstCall.rnSt6Am(
-                                                                            containerMidFcstResponse.jsonBody,
-                                                                          )?.toString()}mm',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            '풍향: ',
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            '풍속: m/s',
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                      ].divide(const SizedBox(
-                                                                              height: 4.0)),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        8.0,
-                                                                        0.0,
-                                                                        8.0),
-                                                            child: Material(
-                                                              color: Colors
-                                                                  .transparent,
-                                                              elevation: 4.0,
-                                                              shape:
-                                                                  const RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .only(
-                                                                  bottomLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  bottomRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                ),
-                                                              ),
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    const BorderRadius
-                                                                        .only(
-                                                                  bottomLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  bottomRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          8.0),
-                                                                ),
-                                                                child:
-                                                                    Container(
-                                                                  width: 124.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryBackground,
-                                                                    boxShadow: const [
-                                                                      BoxShadow(
-                                                                        blurRadius:
-                                                                            4.0,
-                                                                        color: Color(
-                                                                            0x33000000),
-                                                                        offset:
-                                                                            Offset(
-                                                                          0.0,
-                                                                          2.0,
-                                                                        ),
-                                                                      )
-                                                                    ],
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      bottomLeft:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                      bottomRight:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              8.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0,
-                                                                            8.0),
-                                                                    child:
-                                                                        Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      children:
-                                                                          [
-                                                                        Text(
-                                                                          '7일 후 날씨',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'PretendardSeries',
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
-                                                                              ),
-                                                                        ),
-                                                                        ClipRRect(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8.0),
-                                                                          child:
-                                                                              Image.network(
-                                                                            valueOrDefault<String>(
-                                                                              functions.midFcstToImage(MidFcstCall.am7(
-                                                                                containerMidFcstResponse.jsonBody,
-                                                                              )),
-                                                                              'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%EB%82%A0%EC%94%A8%EC%9E%84%EC%8B%9C%2F%EB%A7%91%EC%9D%8C.png?alt=media&token=f967054c-0b4c-45ee-8364-3e928f218edf',
-                                                                            ),
-                                                                            width:
-                                                                                MediaQuery.sizeOf(context).width * 0.2,
-                                                                            height:
-                                                                                73.0,
-                                                                            fit:
-                                                                                BoxFit.cover,
-                                                                          ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            MidFcstCall.am7(
-                                                                              containerMidFcstResponse.jsonBody,
-                                                                            ),
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          '강수량:${MidFcstCall.rnSt7Am(
-                                                                            containerMidFcstResponse.jsonBody,
-                                                                          )?.toString()}mm',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            '풍향: ',
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            '풍속: m/s',
-                                                                            '예보 응답없음',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                              ),
-                                                                        ),
-                                                                      ].divide(const SizedBox(
-                                                                              height: 4.0)),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ].divide(const SizedBox(
-                                                            width: 8.0)),
-                                                      ),
-                                                    ),
-                                                  ].divide(
-                                                      const SizedBox(height: 8.0)),
+                                    return Container(
+                                      width: 100.0,
+                                      height: 100.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                      ),
+                                      child: FutureBuilder<ApiCallResponse>(
+                                        future: MidFcstCall.call(
+                                          numOfRows: 1,
+                                          pageNo: 1,
+                                          dataType: 'JSON',
+                                          regId: functions.midFcstCodeTrans(
+                                              weatherDetailedTBWeatherPointRecord
+                                                  .midRegId),
+                                          tmFc:
+                                          '${functions.datetimeToDateCopy(getCurrentTimestamp.toString()).toString()}0600',
+                                        ),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50.0,
+                                                height: 50.0,
+                                                child:
+                                                CircularProgressIndicator(
+                                                  valueColor:
+                                                  AlwaysStoppedAnimation<
+                                                      Color>(
+                                                    FlutterFlowTheme.of(
+                                                        context)
+                                                        .primary,
+                                                  ),
                                                 ),
                                               ),
                                             );
-                                          },
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                );
-                              },
-                            ),
-                          ].divide(const SizedBox(height: 8.0)),
-                        ),
-                      ),
+                                          }
+                                          final containerMidFcstResponse =
+                                          snapshot.data!;
+
+                                          return Container(
+                                            width: 100.0,
+                                            height: 440.0,
+                                            decoration: const BoxDecoration(
+                                              color: Color(0xffFEFFEF),
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                  20.0, 12.0, 20.0, 12.0),
+                                              child: Column(
+                                                mainAxisSize:
+                                                MainAxisSize.max,
+                                                children: [
+                                                  Align(
+                                                    alignment:
+                                                    const AlignmentDirectional(
+                                                        -1.0, -1.0),
+                                                    child: Text(
+                                                        '일주일 예보',
+                                                      style: FlutterFlowTheme.of(context).bodyMedium
+                                                          .override(
+                                                        fontFamily: 'PretendardSeries',
+                                                        fontSize: 17.0,
+                                                        color: FlutterFlowTheme.of(context).primaryText,
+                                                        letterSpacing:
+                                                        0.0,
+                                                        fontWeight: FontWeight.w600,
+                                                        useGoogleFonts: GoogleFonts
+                                                            .asMap()
+                                                            .containsKey(
+                                                            'PretendardSeries'),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SingleChildScrollView(
+                                                    scrollDirection:
+                                                    Axis.horizontal,
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                      MainAxisSize.max,
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .start,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                              0.0,
+                                                              8.0,
+                                                              0.0,
+                                                              8.0),
+                                                          child: Material(
+                                                            color: Colors
+                                                                .transparent,
+                                                            elevation: 4.0,
+                                                            shape:
+                                                            const RoundedRectangleBorder(
+                                                              borderRadius:
+                                                              BorderRadius
+                                                                  .only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                              ),
+                                                            ),
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                              const BorderRadius
+                                                                  .only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                              ),
+                                                              child:
+                                                              Container(
+                                                                width: 124.0,
+                                                                decoration:
+                                                                BoxDecoration(
+                                                                  color: FlutterFlowTheme.of(
+                                                                      context)
+                                                                      .primaryBackground,
+                                                                  boxShadow: const [
+                                                                    BoxShadow(
+                                                                      blurRadius:
+                                                                      4.0,
+                                                                      color: Color(
+                                                                          0x33000000),
+                                                                      offset:
+                                                                      Offset(
+                                                                        0.0,
+                                                                        2.0,
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                  borderRadius:
+                                                                  const BorderRadius
+                                                                      .only(
+                                                                    bottomLeft:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                    bottomRight:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                        8.0),
+                                                                    topRight:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                  ),
+                                                                ),
+                                                                child:
+                                                                Padding(
+                                                                  padding: const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      0.0,
+                                                                      8.0,
+                                                                      0.0,
+                                                                      8.0),
+                                                                  child:
+                                                                  Column(
+                                                                    mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                    mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                    children:
+                                                                    [
+                                                                      Text(
+                                                                        '1일 후 날씨',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 14,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w700,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      ClipRRect(
+                                                                        borderRadius:
+                                                                        BorderRadius.circular(8.0),
+                                                                        child:
+                                                                        Image.network(
+                                                                          functions
+                                                                              .skyToImageLinkCopy(functions
+                                                                              .fcsSkyForTommorow(
+                                                                              FcstWeatherApiCall.itemList(
+                                                                                containerFcstWeatherApiResponse.jsonBody,
+                                                                              )?.toList(),
+                                                                              functions.datetimeToDateCopy(getCurrentTimestamp.toString()).toString(),
+                                                                              1)
+                                                                              ?.first
+                                                                              ?.toString())
+                                                                              .first,
+                                                                          width:
+                                                                          MediaQuery.sizeOf(context).width * 0.2,
+                                                                          height:
+                                                                          73.0,
+                                                                          fit:
+                                                                          BoxFit.cover,
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          '${functions.fcsTmpForTommorow(FcstWeatherApiCall.itemList(
+                                                                            containerFcstWeatherApiResponse.jsonBody,
+                                                                          )?.toList(), functions.datetimeToDateCopy(getCurrentTimestamp.toString()).toString(), 1)?.first?.toString()}℃',
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 13.5,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          '강수량: ${functions.fcstListForCategory(FcstWeatherApiCall.itemList(
+                                                                            containerFcstWeatherApiResponse.jsonBody,
+                                                                          )?.toList(), getCurrentTimestamp.toString(), 1, 'PCP')?.first?.toString()}',
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          '풍향: ${functions.vecToString(functions.fcstListForCategory(FcstWeatherApiCall.itemList(
+                                                                            containerFcstWeatherApiResponse.jsonBody,
+                                                                          )?.toList(), getCurrentTimestamp.toString(), 1, 'VEC')?.first?.toString())}',
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          '풍속: ${functions.fcstListForCategory(FcstWeatherApiCall.itemList(
+                                                                            containerFcstWeatherApiResponse.jsonBody,
+                                                                          )?.toList(), getCurrentTimestamp.toString(), 1, 'WSD')?.first?.toString()}m/s',
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                    ].divide(const SizedBox(
+                                                                        height: 4.0)),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                              0.0,
+                                                              8.0,
+                                                              0.0,
+                                                              8.0),
+                                                          child: Material(
+                                                            color: Colors
+                                                                .transparent,
+                                                            elevation: 4.0,
+                                                            shape:
+                                                            const RoundedRectangleBorder(
+                                                              borderRadius:
+                                                              BorderRadius
+                                                                  .only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                              ),
+                                                            ),
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                              const BorderRadius
+                                                                  .only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                              ),
+                                                              child:
+                                                              Container(
+                                                                width: 124.0,
+                                                                decoration:
+                                                                BoxDecoration(
+                                                                  color: FlutterFlowTheme.of(
+                                                                      context)
+                                                                      .primaryBackground,
+                                                                  boxShadow: const [
+                                                                    BoxShadow(
+                                                                      blurRadius:
+                                                                      4.0,
+                                                                      color: Color(
+                                                                          0x33000000),
+                                                                      offset:
+                                                                      Offset(
+                                                                        0.0,
+                                                                        2.0,
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                  borderRadius:
+                                                                  const BorderRadius
+                                                                      .only(
+                                                                    bottomLeft:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                    bottomRight:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                        8.0),
+                                                                    topRight:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                  ),
+                                                                ),
+                                                                child:
+                                                                Padding(
+                                                                  padding: const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      0.0,
+                                                                      8.0,
+                                                                      0.0,
+                                                                      8.0),
+                                                                  child:
+                                                                  Column(
+                                                                    mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                    mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                    children:
+                                                                    [
+                                                                      Text(
+                                                                        '2일 후 날씨',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 14,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w700,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      ClipRRect(
+                                                                        borderRadius:
+                                                                        BorderRadius.circular(8.0),
+                                                                        child:
+                                                                        Image.network(
+                                                                          functions
+                                                                              .skyToImageLinkCopy(functions
+                                                                              .fcsSkyForTommorow(
+                                                                              FcstWeatherApiCall.itemList(
+                                                                                containerFcstWeatherApiResponse.jsonBody,
+                                                                              )?.toList(),
+                                                                              functions.datetimeToDateCopy(getCurrentTimestamp.toString()).toString(),
+                                                                              2)
+                                                                              ?.first
+                                                                              ?.toString())
+                                                                              .first,
+                                                                          width:
+                                                                          MediaQuery.sizeOf(context).width * 0.2,
+                                                                          height:
+                                                                          73.0,
+                                                                          fit:
+                                                                          BoxFit.cover,
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          '${functions.fcsTmpForTommorow(FcstWeatherApiCall.itemList(
+                                                                            containerFcstWeatherApiResponse.jsonBody,
+                                                                          )?.toList(), functions.datetimeToDateCopy(getCurrentTimestamp.toString()).toString(), 2)?.first?.toString()}℃',
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 13.5,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          '강수량:${functions.fcstListForCategory(FcstWeatherApiCall.itemList(
+                                                                            containerFcstWeatherApiResponse.jsonBody,
+                                                                          )?.toList(), getCurrentTimestamp.toString(), 2, 'PCP')?.first?.toString()}',
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          '풍향: ${functions.vecToString(functions.fcstListForCategory(FcstWeatherApiCall.itemList(
+                                                                            containerFcstWeatherApiResponse.jsonBody,
+                                                                          )?.toList(), getCurrentTimestamp.toString(), 2, 'VEC')?.first?.toString())}',
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          '풍속: ${functions.fcstListForCategory(FcstWeatherApiCall.itemList(
+                                                                            containerFcstWeatherApiResponse.jsonBody,
+                                                                          )?.toList(), getCurrentTimestamp.toString(), 2, 'WSD')?.first?.toString()}m/s',
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                    ].divide(const SizedBox(
+                                                                        height: 4.0)),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                              0.0,
+                                                              8.0,
+                                                              0.0,
+                                                              8.0),
+                                                          child: Material(
+                                                            color: Colors
+                                                                .transparent,
+                                                            elevation: 4.0,
+                                                            shape:
+                                                            const RoundedRectangleBorder(
+                                                              borderRadius:
+                                                              BorderRadius
+                                                                  .only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                              ),
+                                                            ),
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                              const BorderRadius
+                                                                  .only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                              ),
+                                                              child:
+                                                              Container(
+                                                                width: 124.0,
+                                                                decoration:
+                                                                BoxDecoration(
+                                                                  color: FlutterFlowTheme.of(
+                                                                      context)
+                                                                      .primaryBackground,
+                                                                  boxShadow: const [
+                                                                    BoxShadow(
+                                                                      blurRadius:
+                                                                      4.0,
+                                                                      color: Color(
+                                                                          0x33000000),
+                                                                      offset:
+                                                                      Offset(
+                                                                        0.0,
+                                                                        2.0,
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                  borderRadius:
+                                                                  const BorderRadius
+                                                                      .only(
+                                                                    bottomLeft:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                    bottomRight:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                        8.0),
+                                                                    topRight:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                  ),
+                                                                ),
+                                                                child:
+                                                                Padding(
+                                                                  padding: const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      0.0,
+                                                                      8.0,
+                                                                      0.0,
+                                                                      8.0),
+                                                                  child:
+                                                                  Column(
+                                                                    mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                    mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                    children:
+                                                                    [
+                                                                      Text(
+                                                                        '3일 후 날씨',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 14,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w700,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      ClipRRect(
+                                                                        borderRadius:
+                                                                        BorderRadius.circular(8.0),
+                                                                        child:
+                                                                        Image.network(
+                                                                          valueOrDefault<String>(
+                                                                            functions.midFcstToImage(MidFcstCall.am3(
+                                                                              containerMidFcstResponse.jsonBody,
+                                                                            )),
+                                                                            'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%EB%82%A0%EC%94%A8%EC%9E%84%EC%8B%9C%2F%EB%A7%91%EC%9D%8C.png?alt=media&token=f967054c-0b4c-45ee-8364-3e928f218edf',
+                                                                          ),
+                                                                          width:
+                                                                          MediaQuery.sizeOf(context).width * 0.2,
+                                                                          height:
+                                                                          73.0,
+                                                                          fit:
+                                                                          BoxFit.cover,
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          MidFcstCall.am3(
+                                                                            containerMidFcstResponse.jsonBody,
+                                                                          ),
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 13.5,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        '강수량:${MidFcstCall.rnSt3Am(
+                                                                          containerMidFcstResponse.jsonBody,
+                                                                        )?.toString()}mm',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          '풍향: ',
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          '풍속: m/s',
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                    ].divide(const SizedBox(
+                                                                        height: 4.0)),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                              0.0,
+                                                              8.0,
+                                                              0.0,
+                                                              8.0),
+                                                          child: Material(
+                                                            color: Colors
+                                                                .transparent,
+                                                            elevation: 4.0,
+                                                            shape:
+                                                            const RoundedRectangleBorder(
+                                                              borderRadius:
+                                                              BorderRadius
+                                                                  .only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                              ),
+                                                            ),
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                              const BorderRadius
+                                                                  .only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                              ),
+                                                              child:
+                                                              Container(
+                                                                width: 124.0,
+                                                                decoration:
+                                                                BoxDecoration(
+                                                                  color: FlutterFlowTheme.of(
+                                                                      context)
+                                                                      .primaryBackground,
+                                                                  boxShadow: const [
+                                                                    BoxShadow(
+                                                                      blurRadius:
+                                                                      4.0,
+                                                                      color: Color(
+                                                                          0x33000000),
+                                                                      offset:
+                                                                      Offset(
+                                                                        0.0,
+                                                                        2.0,
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                  borderRadius:
+                                                                  const BorderRadius
+                                                                      .only(
+                                                                    bottomLeft:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                    bottomRight:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                        8.0),
+                                                                    topRight:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                  ),
+                                                                ),
+                                                                child:
+                                                                Padding(
+                                                                  padding: const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      0.0,
+                                                                      8.0,
+                                                                      0.0,
+                                                                      8.0),
+                                                                  child:
+                                                                  Column(
+                                                                    mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                    mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                    children:
+                                                                    [
+                                                                      Text(
+                                                                        '4일 후 날씨',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 14,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w700,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      ClipRRect(
+                                                                        borderRadius:
+                                                                        BorderRadius.circular(8.0),
+                                                                        child:
+                                                                        Image.network(
+                                                                          valueOrDefault<String>(
+                                                                            functions.midFcstToImage(MidFcstCall.am4(
+                                                                              containerMidFcstResponse.jsonBody,
+                                                                            )),
+                                                                            'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%EB%82%A0%EC%94%A8%EC%9E%84%EC%8B%9C%2F%EB%A7%91%EC%9D%8C.png?alt=media&token=f967054c-0b4c-45ee-8364-3e928f218edf',
+                                                                          ),
+                                                                          width:
+                                                                          MediaQuery.sizeOf(context).width * 0.2,
+                                                                          height:
+                                                                          73.0,
+                                                                          fit:
+                                                                          BoxFit.cover,
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          valueOrDefault<String>(
+                                                                            MidFcstCall.am4(
+                                                                              containerMidFcstResponse.jsonBody,
+                                                                            ),
+                                                                            '예보 응답없음',
+                                                                          ),
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 13.5,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        '강수량:${MidFcstCall.rnSt4Am(
+                                                                          containerMidFcstResponse.jsonBody,
+                                                                        )?.toString()}mm',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          '풍향: ',
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          '풍속: m/s',
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                    ].divide(const SizedBox(
+                                                                        height: 4.0)),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                              0.0,
+                                                              8.0,
+                                                              0.0,
+                                                              8.0),
+                                                          child: Material(
+                                                            color: Colors
+                                                                .transparent,
+                                                            elevation: 4.0,
+                                                            shape:
+                                                            const RoundedRectangleBorder(
+                                                              borderRadius:
+                                                              BorderRadius
+                                                                  .only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                              ),
+                                                            ),
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                              const BorderRadius
+                                                                  .only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                              ),
+                                                              child:
+                                                              Container(
+                                                                width: 124.0,
+                                                                decoration:
+                                                                BoxDecoration(
+                                                                  color: FlutterFlowTheme.of(
+                                                                      context)
+                                                                      .primaryBackground,
+                                                                  boxShadow: const [
+                                                                    BoxShadow(
+                                                                      blurRadius:
+                                                                      4.0,
+                                                                      color: Color(
+                                                                          0x33000000),
+                                                                      offset:
+                                                                      Offset(
+                                                                        0.0,
+                                                                        2.0,
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                  borderRadius:
+                                                                  const BorderRadius
+                                                                      .only(
+                                                                    bottomLeft:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                    bottomRight:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                        8.0),
+                                                                    topRight:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                  ),
+                                                                ),
+                                                                child:
+                                                                Padding(
+                                                                  padding: const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      0.0,
+                                                                      8.0,
+                                                                      0.0,
+                                                                      8.0),
+                                                                  child:
+                                                                  Column(
+                                                                    mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                    mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                    children:
+                                                                    [
+                                                                      Text(
+                                                                        '5일 후 날씨',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 14,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w700,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      ClipRRect(
+                                                                        borderRadius:
+                                                                        BorderRadius.circular(8.0),
+                                                                        child:
+                                                                        Image.network(
+                                                                          valueOrDefault<String>(
+                                                                            functions.midFcstToImage(MidFcstCall.am5(
+                                                                              containerMidFcstResponse.jsonBody,
+                                                                            )),
+                                                                            'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%EB%82%A0%EC%94%A8%EC%9E%84%EC%8B%9C%2F%EB%A7%91%EC%9D%8C.png?alt=media&token=f967054c-0b4c-45ee-8364-3e928f218edf',
+                                                                          ),
+                                                                          width:
+                                                                          MediaQuery.sizeOf(context).width * 0.2,
+                                                                          height:
+                                                                          73.0,
+                                                                          fit:
+                                                                          BoxFit.cover,
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          MidFcstCall.am5(
+                                                                            containerMidFcstResponse.jsonBody,
+                                                                          ),
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 13.5,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        '강수량:${MidFcstCall.rnSt5Am(
+                                                                          containerMidFcstResponse.jsonBody,
+                                                                        )?.toString()}mm',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          '풍향: ',
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          '풍속: m/s',
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                    ].divide(const SizedBox(
+                                                                        height: 4.0)),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                              0.0,
+                                                              8.0,
+                                                              0.0,
+                                                              8.0),
+                                                          child: Material(
+                                                            color: Colors
+                                                                .transparent,
+                                                            elevation: 4.0,
+                                                            shape:
+                                                            const RoundedRectangleBorder(
+                                                              borderRadius:
+                                                              BorderRadius
+                                                                  .only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                              ),
+                                                            ),
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                              const BorderRadius
+                                                                  .only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                              ),
+                                                              child:
+                                                              Container(
+                                                                width: 124.0,
+                                                                decoration:
+                                                                BoxDecoration(
+                                                                  color: FlutterFlowTheme.of(
+                                                                      context)
+                                                                      .primaryBackground,
+                                                                  boxShadow: const [
+                                                                    BoxShadow(
+                                                                      blurRadius:
+                                                                      4.0,
+                                                                      color: Color(
+                                                                          0x33000000),
+                                                                      offset:
+                                                                      Offset(
+                                                                        0.0,
+                                                                        2.0,
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                  borderRadius:
+                                                                  const BorderRadius
+                                                                      .only(
+                                                                    bottomLeft:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                    bottomRight:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                        8.0),
+                                                                    topRight:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                  ),
+                                                                ),
+                                                                child:
+                                                                Padding(
+                                                                  padding: const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      0.0,
+                                                                      8.0,
+                                                                      0.0,
+                                                                      8.0),
+                                                                  child:
+                                                                  Column(
+                                                                    mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                    mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                    children:
+                                                                    [
+                                                                      Text(
+                                                                        '6일 후 날씨',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 14,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w700,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      ClipRRect(
+                                                                        borderRadius:
+                                                                        BorderRadius.circular(8.0),
+                                                                        child:
+                                                                        Image.network(
+                                                                          valueOrDefault<String>(
+                                                                            functions.midFcstToImage(MidFcstCall.am6(
+                                                                              containerMidFcstResponse.jsonBody,
+                                                                            )),
+                                                                            'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%EB%82%A0%EC%94%A8%EC%9E%84%EC%8B%9C%2F%EB%A7%91%EC%9D%8C.png?alt=media&token=f967054c-0b4c-45ee-8364-3e928f218edf',
+                                                                          ),
+                                                                          width:
+                                                                          MediaQuery.sizeOf(context).width * 0.2,
+                                                                          height:
+                                                                          73.0,
+                                                                          fit:
+                                                                          BoxFit.cover,
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          MidFcstCall.am6(
+                                                                            containerMidFcstResponse.jsonBody,
+                                                                          ),
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 13.5,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        '강수량:${MidFcstCall.rnSt6Am(
+                                                                          containerMidFcstResponse.jsonBody,
+                                                                        )?.toString()}mm',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          '풍향: ',
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          '풍속: m/s',
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                    ].divide(const SizedBox(
+                                                                        height: 4.0)),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                          const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
+                                                          child: Material(
+                                                            color: Colors
+                                                                .transparent,
+                                                            elevation: 4.0,
+                                                            shape:
+                                                            const RoundedRectangleBorder(
+                                                              borderRadius:
+                                                              BorderRadius
+                                                                  .only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                              ),
+                                                            ),
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                              const BorderRadius
+                                                                  .only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                    8.0),
+                                                              ),
+                                                              child:
+                                                              Container(
+                                                                width: 124.0,
+                                                                decoration:
+                                                                BoxDecoration(
+                                                                  color: FlutterFlowTheme.of(
+                                                                      context)
+                                                                      .primaryBackground,
+                                                                  boxShadow: const [
+                                                                    BoxShadow(
+                                                                      blurRadius:
+                                                                      4.0,
+                                                                      color: Color(
+                                                                          0x33000000),
+                                                                      offset:
+                                                                      Offset(
+                                                                        0.0,
+                                                                        2.0,
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                  borderRadius:
+                                                                  const BorderRadius
+                                                                      .only(
+                                                                    bottomLeft:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                    bottomRight:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                        8.0),
+                                                                    topRight:
+                                                                    Radius.circular(
+                                                                        8.0),
+                                                                  ),
+                                                                ),
+                                                                child:
+                                                                Padding(
+                                                                  padding: const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      0.0,
+                                                                      8.0,
+                                                                      0.0,
+                                                                      8.0),
+                                                                  child:
+                                                                  Column(
+                                                                    mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                    mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                    children:
+                                                                    [
+                                                                      Text(
+                                                                        '7일 후 날씨',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 14,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w700,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      ClipRRect(
+                                                                        borderRadius:
+                                                                        BorderRadius.circular(8.0),
+                                                                        child:
+                                                                        Image.network(
+                                                                          valueOrDefault<String>(
+                                                                            functions.midFcstToImage(MidFcstCall.am7(
+                                                                              containerMidFcstResponse.jsonBody,
+                                                                            )),
+                                                                            'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%EB%82%A0%EC%94%A8%EC%9E%84%EC%8B%9C%2F%EB%A7%91%EC%9D%8C.png?alt=media&token=f967054c-0b4c-45ee-8364-3e928f218edf',
+                                                                          ),
+                                                                          width:
+                                                                          MediaQuery.sizeOf(context).width * 0.2,
+                                                                          height:
+                                                                          73.0,
+                                                                          fit:
+                                                                          BoxFit.cover,
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          MidFcstCall.am7(
+                                                                            containerMidFcstResponse.jsonBody,
+                                                                          ),
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 13.5,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        '강수량:${MidFcstCall.rnSt7Am(
+                                                                          containerMidFcstResponse.jsonBody,
+                                                                        )?.toString()}mm',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          '풍향: ',
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          '풍속: m/s',
+                                                                          '예보 응답없음',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily: 'PretendardSeries',
+                                                                          fontSize: 12,
+                                                                          letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                    ].divide(const SizedBox(
+                                                                        height: 4.0)),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ].divide(const SizedBox(
+                                                          width: 20.0)),
+                                                    ),
+                                                  ),
+                                                ].divide(
+                                                    const SizedBox(height: 12.0)),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+                        ].divide(const SizedBox(height: 8.0)),
+                      )
                     ].divide(const SizedBox(height: 8.0)),
                   ),
                   Align(

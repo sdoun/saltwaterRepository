@@ -117,6 +117,7 @@ class _Seawall2ndFilterWidgetState extends State<Seawall2ndFilterWidget> {
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Filtercheckbox(
                       filterText: '숙     소',
@@ -155,7 +156,7 @@ class _Seawall2ndFilterWidgetState extends State<Seawall2ndFilterWidget> {
                   },
                   child: Container(
                     width: 100.0,
-                    height: 43.0,
+                    height: 40.0,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).primary,
                       borderRadius: BorderRadius.circular(15),

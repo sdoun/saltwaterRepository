@@ -158,10 +158,32 @@ class _LoginWidgetState extends State<LoginWidget>
           top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 36, 0, 0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/KakaoTalk_20240913_183755149.png',
+                      height: 40.0,
+                    ),
+                    Text(
+                      '짠물투어',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontFamily: 'AugroSeriesBold',
+                        color: FlutterFlowTheme.of(context).primary,
+                      ),
+                    )
+                  ],
+                ),
+              ),
               Expanded(
                 child: Align(
-                  alignment: const AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, -1),
                   child: Padding(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 12.0),
@@ -211,49 +233,36 @@ class _LoginWidgetState extends State<LoginWidget>
                                             Text(
                                               '회원가입',
                                               textAlign: TextAlign.start,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .headlineMediumFamily,
-                                                        fontSize: 21.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .headlineMediumFamily),
-                                                      ),
+                                              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                                                fontFamily:
+                                                'PretendardSeries',
+                                                color: FlutterFlowTheme.of(context)
+                                                    .primaryText,
+                                                fontSize: 19.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w600,
+                                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                    'PretendardSeries'),
+                                              ),
                                             ),
                                             Padding(
                                               padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 4.0, 0.0, 24.0),
                                               child: Text(
-                                                '아래의 폼에 이메일과 비밀번호를 입력해주세요.',
+                                                '이메일로 회원가입 또는 기존 아이디로 회원가입',
                                                 textAlign: TextAlign.start,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMediumFamily,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMediumFamily),
-                                                        ),
+                                                style: FlutterFlowTheme.of(context).labelMedium.override(
+                                                  fontFamily:
+                                                  'PretendardSeries',
+                                                  color: FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                                  fontSize: 15.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.w500,
+                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                      'PretendardSeries'),
+                                                ),
                                               ),
                                             ),
                                             LoginTextForm(
@@ -287,7 +296,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                 FlutterFlowTheme.of(
                                                     context)
                                                     .secondaryText,
-                                                size: 24.0,
+                                                size: 20.0,
                                               ),
                                                 validator: _model
                                                     .passwordCreateTextControllerValidator
@@ -310,7 +319,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                 FlutterFlowTheme.of(
                                                     context)
                                                     .secondaryText,
-                                                size: 24.0,
+                                                size: 20.0,
 
                                               ),
                                               validator: _model
@@ -726,13 +735,13 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                     .mounted);
                                                           },
                                                           text: '구글 회원가입',
-                                                          backgroundColor: Colors.black,
-                                                          icon: const Icon(
-                                                            Icons
-                                                                .chat_bubble_outlined,
+                                                          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+                                                          icon: const FaIcon(
+                                                            FontAwesomeIcons
+                                                                .google,
                                                             size: 20.0,
                                                           ),
-                                                          textColor: FlutterFlowTheme.of(context).primaryBackground,
+                                                          textColor: FlutterFlowTheme.of(context).primaryText,
                                                         ),
                                                         isAndroid
                                                             ? Container()
@@ -774,9 +783,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           text: '카카오 회원가입',
                                                           backgroundColor: const Color(
                                                               0xFFFFE700),
-                                                          icon: const FaIcon(
-                                                            FontAwesomeIcons
-                                                                .google,
+                                                          icon: Icon(
+                                                            Icons
+                                                            .chat_bubble_outlined,
+                                                            color: FlutterFlowTheme.of(context).primaryText,
                                                             size: 20.0,
                                                           ),
                                                           textColor: FlutterFlowTheme.of(context).primaryText,
@@ -789,10 +799,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           text: '네이버 회원가입',
                                                           backgroundColor: const Color(
                                                               0xFF00CC66),
-                                                          icon: const FaIcon(
-                                                            FontAwesomeIcons
-                                                                .google,
+                                                          icon: Icon(
+                                                            Icons
+                                                                .chat_bubble_outlined,
                                                             size: 20.0,
+                                                            color: FlutterFlowTheme.of(context).primaryText,
                                                           ),
                                                           textColor: FlutterFlowTheme.of(context).primaryText,
                                                         ),
@@ -913,7 +924,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                 FlutterFlowTheme.of(
                                                     context)
                                                     .secondaryText,
-                                                size: 24.0,
+                                                size: 20.0,
                                               ),
                                               validator: _model
                                                   .passwordTextControllerValidator

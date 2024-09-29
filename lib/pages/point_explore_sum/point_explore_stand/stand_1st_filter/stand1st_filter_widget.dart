@@ -215,7 +215,7 @@ class _Stand1stFilterWidgetState extends State<Stand1stFilterWidget> {
                   },
                   child: Container(
                     width: 100.0,
-                    height: 43.0,
+                    height: 40.0,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).primary,
                       borderRadius: BorderRadius.circular(15),

@@ -91,6 +91,7 @@ class _Pension3rdFilterWidgetState extends State<Pension3rdFilterWidget> {
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Filtercheckbox(
                     filterText: '식사제공',
@@ -112,6 +113,7 @@ class _Pension3rdFilterWidgetState extends State<Pension3rdFilterWidget> {
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Filtercheckbox(
                     filterText: '낚시배&좌대 이용가능',
@@ -150,7 +152,8 @@ class _Pension3rdFilterWidgetState extends State<Pension3rdFilterWidget> {
                 },
                 child: Container(
                   width: 100.0,
-                  height: 43.0,
+                  height: 40.0,
+
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primary,
                     borderRadius: BorderRadius.circular(15),
