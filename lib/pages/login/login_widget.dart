@@ -165,10 +165,11 @@ class _LoginWidgetState extends State<LoginWidget>
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Image.asset(
                       'assets/images/KakaoTalk_20240913_183755149.png',
-                      height: 40.0,
+                      height: 36.0,
                     ),
                     Text(
                       '짠물투어',
@@ -484,30 +485,17 @@ class _LoginWidgetState extends State<LoginWidget>
                                                       },
                                                       child: Text(
                                                         '약관 동의하기',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily,
-                                                                  fontSize:
-                                                                      16.0,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  decoration:
-                                                                      TextDecoration
-                                                                          .underline,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily),
-                                                                ),
+                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                          fontFamily:
+                                                          'PretendardSeries',
+                                                          color: FlutterFlowTheme.of(context)
+                                                              .secondaryText,
+                                                          fontSize: 14.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight: FontWeight.w600,
+                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                              'PretendardSeries'),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
@@ -611,9 +599,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           navigate();
                                                         },
                                                   text: '가입하고 시작하기!',
+                                                  //버튼 크기 바꾸는 중이었음
                                                   options: FFButtonOptions(
                                                     width: 230.0,
-                                                    height: 52.0,
+                                                    height: 44.0,
                                                     padding:
                                                         const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
@@ -765,9 +754,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                     .mounted);
                                                           },
                                                           text: '애플 회원가입',
-                                                          backgroundColor: FlutterFlowTheme.of(
-                                                              context)
-                                                              .secondaryBackground,
+                                                          backgroundColor: const Color(0xffCAF1FA),
                                                           icon: const FaIcon(
                                                             FontAwesomeIcons
                                                                 .apple,
@@ -847,49 +834,36 @@ class _LoginWidgetState extends State<LoginWidget>
                                             Text(
                                               '로그인',
                                               textAlign: TextAlign.start,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .headlineMediumFamily,
-                                                        fontSize: 21.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .headlineMediumFamily),
-                                                      ),
+                                              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                                                fontFamily:
+                                                'PretendardSeries',
+                                                color: FlutterFlowTheme.of(context)
+                                                    .primaryText,
+                                                fontSize: 19.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w600,
+                                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                    'PretendardSeries'),
+                                              ),
                                             ),
                                             Padding(
                                               padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 4.0, 0.0, 24.0),
                                               child: Text(
-                                                '아래의 폼을 채워주세요.',
+                                                '이메일 로그인 또는 기존 아이디로 로그인',
                                                 textAlign: TextAlign.start,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMediumFamily,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMediumFamily),
-                                                        ),
+                                                style: FlutterFlowTheme.of(context).labelMedium.override(
+                                                  fontFamily:
+                                                  'PretendardSeries',
+                                                  color: FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                                  fontSize: 14.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.w600,
+                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                      'PretendardSeries'),
+                                                ),
                                               ),
                                             ),
                                             LoginTextForm(
@@ -967,7 +941,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                   text: 'Sign In',
                                                   options: FFButtonOptions(
                                                     width: 230.0,
-                                                    height: 52.0,
+                                                    height: 44.0,
                                                     padding:
                                                         const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
@@ -1133,9 +1107,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           0.0,
                                                                           0.0,
                                                                           0.0),
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryBackground,
+                                                              color: const Color(0xffCAF1FA),
                                                               textStyle:
                                                                   FlutterFlowTheme.of(
                                                                           context)
@@ -1238,24 +1210,17 @@ class _LoginWidgetState extends State<LoginWidget>
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .primaryBackground,
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
-                                                        ),
+                                                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                    fontFamily:
+                                                    'PretendardSeries',
+                                                    color: FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                    fontSize: 14.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w600,
+                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                        'PretendardSeries'),
+                                                  ),
                                                     elevation: 0.0,
                                                     borderSide: BorderSide(
                                                       color:

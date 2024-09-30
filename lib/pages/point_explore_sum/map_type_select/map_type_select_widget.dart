@@ -7,8 +7,9 @@ import 'map_type_select_model.dart';
 export 'map_type_select_model.dart';
 
 class MapTypeSelectWidget extends StatefulWidget {
-  const MapTypeSelectWidget({super.key});
+  const MapTypeSelectWidget({super.key, this.onMapSeleted});
 
+  final onMapSeleted;
   @override
   State<MapTypeSelectWidget> createState() => _MapTypeSelectWidgetState();
 }
@@ -254,6 +255,7 @@ class _MapTypeSelectWidgetState extends State<MapTypeSelectWidget> {
                 ],
               ),
               InkWell(
+                onTap: widget.onMapSeleted,
                 child: Container(
                   margin: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                   alignment: const Alignment(0, 0),
@@ -273,9 +275,6 @@ class _MapTypeSelectWidgetState extends State<MapTypeSelectWidget> {
                     ),
                   ),
                 ),
-                onTap: () async{
-                  Navigator.pop(context);
-                },
               ),
             ].divide(const SizedBox(height: 4.0)),
           ),

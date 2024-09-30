@@ -42,7 +42,7 @@ class _FishchoicechipsState extends State<Fishchoicechips> {
                 .primaryBackground,
             letterSpacing: 0.0,
             fontSize: 12,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
             useGoogleFonts: GoogleFonts.asMap()
                 .containsKey('PretendardSeries'),
           ),
@@ -61,9 +61,10 @@ class _FishchoicechipsState extends State<Fishchoicechips> {
               .override(
             fontFamily: 'PretendardSeries',
             fontSize: 12,
-            color: Colors.black,
+            color: FlutterFlowTheme.of(context)
+                .primaryText,
             letterSpacing: 0.0,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w700,
             useGoogleFonts: GoogleFonts.asMap()
                 .containsKey('PretendardSeries'),
           ),

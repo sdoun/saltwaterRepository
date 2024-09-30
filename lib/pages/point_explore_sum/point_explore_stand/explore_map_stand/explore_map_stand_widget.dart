@@ -96,14 +96,27 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
             alignment: const AlignmentDirectional(0.0, 0.0),
             child: Text(
               '포인트 검색하기',
-              style: FlutterFlowTheme.of(context).headlineMedium.override(
-                    fontFamily:
-                        FlutterFlowTheme.of(context).headlineMediumFamily,
-                    letterSpacing: 0.0,
-                    fontWeight: FontWeight.w600,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        FlutterFlowTheme.of(context).headlineMediumFamily),
-                  ),
+              style: FlutterFlowTheme
+                  .of(context)
+                  .bodyMedium
+                  .override(
+                fontFamily:
+                'PretendardSeries',
+                color: FlutterFlowTheme.of(
+                    context)
+                    .primaryText,
+                fontSize:
+                19.0,
+                letterSpacing:
+                0.0,
+                fontWeight:
+                FontWeight
+                    .w700,
+                useGoogleFonts: GoogleFonts
+                    .asMap()
+                    .containsKey(
+                    'PretendardSeries'),
+              ),
             ),
           ),
 
@@ -130,6 +143,7 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Container(
+                        margin: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).primaryBackground,
@@ -152,217 +166,224 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
                               ),
                               Align(
                                 alignment: const AlignmentDirectional(-1.0, 0.0),
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          await showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            backgroundColor: const Color(0x24000000),
-                                            enableDrag: false,
-                                            context: context,
-                                            builder: (context) {
-                                              return WebViewAware(
-                                                child: GestureDetector(
-                                                  onTap: () =>
-                                                      FocusScope.of(context)
-                                                          .unfocus(),
-                                                  child: Padding(
-                                                    padding:
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 5.0, 0.0, 0.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor: const Color(0x24000000),
+                                                enableDrag: false,
+                                                context: context,
+                                                builder: (context) {
+                                                  return WebViewAware(
+                                                    child: GestureDetector(
+                                                      onTap: () =>
+                                                          FocusScope.of(context)
+                                                              .unfocus(),
+                                                      child: Padding(
+                                                        padding:
                                                         MediaQuery.viewInsetsOf(
                                                             context),
-                                                    child:
+                                                        child:
                                                         const PointCategoryWidget(),
-                                                  ),
-                                                ),
-                                              );
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ).then(
+                                                      (value) => safeSetState(() {}));
                                             },
-                                          ).then(
-                                              (value) => safeSetState(() {}));
-                                        },
-                                        child: ClipRRect(
-                                          borderRadius:
+                                            child: ClipRRect(
+                                              borderRadius:
                                               BorderRadius.circular(8.0),
-                                          child: Container(
-                                            height: 32.0,
-                                            decoration: BoxDecoration(
-                                              color:
+                                              child: Container(
+                                                height: 32.0,
+                                                decoration: BoxDecoration(
+                                                  color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
-                                              borderRadius:
+                                                  borderRadius:
                                                   BorderRadius.circular(8.0),
-                                              border: Border.all(
-                                                color: FlutterFlowTheme.of(context).primary,
-                                                width: 2,
-                                              ),
-                                            ),
-                                            alignment:
+                                                  border: Border.all(
+                                                    color: FlutterFlowTheme.of(context).primary,
+                                                    width: 2,
+                                                  ),
+                                                ),
+                                                alignment:
                                                 const AlignmentDirectional(0.0, 0.0),
-                                            child: Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(8.0, 0.0, 4.0, 0.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
+                                                child: Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(8.0, 0.0, 4.0, 0.0),
+                                                  child: Row(
+                                                    mainAxisSize: MainAxisSize.max,
+                                                    mainAxisAlignment:
                                                     MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    '해상펜션&좌대',
-                                                    style: FlutterFlowTheme.of(
+                                                    children: [
+                                                      Text(
+                                                        '해상펜션&좌대',
+                                                        style: FlutterFlowTheme.of(
                                                             context)
-                                                        .bodyMedium
-                                                        .override(
+                                                            .bodyMedium
+                                                            .override(
                                                           fontFamily:
-                                                              'PretendardSeries',
+                                                          'PretendardSeries',
                                                           color: FlutterFlowTheme
-                                                                  .of(context)
+                                                              .of(context)
                                                               .primaryText,
                                                           fontSize: 12.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                          FontWeight.w700,
                                                           useGoogleFonts:
-                                                              GoogleFonts
-                                                                      .asMap()
-                                                                  .containsKey(
-                                                                      'PretendardSeries'),
+                                                          GoogleFonts
+                                                              .asMap()
+                                                              .containsKey(
+                                                              'PretendardSeries'),
                                                         ),
-                                                  ),
-                                                  Align(
-                                                    alignment:
+                                                      ),
+                                                      Align(
+                                                        alignment:
                                                         const AlignmentDirectional(
                                                             1.0, 0.0),
-                                                    child: Padding(
-                                                      padding:
+                                                        child: Padding(
+                                                          padding:
                                                           const EdgeInsetsDirectional
                                                               .fromSTEB(
-                                                                  3.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Icon(
-                                                        Icons
-                                                            .keyboard_arrow_down_outlined,
-                                                        color: FlutterFlowTheme
+                                                              3.0,
+                                                              0.0,
+                                                              0.0,
+                                                              0.0),
+                                                          child: Icon(
+                                                            Icons
+                                                                .keyboard_arrow_down_outlined,
+                                                            color: FlutterFlowTheme
                                                                 .of(context)
-                                                            .primaryText,
-                                                        size: 18.0,
+                                                                .primaryText,
+                                                            size: 18.0,
+                                                          ),
+                                                        ),
                                                       ),
-                                                    ),
+                                                    ],
                                                   ),
-                                                ],
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                      Standfilterbutton(
-                                          iniitalText: '시설구분',
-                                          filterValue: _model.stand1stFilter,
-                                          onTap: () async {
-                                            await showModalBottomSheet(
-                                              isScrollControlled: true,
-                                              backgroundColor: Colors.transparent,
-                                              enableDrag: false,
-                                              context: context,
-                                              builder: (context) {
-                                                return WebViewAware(
-                                                  child: GestureDetector(
-                                                    onTap: () =>
-                                                        FocusScope.of(context)
-                                                            .unfocus(),
-                                                    child: Padding(
-                                                      padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                      child:
-                                                      const Stand1stFilterWidget(),
+                                          Standfilterbutton(
+                                            iniitalText: '시설구분',
+                                            filterValue: _model.stand1stFilter,
+                                            onTap: () async {
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor: Colors.transparent,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder: (context) {
+                                                  return WebViewAware(
+                                                    child: GestureDetector(
+                                                      onTap: () =>
+                                                          FocusScope.of(context)
+                                                              .unfocus(),
+                                                      child: Padding(
+                                                        padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                        child:
+                                                        const Stand1stFilterWidget(),
+                                                      ),
                                                     ),
-                                                  ),
-                                                );
-                                              },
-                                            ).then((value) => safeSetState(() =>
-                                            _model.stand1stFilter = value));
+                                                  );
+                                                },
+                                              ).then((value) => safeSetState(() =>
+                                              _model.stand1stFilter = value));
 
-                                            safeSetState(() {});
-                                          },
-                                      ),
-                                      Standfilterbutton(
-                                        iniitalText: '편의시설',
-                                        filterValue: _model.stand2ndFilter,
-                                        onTap: () async {
-                                          await showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            backgroundColor: Colors.transparent,
-                                            enableDrag: false,
-                                            context: context,
-                                            builder: (context) {
-                                              return WebViewAware(
-                                                child: GestureDetector(
-                                                  onTap: () =>
-                                                      FocusScope.of(context)
-                                                          .unfocus(),
-                                                  child: Padding(
-                                                    padding:
-                                                    MediaQuery.viewInsetsOf(
-                                                        context),
-                                                    child:
-                                                    const Stand2ndFilterWidget(),
-                                                  ),
-                                                ),
-                                              );
+                                              safeSetState(() {});
                                             },
-                                          ).then((value) => safeSetState(() =>
-                                          _model.stand2ndFilter = value));
+                                          ),
+                                          Standfilterbutton(
+                                            iniitalText: '편의시설',
+                                            filterValue: _model.stand2ndFilter,
+                                            onTap: () async {
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor: Colors.transparent,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder: (context) {
+                                                  return WebViewAware(
+                                                    child: GestureDetector(
+                                                      onTap: () =>
+                                                          FocusScope.of(context)
+                                                              .unfocus(),
+                                                      child: Padding(
+                                                        padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                        child:
+                                                        const Stand2ndFilterWidget(),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ).then((value) => safeSetState(() =>
+                                              _model.stand2ndFilter = value));
 
-                                          safeSetState(() {});
-                                        },
-                                      ),
-                                      Standfilterbutton(
-                                        iniitalText: '편의사항',
-                                        filterValue: _model.stand3rdFilter,
-                                        onTap: () async {
-                                          await showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            backgroundColor: Colors.transparent,
-                                            enableDrag: false,
-                                            context: context,
-                                            builder: (context) {
-                                              return WebViewAware(
-                                                child: GestureDetector(
-                                                  onTap: () =>
-                                                      FocusScope.of(context)
-                                                          .unfocus(),
-                                                  child: Padding(
-                                                    padding:
-                                                    MediaQuery.viewInsetsOf(
-                                                        context),
-                                                    child:
-                                                    const Stand3rdFilterWidget(),
-                                                  ),
-                                                ),
-                                              );
+                                              safeSetState(() {});
                                             },
-                                          ).then((value) => safeSetState(() =>
-                                          _model.stand3rdFilter = value));
+                                          ),
+                                          Standfilterbutton(
+                                            iniitalText: '편의사항',
+                                            filterValue: _model.stand3rdFilter,
+                                            onTap: () async {
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor: Colors.transparent,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder: (context) {
+                                                  return WebViewAware(
+                                                    child: GestureDetector(
+                                                      onTap: () =>
+                                                          FocusScope.of(context)
+                                                              .unfocus(),
+                                                      child: Padding(
+                                                        padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                        child:
+                                                        const Stand3rdFilterWidget(),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ).then((value) => safeSetState(() =>
+                                              _model.stand3rdFilter = value));
 
-                                          safeSetState(() {});
-                                        },
+                                              safeSetState(() {});
+                                            },
+                                          ),
+                                        ].divide(const SizedBox(width: 4.0)),
                                       ),
-                                    ].divide(const SizedBox(width: 4.0)),
+                                    ),
                                   ),
                                 ),
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 24.0),
+                                    0.0, 12.0, 0.0, 24.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     _model.standList =
@@ -392,13 +413,14 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(
-                                          fontFamily: 'PretendardSeries',
-                                          color: Colors.white,
-                                          fontSize: 18.0,
-                                          letterSpacing: 0.0,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey('PretendardSeries'),
-                                        ),
+                                      fontFamily: 'PretendardSeries',
+                                      color: Colors.white,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w500,
+                                      letterSpacing: 0.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey('PretendardSeries'),
+                                    ),
                                     elevation: 3.0,
                                     borderSide: const BorderSide(
                                       color: Colors.transparent,
@@ -481,7 +503,12 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
                                       },
                                     ),
                                   ),
-                                  const Mapselectbutton(),
+                                  Mapselectbutton(
+                                    onSelected: () async{
+                                      Navigator.pop(context);
+                                      safeSetState(() {});
+                                    },
+                                  ),
                                 ],
                               ),
                             ),

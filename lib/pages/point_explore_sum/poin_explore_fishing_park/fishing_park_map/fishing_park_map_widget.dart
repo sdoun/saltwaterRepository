@@ -96,14 +96,27 @@ class _FishingParkMapWidgetState extends State<FishingParkMapWidget> {
             alignment: const AlignmentDirectional(0.0, 0.0),
             child: Text(
               '포인트 검색하기',
-              style: FlutterFlowTheme.of(context).headlineMedium.override(
-                    fontFamily:
-                        FlutterFlowTheme.of(context).headlineMediumFamily,
-                    letterSpacing: 0.0,
-                    fontWeight: FontWeight.w600,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        FlutterFlowTheme.of(context).headlineMediumFamily),
-                  ),
+              style: FlutterFlowTheme
+                  .of(context)
+                  .bodyMedium
+                  .override(
+                fontFamily:
+                'PretendardSeries',
+                color: FlutterFlowTheme.of(
+                    context)
+                    .primaryText,
+                fontSize:
+                19.0,
+                letterSpacing:
+                0.0,
+                fontWeight:
+                FontWeight
+                    .w700,
+                useGoogleFonts: GoogleFonts
+                    .asMap()
+                    .containsKey(
+                    'PretendardSeries'),
+              ),
             ),
           ),
           actions: const[
@@ -151,7 +164,10 @@ class _FishingParkMapWidgetState extends State<FishingParkMapWidget> {
                               ),
                               Align(
                                 alignment: const AlignmentDirectional(-1.0, 0.0),
-                                child: SingleChildScrollView(
+                                child:
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                                  child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -227,7 +243,7 @@ class _FishingParkMapWidgetState extends State<FishingParkMapWidget> {
                                                           fontSize: 12.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.w700,
                                                           useGoogleFonts:
                                                               GoogleFonts
                                                                       .asMap()
@@ -359,10 +375,11 @@ class _FishingParkMapWidgetState extends State<FishingParkMapWidget> {
                                     ].divide(const SizedBox(width: 4.0)),
                                   ),
                                 ),
+                                ),
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 24.0),
+                                    0.0, 12.0, 0.0, 24.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     _model.pensionPointList =
@@ -393,7 +410,8 @@ class _FishingParkMapWidgetState extends State<FishingParkMapWidget> {
                                         .override(
                                           fontFamily: 'PretendardSeries',
                                           color: Colors.white,
-                                          fontSize: 18.0,
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.w500,
                                           letterSpacing: 0.0,
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey('PretendardSeries'),
@@ -481,7 +499,12 @@ class _FishingParkMapWidgetState extends State<FishingParkMapWidget> {
                                       },
                                     ),
                                   ),
-                                  const Mapselectbutton(),
+                                  Mapselectbutton(
+                                    onSelected: () async{
+                                      Navigator.pop(context);
+                                      safeSetState(() {});
+                                    },
+                                  ),
                                 ],
                               ),
                             ),

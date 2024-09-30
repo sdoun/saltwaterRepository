@@ -171,7 +171,7 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.pushNamed('shoppingHome');
+                    context.pushNamed('service_is_not_ready');
                   },
                   child: Container(
                     height: double.infinity,

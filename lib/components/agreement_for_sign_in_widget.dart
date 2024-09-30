@@ -113,19 +113,21 @@ class _AgreementForSignInWidgetState extends State<AgreementForSignInWidget> {
                   child: Text(
                     '짠물투어 이용약관',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyMediumFamily,
-                          fontSize: 21.0,
-                          letterSpacing: 0.0,
-                          fontWeight: FontWeight.bold,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodyMediumFamily),
-                        ),
+                      fontFamily:
+                      'PretendardSeries',
+                      color: FlutterFlowTheme.of(context)
+                          .primaryText,
+                      fontSize: 19.0,
+                      letterSpacing: 0.0,
+                      fontWeight: FontWeight.w700,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          'PretendardSeries'),
+                    ),
                   ),
                 ),
                 Divider(
-                  thickness: 1.0,
-                  color: FlutterFlowTheme.of(context).primary,
+                  thickness: 0.5,
+                  color: FlutterFlowTheme.of(context).secondaryText,
                 ),
                 Container(
                   width: double.infinity,
@@ -183,18 +185,17 @@ class _AgreementForSignInWidgetState extends State<AgreementForSignInWidget> {
                         ),
                         Text(
                           '모두 동의하기',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyMediumFamily,
-                                fontSize: 16.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w600,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily),
-                              ),
+                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily:
+                            'PretendardSeries',
+                            color: FlutterFlowTheme.of(context)
+                                .primaryText,
+                            fontSize: 17.0,
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.w600,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                'PretendardSeries'),
+                          ),
                         ),
                       ],
                     ),
@@ -267,18 +268,17 @@ class _AgreementForSignInWidgetState extends State<AgreementForSignInWidget> {
                           },
                           child: Text(
                             '(필수) 서비스 이용 약관',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyMediumFamily,
-                                  fontSize: 16.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w600,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily),
-                                ),
+                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily:
+                              'PretendardSeries',
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryText,
+                              fontSize: 14.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  'PretendardSeries'),
+                            ),
                           ),
                         ),
                       ],
@@ -352,18 +352,17 @@ class _AgreementForSignInWidgetState extends State<AgreementForSignInWidget> {
                           },
                           child: Text(
                             '(필수) 개인정보  이용 약관',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyMediumFamily,
-                                  fontSize: 16.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w600,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily),
-                                ),
+                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily:
+                              'PretendardSeries',
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryText,
+                              fontSize: 14.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  'PretendardSeries'),
+                            ),
                           ),
                         ),
                       ],
@@ -409,18 +408,17 @@ class _AgreementForSignInWidgetState extends State<AgreementForSignInWidget> {
                         ),
                         Text(
                           '(필수) 휴대폰 본인인증 서비스 ',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyMediumFamily,
-                                fontSize: 16.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w600,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily),
-                              ),
+                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily:
+                            'PretendardSeries',
+                            color: FlutterFlowTheme.of(context)
+                                .primaryText,
+                            fontSize: 14.0,
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.w500,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                'PretendardSeries'),
+                          ),
                         ),
                       ],
                     ),
@@ -465,18 +463,17 @@ class _AgreementForSignInWidgetState extends State<AgreementForSignInWidget> {
                         ),
                         Text(
                           '(필수) 위치기반 서비스 이용약관',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyMediumFamily,
-                                fontSize: 16.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w600,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily),
-                              ),
+                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily:
+                            'PretendardSeries',
+                            color: FlutterFlowTheme.of(context)
+                                .primaryText,
+                            fontSize: 14.0,
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.w500,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                'PretendardSeries'),
+                          ),
                         ),
                       ],
                     ),
@@ -521,18 +518,17 @@ class _AgreementForSignInWidgetState extends State<AgreementForSignInWidget> {
                         ),
                         Text(
                           '(선택) 마케팅 정보 수신 동의',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyMediumFamily,
-                                fontSize: 16.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w600,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily),
-                              ),
+                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily:
+                            'PretendardSeries',
+                            color: FlutterFlowTheme.of(context)
+                                .primaryText,
+                            fontSize: 14.0,
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.w500,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                'PretendardSeries'),
+                          ),
                         ),
                       ],
                     ),
@@ -567,18 +563,17 @@ class _AgreementForSignInWidgetState extends State<AgreementForSignInWidget> {
                           iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primary,
-                          textStyle: FlutterFlowTheme.of(context)
-                              .titleSmall
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .titleSmallFamily,
-                                color: Colors.white,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w600,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .titleSmallFamily),
-                              ),
+                          textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                            fontFamily:
+                            'PretendardSeries',
+                            color: FlutterFlowTheme.of(context)
+                                .primaryText,
+                            fontSize: 13.0,
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.w600,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            'PretendardSeries'),
+                            ),
                           elevation: 3.0,
                           borderSide: const BorderSide(
                             color: Colors.transparent,

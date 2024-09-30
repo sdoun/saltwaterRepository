@@ -162,6 +162,10 @@ class _NaverMapWidgetPointCopyState extends State<NaverMapWidgetPointCopy> {
   @override
   void didUpdateWidget(NaverMapWidgetPointCopy oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if(widget.mapType != oldWidget.mapType){
+      setState(() {
+      });
+    }
     if (widget.pointList != oldWidget.pointList) {
       pointLength = widget.pointList?.length ?? 0;
       updateMarkers();

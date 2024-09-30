@@ -5,7 +5,9 @@ import 'package:webviewx_plus/webviewx_plus.dart';
 import '../../pages/point_explore_sum/map_type_select/map_type_select_widget.dart';
 
 class Mapselectbutton extends StatefulWidget {
-  const Mapselectbutton({super.key});
+  const Mapselectbutton({super.key, this.onSelected});
+  final onSelected;
+
 
   @override
   State<Mapselectbutton> createState() => _MapselectbuttonState();
@@ -41,7 +43,9 @@ class _MapselectbuttonState extends State<Mapselectbutton> {
                       MediaQuery.viewInsetsOf(
                           context),
                       child:
-                      const MapTypeSelectWidget(),
+                      MapTypeSelectWidget(
+                        onMapSeleted: widget.onSelected,
+                      ),
                     ),
                   ),
                 );

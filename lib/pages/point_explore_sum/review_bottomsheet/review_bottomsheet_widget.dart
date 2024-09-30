@@ -105,14 +105,18 @@ class _ReviewBottomsheetWidgetState extends State<ReviewBottomsheetWidget> {
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                   child: Text(
-                    '리뷰 작성하기',
+                    '  리뷰 작성하기',
                     style: FlutterFlowTheme.of(context).headlineMedium.override(
-                          fontFamily: 'PretendardSeries',
-                          letterSpacing: 0.0,
-                          fontWeight: FontWeight.w600,
-                          useGoogleFonts: GoogleFonts.asMap()
-                              .containsKey('PretendardSeries'),
-                        ),
+                      fontFamily:
+                      'PretendardSeries',
+                      color: FlutterFlowTheme.of(context)
+                          .primaryText,
+                      fontSize: 20.0,
+                      letterSpacing: 0.0,
+                      fontWeight: FontWeight.w600,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          'PretendardSeries'),
+                    ),
                   ),
                 ),
                 Padding(
@@ -139,16 +143,17 @@ class _ReviewBottomsheetWidgetState extends State<ReviewBottomsheetWidget> {
                         child: AuthUserStreamWidget(
                           builder: (context) => Text(
                             currentUserDisplayName,
-                            style: FlutterFlowTheme.of(context)
-                                .titleLarge
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .titleLargeFamily,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .titleLargeFamily),
-                                ),
+                            style: FlutterFlowTheme.of(context).titleLarge.override(
+                              fontFamily:
+                              'PretendardSeries',
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryText,
+                              fontSize: 18.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  'PretendardSeries'),
+                            ),
                           ),
                         ),
                       ),
@@ -166,20 +171,24 @@ class _ReviewBottomsheetWidgetState extends State<ReviewBottomsheetWidget> {
                         .override(
                           fontFamily:
                               FlutterFlowTheme.of(context).labelMediumFamily,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
                           letterSpacing: 0.0,
                           useGoogleFonts: GoogleFonts.asMap().containsKey(
                               FlutterFlowTheme.of(context).labelMediumFamily),
                         ),
-                    hintText: '리뷰 제목을 입력해주세요.',
-                    hintStyle: FlutterFlowTheme.of(context)
-                        .labelMedium
-                        .override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).labelMediumFamily,
-                          letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).labelMediumFamily),
-                        ),
+                    hintText: '제목을 입력해주세요.',
+                    hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                      fontFamily:
+                      'PretendardSeries',
+                      color: FlutterFlowTheme.of(context)
+                          .primaryText,
+                      fontSize: 14.0,
+                      letterSpacing: 0.0,
+                      fontWeight: FontWeight.w400,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          'PretendardSeries'),
+                    ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: FlutterFlowTheme.of(context).secondaryText,
@@ -210,12 +219,16 @@ class _ReviewBottomsheetWidgetState extends State<ReviewBottomsheetWidget> {
                     ),
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).bodyMediumFamily,
-                        letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyMediumFamily),
-                      ),
+                    fontFamily:
+                    'PretendardSeries',
+                    color: FlutterFlowTheme.of(context)
+                        .primaryText,
+                    fontSize: 14.0,
+                    letterSpacing: 0.0,
+                    fontWeight: FontWeight.w400,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        'PretendardSeries'),
+                  ),
                   validator:
                       _model.textController1Validator.asValidator(context),
                 ),
@@ -226,16 +239,18 @@ class _ReviewBottomsheetWidgetState extends State<ReviewBottomsheetWidget> {
                     focusNode: _model.shortBioFocusNode,
                     obscureText: false,
                     decoration: InputDecoration(
-                      hintText: '리뷰를 작성해주세요.',
-                      hintStyle: FlutterFlowTheme.of(context)
-                          .labelMedium
-                          .override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).labelMediumFamily,
-                            letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).labelMediumFamily),
-                          ),
+                      hintText: '내용 작성해주세요.',
+                      hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                        fontFamily:
+                        'PretendardSeries',
+                        color: FlutterFlowTheme.of(context)
+                            .primaryText,
+                        fontSize: 14.0,
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.w400,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            'PretendardSeries'),
+                      ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: FlutterFlowTheme.of(context).secondaryText,
@@ -268,12 +283,16 @@ class _ReviewBottomsheetWidgetState extends State<ReviewBottomsheetWidget> {
                           20.0, 32.0, 20.0, 12.0),
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyMediumFamily,
-                          letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodyMediumFamily),
-                        ),
+                      fontFamily:
+                      'PretendardSeries',
+                      color: FlutterFlowTheme.of(context)
+                          .primaryText,
+                      fontSize: 14.0,
+                      letterSpacing: 0.0,
+                      fontWeight: FontWeight.w400,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          'PretendardSeries'),
+                    ),
                     textAlign: TextAlign.start,
                     maxLines: 4,
                     keyboardType: TextInputType.multiline,
@@ -300,27 +319,25 @@ class _ReviewBottomsheetWidgetState extends State<ReviewBottomsheetWidget> {
                           ));
                           Navigator.pop(context);
                         },
-                        text: '리뷰 작성',
+                        text: '작성 완료',
                         options: FFButtonOptions(
-                          width: 270.0,
-                          height: 50.0,
+                          width: 150.0,
+                          height: 30.0,
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primary,
-                          textStyle: FlutterFlowTheme.of(context)
-                              .titleMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .titleMediumFamily,
-                                color: Colors.white,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w600,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .titleMediumFamily),
-                              ),
+                          textStyle: FlutterFlowTheme.of(context).titleMedium.override(
+                            fontFamily:
+                            'PretendardSeries',
+                            color: Colors.white,
+                            fontSize: 14.0,
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.w500,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                'PretendardSeries'),
+                          ),
                           elevation: 3.0,
                           borderSide: const BorderSide(
                             color: Colors.transparent,

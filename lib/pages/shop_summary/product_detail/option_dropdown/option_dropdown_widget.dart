@@ -100,7 +100,9 @@ class _OptionDropdownWidgetState extends State<OptionDropdownWidget> {
             width: double.infinity,
             height: 56.0,
             textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                  fontFamily: 'PretendardSeries',
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
                   letterSpacing: 0.0,
                   useGoogleFonts: GoogleFonts.asMap().containsKey(
                       FlutterFlowTheme.of(context).bodyMediumFamily),

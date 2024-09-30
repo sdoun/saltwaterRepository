@@ -141,14 +141,27 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
                 alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Text(
                   '포인트 검색하기',
-                  style: FlutterFlowTheme.of(context).headlineMedium.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).headlineMediumFamily,
-                        letterSpacing: 0.0,
-                        fontWeight: FontWeight.w600,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).headlineMediumFamily),
-                      ),
+                  style: FlutterFlowTheme
+                      .of(context)
+                      .bodyMedium
+                      .override(
+                    fontFamily:
+                    'PretendardSeries',
+                    color: FlutterFlowTheme.of(
+                        context)
+                        .primaryText,
+                    fontSize:
+                    19.0,
+                    letterSpacing:
+                    0.0,
+                    fontWeight:
+                    FontWeight
+                        .w700,
+                    useGoogleFonts: GoogleFonts
+                        .asMap()
+                        .containsKey(
+                        'PretendardSeries'),
+                  ),
                 ),
               ),
               actions: const [
@@ -175,312 +188,317 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 12.0, 0.0, 0.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Fishchoicechips(
-                                    controller: _model.choiceChipsValueController
-                                      ??=
-                                      FormFieldController<List<String>>(
-                                          FFAppState().fishes,
-                                    ),
-                                    chipValues: _model.choiceChipsValues,
-                                    onChanged: (val) => safeSetState(
-                                            () => _model.choiceChipsValues = val),
-                                  ),
+                          Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 12.0, 0.0, 0.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Fishchoicechips(
+                                        controller: _model.choiceChipsValueController
+                                        ??=
+                                            FormFieldController<List<String>>(
+                                              FFAppState().fishes,
+                                            ),
+                                        chipValues: _model.choiceChipsValues,
+                                        onChanged: (val) => safeSetState(
+                                                () => _model.choiceChipsValues = val),
+                                      ),
 
-                                  Align(
-                                    alignment: const AlignmentDirectional(-1.0, 0.0),
-                                    child: SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      controller: _model.rowController,
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              await showModalBottomSheet(
-                                                isScrollControlled: true,
-                                                backgroundColor:
+                                      Align(
+                                        alignment: const AlignmentDirectional(-1.0, 0.0),
+                                        child: Padding(
+                                          padding: const EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                                          child: SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          controller: _model.rowController,
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor: Colors.transparent,
+                                                onTap: () async {
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
                                                     const Color(0x24000000),
-                                                enableDrag: false,
-                                                context: context,
-                                                builder: (context) {
-                                                  return WebViewAware(
-                                                    child: GestureDetector(
-                                                      onTap: () =>
-                                                          FocusScope.of(context)
-                                                              .unfocus(),
-                                                      child: Padding(
-                                                        padding: MediaQuery
-                                                            .viewInsetsOf(
+                                                    enableDrag: false,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return WebViewAware(
+                                                        child: GestureDetector(
+                                                          onTap: () =>
+                                                              FocusScope.of(context)
+                                                                  .unfocus(),
+                                                          child: Padding(
+                                                            padding: MediaQuery
+                                                                .viewInsetsOf(
                                                                 context),
-                                                        child:
+                                                            child:
                                                             const PointCategoryWidget(),
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                              ).then((value) =>
-                                                  safeSetState(() {}));
-                                            },
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                              child: Container(
-                                                height: 32.0,
-                                                decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryBackground,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  border: Border.all(
-                                                    color: FlutterFlowTheme.of(context).primary,
-                                                  ),
-                                                ),
-                                                alignment: const AlignmentDirectional(
-                                                    0.0, 0.0),
-                                                child: Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          8.0, 0.0, 4.0, 0.0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        '해변&갯바위',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'PretendardSeries',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryText,
-                                                                  fontSize:
-                                                                      12.0,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          'PretendardSeries'),
-                                                                ),
-                                                      ),
-                                                      Align(
-                                                        alignment:
-                                                            const AlignmentDirectional(
-                                                                1.0, 0.0),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      3.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          child: Icon(
-                                                            Icons
-                                                                .keyboard_arrow_down_outlined,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryText,
-                                                            size: 18.0,
                                                           ),
                                                         ),
+                                                      );
+                                                    },
+                                                  ).then((value) =>
+                                                      safeSetState(() {}));
+                                                },
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                                  child: Container(
+                                                    height: 32.0,
+                                                    decoration: BoxDecoration(
+                                                      color: FlutterFlowTheme.of(
+                                                          context)
+                                                          .primaryBackground,
+                                                      borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                      border: Border.all(
+                                                        color: FlutterFlowTheme.of(context).primary,
                                                       ),
-                                                    ],
+                                                    ),
+                                                    alignment: const AlignmentDirectional(
+                                                        0.0, 0.0),
+                                                    child: Padding(
+                                                      padding: const EdgeInsetsDirectional
+                                                          .fromSTEB(
+                                                          8.0, 0.0, 4.0, 0.0),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                        MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                        children: [
+                                                          Text(
+                                                            '해변&갯바위',
+                                                            style:
+                                                            FlutterFlowTheme.of(
+                                                                context)
+                                                                .bodyMedium
+                                                                .override(
+                                                              fontFamily:
+                                                              'PretendardSeries',
+                                                              color: FlutterFlowTheme.of(
+                                                                  context)
+                                                                  .primaryText,
+                                                              fontSize:
+                                                              12.0,
+                                                              letterSpacing:
+                                                              0.0,
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .w700,
+                                                              useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                                  .containsKey(
+                                                                  'PretendardSeries'),
+                                                            ),
+                                                          ),
+                                                          Align(
+                                                            alignment:
+                                                            const AlignmentDirectional(
+                                                                1.0, 0.0),
+                                                            child: Padding(
+                                                              padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                  3.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                              child: Icon(
+                                                                Icons
+                                                                    .keyboard_arrow_down_outlined,
+                                                                color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                    .primaryText,
+                                                                size: 18.0,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                          Standfilterbutton(
-                                              iniitalText: '시설구분',
-                                              onTap: () async {
-                                                await showModalBottomSheet(
-                                                  isScrollControlled: true,
-                                                  backgroundColor:
-                                                  Colors.transparent,
-                                                  enableDrag: false,
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return WebViewAware(
-                                                      child: GestureDetector(
-                                                        onTap: () =>
-                                                            FocusScope.of(context)
-                                                                .unfocus(),
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                              context),
-                                                          child:
-                                                          const Ocean1stFilterWidget(),
+                                              Standfilterbutton(
+                                                iniitalText: '시설구분',
+                                                onTap: () async {
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                    Colors.transparent,
+                                                    enableDrag: false,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return WebViewAware(
+                                                        child: GestureDetector(
+                                                          onTap: () =>
+                                                              FocusScope.of(context)
+                                                                  .unfocus(),
+                                                          child: Padding(
+                                                            padding: MediaQuery
+                                                                .viewInsetsOf(
+                                                                context),
+                                                            child:
+                                                            const Ocean1stFilterWidget(),
+                                                          ),
                                                         ),
-                                                      ),
-                                                    );
-                                                  },
-                                                ).then((value) => safeSetState(
-                                                        () => _model.ocean1stFilter =
-                                                        value));
+                                                      );
+                                                    },
+                                                  ).then((value) => safeSetState(
+                                                          () => _model.ocean1stFilter =
+                                                          value));
 
-                                                safeSetState(() {});
-                                              },
-                                            filterValue: _model.ocean1stFilter,
-                                          ),
-                                          Standfilterbutton(
-                                            iniitalText: '편의시설',
-                                            onTap: () async {
-                                              await showModalBottomSheet(
-                                                isScrollControlled: true,
-                                                backgroundColor:
-                                                Colors.transparent,
-                                                enableDrag: false,
-                                                context: context,
-                                                builder: (context) {
-                                                  return WebViewAware(
-                                                    child: GestureDetector(
-                                                      onTap: () =>
-                                                          FocusScope.of(context)
-                                                              .unfocus(),
-                                                      child: Padding(
-                                                        padding: MediaQuery
-                                                            .viewInsetsOf(
-                                                            context),
-                                                        child:
-                                                        const Ocean2ndFilterWidget(),
-                                                      ),
-                                                    ),
-                                                  );
+                                                  safeSetState(() {});
                                                 },
-                                              ).then((value) => safeSetState(
-                                                      () => _model.ocean2ndFilter =
-                                                      value));
+                                                filterValue: _model.ocean1stFilter,
+                                              ),
+                                              Standfilterbutton(
+                                                iniitalText: '편의시설',
+                                                onTap: () async {
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                    Colors.transparent,
+                                                    enableDrag: false,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return WebViewAware(
+                                                        child: GestureDetector(
+                                                          onTap: () =>
+                                                              FocusScope.of(context)
+                                                                  .unfocus(),
+                                                          child: Padding(
+                                                            padding: MediaQuery
+                                                                .viewInsetsOf(
+                                                                context),
+                                                            child:
+                                                            const Ocean2ndFilterWidget(),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ).then((value) => safeSetState(
+                                                          () => _model.ocean2ndFilter =
+                                                          value));
 
-                                              safeSetState(() {});
-                                            },
-                                            filterValue: _model.ocean2ndFilter,
-                                          ),
-                                          Standfilterbutton(
-                                            iniitalText: '편의사항',
-                                            onTap: () async {
-                                              await showModalBottomSheet(
-                                                isScrollControlled: true,
-                                                backgroundColor:
-                                                Colors.transparent,
-                                                enableDrag: false,
-                                                context: context,
-                                                builder: (context) {
-                                                  return WebViewAware(
-                                                    child: GestureDetector(
-                                                      onTap: () =>
-                                                          FocusScope.of(context)
-                                                              .unfocus(),
-                                                      child: Padding(
-                                                        padding: MediaQuery
-                                                            .viewInsetsOf(
-                                                            context),
-                                                        child:
-                                                        const Ocean2ndFilterWidget(),
-                                                      ),
-                                                    ),
-                                                  );
+                                                  safeSetState(() {});
                                                 },
-                                              ).then((value) => safeSetState(
-                                                      () => _model.oceean3rdFilter =
-                                                      value));
+                                                filterValue: _model.ocean2ndFilter,
+                                              ),
+                                              Standfilterbutton(
+                                                iniitalText: '편의사항',
+                                                onTap: () async {
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                    Colors.transparent,
+                                                    enableDrag: false,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return WebViewAware(
+                                                        child: GestureDetector(
+                                                          onTap: () =>
+                                                              FocusScope.of(context)
+                                                                  .unfocus(),
+                                                          child: Padding(
+                                                            padding: MediaQuery
+                                                                .viewInsetsOf(
+                                                                context),
+                                                            child:
+                                                            const Ocean2ndFilterWidget(),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ).then((value) => safeSetState(
+                                                          () => _model.oceean3rdFilter =
+                                                          value));
 
-                                              safeSetState(() {});
-                                            },
-                                            filterValue: _model.oceean3rdFilter,
+                                                  safeSetState(() {});
+                                                },
+                                                filterValue: _model.oceean3rdFilter,
+                                              ),
+                                            ].divide(const SizedBox(width: 4.0)),
                                           ),
-                                        ].divide(const SizedBox(width: 4.0)),
+                                        ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 24.0),
-                                    child: FFButtonWidget(
-                                      onPressed: () async {
-                                        _model.pointList =
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 12.0, 0.0, 24.0),
+                                        child: FFButtonWidget(
+                                          onPressed: () async {
+                                            _model.pointList =
                                             await actions.pointListFromFilter(
-                                          _model.ocean1stFilter?.toList(),
-                                          _model.ocean2ndFilter?.toList(),
-                                          _model.oceean3rdFilter?.toList(),
-                                          _model.choiceChipsValues?.toList(),
-                                          'TB_point',
-                                        );
-                                        _model.filterValue =
-                                            exploreMapOceanTBPointRecordList
-                                                .toList()
-                                                .cast<TBPointRecord>();
-                                        safeSetState(() {});
+                                              _model.ocean1stFilter?.toList(),
+                                              _model.ocean2ndFilter?.toList(),
+                                              _model.oceean3rdFilter?.toList(),
+                                              _model.choiceChipsValues?.toList(),
+                                              'TB_point',
+                                            );
+                                            _model.filterValue =
+                                                exploreMapOceanTBPointRecordList
+                                                    .toList()
+                                                    .cast<TBPointRecord>();
+                                            safeSetState(() {});
 
-                                        safeSetState(() {});
-                                      },
-                                      text: '선택완료',
-                                      options: FFButtonOptions(
-                                        width:
+                                            safeSetState(() {});
+                                          },
+                                          text: '선택완료',
+                                          options: FFButtonOptions(
+                                            width:
                                             MediaQuery.sizeOf(context).width *
                                                 0.8,
-                                        height: 40.0,
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 0.0),
-                                        iconPadding:
+                                            height: 40.0,
+                                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                            iconPadding:
                                             const EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
-                                        color: FlutterFlowTheme.of(context).primary,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
+                                            color: FlutterFlowTheme.of(context).primary,
+                                            textStyle: FlutterFlowTheme.of(context)
+                                                .titleSmall
+                                                .override(
                                               fontFamily: 'PretendardSeries',
                                               color: Colors.white,
-                                              fontSize: 18.0,
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.w500,
                                               letterSpacing: 0.0,
-                                              useGoogleFonts:
-                                                  GoogleFonts.asMap()
-                                                      .containsKey(
-                                                          'PretendardSeries'),
+                                              useGoogleFonts: GoogleFonts.asMap()
+                                                  .containsKey('PretendardSeries'),
                                             ),
-                                        elevation: 3.0,
-                                        borderSide: const BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
+                                            elevation: 3.0,
+                                            borderSide: const BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
                                             BorderRadius.circular(8.0),
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                    ].divide(const SizedBox(height: 8.0)),
                                   ),
-                                ].divide(const SizedBox(height: 8.0)),
+                                ),
                               ),
-                            ),
                           ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(10.0),
@@ -518,7 +536,12 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
                                       },
                                     ),
                                   ),
-                                  const Mapselectbutton(),
+                                  Mapselectbutton(
+                                    onSelected: () async{
+                                      Navigator.pop(context);
+                                      safeSetState(() {});
+                                    },
+                                  ),
                                 ],
                               ),
                             ),

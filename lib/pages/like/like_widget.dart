@@ -75,15 +75,16 @@ class _LikeWidgetState extends State<LikeWidget> {
                 child: Text(
                   '찜',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).headlineMediumFamily,
-                        color: Colors.black,
-                        fontSize: 22.0,
-                        letterSpacing: 0.0,
-                        fontWeight: FontWeight.w600,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).headlineMediumFamily),
-                      ),
+                    fontFamily:
+                    'PretendardSeries',
+                    color: FlutterFlowTheme.of(context)
+                        .primaryText,
+                    fontSize: 20.0,
+                    letterSpacing: 0.0,
+                    fontWeight: FontWeight.w700,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        'PretendardSeries'),
+                  ),
                 ),
               ),
               centerTitle: true,
@@ -110,32 +111,23 @@ class _LikeWidgetState extends State<LikeWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             SizedBox(
-                              height: 40.0,
-                              child: VerticalDivider(
-                                thickness: 5.0,
-                                color: FlutterFlowTheme.of(context).primaryText,
-                              ),
+                              height: 20.0,
+                              child: Image.asset('assets/images/찜한포인트.png'),
                             ),
                             Text(
-                              '내가 찜한 포인트',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    fontSize: 20.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w600,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                  ),
+                              '  내가 찜한 포인트',
+                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                fontFamily:
+                                'PretendardSeries',
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryText,
+                                fontSize: 17.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w600,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    'PretendardSeries'),
+                              ),
                             ),
-                            SizedBox(
-                              height: 24.0,
-                              child: Image.asset('assets/images/찜한포인트.png'),
-                            )
                           ],
                         ),
                         StreamBuilder<List<TBPointRecord>>(
@@ -164,147 +156,135 @@ class _LikeWidgetState extends State<LikeWidget> {
                             List<TBPointRecord> columnTBPointRecordList =
                                 snapshot.data!;
 
-                            return Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children:
+                            return Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 40),
+                                child:Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children:
                                   List.generate(columnTBPointRecordList.length,
-                                      (columnIndex) {
-                                final columnTBPointRecord =
-                                    columnTBPointRecordList[columnIndex];
-                                return InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    context.pushNamed(
-                                      'point_detailed',
-                                      queryParameters: {
-                                        'pointRefSW': serializeParam(
-                                          columnTBPointRecord.reference,
-                                          ParamType.DocumentReference,
-                                        ),
-                                      }.withoutNulls,
-                                    );
-                                  },
-                                  child: Material(
-                                    color: Colors.transparent,
-                                    elevation: 3.0,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12.0),
-                                    ),
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 85.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        boxShadow: const [
-                                          BoxShadow(
-                                            blurRadius: 4.0,
-                                            color: Color(0x33000000),
-                                            offset: Offset(
-                                              0.0,
-                                              2.0,
+                                          (columnIndex) {
+                                        final columnTBPointRecord =
+                                        columnTBPointRecordList[columnIndex];
+                                        return InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            context.pushNamed(
+                                              'point_detailed',
+                                              queryParameters: {
+                                                'pointRefSW': serializeParam(
+                                                  columnTBPointRecord.reference,
+                                                  ParamType.DocumentReference,
+                                                ),
+                                              }.withoutNulls,
+                                            );
+                                          },
+                                          child: Material(
+                                            color: Colors.transparent,
+                                            elevation: 3.0,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(12.0),
                                             ),
-                                          )
-                                        ],
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            12.0, 8.0, 12.0, 8.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                              child: Image.network(
-                                                'https://picsum.photos/seed/426/600',
-                                                width: 80.0,
-                                                height: 200.0,
-                                                fit: BoxFit.cover,
+                                            child: Container(
+                                              width: double.infinity,
+                                              height: 85.0,
+                                              decoration: BoxDecoration(
+                                                color: FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
+                                                boxShadow: const [
+                                                  BoxShadow(
+                                                    blurRadius: 4.0,
+                                                    color: Color(0x33000000),
+                                                    offset: Offset(
+                                                      0.0,
+                                                      2.0,
+                                                    ),
+                                                  )
+                                                ],
+                                                borderRadius:
+                                                BorderRadius.circular(12.0),
+                                              ),
+                                              child: Padding(
+                                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                                    12.0, 8.0, 12.0, 8.0),
+                                                child: Row(
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  children: [
+                                                    ClipRRect(
+                                                      borderRadius:
+                                                      BorderRadius.circular(8.0),
+                                                      child: Image.network(
+                                                        'https://picsum.photos/seed/426/600',
+                                                        width: 80.0,
+                                                        height: 200.0,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                    Column(
+                                                      mainAxisSize: MainAxisSize.max,
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          columnTBPointRecord.pointName,
+                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                            fontFamily:
+                                                            'PretendardSeries',
+                                                            color: FlutterFlowTheme.of(context)
+                                                                .primaryText,
+                                                            fontSize: 17.0,
+                                                            letterSpacing: 0.0,
+                                                            fontWeight: FontWeight.w600,
+                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                                'PretendardSeries'),
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          columnTBPointRecord
+                                                              .pointCategories,
+                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                            fontFamily:
+                                                            'PretendardSeries',
+                                                            color: FlutterFlowTheme.of(context)
+                                                                .primaryText,
+                                                            fontSize: 17.0,
+                                                            letterSpacing: 0.0,
+                                                            fontWeight: FontWeight.w600,
+                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                                'PretendardSeries'),
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          columnTBPointRecord
+                                                              .pointAddress
+                                                              .maybeHandleOverflow(
+                                                            maxChars: 15,
+                                                            replacement: '…',
+                                                          ),
+                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                            fontFamily:
+                                                            'PretendardSeries',
+                                                            color: FlutterFlowTheme.of(context)
+                                                                .primaryText,
+                                                            fontSize: 17.0,
+                                                            letterSpacing: 0.0,
+                                                            fontWeight: FontWeight.w600,
+                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                                'PretendardSeries'),
+                                                          ),
+                                                        ),
+                                                      ].divide(const SizedBox(height: 4.0)),
+                                                    ),
+                                                  ].divide(const SizedBox(width: 8.0)),
+                                                ),
                                               ),
                                             ),
-                                            Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  columnTBPointRecord.pointName,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
-                                                ),
-                                                Text(
-                                                  columnTBPointRecord
-                                                      .pointCategories,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
-                                                ),
-                                                Text(
-                                                  columnTBPointRecord
-                                                      .pointAddress
-                                                      .maybeHandleOverflow(
-                                                    maxChars: 15,
-                                                    replacement: '…',
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
-                                                ),
-                                              ].divide(const SizedBox(height: 4.0)),
-                                            ),
-                                          ].divide(const SizedBox(width: 8.0)),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }).divide(const SizedBox(height: 4.0)),
+                                          ),
+                                        );
+                                      }).divide(const SizedBox(height: 4.0)),
+                                )
                             );
                           },
                         ),
@@ -318,32 +298,24 @@ class _LikeWidgetState extends State<LikeWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             SizedBox(
-                              height: 40.0,
-                              child: VerticalDivider(
-                                thickness: 5.0,
-                                color: FlutterFlowTheme.of(context).primaryText,
-                              ),
+                              height: 15,
+                              child: Image.asset('assets/images/찜한게시물.png'),
                             ),
                             Text(
-                              '내가 찜한 게시물',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    fontSize: 20.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w600,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                  ),
+                              ' 내가 찜한 게시물',
+                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                fontFamily:
+                                'PretendardSeries',
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryText,
+                                fontSize: 17.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w600,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    'PretendardSeries'),
+                              ),
                             ),
-                            SizedBox(
-                              height: 24,
-                              child: Image.asset('assets/images/찜한게시물.png'),
-                            )
+
                           ],
                         ),
                         StreamBuilder<List<TBCarrotPostRecord>>(
@@ -442,44 +414,41 @@ class _LikeWidgetState extends State<LikeWidget> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  columnTBCarrotPostRecord
-                                                      .postTitle,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
+                                                  valueOrDefault<String>(
+                                                    columnTBCarrotPostRecord
+                                                        .postTitle
+                                                        .toString(),
+                                                    '0',
+                                                  ).maybeHandleOverflow(
+                                                    maxChars: 10,
+                                                    replacement: '…',
+                                                  ),
+                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                    fontFamily:
+                                                    'PretendardSeries',
+                                                    color: FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                    fontSize: 17.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w600,
+                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                        'PretendardSeries'),
+                                                  ),
                                                 ),
                                                 Text(
                                                   columnTBCarrotPostRecord
                                                       .postCategory,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
+                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                    fontFamily:
+                                                    'PretendardSeries',
+                                                    color: FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                    fontSize: 17.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w600,
+                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                        'PretendardSeries'),
+                                                  ),
                                                 ),
                                                 Text(
                                                   valueOrDefault<String>(
@@ -491,22 +460,17 @@ class _LikeWidgetState extends State<LikeWidget> {
                                                     maxChars: 15,
                                                     replacement: '…',
                                                   ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
+                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                    fontFamily:
+                                                    'PretendardSeries',
+                                                    color: FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                    fontSize: 17.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w600,
+                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                        'PretendardSeries'),
+                                                  ),
                                                 ),
                                               ].divide(const SizedBox(height: 4.0)),
                                             ),

@@ -105,8 +105,7 @@ class _ServiceIsNotReadyWidgetState extends State<ServiceIsNotReadyWidget> {
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
                         'assets/images/서비스준비중.png',
-                        width: 320.0,
-                        height: 200.0,
+                        width: 280.0,
                         fit: BoxFit.cover,
                       ),
                     ),

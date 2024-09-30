@@ -63,14 +63,25 @@ class _UserEditWidgetState extends State<UserEditWidget> {
             alignment: const AlignmentDirectional(0.0, 0.0),
             child: Text(
               '프로필 수정',
-              style: FlutterFlowTheme.of(context).headlineMedium.override(
-                    fontFamily:
-                        FlutterFlowTheme.of(context).headlineMediumFamily,
-                    letterSpacing: 0.0,
-                    fontWeight: FontWeight.w600,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        FlutterFlowTheme.of(context).headlineMediumFamily),
-                  ),
+              style: FlutterFlowTheme.of(
+                  context)
+                  .headlineMedium
+                  .override(
+                fontFamily:
+                'PretendardSeries',
+                color: FlutterFlowTheme
+                    .of(context)
+                    .primaryText,
+                fontSize: 19.0,
+                letterSpacing: 0.0,
+                fontWeight:
+                FontWeight.w700,
+                useGoogleFonts:
+                GoogleFonts
+                    .asMap()
+                    .containsKey(
+                    'PretendardSeries'),
+              ),
             ),
           ),
           actions: const [],
@@ -146,7 +157,7 @@ class _UserEditWidgetState extends State<UserEditWidget> {
                                 },
                                 child: Icon(
                                   Icons.add_circle_outline,
-                                  color: FlutterFlowTheme.of(context).primary,
+                                  color: FlutterFlowTheme.of(context).secondaryText,
                                   size: 28.0,
                                 ),
                               ),
@@ -161,20 +172,26 @@ class _UserEditWidgetState extends State<UserEditWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '닉네임',
-                              style: FlutterFlowTheme.of(context)
+                              '새로운 닉네임 설정',
+                              style: FlutterFlowTheme.of(
+                                  context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    fontSize: 17.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w600,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                  ),
+                                fontFamily:
+                                'PretendardSeries',
+                                color: FlutterFlowTheme
+                                    .of(context)
+                                    .primaryText,
+                                fontSize: 15.0,
+                                letterSpacing: 0.0,
+                                fontWeight:
+                                FontWeight.w700,
+                                useGoogleFonts:
+                                GoogleFonts
+                                    .asMap()
+                                    .containsKey(
+                                    'PretendardSeries'),
+                              ),
                             ),
                             TextFormField(
                               controller: _model.textController,
@@ -182,29 +199,45 @@ class _UserEditWidgetState extends State<UserEditWidget> {
                               autofocus: true,
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelText: 'Label here...',
-                                labelStyle: FlutterFlowTheme.of(context)
-                                    .labelMedium
+                                labelText: '여기에 입력하세요',
+                                labelStyle: FlutterFlowTheme.of(
+                                    context)
+                                    .bodyMedium
                                     .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .labelMediumFamily,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMediumFamily),
-                                    ),
-                                hintStyle: FlutterFlowTheme.of(context)
-                                    .labelMedium
+                                  fontFamily:
+                                  'PretendardSeries',
+                                  color: FlutterFlowTheme
+                                      .of(context)
+                                      .secondaryText,
+                                  fontSize: 13.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight:
+                                  FontWeight.w500,
+                                  useGoogleFonts:
+                                  GoogleFonts
+                                      .asMap()
+                                      .containsKey(
+                                      'PretendardSeries'),
+                                ),
+                                hintStyle: FlutterFlowTheme.of(
+                                    context)
+                                    .bodyMedium
                                     .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .labelMediumFamily,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMediumFamily),
-                                    ),
+                                  fontFamily:
+                                  'PretendardSeries',
+                                  color: FlutterFlowTheme
+                                      .of(context)
+                                      .secondaryText,
+                                  fontSize: 14.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight:
+                                  FontWeight.w400,
+                                  useGoogleFonts:
+                                  GoogleFonts
+                                      .asMap()
+                                      .containsKey(
+                                      'PretendardSeries'),
+                                ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color:
@@ -235,17 +268,25 @@ class _UserEditWidgetState extends State<UserEditWidget> {
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                               ),
-                              style: FlutterFlowTheme.of(context)
+                              style: FlutterFlowTheme.of(
+                                  context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    letterSpacing: 0.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                  ),
+                                fontFamily:
+                                'PretendardSeries',
+                                color: FlutterFlowTheme
+                                    .of(context)
+                                    .secondaryText,
+                                fontSize: 14.0,
+                                letterSpacing: 0.0,
+                                fontWeight:
+                                FontWeight.w400,
+                                useGoogleFonts:
+                                GoogleFonts
+                                    .asMap()
+                                    .containsKey(
+                                    'PretendardSeries'),
+                              ),
                               validator: _model.textControllerValidator
                                   .asValidator(context),
                             ),
@@ -271,28 +312,32 @@ class _UserEditWidgetState extends State<UserEditWidget> {
                               },
                               text: '확인',
                               options: FFButtonOptions(
-                                height: 40.0,
+                                height: 30.0,
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     24.0, 0.0, 24.0, 0.0),
                                 iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
                                 color: FlutterFlowTheme.of(context).primary,
-                                textStyle: FlutterFlowTheme.of(context)
+                                textStyle: FlutterFlowTheme.of(
+                                    context)
                                     .titleSmall
                                     .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .titleSmallFamily,
-                                      color: Colors.white,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w600,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmallFamily),
-                                    ),
+                                  fontFamily:
+                                  'PretendardSeries',
+                                  color: Colors.white,
+                                  fontSize: 12.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight:
+                                  FontWeight.w600,
+                                  useGoogleFonts:
+                                  GoogleFonts
+                                      .asMap()
+                                      .containsKey(
+                                      'PretendardSeries'),
+                                ),
                                 elevation: 3.0,
-                                borderSide: const BorderSide(
-                                  color: Colors.transparent,
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).primary,
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(8.0),
@@ -307,28 +352,33 @@ class _UserEditWidgetState extends State<UserEditWidget> {
                             },
                             text: '취소하기',
                             options: FFButtonOptions(
-                              height: 40.0,
+                              height: 30.0,
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   24.0, 0.0, 24.0, 0.0),
                               iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: FlutterFlowTheme.of(context)
                                   .primaryBackground,
-                              textStyle: FlutterFlowTheme.of(context)
+                              textStyle: FlutterFlowTheme.of(
+                                  context)
                                   .titleSmall
                                   .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .titleSmallFamily,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    letterSpacing: 0.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .titleSmallFamily),
-                                  ),
-                              borderSide: const BorderSide(
-                                color: Color(0xFF060606),
+                                fontFamily:
+                                'PretendardSeries',
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryText,
+                                fontSize: 12.0,
+                                letterSpacing: 0.0,
+                                fontWeight:
+                                FontWeight.w600,
+                                useGoogleFonts:
+                                GoogleFonts
+                                    .asMap()
+                                    .containsKey(
+                                    'PretendardSeries'),
+                              ),
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).secondaryText,
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),

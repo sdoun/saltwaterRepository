@@ -67,21 +67,31 @@ class _MenuWidgetState extends State<MenuWidget> {
           title: Align(
             alignment: const AlignmentDirectional(0.0, -1.0),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 36.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
               child: Text(
-                '더 보기',
+                '더 보 기',
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'PretendardSeries',
-                      fontSize: 21.0,
+                      fontSize: 20.0,
                       letterSpacing: 0.0,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w800,
                       useGoogleFonts:
                           GoogleFonts.asMap().containsKey('PretendardSeries'),
                     ),
               ),
             ),
           ),
-          actions: const [],
+          actions: const [FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 60.0,
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.transparent,
+              size: 30.0,
+            ),
+          ),],
           centerTitle: false,
           elevation: 2.0,
         ),
@@ -124,10 +134,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                                       Container(
                                         width:
                                             MediaQuery.sizeOf(context).width *
-                                                0.2,
+                                                0.15,
                                         height:
                                             MediaQuery.sizeOf(context).width *
-                                                0.2,
+                                                0.15,
                                         clipBehavior: Clip.antiAlias,
                                         decoration: const BoxDecoration(
                                           shape: BoxShape.circle,
@@ -139,21 +149,25 @@ class _MenuWidgetState extends State<MenuWidget> {
                                       ),
                                       Text(
                                         '공지사항',
-                                        style: FlutterFlowTheme.of(context)
+                                        style: FlutterFlowTheme.of(
+                                            context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w600,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily),
-                                            ),
+                                          fontFamily:
+                                          'PretendardSeries',
+                                          color: FlutterFlowTheme
+                                              .of(context)
+                                              .primaryText,
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                          FontWeight.w700,
+                                          useGoogleFonts:
+                                          GoogleFonts
+                                              .asMap()
+                                              .containsKey(
+                                              'PretendardSeries'),
+                                        ),
                                       ),
                                     ].divide(const SizedBox(height: 8.0)),
                                   ),
@@ -182,11 +196,11 @@ class _MenuWidgetState extends State<MenuWidget> {
                                     children: [
                                       Container(
                                         width:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.2,
+                                        MediaQuery.sizeOf(context).width *
+                                            0.15,
                                         height:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.2,
+                                        MediaQuery.sizeOf(context).width *
+                                            0.15,
                                         clipBehavior: Clip.antiAlias,
                                         decoration: const BoxDecoration(
                                           shape: BoxShape.circle,
@@ -198,21 +212,25 @@ class _MenuWidgetState extends State<MenuWidget> {
                                       ),
                                       Text(
                                         '이벤트',
-                                        style: FlutterFlowTheme.of(context)
+                                        style: FlutterFlowTheme.of(
+                                            context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w600,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily),
-                                            ),
+                                          fontFamily:
+                                          'PretendardSeries',
+                                          color: FlutterFlowTheme
+                                              .of(context)
+                                              .primaryText,
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                          FontWeight.w700,
+                                          useGoogleFonts:
+                                          GoogleFonts
+                                              .asMap()
+                                              .containsKey(
+                                              'PretendardSeries'),
+                                        ),
                                       ),
                                     ].divide(const SizedBox(height: 8.0)),
                                   ),
@@ -241,11 +259,11 @@ class _MenuWidgetState extends State<MenuWidget> {
                                     children: [
                                       Container(
                                         width:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.2,
+                                        MediaQuery.sizeOf(context).width *
+                                            0.15,
                                         height:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.2,
+                                        MediaQuery.sizeOf(context).width *
+                                            0.15,
                                         clipBehavior: Clip.antiAlias,
                                         decoration: const BoxDecoration(
                                           shape: BoxShape.circle,
@@ -257,21 +275,25 @@ class _MenuWidgetState extends State<MenuWidget> {
                                       ),
                                       Text(
                                         '낚시대회',
-                                        style: FlutterFlowTheme.of(context)
+                                        style: FlutterFlowTheme.of(
+                                            context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w600,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily),
-                                            ),
+                                          fontFamily:
+                                          'PretendardSeries',
+                                          color: FlutterFlowTheme
+                                              .of(context)
+                                              .primaryText,
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                          FontWeight.w700,
+                                          useGoogleFonts:
+                                          GoogleFonts
+                                              .asMap()
+                                              .containsKey(
+                                              'PretendardSeries'),
+                                        ),
                                       ),
                                     ].divide(const SizedBox(height: 8.0)),
                                   ),
@@ -306,11 +328,11 @@ class _MenuWidgetState extends State<MenuWidget> {
                                     children: [
                                       Container(
                                         width:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.2,
+                                        MediaQuery.sizeOf(context).width *
+                                            0.15,
                                         height:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.2,
+                                        MediaQuery.sizeOf(context).width *
+                                            0.15,
                                         clipBehavior: Clip.antiAlias,
                                         decoration: const BoxDecoration(
                                           shape: BoxShape.circle,
@@ -322,21 +344,25 @@ class _MenuWidgetState extends State<MenuWidget> {
                                       ),
                                       Text(
                                         '낚시경보',
-                                        style: FlutterFlowTheme.of(context)
+                                        style: FlutterFlowTheme.of(
+                                            context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w600,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily),
-                                            ),
+                                          fontFamily:
+                                          'PretendardSeries',
+                                          color: FlutterFlowTheme
+                                              .of(context)
+                                              .primaryText,
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                          FontWeight.w700,
+                                          useGoogleFonts:
+                                          GoogleFonts
+                                              .asMap()
+                                              .containsKey(
+                                              'PretendardSeries'),
+                                        ),
                                       ),
                                     ].divide(const SizedBox(height: 8.0)),
                                   ),
@@ -365,11 +391,11 @@ class _MenuWidgetState extends State<MenuWidget> {
                                     children: [
                                       Container(
                                         width:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.2,
+                                        MediaQuery.sizeOf(context).width *
+                                            0.15,
                                         height:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.2,
+                                        MediaQuery.sizeOf(context).width *
+                                            0.15,
                                         clipBehavior: Clip.antiAlias,
                                         decoration: const BoxDecoration(
                                           shape: BoxShape.circle,
@@ -381,21 +407,25 @@ class _MenuWidgetState extends State<MenuWidget> {
                                       ),
                                       Text(
                                         '금어기',
-                                        style: FlutterFlowTheme.of(context)
+                                        style: FlutterFlowTheme.of(
+                                            context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w600,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily),
-                                            ),
+                                          fontFamily:
+                                          'PretendardSeries',
+                                          color: FlutterFlowTheme
+                                              .of(context)
+                                              .primaryText,
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                          FontWeight.w700,
+                                          useGoogleFonts:
+                                          GoogleFonts
+                                              .asMap()
+                                              .containsKey(
+                                              'PretendardSeries'),
+                                        ),
                                       ),
                                     ].divide(const SizedBox(height: 8.0)),
                                   ),
@@ -424,11 +454,11 @@ class _MenuWidgetState extends State<MenuWidget> {
                                     children: [
                                       Container(
                                         width:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.2,
+                                        MediaQuery.sizeOf(context).width *
+                                            0.15,
                                         height:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.2,
+                                        MediaQuery.sizeOf(context).width *
+                                            0.15,
                                         clipBehavior: Clip.antiAlias,
                                         decoration: const BoxDecoration(
                                           shape: BoxShape.circle,
@@ -440,21 +470,25 @@ class _MenuWidgetState extends State<MenuWidget> {
                                       ),
                                       Text(
                                         '방생기준',
-                                        style: FlutterFlowTheme.of(context)
+                                        style: FlutterFlowTheme.of(
+                                            context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w600,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily),
-                                            ),
+                                          fontFamily:
+                                          'PretendardSeries',
+                                          color: FlutterFlowTheme
+                                              .of(context)
+                                              .primaryText,
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                          FontWeight.w700,
+                                          useGoogleFonts:
+                                          GoogleFonts
+                                              .asMap()
+                                              .containsKey(
+                                              'PretendardSeries'),
+                                        ),
                                       ),
                                     ].divide(const SizedBox(height: 8.0)),
                                   ),
@@ -465,121 +499,150 @@ class _MenuWidgetState extends State<MenuWidget> {
                         ),
                       ],
                     ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.pushNamed('service_is_not_ready');
-                          },
-                          child: Container(
-                            width: MediaQuery.sizeOf(context).width * 0.4,
-                            height: 72.0,
-                            decoration: const BoxDecoration(
-                              color: Color(0xFFF3F3F3),
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '업체 제휴 문의',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyMediumFamily,
+                    Divider(
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      thickness: 0.5,
+                    ),
+                    Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(0, 35, 0, 0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed('service_is_not_ready');
+                              },
+                              child: Container(
+                                width: MediaQuery.sizeOf(context).width * 0.4,
+                                height: 72.0,
+                                decoration: const BoxDecoration(
+                                  color: Color(0xFFF3F3F3),
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      '업체 제휴 문의',
+                                      style: FlutterFlowTheme.of(
+                                          context)
+                                          .bodyMedium
+                                          .override(
+                                        fontFamily:
+                                        'PretendardSeries',
+                                        color: FlutterFlowTheme
+                                            .of(context)
+                                            .primaryText,
                                         fontSize: 16.0,
                                         letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w600,
-                                        useGoogleFonts: GoogleFonts.asMap()
+                                        fontWeight:
+                                        FontWeight.w700,
+                                        useGoogleFonts:
+                                        GoogleFonts
+                                            .asMap()
                                             .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily),
+                                            'PretendardSeries'),
                                       ),
-                                ),
-                                Text(
-                                  '제휴 및 통보',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyMediumFamily,
-                                        color: FlutterFlowTheme.of(context)
+                                    ),
+                                    Text(
+                                      '제휴 및 통보',
+                                      style: FlutterFlowTheme.of(
+                                          context)
+                                          .bodyMedium
+                                          .override(
+                                        fontFamily:
+                                        'PretendardSeries',
+                                        color: FlutterFlowTheme
+                                            .of(context)
                                             .secondaryText,
                                         fontSize: 12.0,
                                         letterSpacing: 0.0,
-                                        useGoogleFonts: GoogleFonts.asMap()
+                                        fontWeight:
+                                        FontWeight.w600,
+                                        useGoogleFonts:
+                                        GoogleFonts
+                                            .asMap()
                                             .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily),
+                                            'PretendardSeries'),
                                       ),
+                                    ),
+                                  ].divide(const SizedBox(height: 4.0)),
                                 ),
-                              ].divide(const SizedBox(height: 4.0)),
+                              ),
                             ),
-                          ),
-                        ),
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.pushNamed('service_is_not_ready');
-                          },
-                          child: Container(
-                            width: MediaQuery.sizeOf(context).width * 0.43,
-                            height: 72.0,
-                            decoration: const BoxDecoration(
-                              color: Color(0xFFF3F3F3),
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '서비스 문의',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyMediumFamily,
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed('service_is_not_ready');
+                              },
+                              child: Container(
+                                width: MediaQuery.sizeOf(context).width * 0.43,
+                                height: 72.0,
+                                decoration: const BoxDecoration(
+                                  color: Color(0xFFF3F3F3),
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      '서비스 문의',
+                                      style: FlutterFlowTheme.of(
+                                          context)
+                                          .bodyMedium
+                                          .override(
+                                        fontFamily:
+                                        'PretendardSeries',
+                                        color: FlutterFlowTheme
+                                            .of(context)
+                                            .primaryText,
                                         fontSize: 16.0,
                                         letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w600,
-                                        useGoogleFonts: GoogleFonts.asMap()
+                                        fontWeight:
+                                        FontWeight.w700,
+                                        useGoogleFonts:
+                                        GoogleFonts
+                                            .asMap()
                                             .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily),
+                                            'PretendardSeries'),
                                       ),
-                                ),
-                                Text(
-                                  '이용문의 & 불편사항 신고',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyMediumFamily,
-                                        color: FlutterFlowTheme.of(context)
+                                    ),
+                                    Text(
+                                      '이용문의 & 불편사항 신고',
+                                      style: FlutterFlowTheme.of(
+                                          context)
+                                          .bodyMedium
+                                          .override(
+                                        fontFamily:
+                                        'PretendardSeries',
+                                        color: FlutterFlowTheme
+                                            .of(context)
                                             .secondaryText,
-                                        fontSize: 11.0,
+                                        fontSize: 12.0,
                                         letterSpacing: 0.0,
-                                        useGoogleFonts: GoogleFonts.asMap()
+                                        fontWeight:
+                                        FontWeight.w600,
+                                        useGoogleFonts:
+                                        GoogleFonts
+                                            .asMap()
                                             .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily),
+                                            'PretendardSeries'),
                                       ),
+                                    ),
+                                  ].divide(const SizedBox(height: 4.0)),
                                 ),
-                              ].divide(const SizedBox(height: 4.0)),
+                              ),
                             ),
-                          ),
+                          ].divide(const SizedBox(width: 8.0)),
                         ),
-                      ].divide(const SizedBox(width: 8.0)),
                     ),
                     InkWell(
                       splashColor: Colors.transparent,
@@ -593,7 +656,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                         width: MediaQuery.sizeOf(context).width * 0.9,
                         height: 72.0,
                         decoration: const BoxDecoration(
-                          color: Color(0xFFF3F3F3),
+                          color: Color(0xFFCAF1FA),
                         ),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
@@ -601,36 +664,47 @@ class _MenuWidgetState extends State<MenuWidget> {
                           children: [
                             Text(
                               '서포터스 필드스텝 모집',
-                              style: FlutterFlowTheme.of(context)
+                              style: FlutterFlowTheme.of(
+                                  context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w600,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                  ),
+                                fontFamily:
+                                'PretendardSeries',
+                                color: FlutterFlowTheme
+                                    .of(context)
+                                    .primaryText,
+                                fontSize: 16.0,
+                                letterSpacing: 0.0,
+                                fontWeight:
+                                FontWeight.w700,
+                                useGoogleFonts:
+                                GoogleFonts
+                                    .asMap()
+                                    .containsKey(
+                                    'PretendardSeries'),
+                              ),
                             ),
                             Text(
                               '실시간 조항, 포인트 개발, 현지상황 리포팅',
-                              style: FlutterFlowTheme.of(context)
+                              style: FlutterFlowTheme.of(
+                                  context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    fontSize: 12.0,
-                                    letterSpacing: 0.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                  ),
+                                fontFamily:
+                                'PretendardSeries',
+                                color: FlutterFlowTheme
+                                    .of(context)
+                                    .secondaryText,
+                                fontSize: 12.0,
+                                letterSpacing: 0.0,
+                                fontWeight:
+                                FontWeight.w600,
+                                useGoogleFonts:
+                                GoogleFonts
+                                    .asMap()
+                                    .containsKey(
+                                    'PretendardSeries'),
+                              ),
                             ),
                           ].divide(const SizedBox(height: 4.0)),
                         ),

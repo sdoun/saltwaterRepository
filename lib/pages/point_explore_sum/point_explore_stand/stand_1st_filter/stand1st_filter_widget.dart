@@ -112,6 +112,7 @@ class _Stand1stFilterWidgetState extends State<Stand1stFilterWidget> {
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Filtercheckbox(
                       filterText: '좌       대',

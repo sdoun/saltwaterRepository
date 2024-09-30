@@ -93,7 +93,7 @@ class _Stand2ndFilterWidgetState extends State<Stand2ndFilterWidget> {
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Filtercheckbox(
                         filterText: '화   장   실',
@@ -118,6 +118,7 @@ class _Stand2ndFilterWidgetState extends State<Stand2ndFilterWidget> {
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Filtercheckbox(
                       filterText: '바베큐시설',

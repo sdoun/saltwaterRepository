@@ -99,14 +99,27 @@ class _ExploreMapFishingPensionWidgetState
             alignment: const AlignmentDirectional(0.0, 0.0),
             child: Text(
               '포인트 검색하기',
-              style: FlutterFlowTheme.of(context).headlineMedium.override(
-                    fontFamily:
-                        FlutterFlowTheme.of(context).headlineMediumFamily,
-                    letterSpacing: 0.0,
-                    fontWeight: FontWeight.w600,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        FlutterFlowTheme.of(context).headlineMediumFamily),
-                  ),
+              style: FlutterFlowTheme
+                  .of(context)
+                  .bodyMedium
+                  .override(
+                fontFamily:
+                'PretendardSeries',
+                color: FlutterFlowTheme.of(
+                    context)
+                    .primaryText,
+                fontSize:
+                19.0,
+                letterSpacing:
+                0.0,
+                fontWeight:
+                FontWeight
+                    .w700,
+                useGoogleFonts: GoogleFonts
+                    .asMap()
+                    .containsKey(
+                    'PretendardSeries'),
+              ),
             ),
           ),
           actions: const[
@@ -154,7 +167,9 @@ class _ExploreMapFishingPensionWidgetState
                               ),
                               Align(
                                 alignment: const AlignmentDirectional(-1.0, 0.0),
-                                child: SingleChildScrollView(
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                                  child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -229,7 +244,7 @@ class _ExploreMapFishingPensionWidgetState
                                                           fontSize: 12.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.w700,
                                                           useGoogleFonts:
                                                               GoogleFonts
                                                                       .asMap()
@@ -352,10 +367,11 @@ class _ExploreMapFishingPensionWidgetState
                                     ].divide(const SizedBox(width: 4.0)),
                                   ),
                                 ),
+                                ),
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 24.0),
+                                    0.0, 12.0, 0.0, 24.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     _model.pensionPointList =
@@ -382,13 +398,14 @@ class _ExploreMapFishingPensionWidgetState
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(
-                                          fontFamily: 'PretendardSeries',
-                                          color: Colors.white,
-                                          fontSize: 18.0,
-                                          letterSpacing: 0.0,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey('PretendardSeries'),
-                                        ),
+                                      fontFamily: 'PretendardSeries',
+                                      color: Colors.white,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w500,
+                                      letterSpacing: 0.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey('PretendardSeries'),
+                                    ),
                                     elevation: 3.0,
                                     borderSide: const BorderSide(
                                       color: Colors.transparent,
@@ -464,7 +481,12 @@ class _ExploreMapFishingPensionWidgetState
                                       },
                                     ),
                                   ),
-                                  const Mapselectbutton(),
+                                  Mapselectbutton(
+                                    onSelected: () async{
+                                      Navigator.pop(context);
+                                      safeSetState(() {});
+                                    },
+                                  ),
                                 ],
                               ),
                             ),

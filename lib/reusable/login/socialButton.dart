@@ -35,8 +35,8 @@ class _socialButtonState extends State<socialButton> {
         icon: widget.icon,
         options:
         FFButtonOptions(
-          width: 216.0,
           height: 44.0,
+          width: 230.0,
           padding:
           const EdgeInsetsDirectional
               .fromSTEB(

@@ -1252,7 +1252,7 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                                                 context)
                                                                 .width -
                                                                 52.0) *
-                                                                0.25,
+                                                                0.265,
                                                           ),
                                                           decoration:
                                                           BoxDecoration(
@@ -1320,7 +1320,7 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                                                       .bodyMedium
                                                                       .override(
                                                                     fontFamily: 'PretendardSeries',
-                                                                    fontSize: 13.5,
+                                                                    fontSize: 12,
                                                                     letterSpacing: 0.0,
                                                                     fontWeight: FontWeight.w600,
                                                                     useGoogleFonts: GoogleFonts.asMap().containsKey('PretendardSeries'),
@@ -1442,20 +1442,6 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                 ),
                               );
                             },
-                          ),
-                          Text(
-                            '단기 날씨 예보',
-                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily:
-                              'PretendardSeries',
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryText,
-                              fontSize: 17.0,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w700,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  'PretendardSeries'),
-                            ),
                           ),
                           FutureBuilder<ApiCallResponse>(
                             future: FcstWeatherApiCall.call(
@@ -1582,7 +1568,7 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                                   Align(
                                                     alignment:
                                                     const AlignmentDirectional(
-                                                        -1.0, -1.0),
+                                                        0.0, -1.0),
                                                     child: Text(
                                                         '일주일 예보',
                                                       style: FlutterFlowTheme.of(context).bodyMedium

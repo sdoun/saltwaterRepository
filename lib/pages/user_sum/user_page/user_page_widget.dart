@@ -87,20 +87,25 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                               child: AuthUserStreamWidget(
                                 builder: (context) => Text(
                                   currentUserDisplayName,
-                                  style: FlutterFlowTheme.of(context)
+                                  style: FlutterFlowTheme.of(
+                                      context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyMediumFamily,
-                                        fontSize: 20.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.bold,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily),
-                                        color: FlutterFlowTheme.of(context).primary,
-                                      ),
+                                    fontFamily:
+                                    'PretendardSeries',
+                                    color: FlutterFlowTheme
+                                        .of(context)
+                                        .primary,
+                                    fontSize: 20.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight:
+                                    FontWeight.w700,
+                                    useGoogleFonts:
+                                    GoogleFonts
+                                        .asMap()
+                                        .containsKey(
+                                        'PretendardSeries'),
+                                  ),
                                 ),
                               ),
                             ),
@@ -134,23 +139,25 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                           0.0, 6.0, 0.0, 6.0),
                                       child: Text(
                                         '[회원등급]',
-                                        style: FlutterFlowTheme.of(context)
+                                        style: FlutterFlowTheme.of(
+                                            context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily,
-                                              color: const Color(0xFF949595),
-                                              fontSize: 12.0,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w600,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily),
-                                            ),
+                                          fontFamily:
+                                          'PretendardSeries',
+                                          color: FlutterFlowTheme
+                                              .of(context)
+                                              .primary,
+                                          fontSize: 12.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                          FontWeight.w600,
+                                          useGoogleFonts:
+                                          GoogleFonts
+                                              .asMap()
+                                              .containsKey(
+                                              'PretendardSeries'),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -185,15 +192,15 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .titleSmallFamily,
+                                        fontFamily: 'PretendardSeries',
                                         color: FlutterFlowTheme.of(context)
                                             .primaryBackground,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 14,
                                         letterSpacing: 0.0,
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmallFamily),
+                                            'PretendardSeries'),
                                       ),
                                   elevation: 3.0,
                                   borderSide: const BorderSide(
@@ -230,16 +237,15 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .titleSmallFamily,
-                                        color: Colors.black,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w600,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmallFamily),
-                                      ),
+                                    fontFamily: 'PretendardSeries',
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14,
+                                    letterSpacing: 0.0,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                        'PretendardSeries'),
+                                  ),
                                   elevation: 3.0,
                                   borderSide: const BorderSide(
                                     color: Colors.transparent,
@@ -269,19 +275,25 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                   24.0, 0.0, 0.0, 12.0),
                               child: Text(
                                 '내 포인트',
-                                style: FlutterFlowTheme.of(context)
+                                style: FlutterFlowTheme.of(
+                                    context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily,
-                                      fontSize: 20.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily),
-                                    ),
+                                  fontFamily:
+                                  'PretendardSeries',
+                                  color: FlutterFlowTheme
+                                      .of(context)
+                                      .primaryText,
+                                  fontSize: 20.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight:
+                                  FontWeight.w700,
+                                  useGoogleFonts:
+                                  GoogleFonts
+                                      .asMap()
+                                      .containsKey(
+                                      'PretendardSeries'),
+                                ),
                               ),
                             ),
                           ),
@@ -290,7 +302,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                 24.0, 0.0, 24.0, 12.0),
                             child: Container(
                               width: MediaQuery.sizeOf(context).width * 0.85,
-                              height: 100.0,
+                              height: 80.0,
                               decoration: const BoxDecoration(
                                 color: Color(0xFFE9E9E9),
                                 borderRadius: BorderRadius.only(
@@ -316,23 +328,23 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                           0.0, 20.0, 0.0, 0.0),
                                       child: Text(
                                         '[Point]',
-                                        style: FlutterFlowTheme.of(context)
+                                        style: FlutterFlowTheme.of(
+                                            context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily,
-                                              fontSize: 20.0,
-                                              letterSpacing: 0.0,
-                                              color: const Color(0xff4CAAF5),
-                                              fontWeight: FontWeight.bold,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily),
-                                            ),
+                                          fontFamily:
+                                          'PretendardSeries',
+                                          color: const Color(0xff4CAAF5),
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                          FontWeight.w700,
+                                          useGoogleFonts:
+                                          GoogleFonts
+                                              .asMap()
+                                              .containsKey(
+                                              'PretendardSeries'),
+                                        ),
                                       ),
                                     ),
                                     Padding(
@@ -350,46 +362,45 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                                       48.0, 0.0, 0.0, 0.0),
                                               child: Text(
                                                 '적립예정: ',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily,
-                                                          color:
-                                                              const Color(0xFF949595),
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
-                                                        ),
+                                                style: FlutterFlowTheme.of(
+                                                    context)
+                                                    .bodyMedium
+                                                    .override(
+                                                  fontFamily:
+                                                  'PretendardSeries',
+                                                  color: const Color(0xff949595),
+                                                  fontSize: 13.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                  FontWeight.w600,
+                                                  useGoogleFonts:
+                                                  GoogleFonts
+                                                      .asMap()
+                                                      .containsKey(
+                                                      'PretendardSeries'),
+                                                ),
                                               ),
                                             ),
                                           ),
                                           Text(
                                             '[point2]',
-                                            style: FlutterFlowTheme.of(context)
+                                            style: FlutterFlowTheme.of(
+                                                context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily,
-                                                  letterSpacing: 0.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMediumFamily),
-                                                ),
+                                              fontFamily:
+                                              'PretendardSeries',
+                                              color: FlutterFlowTheme.of(context).primaryText,
+                                              fontSize: 13.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                              FontWeight.w400,
+                                              useGoogleFonts:
+                                              GoogleFonts
+                                                  .asMap()
+                                                  .containsKey(
+                                                  'PretendardSeries'),
+                                            ),
                                           ),
                                           Padding(
                                             padding:
@@ -427,35 +438,32 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                               text: '적립내역보기  >',
                                               options: FFButtonOptions(
                                                 height: 36.0,
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        0, 0.0, 0, 0.0),
+                                                    (MediaQuery.of(context).size.width * 0.1).clamp(0, 40), 0.0, (MediaQuery.of(context).size.width * 0.1).clamp(0, 40), 0.0),
                                                 iconPadding:
                                                     const EdgeInsetsDirectional
                                                         .fromSTEB(
                                                             0.0, 0.0, 0.0, 0.0),
                                                 color: const Color(0xFFE9E9E9),
                                                 textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily,
-                                                          color:
-                                                              const Color(0xFF949595),
-                                                          fontSize: 14.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .titleSmallFamily),
-                                                        ),
+                                                  FlutterFlowTheme.of(
+                                                      context)
+                                                      .titleSmall
+                                                      .override(
+                                                    fontFamily:
+                                                    'PretendardSeries',
+                                                    color: FlutterFlowTheme.of(context).secondaryText,
+                                                    fontSize: 12.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                    FontWeight.w400,
+                                                    useGoogleFonts:
+                                                    GoogleFonts
+                                                        .asMap()
+                                                        .containsKey(
+                                                        'PretendardSeries'),
+                                                  ),
                                                 borderSide: const BorderSide(
                                                   color: Colors.transparent,
                                                   width: 0.0,
@@ -482,7 +490,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                context.pushNamed('shoppingGuide');
+                                context.pushNamed('service_is_not_ready');
                               },
                               child: ClipRRect(
                                 borderRadius: const BorderRadius.only(
@@ -524,7 +532,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                                     8.0, 0.0, 0.0, 0.0),
                                             child: FFButtonWidget(
                                               onPressed: () {
-                                                print('Button pressed ...');
+                                                context.pushNamed('service_is_not_ready');
                                               },
                                               text: '이용 가이드 GUIDE',
                                               options: FFButtonOptions(
@@ -538,25 +546,25 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                                             0.0, 0.0, 0.0, 0.0),
                                                 color: FlutterFlowTheme.of(context).secondaryBackground,
                                                 textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily,
-                                                          color: Colors.black,
-                                                          fontSize: 14.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .titleSmallFamily),
-                                                        ),
+                                                FlutterFlowTheme.of(
+                                                    context)
+                                                    .bodyMedium
+                                                    .override(
+                                                  fontFamily:
+                                                  'PretendardSeries',
+                                                  color: FlutterFlowTheme
+                                                      .of(context)
+                                                      .primaryText,
+                                                  fontSize: 13.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                  FontWeight.w700,
+                                                  useGoogleFonts:
+                                                  GoogleFonts
+                                                      .asMap()
+                                                      .containsKey(
+                                                      'PretendardSeries'),
+                                                ),
                                                 elevation: 0.0,
                                                 borderSide: const BorderSide(
                                                   color: Colors.transparent,
@@ -589,7 +597,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                                 size: 24.0,
                                               ),
                                               onPressed: () {
-                                                print('IconButton pressed ...');
+                                                context.pushNamed('service_is_not_ready');
                                               },
                                             ),
                                           ),
@@ -604,6 +612,10 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                         ],
                       ),
                     ),
+                    Divider(
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      thickness: 0.5,
+                    ),
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
@@ -614,22 +626,28 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                             alignment: const AlignmentDirectional(-1.0, -1.0),
                             child: Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 12.0),
+                                  10.0, 0.0, 0.0, 12.0),
                               child: Text(
                                 '내가 작성한 리뷰',
-                                style: FlutterFlowTheme.of(context)
+                                style: FlutterFlowTheme.of(
+                                    context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily,
-                                      fontSize: 20.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily),
-                                    ),
+                                  fontFamily:
+                                  'PretendardSeries',
+                                  color: FlutterFlowTheme
+                                      .of(context)
+                                      .primary,
+                                  fontSize: 12.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight:
+                                  FontWeight.w600,
+                                  useGoogleFonts:
+                                  GoogleFonts
+                                      .asMap()
+                                      .containsKey(
+                                      'PretendardSeries'),
+                                ),
                               ),
                             ),
                           ),
@@ -730,7 +748,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                             ),
                                             child: Padding(
                                               padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(8.0, 8.0, 8.0, 8.0),
+                                                  .fromSTEB(10.0, 8.0, 10.0, 8.0),
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 crossAxisAlignment:
@@ -766,6 +784,8 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                                           fontFamily:
                                                               'PretendardSeries',
                                                           letterSpacing: 0.0,
+                                                          fontSize: 14,
+                                                          fontWeight: FontWeight.w400,
                                                           useGoogleFonts:
                                                               GoogleFonts
                                                                       .asMap()
@@ -777,21 +797,20 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                                     listViewTBUserReviewPointRecord
                                                         .reviewText,
                                                     style: FlutterFlowTheme.of(
-                                                            context)
+                                                        context)
                                                         .bodyMedium
                                                         .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
-                                                        ),
+                                                      fontFamily:
+                                                      'PretendardSeries',
+                                                      letterSpacing: 0.0,
+                                                      fontSize: 14,
+                                                      fontWeight: FontWeight.w400,
+                                                      useGoogleFonts:
+                                                      GoogleFonts
+                                                          .asMap()
+                                                          .containsKey(
+                                                          'PretendardSeries'),
+                                                    ),
                                                   ),
                                                 ].divide(const SizedBox(height: 8.0)),
                                               ),
