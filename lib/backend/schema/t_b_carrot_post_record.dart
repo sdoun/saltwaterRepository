@@ -27,7 +27,7 @@ class TBCarrotPostRecord extends FirestoreRecord {
 
   // "post_image" field.
   List<String>? _postImage;
-  List<String> get postImage => _postImage ?? const [];
+  List<String> get postImage => _postImage ?? const ['https://picsum.photos/seed/426/600',];
   bool hasPostImage() => _postImage != null;
 
   // "post_datetime" field.
@@ -57,6 +57,8 @@ class TBCarrotPostRecord extends FirestoreRecord {
 
   // "post_seller" field.
   DocumentReference? _postSeller;
+
+
   DocumentReference? get postSeller => _postSeller;
   bool hasPostSeller() => _postSeller != null;
 

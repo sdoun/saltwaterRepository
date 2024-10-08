@@ -94,12 +94,12 @@ class _pointButtonState extends State<pointButton> {
                   fontFamily:
                   'PretendardSeries',
                   fontSize:
-                  12.0,
+                  14.0,
                   letterSpacing:
                   0.0,
                   fontWeight:
                   FontWeight
-                      .w600,
+                      .w500,
                   useGoogleFonts: GoogleFonts
                       .asMap()
                       .containsKey(

@@ -216,7 +216,7 @@ class _LikeWidgetState extends State<LikeWidget> {
                                                       borderRadius:
                                                       BorderRadius.circular(8.0),
                                                       child: Image.network(
-                                                        'https://picsum.photos/seed/426/600',
+                                                        columnTBPointRecord.pointImages[0].toString(),
                                                         width: 80.0,
                                                         height: 200.0,
                                                         fit: BoxFit.cover,
@@ -234,7 +234,7 @@ class _LikeWidgetState extends State<LikeWidget> {
                                                             'PretendardSeries',
                                                             color: FlutterFlowTheme.of(context)
                                                                 .primaryText,
-                                                            fontSize: 17.0,
+                                                            fontSize: 14.0,
                                                             letterSpacing: 0.0,
                                                             fontWeight: FontWeight.w600,
                                                             useGoogleFonts: GoogleFonts.asMap().containsKey(
@@ -249,9 +249,9 @@ class _LikeWidgetState extends State<LikeWidget> {
                                                             'PretendardSeries',
                                                             color: FlutterFlowTheme.of(context)
                                                                 .primaryText,
-                                                            fontSize: 17.0,
+                                                            fontSize: 13.0,
                                                             letterSpacing: 0.0,
-                                                            fontWeight: FontWeight.w600,
+                                                            fontWeight: FontWeight.w500,
                                                             useGoogleFonts: GoogleFonts.asMap().containsKey(
                                                                 'PretendardSeries'),
                                                           ),
@@ -268,9 +268,9 @@ class _LikeWidgetState extends State<LikeWidget> {
                                                             'PretendardSeries',
                                                             color: FlutterFlowTheme.of(context)
                                                                 .primaryText,
-                                                            fontSize: 17.0,
+                                                            fontSize: 13.0,
                                                             letterSpacing: 0.0,
-                                                            fontWeight: FontWeight.w600,
+                                                            fontWeight: FontWeight.w500,
                                                             useGoogleFonts: GoogleFonts.asMap().containsKey(
                                                                 'PretendardSeries'),
                                                           ),
@@ -402,7 +402,8 @@ class _LikeWidgetState extends State<LikeWidget> {
                                               borderRadius:
                                                   BorderRadius.circular(8.0),
                                               child: Image.network(
-                                                'https://picsum.photos/seed/426/600',
+                                                columnTBCarrotPostRecord
+                                                    .postImage[0].toString(),
                                                 width: 80.0,
                                                 height: 200.0,
                                                 fit: BoxFit.cover,
@@ -428,7 +429,7 @@ class _LikeWidgetState extends State<LikeWidget> {
                                                     'PretendardSeries',
                                                     color: FlutterFlowTheme.of(context)
                                                         .primaryText,
-                                                    fontSize: 17.0,
+                                                    fontSize: 14.0,
                                                     letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w600,
                                                     useGoogleFonts: GoogleFonts.asMap().containsKey(
@@ -443,9 +444,9 @@ class _LikeWidgetState extends State<LikeWidget> {
                                                     'PretendardSeries',
                                                     color: FlutterFlowTheme.of(context)
                                                         .primaryText,
-                                                    fontSize: 17.0,
+                                                    fontSize: 13.0,
                                                     letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.w500,
                                                     useGoogleFonts: GoogleFonts.asMap().containsKey(
                                                         'PretendardSeries'),
                                                   ),
@@ -465,9 +466,9 @@ class _LikeWidgetState extends State<LikeWidget> {
                                                     'PretendardSeries',
                                                     color: FlutterFlowTheme.of(context)
                                                         .primaryText,
-                                                    fontSize: 17.0,
+                                                    fontSize: 13.0,
                                                     letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.w500,
                                                     useGoogleFonts: GoogleFonts.asMap().containsKey(
                                                         'PretendardSeries'),
                                                   ),

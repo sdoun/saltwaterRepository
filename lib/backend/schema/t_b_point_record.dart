@@ -97,13 +97,14 @@ class TBPointRecord extends FirestoreRecord {
 
   // "point_images" field.
   List<String>? _pointImages;
-  List<String> get pointImages => _pointImages ?? const [];
+  List<String> get pointImages => _pointImages ?? const ['https://picsum.photos/seed/426/600'];
   bool hasPointImages() => _pointImages != null;
 
   // "point_involvedVideo" field.
   List<String>? _pointInvolvedVideo;
 
   var pointIntroductionab;
+
   List<String> get pointInvolvedVideo => _pointInvolvedVideo ?? const [];
   bool hasPointInvolvedVideo() => _pointInvolvedVideo != null;
 

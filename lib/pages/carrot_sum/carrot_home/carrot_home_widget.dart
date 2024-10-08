@@ -656,7 +656,7 @@ class _CarrotHomeWidgetState extends State<CarrotHomeWidget> {
                                                           BorderRadius.circular(
                                                               8.0),
                                                       child: Image.network(
-                                                        'https://picsum.photos/seed/898/600',
+                                                        postsItem.postImage[0] ?? 'https://picsum.photos/id/1/200/300',
                                                         width: 80.0,
                                                         height: 200.0,
                                                         fit: BoxFit.cover,

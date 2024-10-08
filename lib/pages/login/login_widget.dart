@@ -162,24 +162,9 @@ class _LoginWidgetState extends State<LoginWidget>
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 36, 0, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      'assets/images/KakaoTalk_20240913_183755149.png',
-                      height: 36.0,
-                    ),
-                    Text(
-                      '짠물투어',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'AugroSeriesBold',
-                        color: FlutterFlowTheme.of(context).primary,
-                      ),
-                    )
-                  ],
+                child: SizedBox(
+                    height: 48,
+                    child: Image.asset('assets/images/상단바로고1.png')
                 ),
               ),
               Expanded(
@@ -1044,14 +1029,17 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             context.mounted);
                                                       },
                                                       text: '구글 로그인',
-                                                      backgroundColor: Colors.black,
-                                                      icon: const FaIcon(
+                                                      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+                                                      icon: FaIcon(
                                                         FontAwesomeIcons.google,
                                                         size: 20.0,
+                                                        color: FlutterFlowTheme
+                                                            .of(context)
+                                                            .primaryText,
                                                       ),
                                                       textColor: FlutterFlowTheme
                                                           .of(context)
-                                                          .primaryBackground,
+                                                          .primaryText,
                                                   ),
                                                   isAndroid
                                                       ? Container()

@@ -233,7 +233,7 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
                                                     MainAxisAlignment.center,
                                                     children: [
                                                       Text(
-                                                        '해상펜션&좌대',
+                                                        '해상펜션, 좌대',
                                                         style: FlutterFlowTheme.of(
                                                             context)
                                                             .bodyMedium

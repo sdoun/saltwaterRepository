@@ -51,9 +51,6 @@ class _Home1WidgetState extends State<Home1Widget> {
 
   @override
   Widget build(BuildContext context) {
-    final PageController adsController = PageController(
-      initialPage: 0,
-    );
     return StreamBuilder<List<TBChatRoomRecord>>(
       stream: queryTBChatRoomRecord(
         queryBuilder: (tBChatRoomRecord) => tBChatRoomRecord.where(
@@ -68,13 +65,9 @@ class _Home1WidgetState extends State<Home1Widget> {
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: Center(
               child: SizedBox(
-                width: 50.0,
-                height: 50.0,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    FlutterFlowTheme.of(context).primary,
-                  ),
-                ),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: Image.asset('assets/images/splash.png')
               ),
             ),
           );
@@ -94,18 +87,17 @@ class _Home1WidgetState extends State<Home1Widget> {
                   padding: const EdgeInsetsDirectional.fromSTEB(
                     12, 0, 0, 0
                   ),
-                child: Row(
-                  children: [
-                    Image.asset('assets/images/KakaoTalk_20240913_183755149.png'),
-                    Text(
-                      '짠물투어',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'AugroSeriesBold',
-                        color: FlutterFlowTheme.of(context).primary,
+                child: Align(
+                  alignment: const AlignmentDirectional(0, 0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                          height: 48,
+                          child: Image.asset('assets/images/상단바로고1.png')
                       ),
-                    )
-                  ],
+                    ],
+                  ),
                 ),
               ),
               title: const Align(
@@ -179,50 +171,60 @@ class _Home1WidgetState extends State<Home1Widget> {
                               },
                             ).then((value) => safeSetState(() {}));
                           },
-                          child: badges.Badge(
-                            badgeContent: Text(
-                              valueOrDefault<String>(
-                                badgeTBChatRecordList.length.toString(),
-                                '0',
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .titleSmallFamily,
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .titleSmallFamily),
-                              ),
+                          child: Container(
+                            height: 40.0,
+                              clipBehavior: Clip.antiAlias,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.rectangle,
                             ),
-                            showBadge: true,
-                            shape: badges.BadgeShape.circle,
-                            badgeColor: FlutterFlowTheme.of(context).primary,
-                            elevation: 4.0,
-                            padding:
-                            const EdgeInsetsDirectional.fromSTEB(4.0, 4.0, 4.0, 4.0),
-                            position: badges.BadgePosition.topEnd(),
-                            animationType: badges.BadgeAnimationType.scale,
-                            toAnimate: true,
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              child: Container(
-                                width: 36.0,
-                                height: 36.0,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
+                            child: Stack(
+                              alignment: Alignment.topRight,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 4),
+                                  child: Image.asset(
+                                    'assets/images/q3052_.png',
+                                    height: 36,
+                                  ),
                                 ),
-                                child: Image.asset(
-                                  'assets/images/q3052_.png',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
+                                  child: Align(
+                                    alignment: Alignment.topRight,
+                                    child: badges.Badge(
+                                      badgeContent: Text(
+                                        valueOrDefault<String>(
+                                          badgeTBChatRecordList.length.toString(),
+                                          '0',
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                          fontFamily: FlutterFlowTheme.of(context)
+                                              .titleSmallFamily,
+                                          fontSize: 12,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                          letterSpacing: 0.0,
+                                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmallFamily),
+                                        ),
+                                      ),
+                                      showBadge: true,
+                                      shape: badges.BadgeShape.circle,
+                                      badgeColor: FlutterFlowTheme.of(context).primary,
+                                      elevation: 4.0,
+                                      padding:
+                                      const EdgeInsetsDirectional.fromSTEB(3.0, 3.0, 3.0, 3.0),
+                                      position: badges.BadgePosition.topEnd(),
+                                      animationType: badges.BadgeAnimationType.scale,
+                                      toAnimate: true,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
                           ),
                         );
                       },
@@ -286,7 +288,7 @@ class _Home1WidgetState extends State<Home1Widget> {
                           children: [
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 24.0, 12.0, 0.0),
+                                  12.0, 36.0, 12.0, 0.0),
                               child: Container(
                                 width: double.infinity,
                                 decoration: const BoxDecoration(
@@ -347,7 +349,7 @@ class _Home1WidgetState extends State<Home1Widget> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 pointButton(
-                                                    text: '방파제\n&선착장',
+                                                    text: '방파제\n선착장',
                                                     ontap: () async {
                                                       context.pushNamed(
                                                           'exploreMapSW');
@@ -369,7 +371,7 @@ class _Home1WidgetState extends State<Home1Widget> {
                                                   ),
                                                 ),
                                                 pointButton(
-                                                  text: '해변&\n갯바위',
+                                                  text: '해변\n갯바위',
                                                   ontap: () async {
                                                     context.pushNamed(
                                                         'exploreMapOcean');
@@ -380,7 +382,7 @@ class _Home1WidgetState extends State<Home1Widget> {
                                                   ),
                                                 ),
                                                 pointButton(
-                                                  text: '해상펜션\n&좌대',
+                                                  text: '해상펜션\n 좌대',
                                                   ontap: () async {
                                                     context.pushNamed(
                                                         'exploreMap_stand');
@@ -391,7 +393,7 @@ class _Home1WidgetState extends State<Home1Widget> {
                                                   ),
                                                 ),
                                                 pointButton(
-                                                  text: '낚시펜션\n&민박',
+                                                  text: '낚시펜션\n 민박',
                                                   ontap: () async {
                                                     context.pushNamed(
                                                         'exploreMapFishingPension');
@@ -411,17 +413,9 @@ class _Home1WidgetState extends State<Home1Widget> {
                                 ),
                               ),
                             ),
-                            const Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 8.0, 12.0, 0.0),
-                              child: Divider(
-                                color: Color(0xffbbbbbb),
-                                thickness: 1.5,
-                              ),
-                            ),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 8.0, 12.0, 0.0),
+                                  12.0, 36.0, 12.0, 0.0),
                               child: Container(
                                 width: double.infinity,
                                 decoration: const BoxDecoration(
@@ -463,7 +457,7 @@ class _Home1WidgetState extends State<Home1Widget> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 16.0, 0.0, 16.0),
+                                          0.0, 16.0, 0.0, 32.0),
                                       child: Container(
                                         width: double.infinity,
                                         decoration: const BoxDecoration(
@@ -504,7 +498,13 @@ class _Home1WidgetState extends State<Home1Widget> {
                         ),
                       ),
 
-                      const PointAdsPageview(),
+                      const Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 36),
+                        child: PointAdsPageview(),
+                      ),
+                      const SizedBox(
+                        height: 80,
+                      )
                     ],
                   ),
                   Align(

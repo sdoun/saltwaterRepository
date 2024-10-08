@@ -217,7 +217,7 @@ class _ExploreMapFishingPensionWidgetState
                                                   BorderRadius.circular(8.0),
                                               border: Border.all(
                                                 color: FlutterFlowTheme.of(context)
-                                                    .primary,
+                                                    .primary, width: 2
                                               ),
                                             ),
                                             alignment:
@@ -231,7 +231,7 @@ class _ExploreMapFishingPensionWidgetState
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    '낚시펜션민박',
+                                                    '낚시펜션, 민박',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium

@@ -11,11 +11,15 @@ import 'backend/push_notifications/push_notifications_util.dart';
 import 'backend/firebase/firebase_config.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+ WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+ FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   GoRouter.optionURLReflectsImperativeAPIs = true;
   usePathUrlStrategy();
+
+
   await initFirebase();
 
   // Start initial custom actions code
@@ -58,7 +62,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier);
     userStream = saltWaterBetaVer1FirebaseUserStream()
@@ -66,10 +69,19 @@ class _MyAppState extends State<MyApp> {
         _appStateNotifier.update(user);
       });
     jwtTokenStream.listen((_) {});
-    Future.delayed(
-      const Duration(milliseconds: 1000),
-      () => _appStateNotifier.stopShowingSplashImage(),
-    );
+
+    // 앱 초기화가 완료된 후 스플래시 화면을 제거합니다.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initializeApp();
+    });
+  }
+  Future<void> _initializeApp() async {
+    // 여기에 추가적인 초기화 작업을 넣을 수 있습니다.
+    await Future.delayed(const Duration(seconds: 3)); // 예시로 3초 대기
+
+    // 모든 초기화 작업이 완료된 후 스플래시 화면을 제거합니다.
+    FlutterNativeSplash.remove();
+    _appStateNotifier.stopShowingSplashImage();
   }
 
   @override
@@ -86,6 +98,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp.router(
       title: 'saltWater-beta-ver1',
       localizationsDelegates: const [

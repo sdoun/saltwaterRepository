@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -289,7 +291,7 @@ class _CarrotSearchResultWidgetState extends State<CarrotSearchResultWidget> {
                                               borderRadius:
                                                   BorderRadius.circular(8.0),
                                               child: Image.network(
-                                                'https://picsum.photos/seed/307/600',
+                                                resultsItem.postImage[0].toString(),
                                                 width: 80.0,
                                                 height: 200.0,
                                                 fit: BoxFit.cover,
@@ -346,7 +348,7 @@ class _CarrotSearchResultWidgetState extends State<CarrotSearchResultWidget> {
                                                   functions
                                                       .datetimeToDateCopy(
                                                           resultsItem
-                                                              .postDatetime!
+                                                              .postDatetime
                                                               .toString())
                                                       .toString(),
                                                   style: FlutterFlowTheme.of(

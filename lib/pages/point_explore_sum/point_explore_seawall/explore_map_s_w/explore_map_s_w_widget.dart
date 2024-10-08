@@ -113,6 +113,7 @@ class _ExploreMapSWWidgetState extends State<ExploreMapSWWidget> {
           );
         }
         List<TBPointRecord> exploreMapSWTBPointRecordList = snapshot.data!;
+        print('쿼리길이: ${exploreMapSWTBPointRecordList.length}');
 
         return GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -274,7 +275,7 @@ class _ExploreMapSWWidgetState extends State<ExploreMapSWWidget> {
                                                     border: Border.all(
                                                       color: FlutterFlowTheme.of(
                                                           context)
-                                                          .primary,
+                                                          .primary, width: 2
                                                     ),
                                                   ),
                                                   alignment: const AlignmentDirectional(
@@ -449,6 +450,7 @@ class _ExploreMapSWWidgetState extends State<ExploreMapSWWidget> {
                                               exploreMapSWTBPointRecordList
                                                   .toList()
                                                   .cast<TBPointRecord>();
+
                                           safeSetState(() {});
 
                                           safeSetState(() {});

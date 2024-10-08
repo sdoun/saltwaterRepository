@@ -22,34 +22,53 @@ Future<List<String>?> sWFilterSumString(
 
     // Create a reference to the collection
     final collectionReference = firestoreInstance.collection('TB_point');
+    print('1필터 길이: ${sW1stFilter?.length}');
+    print('2필터 길이: ${sW2ndFilter?.length}');
+    print('3필터 길이: ${sW3rdFilter?.length}');
 
     // Get all the documents in the collection
     final querySnapshot = await collectionReference.get();
 
     // Create an empty list to store the field values
     List<String> result = [];
-
+    List<String> tags = [];
     // Combine all filter conditions into one list
     List<String> wCondition = (sW1stFilter ?? []) +
         (sW2ndFilter ?? []) +
         (sW3rdFilter ?? []) +
         (sWfishType ?? []);
 
+    print('전체필터길이${wCondition.length}');
+
     // Loop through all the documents
     for (final documentSnapshot in querySnapshot.docs) {
       // Get the 'point_tags' field value and convert to a List<String>
-      final tags = List<String>.from(
-          documentSnapshot.get('point_tags') as List<dynamic>) + documentSnapshot.get('point_fishes') as List<dynamic>;
+      tags = [];
+      if (documentSnapshot.data().containsKey('point_tags')) {
+        tags.addAll(List<String>.from(documentSnapshot.get('point_tags') as List<dynamic>));
+      }
 
-      // Add true items from 'point_tags_boolen' to tagsFromBoolenStruct
+      // Safely get point_fishes
+      if (documentSnapshot.data().containsKey('point_fishes')) {
+        tags.addAll(List<String>.from(documentSnapshot.get('point_fishes') as List<dynamic>));
+      }
+      print('태그길이: ${tags.length}');
 
-      // Check if all items in 'wCondition' are in 'tagsFromBoolenStruct'
-      if (wCondition.every((element) => tags.contains(element))) {
+      if (wCondition.isNotEmpty) {
+        if (wCondition.every((element) => tags.contains(element))) {
+          final nameValue = documentSnapshot.get('point_name') as String;
+          result.add(nameValue);
+          print('필터 작동');
+        }
+      } else {
+        // If wCondition is empty, add all documents
         final nameValue = documentSnapshot.get('point_name') as String;
+        print('필터값 비어있음');
         result.add(nameValue);
       }
     }
-
+    print('검색결과 길이${result.length}');
+    tags = [];
     return result;
   } catch (e) {
     print('error detected $e');

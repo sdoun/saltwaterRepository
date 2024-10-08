@@ -90,6 +90,7 @@ class _UnReadChatWidgetState extends State<UnReadChatWidget> {
                     style: FlutterFlowTheme.of(context).headlineSmall.override(
                           fontFamily:
                               FlutterFlowTheme.of(context).headlineSmallFamily,
+                          fontSize: 14,
                           letterSpacing: 0.0,
                           useGoogleFonts: GoogleFonts.asMap().containsKey(
                               FlutterFlowTheme.of(context).headlineSmallFamily),

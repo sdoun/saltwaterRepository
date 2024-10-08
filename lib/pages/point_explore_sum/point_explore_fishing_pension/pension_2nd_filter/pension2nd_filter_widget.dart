@@ -7,6 +7,7 @@ import 'pension2nd_filter_model.dart';
 export 'pension2nd_filter_model.dart';
 
 import 'package:salt_water_beta_ver1/reusable/pointExplore/filterCheckBox.dart';
+import 'package:salt_water_beta_ver1/reusable/pointExplore/filterBackground.dart';
 
 class Pension2ndFilterWidget extends StatefulWidget {
   const Pension2ndFilterWidget({super.key});
@@ -45,146 +46,120 @@ class _Pension2ndFilterWidgetState extends State<Pension2ndFilterWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      elevation: 3.0,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(0.0),
-          bottomRight: Radius.circular(0.0),
-          topLeft: Radius.circular(12.0),
-          topRight: Radius.circular(12.0),
-        ),
-      ),
-      child: Container(
-        width: 351.0,
-        height: 380.0,
-        decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).secondaryBackground,
-          borderRadius: const BorderRadius.only(
-            bottomLeft: Radius.circular(0.0),
-            bottomRight: Radius.circular(0.0),
-            topLeft: Radius.circular(12.0),
-            topRight: Radius.circular(12.0),
+    return Filterbackground(
+      child: Column(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Text(
+          '인근편의시설',
+          style: FlutterFlowTheme.of(context).bodyMedium.override(
+            fontFamily:'PretendardSeries',
+            fontSize: 19.0,
+            letterSpacing: 0.0,
+            fontWeight: FontWeight.w700,
+            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                'PretendardSeries'),
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(18.0, 21.0, 18.0, 0.0),
-          child: Column(
+        Divider(
+          thickness: 1.0,
+          color: FlutterFlowTheme.of(context).secondaryText,
+        ),
+        Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+          child: Row(
             mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                '인근편의시설',
-                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily:'PretendardSeries',
-                  fontSize: 19.0,
-                  letterSpacing: 0.0,
-                  fontWeight: FontWeight.w700,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      'PretendardSeries'),
-                ),
+              Filtercheckbox(
+                filterText: '식   당',
+                checkBoxValue: _model.checkboxValue1,
+                onChecked: (newValue) async {
+                  safeSetState(() =>
+                  _model.checkboxValue1 = newValue!);
+                },
               ),
-              Divider(
-                thickness: 1.0,
-                color: FlutterFlowTheme.of(context).secondaryText,
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Filtercheckbox(
-                        filterText: '식   당',
-                        checkBoxValue: _model.checkboxValue1,
-                        onChecked: (newValue) async {
-                          safeSetState(() =>
-                          _model.checkboxValue1 = newValue!);
-                        },
-                    ),
-                    Filtercheckbox(
-                      filterText: '매   점',
-                      checkBoxValue: _model.checkboxValue2,
-                      onChecked: (newValue) async {
-                        safeSetState(() =>
-                        _model.checkboxValue2 = newValue!);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Filtercheckbox(
-                      filterText: '주변낚시터',
-                      checkBoxValue: _model.checkboxValue3,
-                      onChecked: (newValue) async {
-                        safeSetState(() =>
-                        _model.checkboxValue3 = newValue!);
-                      },
-                    ),
-                    Filtercheckbox(
-                      filterText: '낚시방',
-                      checkBoxValue: _model.checkboxValue4,
-                      onChecked: (newValue) async {
-                        safeSetState(() =>
-                        _model.checkboxValue4 = newValue!);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    Navigator.pop(
-                        context,
-                        functions.pension2ndFilterBottomsheet(
-                            _model.checkboxValue3!,
-                            _model.checkboxValue1!,
-                            _model.checkboxValue2!,
-                            _model.checkboxValue4!));
-                  },
-                  child: Container(
-                    width: 100.0,
-                    height: 40.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).primary,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Align(
-                      alignment: const AlignmentDirectional(0.0, 0.0),
-                      child: Text(
-                        '선택완료',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).bodyMediumFamily,
-                              color: FlutterFlowTheme.of(context).primaryBackground,
-                              fontSize: 17.0,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w500,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context)
-                                      .bodyMediumFamily),
-                            ),
-                      ),
-                    ),
-                  ),
-                ),
+              Filtercheckbox(
+                filterText: '매   점',
+                checkBoxValue: _model.checkboxValue2,
+                onChecked: (newValue) async {
+                  safeSetState(() =>
+                  _model.checkboxValue2 = newValue!);
+                },
               ),
             ],
           ),
         ),
-      ),
+        Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Filtercheckbox(
+                filterText: '주변낚시터',
+                checkBoxValue: _model.checkboxValue3,
+                onChecked: (newValue) async {
+                  safeSetState(() =>
+                  _model.checkboxValue3 = newValue!);
+                },
+              ),
+              Filtercheckbox(
+                filterText: '낚시방',
+                checkBoxValue: _model.checkboxValue4,
+                onChecked: (newValue) async {
+                  safeSetState(() =>
+                  _model.checkboxValue4 = newValue!);
+                },
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+          child: InkWell(
+            splashColor: Colors.transparent,
+            focusColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onTap: () async {
+              Navigator.pop(
+                  context,
+                  functions.pension2ndFilterBottomsheet(
+                      _model.checkboxValue3!,
+                      _model.checkboxValue1!,
+                      _model.checkboxValue2!,
+                      _model.checkboxValue4!));
+            },
+            child: Container(
+              width: 100.0,
+              height: 40.0,
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme.of(context).primary,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Align(
+                alignment: const AlignmentDirectional(0.0, 0.0),
+                child: Text(
+                  '선택완료',
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    fontFamily:
+                    FlutterFlowTheme.of(context).bodyMediumFamily,
+                    color: FlutterFlowTheme.of(context).primaryBackground,
+                    fontSize: 17.0,
+                    letterSpacing: 0.0,
+                    fontWeight: FontWeight.w500,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context)
+                            .bodyMediumFamily),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
     );
   }
 }

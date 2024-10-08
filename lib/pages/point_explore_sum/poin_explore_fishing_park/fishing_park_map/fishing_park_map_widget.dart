@@ -216,7 +216,7 @@ class _FishingParkMapWidgetState extends State<FishingParkMapWidget> {
                                                   BorderRadius.circular(8.0),
                                               border: Border.all(
                                                 color: FlutterFlowTheme.of(context)
-                                                    .primary,
+                                                    .primary, width: 2
                                               ),
                                             ),
                                             alignment:

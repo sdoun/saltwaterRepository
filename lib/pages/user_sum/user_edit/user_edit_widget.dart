@@ -1,3 +1,5 @@
+import 'package:salt_water_beta_ver1/components/new_profile_image.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/custom_navbar_widget.dart';
@@ -148,7 +150,7 @@ class _UserEditWidgetState extends State<UserEditWidget> {
                                           child: Padding(
                                             padding: MediaQuery.viewInsetsOf(
                                                 context),
-                                            child: const ImageUploadWidget(),
+                                            child: const NewProfileImage(),
                                           ),
                                         ),
                                       );
@@ -198,6 +200,7 @@ class _UserEditWidgetState extends State<UserEditWidget> {
                               focusNode: _model.textFieldFocusNode,
                               autofocus: true,
                               obscureText: false,
+                              initialValue: currentUserDisplayName,
                               decoration: InputDecoration(
                                 labelText: '여기에 입력하세요',
                                 labelStyle: FlutterFlowTheme.of(

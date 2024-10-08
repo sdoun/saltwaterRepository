@@ -20,6 +20,8 @@ class UserPageWidget extends StatefulWidget {
 
 class _UserPageWidgetState extends State<UserPageWidget> {
   late UserPageModel _model;
+  List<Widget>? pointReviews;
+  int reviewLimit = 3;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -36,6 +38,123 @@ class _UserPageWidgetState extends State<UserPageWidget> {
     _model.dispose();
 
     super.dispose();
+  }
+
+  Widget? pointReviewBuilder(TBUserReviewPointRecord reviewRecord){
+    return InkWell(
+      splashColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onTap: () async {
+        context.pushNamed(
+          'point_detailed',
+          queryParameters: {
+            'pointRefSW': serializeParam(
+              reviewRecord
+                  .parentReference,
+              ParamType.DocumentReference,
+            ),
+          }.withoutNulls,
+        );
+      },
+      child: Container(
+        width: double.infinity,
+        height: 124.0,
+        decoration: BoxDecoration(
+          color:
+          FlutterFlowTheme.of(context)
+              .primaryBackground,
+        ),
+        child: Padding(
+          padding: const EdgeInsetsDirectional
+              .fromSTEB(10.0, 8.0, 10.0, 8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment:
+            CrossAxisAlignment.start,
+            children: [
+              Text(
+                reviewRecord
+                    .reviewTitle,
+                style: FlutterFlowTheme.of(
+                    context)
+                    .bodyMedium
+                    .override(
+                  fontFamily:
+                  'PretendardSeries',
+                  fontSize: 16.0,
+                  letterSpacing: 0.0,
+                  fontWeight:
+                  FontWeight.w600,
+                  useGoogleFonts:
+                  GoogleFonts
+                      .asMap()
+                      .containsKey(
+                      'PretendardSeries'),
+                ),
+              ),
+              Text(
+                currentUserDisplayName,
+                style: FlutterFlowTheme.of(
+                    context)
+                    .bodyMedium
+                    .override(
+                  fontFamily:
+                  'PretendardSeries',
+                  letterSpacing: 0.0,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  useGoogleFonts:
+                  GoogleFonts
+                      .asMap()
+                      .containsKey(
+                      'PretendardSeries'),
+                ),
+              ),
+              Text(
+                reviewRecord
+                    .reviewText,
+                style: FlutterFlowTheme.of(
+                    context)
+                    .bodyMedium
+                    .override(
+                  fontFamily:
+                  'PretendardSeries',
+                  letterSpacing: 0.0,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  useGoogleFonts:
+                  GoogleFonts
+                      .asMap()
+                      .containsKey(
+                      'PretendardSeries'),
+                ),
+              ),
+            ].divide(const SizedBox(height: 8.0)),
+          ),
+        ),
+      ),
+    );
+  }
+  List<Widget> reviewListBuilder(List<TBUserReviewPointRecord>? list){
+    pointReviews = [];
+    if(list != null){
+      if(list.length <reviewLimit){
+        for(int i = 0; i<list.length; i++){
+          pointReviews?.add(pointReviewBuilder(list[i])!);
+        }
+      }
+      else{
+        for(int i = 0; i<reviewLimit; i++){
+          pointReviews?.add(pointReviewBuilder(list[i])!);
+        }
+      }
+      return pointReviews!;
+    }
+    else{
+      return [const SizedBox(height: 42,)];
+    }
   }
 
   @override
@@ -302,7 +421,6 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                 24.0, 0.0, 24.0, 12.0),
                             child: Container(
                               width: MediaQuery.sizeOf(context).width * 0.85,
-                              height: 80.0,
                               decoration: const BoxDecoration(
                                 color: Color(0xFFE9E9E9),
                                 borderRadius: BorderRadius.only(
@@ -325,7 +443,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 20.0, 0.0, 0.0),
+                                          0.0, 20.0, 0.0, 15.0),
                                       child: Text(
                                         '[Point]',
                                         style: FlutterFlowTheme.of(
@@ -349,7 +467,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 8.0, 0.0, 0.0),
+                                          0.0, 8.0, 0.0, 15.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
@@ -432,15 +550,15 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                             alignment:
                                                 const AlignmentDirectional(0.0, 0.0),
                                             child: FFButtonWidget(
-                                              onPressed: () {
-                                                print('Button pressed ...');
+                                              onPressed: () async {
+                                                context.pushNamed('service_is_not_ready');
                                               },
                                               text: '적립내역보기  >',
                                               options: FFButtonOptions(
-                                                height: 36.0,
+                                                height: 24,
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                    (MediaQuery.of(context).size.width * 0.1).clamp(0, 40), 0.0, (MediaQuery.of(context).size.width * 0.1).clamp(0, 40), 0.0),
+                                                    (MediaQuery.of(context).size.width * 0.05).clamp(0, 40), 0, (MediaQuery.of(context).size.width * 0.05).clamp(0, 40), 0),
                                                 iconPadding:
                                                     const EdgeInsetsDirectional
                                                         .fromSTEB(
@@ -621,6 +739,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                           const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Align(
                             alignment: const AlignmentDirectional(-1.0, -1.0),
@@ -653,7 +772,6 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                           ),
                           Container(
                             width: double.infinity,
-                            height: 480.0,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .primaryBackground,
@@ -686,151 +804,57 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                     listViewTBUserReviewPointRecordList =
                                     snapshot.data!;
 
-                                return ListView.builder(
-                                  padding: EdgeInsets.zero,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: listViewTBUserReviewPointRecordList
-                                      .length,
-                                  itemBuilder: (context, listViewIndex) {
-                                    final listViewTBUserReviewPointRecord =
-                                        listViewTBUserReviewPointRecordList[
-                                            listViewIndex];
-                                    return StreamBuilder<UsersRecord>(
-                                      stream: UsersRecord.getDocument(
-                                          listViewTBUserReviewPointRecord
-                                              .reviewWrittenBy!),
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return Center(
-                                            child: SizedBox(
-                                              width: 50.0,
-                                              height: 50.0,
-                                              child: CircularProgressIndicator(
-                                                valueColor:
-                                                    AlwaysStoppedAnimation<
-                                                        Color>(
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        }
-
-                                        final containerUsersRecord =
-                                            snapshot.data!;
-
-                                        return InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed(
-                                              'point_detailed',
-                                              queryParameters: {
-                                                'pointRefSW': serializeParam(
-                                                  listViewTBUserReviewPointRecord
-                                                      .parentReference,
-                                                  ParamType.DocumentReference,
-                                                ),
-                                              }.withoutNulls,
-                                            );
-                                          },
-                                          child: Container(
-                                            width: double.infinity,
-                                            height: 124.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(10.0, 8.0, 10.0, 8.0),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    listViewTBUserReviewPointRecord
-                                                        .reviewTitle,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'PretendardSeries',
-                                                          fontSize: 16.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          useGoogleFonts:
-                                                              GoogleFonts
-                                                                      .asMap()
-                                                                  .containsKey(
-                                                                      'PretendardSeries'),
-                                                        ),
-                                                  ),
-                                                  Text(
-                                                    containerUsersRecord
-                                                        .displayName,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'PretendardSeries',
-                                                          letterSpacing: 0.0,
-                                                          fontSize: 14,
-                                                          fontWeight: FontWeight.w400,
-                                                          useGoogleFonts:
-                                                              GoogleFonts
-                                                                      .asMap()
-                                                                  .containsKey(
-                                                                      'PretendardSeries'),
-                                                        ),
-                                                  ),
-                                                  Text(
-                                                    listViewTBUserReviewPointRecord
-                                                        .reviewText,
-                                                    style: FlutterFlowTheme.of(
-                                                        context)
-                                                        .bodyMedium
-                                                        .override(
-                                                      fontFamily:
-                                                      'PretendardSeries',
-                                                      letterSpacing: 0.0,
-                                                      fontSize: 14,
-                                                      fontWeight: FontWeight.w400,
-                                                      useGoogleFonts:
-                                                      GoogleFonts
-                                                          .asMap()
-                                                          .containsKey(
-                                                          'PretendardSeries'),
-                                                    ),
-                                                  ),
-                                                ].divide(const SizedBox(height: 8.0)),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  },
+                                return Column(
+                                  children: reviewListBuilder(listViewTBUserReviewPointRecordList)
                                 );
                               },
                             ),
                           ),
+                          InkWell(
+                            onTap: (){
+                              setState(() {
+                                reviewLimit = reviewLimit + 10;
+                              });
+                            },
+                            child: Container(
+                              width: 100,
+                              height: 36,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).primary,
+                                borderRadius: BorderRadius.circular(20)
+                              ),
+                              alignment: const Alignment(0, 0),
+                              child: Text(
+                                '더보기',
+                                style: FlutterFlowTheme.of(
+                                    context)
+                                    .bodyMedium
+                                    .override(
+                                  fontFamily:
+                                  'PretendardSeries',
+                                  color: FlutterFlowTheme
+                                      .of(context)
+                                      .primaryBackground,
+                                  fontSize: 13.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight:
+                                  FontWeight.w500,
+                                  useGoogleFonts:
+                                  GoogleFonts
+                                      .asMap()
+                                      .containsKey(
+                                      'PretendardSeries'),
+                                ),
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(
                           20.0,
-                          0.0,
+                          20.0,
                           20.0,
                           valueOrDefault<double>(
                             MediaQuery.sizeOf(context).height * 0.08,

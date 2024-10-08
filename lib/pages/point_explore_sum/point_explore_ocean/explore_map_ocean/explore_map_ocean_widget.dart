@@ -1,3 +1,4 @@
+import '../ocean_3rd_filter/ocean3rd_filter_widget.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/custom_navbar_widget.dart';
@@ -269,6 +270,7 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
                                                           8.0),
                                                       border: Border.all(
                                                         color: FlutterFlowTheme.of(context).primary,
+                                                          width: 2
                                                       ),
                                                     ),
                                                     alignment: const AlignmentDirectional(
@@ -285,7 +287,7 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
                                                             .center,
                                                         children: [
                                                           Text(
-                                                            '해변&갯바위',
+                                                            '해변, 갯바위',
                                                             style:
                                                             FlutterFlowTheme.of(
                                                                 context)
@@ -423,7 +425,7 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
                                                                 .viewInsetsOf(
                                                                 context),
                                                             child:
-                                                            const Ocean2ndFilterWidget(),
+                                                            const Ocean3rdFilterWidget(),
                                                           ),
                                                         ),
                                                       );

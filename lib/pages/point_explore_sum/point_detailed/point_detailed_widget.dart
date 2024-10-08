@@ -346,7 +346,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                     ),
                     Padding(
                       padding:
-                      const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                      const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 36.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -391,9 +391,10 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                 );
                               }
                               List<TBFishRecord> containerTBFishRecordList =
-                              snapshot.data!;
+                              List.from(snapshot.data!.reversed);
 
                               return Container(
+                                margin: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
                                 width: 563.0,
                                 height: 92.0,
                                 decoration: BoxDecoration(
@@ -405,58 +406,55 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                     final pointFishes =
                                     containerTBFishRecordList.toList();
 
-                                    return SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children:
-                                        List.generate(pointFishes.length,
-                                                (pointFishesIndex) {
-                                              final pointFishesItem =
-                                              pointFishes[pointFishesIndex];
-                                              return Container(
-                                                height: 100.0,
-                                                decoration: BoxDecoration(
-                                                  color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
-                                                ),
-                                                child: Column(
-                                                  mainAxisSize: MainAxisSize.max,
-                                                  children: [
-                                                    Container(
-                                                      height: 48.0,
-                                                      clipBehavior: Clip.antiAlias,
-                                                      decoration: const BoxDecoration(
-                                                      ),
-                                                      child: Image.network(
-                                                        pointFishesItem.fishIcon,
-                                                        fit: BoxFit.cover,
-                                                      ),
+                                    return Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children:
+                                      List.generate(pointFishes.length,
+                                              (pointFishesIndex) {
+                                            final pointFishesItem =
+                                            pointFishes[pointFishesIndex];
+                                            return Container(
+                                              height: 100.0,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
+                                              ),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Container(
+                                                    height: 48.0,
+                                                    clipBehavior: Clip.antiAlias,
+                                                    decoration: const BoxDecoration(
                                                     ),
-                                                    Text(
-                                                      pointFishesItem.fishName,
-                                                      style: FlutterFlowTheme.of(
-                                                          context)
-                                                          .bodyMedium
-                                                          .override(
-                                                        fontFamily:
-                                                        'PretendardSeries',
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                        FontWeight.w500,
-                                                        useGoogleFonts: GoogleFonts
-                                                            .asMap()
-                                                            .containsKey(
-                                                            'PretendardSeries'),
-                                                      ),
+                                                    child: Image.network(
+                                                      pointFishesItem.fishIcon,
+                                                      fit: BoxFit.cover,
                                                     ),
-                                                  ].divide(const SizedBox(height: 8.0)),
-                                                ),
-                                              );
-                                            }),
-                                      ),
+                                                  ),
+                                                  Text(
+                                                    pointFishesItem.fishName,
+                                                    style: FlutterFlowTheme.of(
+                                                        context)
+                                                        .bodyMedium
+                                                        .override(
+                                                      fontFamily:
+                                                      'PretendardSeries',
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                      FontWeight.w500,
+                                                      useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                          .containsKey(
+                                                          'PretendardSeries'),
+                                                    ),
+                                                  ),
+                                                ].divide(const SizedBox(height: 8.0)),
+                                              ),
+                                            );
+                                          }),
                                     );
                                   },
                                 ),
@@ -468,7 +466,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 16.0, 20.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -536,7 +534,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                 color: FlutterFlowTheme.of(context)
                                     .primaryBackground,
                               ),
-                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 16, 0, 0),
+                              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16, 0, 0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
@@ -647,7 +645,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                             decoration: const BoxDecoration(
                               color: Color(0xffFEFFEF),
                             ),
-                            padding: EdgeInsetsDirectional.fromSTEB(16, 18, 0, 16),
+                            padding: const EdgeInsetsDirectional.fromSTEB(16, 18, 0, 16),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
@@ -721,7 +719,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                   pointFishing[
                                                       pointFishingIndex];
                                               return Padding(
-                                                padding: EdgeInsetsDirectional.fromSTEB(0, 4, 8, 0),
+                                                padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 8, 0),
                                                 child: Column(
                                                   mainAxisSize:
                                                   MainAxisSize.max,
@@ -868,7 +866,6 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                       child: StreamBuilder<List<TBUserReviewPointRecord>>(
                         stream: queryTBUserReviewPointRecord(
                           parent: widget.pointRefSW,
-                          limit: 3,
                         ),
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
@@ -904,22 +901,12 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                 builder: (context, snapshot) {
                                   // Customize what your widget looks like when it's loading.
                                   if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
-                                          ),
-                                        ),
-                                      ),
+                                    return const Center(
                                     );
                                   }
 
                                   final containerUsersRecord = snapshot.data!;
+                                  print(containerUsersRecord.displayName);
 
                                   return Container(
                                     width: double.infinity,
@@ -967,6 +954,9 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                   containerUsersRecord.photoUrl,
                                                   fit: BoxFit.cover,
                                                 ),
+                                              ),
+                                              const SizedBox(
+                                                width: 12,
                                               ),
                                               Text(
                                                 containerUsersRecord

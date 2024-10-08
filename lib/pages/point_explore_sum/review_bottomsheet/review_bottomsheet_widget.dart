@@ -128,10 +128,7 @@ class _ReviewBottomsheetWidgetState extends State<ReviewBottomsheetWidget> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(40.0),
                         child: Image.network(
-                          random_data.randomImageUrl(
-                            40,
-                            40,
-                          ),
+                            currentUserPhoto,
                           width: 40.0,
                           height: 40.0,
                           fit: BoxFit.cover,
