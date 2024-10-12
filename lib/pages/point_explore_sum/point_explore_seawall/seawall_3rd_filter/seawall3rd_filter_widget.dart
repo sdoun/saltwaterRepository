@@ -48,6 +48,7 @@ class _Seawall3rdFilterWidgetState extends State<Seawall3rdFilterWidget> {
     return Filterbackground(
       child: Column(
         mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             '편의사항',

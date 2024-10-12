@@ -30,6 +30,7 @@ List<String>? sW1stFilterBottomsheet(
 List<String>? sW2ndFilterBottomsheet(
   bool istoilet,
   bool isrestaurant,
+  bool isFishingShop,
   bool isshop,
   bool isbed,
 ) {
@@ -42,6 +43,9 @@ List<String>? sW2ndFilterBottomsheet(
   if (isrestaurant) {
     amenresult.add('식당');
   }
+  if(isFishingShop){
+    amenresult.add('낚시방');
+}
 
   if (isshop) {
     amenresult.add('매점');
@@ -488,11 +492,11 @@ List<String>? pension3rdFilterBottomsheet(
   }
 
   if (ship) {
-    amenresult.add('낚시배및좌대 이용가능');
+    amenresult.add('낚시배, 좌대 이용가능');
   }
 
   if (ocean) {
-    amenresult.add('해변물놀이가능');
+    amenresult.add('해변물놀이 가능');
   }
 
   if (lent) {
@@ -553,10 +557,11 @@ List<dynamic>? fcsTmpForTommorow(
 }
 
 List<String>? park2ndFilterBottomsheet(
-  bool istoilet,
   bool isrestaurant,
   bool isshop,
-  bool fishingShop,
+  bool isFishingShop,
+  bool istoilet,
+  bool isbed,
 ) {
   List<String> amenresult = [];
 
@@ -567,13 +572,16 @@ List<String>? park2ndFilterBottomsheet(
   if (isrestaurant) {
     amenresult.add('식당');
   }
+  if(isFishingShop){
+    amenresult.add('낚시방');
+}
 
   if (isshop) {
     amenresult.add('매점');
   }
 
-  if (fishingShop) {
-    amenresult.add('낚시방');
+  if (isbed) {
+    amenresult.add('숙소');
   }
 
   return amenresult;
@@ -589,7 +597,7 @@ List<String>? park3rdFilterBottomsheet(
   }
 
   if (toolShop) {
-    convinresult.add('낚시장비 판매');
+    convinresult.add('낚시용품 판매');
   }
 
   return convinresult;
@@ -784,6 +792,11 @@ List<String> skyToImageLinkCopy(String? fcstSkyString) {
     print('$fcstSky');
 
     if (fcstSky == null) {
+      resultImage.add(
+          'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%EB%82%A0%EC%94%A8%EC%9E%84%EC%8B%9C%2F%EB%A7%91%EC%9D%8C2.png?alt=media&token=2615f6d1-aa8f-41b0-a37c-530abd25a581');
+      return resultImage;
+    }
+    if (fcstSkyString.isEmpty) {
       resultImage.add(
           'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%EB%82%A0%EC%94%A8%EC%9E%84%EC%8B%9C%2F%EB%A7%91%EC%9D%8C2.png?alt=media&token=2615f6d1-aa8f-41b0-a37c-530abd25a581');
       return resultImage;

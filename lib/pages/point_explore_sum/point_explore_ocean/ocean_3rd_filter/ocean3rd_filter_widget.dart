@@ -48,6 +48,7 @@ class _Ocean3rdFilterWidgetState extends State<Ocean3rdFilterWidget> {
     return Filterbackground(
       child: Column(
         mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             '편의사항',

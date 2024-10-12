@@ -33,6 +33,7 @@ class _Seawall2ndFilterWidgetState extends State<Seawall2ndFilterWidget> {
     _model.checkboxValue2 = false;
     _model.checkboxValue3 = false;
     _model.checkboxValue4 = false;
+    _model.checkboxValue5 = false;
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -49,6 +50,7 @@ class _Seawall2ndFilterWidgetState extends State<Seawall2ndFilterWidget> {
     return Filterbackground(
       child: Column(
         mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             '인근편의시설',
@@ -87,6 +89,14 @@ class _Seawall2ndFilterWidgetState extends State<Seawall2ndFilterWidget> {
                     _model.checkboxValue2 = newValue!);
                   },
                 ),
+                Filtercheckbox(
+                    filterText: '낚 시 방',
+                    checkBoxValue: _model.checkboxValue5,
+                  onChecked: (newValue) async{
+                      safeSetState(() =>
+                      _model.checkboxValue5 = newValue);
+                  },
+                )
               ],
             ),
           ),
@@ -126,10 +136,12 @@ class _Seawall2ndFilterWidgetState extends State<Seawall2ndFilterWidget> {
                 Navigator.pop(
                     context,
                     functions.sW2ndFilterBottomsheet(
-                        _model.checkboxValue4!,
-                        _model.checkboxValue1!,
-                        _model.checkboxValue2!,
-                        _model.checkboxValue3!));
+                        _model.checkboxValue4,
+                        _model.checkboxValue1,
+                        _model.checkboxValue5,
+                        _model.checkboxValue2,
+                        _model.checkboxValue3,
+                    ));
               },
               child: Container(
                 width: 100.0,

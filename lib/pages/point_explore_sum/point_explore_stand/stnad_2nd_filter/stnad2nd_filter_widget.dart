@@ -50,6 +50,7 @@ class _Stand2ndFilterWidgetState extends State<Stand2ndFilterWidget> {
     return Filterbackground(
       child: Column(
         mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             '편의시설',

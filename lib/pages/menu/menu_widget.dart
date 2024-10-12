@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'menu_model.dart';
 export 'menu_model.dart';
 
+import 'package:salt_water_beta_ver1/reusable/menu/menuIconButton.dart';
+
 class MenuWidget extends StatefulWidget {
   const MenuWidget({super.key});
 
@@ -100,7 +102,7 @@ class _MenuWidgetState extends State<MenuWidget> {
           child: Stack(
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 44.0, 36.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -111,194 +113,26 @@ class _MenuWidgetState extends State<MenuWidget> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                context.pushNamed('service_is_not_ready');
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 4.0, 8.0, 4.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.15,
-                                        height:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.15,
-                                        clipBehavior: Clip.antiAlias,
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Image.asset(
-                                          'assets/images/8815j_.png',
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      Text(
-                                        '공지사항',
-                                        style: FlutterFlowTheme.of(
-                                            context)
-                                            .bodyMedium
-                                            .override(
-                                          fontFamily:
-                                          'PretendardSeries',
-                                          color: FlutterFlowTheme
-                                              .of(context)
-                                              .primaryText,
-                                          fontSize: 14.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                          FontWeight.w700,
-                                          useGoogleFonts:
-                                          GoogleFonts
-                                              .asMap()
-                                              .containsKey(
-                                              'PretendardSeries'),
-                                        ),
-                                      ),
-                                    ].divide(const SizedBox(height: 8.0)),
-                                  ),
-                                ),
-                              ),
+                            Menuiconbutton(
+                                imageRoute: 'assets/images/공지사항.png',
+                                text: '공지사항',
+                                onTap: () async{
+                                    context.pushNamed('service_is_not_ready');
+                                },
                             ),
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
+                            Menuiconbutton(
+                              imageRoute: 'assets/images/이벤트.png',
+                              text: '이벤트',
+                              onTap: () async{
                                 context.pushNamed('service_is_not_ready');
                               },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 4.0, 8.0, 4.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        width:
-                                        MediaQuery.sizeOf(context).width *
-                                            0.15,
-                                        height:
-                                        MediaQuery.sizeOf(context).width *
-                                            0.15,
-                                        clipBehavior: Clip.antiAlias,
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Image.asset(
-                                          'assets/images/lkkm3_.png',
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      Text(
-                                        '이벤트',
-                                        style: FlutterFlowTheme.of(
-                                            context)
-                                            .bodyMedium
-                                            .override(
-                                          fontFamily:
-                                          'PretendardSeries',
-                                          color: FlutterFlowTheme
-                                              .of(context)
-                                              .primaryText,
-                                          fontSize: 14.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                          FontWeight.w700,
-                                          useGoogleFonts:
-                                          GoogleFonts
-                                              .asMap()
-                                              .containsKey(
-                                              'PretendardSeries'),
-                                        ),
-                                      ),
-                                    ].divide(const SizedBox(height: 8.0)),
-                                  ),
-                                ),
-                              ),
                             ),
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
+                            Menuiconbutton(
+                              imageRoute: 'assets/images/낚시대회.png',
+                              text: '낚시대회',
+                              onTap: () async{
                                 context.pushNamed('service_is_not_ready');
                               },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 4.0, 8.0, 4.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        width:
-                                        MediaQuery.sizeOf(context).width *
-                                            0.15,
-                                        height:
-                                        MediaQuery.sizeOf(context).width *
-                                            0.15,
-                                        clipBehavior: Clip.antiAlias,
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Image.asset(
-                                          'assets/images/2sxz9_.png',
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      Text(
-                                        '낚시대회',
-                                        style: FlutterFlowTheme.of(
-                                            context)
-                                            .bodyMedium
-                                            .override(
-                                          fontFamily:
-                                          'PretendardSeries',
-                                          color: FlutterFlowTheme
-                                              .of(context)
-                                              .primaryText,
-                                          fontSize: 14.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                          FontWeight.w700,
-                                          useGoogleFonts:
-                                          GoogleFonts
-                                              .asMap()
-                                              .containsKey(
-                                              'PretendardSeries'),
-                                        ),
-                                      ),
-                                    ].divide(const SizedBox(height: 8.0)),
-                                  ),
-                                ),
-                              ),
                             ),
                           ],
                         ),
@@ -306,202 +140,30 @@ class _MenuWidgetState extends State<MenuWidget> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
+                            Menuiconbutton(
+                              imageRoute: 'assets/images/낚시경보.png',
+                              text: '낚시경보',
+                              onTap: () async{
                                 context.pushNamed('service_is_not_ready');
                               },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 4.0, 8.0, 4.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        width:
-                                        MediaQuery.sizeOf(context).width *
-                                            0.15,
-                                        height:
-                                        MediaQuery.sizeOf(context).width *
-                                            0.15,
-                                        clipBehavior: Clip.antiAlias,
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Image.asset(
-                                          'assets/images/fq4o1_.png',
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      Text(
-                                        '낚시경보',
-                                        style: FlutterFlowTheme.of(
-                                            context)
-                                            .bodyMedium
-                                            .override(
-                                          fontFamily:
-                                          'PretendardSeries',
-                                          color: FlutterFlowTheme
-                                              .of(context)
-                                              .primaryText,
-                                          fontSize: 14.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                          FontWeight.w700,
-                                          useGoogleFonts:
-                                          GoogleFonts
-                                              .asMap()
-                                              .containsKey(
-                                              'PretendardSeries'),
-                                        ),
-                                      ),
-                                    ].divide(const SizedBox(height: 8.0)),
-                                  ),
-                                ),
-                              ),
                             ),
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
+                            Menuiconbutton(
+                              imageRoute: 'assets/images/금어기.png',
+                              text: '금어기',
+                              onTap: () async{
                                 context.pushNamed('service_is_not_ready');
                               },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 4.0, 8.0, 4.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        width:
-                                        MediaQuery.sizeOf(context).width *
-                                            0.15,
-                                        height:
-                                        MediaQuery.sizeOf(context).width *
-                                            0.15,
-                                        clipBehavior: Clip.antiAlias,
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Image.asset(
-                                          'assets/images/2uysw_.png',
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      Text(
-                                        '금어기',
-                                        style: FlutterFlowTheme.of(
-                                            context)
-                                            .bodyMedium
-                                            .override(
-                                          fontFamily:
-                                          'PretendardSeries',
-                                          color: FlutterFlowTheme
-                                              .of(context)
-                                              .primaryText,
-                                          fontSize: 14.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                          FontWeight.w700,
-                                          useGoogleFonts:
-                                          GoogleFonts
-                                              .asMap()
-                                              .containsKey(
-                                              'PretendardSeries'),
-                                        ),
-                                      ),
-                                    ].divide(const SizedBox(height: 8.0)),
-                                  ),
-                                ),
-                              ),
                             ),
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
+                            Menuiconbutton(
+                              imageRoute: 'assets/images/방생기준.png',
+                              text: '방생기준',
+                              onTap: () async{
                                 context.pushNamed('service_is_not_ready');
                               },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 4.0, 8.0, 4.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        width:
-                                        MediaQuery.sizeOf(context).width *
-                                            0.15,
-                                        height:
-                                        MediaQuery.sizeOf(context).width *
-                                            0.15,
-                                        clipBehavior: Clip.antiAlias,
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Image.asset(
-                                          'assets/images/mz39m_.png',
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      Text(
-                                        '방생기준',
-                                        style: FlutterFlowTheme.of(
-                                            context)
-                                            .bodyMedium
-                                            .override(
-                                          fontFamily:
-                                          'PretendardSeries',
-                                          color: FlutterFlowTheme
-                                              .of(context)
-                                              .primaryText,
-                                          fontSize: 14.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                          FontWeight.w700,
-                                          useGoogleFonts:
-                                          GoogleFonts
-                                              .asMap()
-                                              .containsKey(
-                                              'PretendardSeries'),
-                                        ),
-                                      ),
-                                    ].divide(const SizedBox(height: 8.0)),
-                                  ),
-                                ),
-                              ),
                             ),
                           ],
                         ),
                       ],
-                    ),
-                    Divider(
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      thickness: 0.5,
                     ),
                     Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(0, 35, 0, 0),

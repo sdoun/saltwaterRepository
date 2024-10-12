@@ -49,6 +49,7 @@ class _Pension2ndFilterWidgetState extends State<Pension2ndFilterWidget> {
     return Filterbackground(
       child: Column(
       mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(
           '인근편의시설',

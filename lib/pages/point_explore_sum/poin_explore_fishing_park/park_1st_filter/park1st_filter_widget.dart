@@ -49,6 +49,7 @@ class _Park1stFilterWidgetState extends State<Park1stFilterWidget> {
     return Filterbackground(
       child: Column(
         mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             '시설구분',
@@ -66,49 +67,55 @@ class _Park1stFilterWidgetState extends State<Park1stFilterWidget> {
             thickness: 1.0,
             color: FlutterFlowTheme.of(context).secondaryText,
           ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Filtercheckbox(
-                filterText: '유료시설',
-                checkBoxValue: _model.checkboxValue1,
-                onChecked: (newValue) async {
-                  safeSetState(() =>
-                  _model.checkboxValue1 = newValue!);
-                },
-              ),
-              Filtercheckbox(
-                filterText: '무료시설',
-                checkBoxValue: _model.checkboxValue2,
-                onChecked: (newValue) async {
-                  safeSetState(() =>
-                  _model.checkboxValue2 = newValue!);
-                },
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.only(top: 24),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Filtercheckbox(
+                  filterText: '유료시설',
+                  checkBoxValue: _model.checkboxValue1,
+                  onChecked: (newValue) async {
+                    safeSetState(() =>
+                    _model.checkboxValue1 = newValue!);
+                  },
+                ),
+                Filtercheckbox(
+                  filterText: '무료시설',
+                  checkBoxValue: _model.checkboxValue2,
+                  onChecked: (newValue) async {
+                    safeSetState(() =>
+                    _model.checkboxValue2 = newValue!);
+                  },
+                ),
+              ],
+            ),
           ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Filtercheckbox(
-                filterText: '자  연  식',
-                checkBoxValue: _model.checkboxValue3,
-                onChecked: (newValue) async {
-                  safeSetState(() =>
-                  _model.checkboxValue3 = newValue!);
-                },
-              ),
-              Filtercheckbox(
-                filterText: '입  어  식',
-                checkBoxValue: _model.checkboxValue4,
-                onChecked: (newValue) async {
-                  safeSetState(() =>
-                  _model.checkboxValue4 = newValue!);
-                },
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.only(top: 24),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Filtercheckbox(
+                  filterText: '자  연  식',
+                  checkBoxValue: _model.checkboxValue3,
+                  onChecked: (newValue) async {
+                    safeSetState(() =>
+                    _model.checkboxValue3 = newValue!);
+                  },
+                ),
+                Filtercheckbox(
+                  filterText: '입  어  식',
+                  checkBoxValue: _model.checkboxValue4,
+                  onChecked: (newValue) async {
+                    safeSetState(() =>
+                    _model.checkboxValue4 = newValue!);
+                  },
+                ),
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
@@ -155,7 +162,7 @@ class _Park1stFilterWidgetState extends State<Park1stFilterWidget> {
               ),
             ),
           ),
-        ].divide(const SizedBox(height: 8.0)),
+        ]
       ),
     );
   }

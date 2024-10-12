@@ -50,6 +50,7 @@ class _Ocean2ndFilterWidgetState extends State<Ocean2ndFilterWidget> {
     return Filterbackground(
       child: Column(
         mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             '인근편의시설',
@@ -99,27 +100,30 @@ class _Ocean2ndFilterWidgetState extends State<Ocean2ndFilterWidget> {
               ],
             ),
           ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Filtercheckbox(
-                filterText: '숙   소',
-                checkBoxValue: _model.checkboxValue4,
-                onChecked: (newValue) async {
-                  safeSetState(() =>
-                  _model.checkboxValue4 = newValue!);
-                },
-              ),
-              Filtercheckbox(
-                filterText: '화장실',
-                checkBoxValue: _model.checkboxValue5,
-                onChecked: (newValue) async {
-                  safeSetState(() =>
-                  _model.checkboxValue5 = newValue!);
-                },
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Filtercheckbox(
+                  filterText: '숙   소',
+                  checkBoxValue: _model.checkboxValue4,
+                  onChecked: (newValue) async {
+                    safeSetState(() =>
+                    _model.checkboxValue4 = newValue!);
+                  },
+                ),
+                Filtercheckbox(
+                  filterText: '화장실',
+                  checkBoxValue: _model.checkboxValue5,
+                  onChecked: (newValue) async {
+                    safeSetState(() =>
+                    _model.checkboxValue5 = newValue!);
+                  },
+                ),
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
@@ -165,7 +169,7 @@ class _Ocean2ndFilterWidgetState extends State<Ocean2ndFilterWidget> {
               ),
             ),
           ),
-        ].divide(const SizedBox(height: 8.0)),
+        ]
       ),
     );
   }

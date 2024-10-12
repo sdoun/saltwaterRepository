@@ -32,46 +32,49 @@ class _PointAdsPageviewState extends State<PointAdsPageview> {
   Widget buildPages(Map<String, dynamic>? data) {
     print("buildPages called with data: $data");
     if (data != null && data['ads_image'] != null) {
-      return SizedBox(
-        height: MediaQuery
-            .of(context)
-            .size
-            .height * 0.25,
-        child: Column(
-          children: [
-            GestureDetector(
-              onTap: () async {
-                if (data['ads_pointRef'] != null) {
-                  await context.pushNamed(
-                    'point_detailed',
-                    queryParameters: {
-                      'pointRefSW': serializeParam(
-                        data['ads_pointRef'],
-                        ParamType.DocumentReference,
-                      ),
-                    }.withoutNulls,
-                  );
-                }
-                else{
-                  return;
-                }
-              },
-              child: Image.network(
-                data['ads_image'],
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    color: Colors.black,
-                    child: const Center(child: Text('Image load failed')),
-                  );
-                },
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return const Center(child: CircularProgressIndicator());
-                },
-              ),
-            ),
-          ],
+      return GestureDetector(
+        onTap: () async {
+          if (data['ads_pointRef'] != null) {
+            await context.pushNamed(
+              'point_detailed',
+              queryParameters: {
+                'pointRefSW': serializeParam(
+                  data['ads_pointRef'],
+                  ParamType.DocumentReference,
+                ),
+              }.withoutNulls,
+            );
+          }
+          else{
+            return;
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.20,
+            child:  Column(
+              children: [
+                Image.network(
+                  data['ads_image'],
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      color: Colors.black,
+                      child: const Center(child: Text('Image load failed')),
+                    );
+                  },
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return const Center(child: CircularProgressIndicator());
+                  },
+                ),
+                const SizedBox(
+                  height: 32,
+                )
+              ]
+            )
+          )
         ),
       );
     } else {
@@ -163,7 +166,7 @@ class _PointAdsPageviewState extends State<PointAdsPageview> {
       return Center(child: Text('Error: $_error'));
     } else {
       return SizedBox(
-        height: MediaQuery.of(context).size.height * 0.35,
+        height: MediaQuery.of(context).size.height * 0.32,
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [

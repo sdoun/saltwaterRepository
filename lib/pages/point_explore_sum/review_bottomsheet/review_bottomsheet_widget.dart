@@ -9,6 +9,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'review_bottomsheet_model.dart';
 export 'review_bottomsheet_model.dart';
 
+import 'package:salt_water_beta_ver1/reusable/pointDetailed/review_textform.dart';
+
 class ReviewBottomsheetWidget extends StatefulWidget {
   const ReviewBottomsheetWidget({
     super.key,
@@ -157,144 +159,19 @@ class _ReviewBottomsheetWidgetState extends State<ReviewBottomsheetWidget> {
                     ],
                   ),
                 ),
-                TextFormField(
+                ReviewTextform(
                   controller: _model.textController1,
                   focusNode: _model.textFieldFocusNode,
-                  autofocus: true,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    labelStyle: FlutterFlowTheme.of(context)
-                        .labelMedium
-                        .override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).labelMediumFamily,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).labelMediumFamily),
-                        ),
-                    hintText: '제목을 입력해주세요.',
-                    hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                      fontFamily:
-                      'PretendardSeries',
-                      color: FlutterFlowTheme.of(context)
-                          .primaryText,
-                      fontSize: 14.0,
-                      letterSpacing: 0.0,
-                      fontWeight: FontWeight.w400,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          'PretendardSeries'),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).secondaryText,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).primary,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).error,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).error,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                    fontFamily:
-                    'PretendardSeries',
-                    color: FlutterFlowTheme.of(context)
-                        .primaryText,
-                    fontSize: 14.0,
-                    letterSpacing: 0.0,
-                    fontWeight: FontWeight.w400,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        'PretendardSeries'),
-                  ),
-                  validator:
-                      _model.textController1Validator.asValidator(context),
+                  validator: _model.textController1Validator.asValidator(context),
+                  hintText: '제목을 입력해주세요.',
                 ),
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                  child: TextFormField(
+                  child: ReviewTextform(
                     controller: _model.shortBioTextController,
                     focusNode: _model.shortBioFocusNode,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      hintText: '내용 작성해주세요.',
-                      hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                        fontFamily:
-                        'PretendardSeries',
-                        color: FlutterFlowTheme.of(context)
-                            .primaryText,
-                        fontSize: 14.0,
-                        letterSpacing: 0.0,
-                        fontWeight: FontWeight.w400,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            'PretendardSeries'),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primary,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                          20.0, 32.0, 20.0, 12.0),
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily:
-                      'PretendardSeries',
-                      color: FlutterFlowTheme.of(context)
-                          .primaryText,
-                      fontSize: 14.0,
-                      letterSpacing: 0.0,
-                      fontWeight: FontWeight.w400,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          'PretendardSeries'),
-                    ),
-                    textAlign: TextAlign.start,
-                    maxLines: 4,
-                    keyboardType: TextInputType.multiline,
-                    validator: _model.shortBioTextControllerValidator
-                        .asValidator(context),
+                    validator: _model.shortBioTextControllerValidator.asValidator(context),
+                    hintText: '내용을 입력해주세요.',
                   ),
                 ),
                 Row(

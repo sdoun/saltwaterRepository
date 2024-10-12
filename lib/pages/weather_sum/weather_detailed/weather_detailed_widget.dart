@@ -85,66 +85,72 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(72.0),
-              child: AppBar(
-                backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-                automaticallyImplyLeading: false,
-                leading: Align(
-                  alignment: const AlignmentDirectional(-1.0, -3.7),
-                  child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
-                    child: FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 30.0,
-                      borderWidth: 1.0,
-                      buttonSize: 60.0,
-                      icon: const Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.black,
-                        size: 30.0,
-                      ),
-                      onPressed: () async {
-                        context.safePop();
-                      },
+            appBar: AppBar(
+              backgroundColor: Colors.white,
+              automaticallyImplyLeading: false,
+              leading: Align(
+                alignment: const AlignmentDirectional(-1.0, -3.7),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
+                  child: FlutterFlowIconButton(
+                    borderColor: Colors.transparent,
+                    borderRadius: 30.0,
+                    borderWidth: 1.0,
+                    buttonSize: 60.0,
+                    icon: const Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.black,
+                      size: 30.0,
                     ),
+                    onPressed: () async {
+                      context.pop();
+                    },
                   ),
                 ),
-                actions: const [],
-                flexibleSpace: FlexibleSpaceBar(
-                  title: Align(
-                    alignment: const AlignmentDirectional(0.0, 0.8),
-                    child: Text(
-                      '날씨보기',
-                      style:
-                          FlutterFlowTheme.of(context).headlineMedium.override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .headlineMediumFamily,
-                                color: Colors.black,
-                                fontSize: 22.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w600,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .headlineMediumFamily),
-                              ),
-                    ),
-                  ),
-                  centerTitle: true,
-                  expandedTitleScale: 1.0,
-                ),
-                elevation: 2.0,
               ),
+              title: Align(
+                alignment: const AlignmentDirectional(0.0, -1.0),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  child: Text(
+                    '날씨보기',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: 'PretendardSeries',
+                      fontSize: 20.0,
+                      letterSpacing: 0.0,
+                      fontWeight: FontWeight.w800,
+                      useGoogleFonts:
+                      GoogleFonts.asMap().containsKey('PretendardSeries'),
+                    ),
+                  ),
+                ),
+              ),
+              actions: const [FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30.0,
+                borderWidth: 1.0,
+                buttonSize: 60.0,
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.transparent,
+                  size: 30.0,
+                ),
+              ),],
+              centerTitle: false,
+              elevation: 2.0,
             ),
             body: SafeArea(
               top: true,
               child: Stack(
                 children: [
+
                   ListView(
                     padding: EdgeInsets.zero,
                     scrollDirection: Axis.vertical,
                     children: [
+                      const SizedBox(
+                        height: 16,
+                      ),
                       FutureBuilder<ApiCallResponse>(
                         future: RealtimeWeatherAPICall.call(
                           nx: weatherDetailedTBWeatherPointRecord.nx,
@@ -152,19 +158,19 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                           numOfRows: 8,
                           dataType: 'JSON',
                           baseDate: functions.datetimeToTimeString(
-                                      getCurrentTimestamp.toString()) ==
-                                  '0000'
+                              getCurrentTimestamp.toString()) ==
+                              '0000'
                               ? (functions.datetimeToDateCopy(
-                                      getCurrentTimestamp.toString()) -
-                                  1)
+                              getCurrentTimestamp.toString()) -
+                              1)
                               : functions.datetimeToDateCopy(
-                                  getCurrentTimestamp.toString()),
+                              getCurrentTimestamp.toString()),
                           baseTime: functions.datetimeToTimeString(
-                                      getCurrentTimestamp.toString()) ==
-                                  '0000'
+                              getCurrentTimestamp.toString()) ==
+                              '0000'
                               ? '2300'
                               : functions.datetimeToTimeString(
-                                  getCurrentTimestamp.toString()),
+                              getCurrentTimestamp.toString()),
                         ),
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
@@ -182,7 +188,7 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                             );
                           }
                           final containerRealtimeWeatherAPIResponse =
-                              snapshot.data!;
+                          snapshot.data!;
 
                           //초단기실황 불러오는 Contaier
                           return Container(
@@ -198,11 +204,11 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                   dataType: 'JSON',
                                   baseDate: functions
                                       .datetimeToDateCopyFcst(
-                                          getCurrentTimestamp.toString())
+                                      getCurrentTimestamp.toString())
                                       .last,
                                   baseTime: functions
                                       .datetimeToDateCopyFcst(
-                                          getCurrentTimestamp.toString())
+                                      getCurrentTimestamp.toString())
                                       .first,
                                   nx: weatherDetailedTBWeatherPointRecord.nx,
                                   ny: weatherDetailedTBWeatherPointRecord.ny,
@@ -217,7 +223,7 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                       height: 50.0,
                                       child: CircularProgressIndicator(
                                         valueColor:
-                                            AlwaysStoppedAnimation<Color>(
+                                        AlwaysStoppedAnimation<Color>(
                                           FlutterFlowTheme.of(context).primary,
                                         ),
                                       ),
@@ -225,7 +231,7 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                   );
                                 }
                                 final containerFcstWeatherApiResponse =
-                                    snapshot.data!;
+                                snapshot.data!;
 
                                 //단기예보 불러오는 Contaier
                                 return Container(
@@ -235,7 +241,7 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 20.0, 16.0, 24.0),
+                                        16.0, 44.0, 16.0, 24.0),
 
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
@@ -247,17 +253,16 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                             borderRadius: BorderRadius.only(
                                               bottomLeft: Radius.circular(12.0),
                                               bottomRight:
-                                                  Radius.circular(12.0),
+                                              Radius.circular(12.0),
                                               topLeft: Radius.circular(12.0),
                                               topRight: Radius.circular(12.0),
                                             ),
                                           ),
                                           child: Container(
-                                            height: 47.0,
                                             decoration: BoxDecoration(
                                               color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
                                             ),
                                             child: Text(
                                               weatherDetailedTBWeatherPointRecord
@@ -273,7 +278,7 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                                 color: FlutterFlowTheme
                                                     .of(context)
                                                     .secondaryText,
-                                                fontSize: 17.0,
+                                                fontSize: 23.0,
                                                 letterSpacing: 0.0,
                                                 fontWeight:
                                                 FontWeight.w700,
@@ -289,8 +294,8 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 20.0, 16.0, 0.0),
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              16.0, 8.0, 16.0, 0.0),
                                           child:  Row(
                                             mainAxisSize:
                                             MainAxisSize.max,
@@ -392,49 +397,49 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
+                                            MainAxisAlignment.spaceEvenly,
                                             children: [
                                               Padding(
                                                 padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        0.0, 0.0, 0.0, 4.0),
+                                                    0.0, 0.0, 0.0, 4.0),
                                                 child: Material(
                                                   color: Colors.transparent,
                                                   elevation: 4.0,
                                                   shape: const RoundedRectangleBorder(
                                                     borderRadius:
-                                                        BorderRadius.only(
+                                                    BorderRadius.only(
                                                       bottomLeft:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       bottomRight:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       topLeft:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       topRight:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                     ),
                                                   ),
                                                   child: ClipRRect(
                                                     borderRadius:
-                                                        const BorderRadius.only(
+                                                    const BorderRadius.only(
                                                       bottomLeft:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       bottomRight:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       topLeft:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       topRight:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                     ),
                                                     child: Container(
                                                       width: MediaQuery.sizeOf(
-                                                                  context)
-                                                              .width *
+                                                          context)
+                                                          .width *
                                                           0.21,
                                                       height: 100.0,
                                                       decoration: BoxDecoration(
                                                         color: FlutterFlowTheme
-                                                                .of(context)
+                                                            .of(context)
                                                             .primaryBackground,
                                                         boxShadow: const [
                                                           BoxShadow(
@@ -448,75 +453,75 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                                           )
                                                         ],
                                                         borderRadius:
-                                                            const BorderRadius.only(
+                                                        const BorderRadius.only(
                                                           bottomLeft:
-                                                              Radius.circular(
-                                                                  8.0),
+                                                          Radius.circular(
+                                                              8.0),
                                                           bottomRight:
-                                                              Radius.circular(
-                                                                  8.0),
+                                                          Radius.circular(
+                                                              8.0),
                                                           topLeft:
-                                                              Radius.circular(
-                                                                  8.0),
+                                                          Radius.circular(
+                                                              8.0),
                                                           topRight:
-                                                              Radius.circular(
-                                                                  8.0),
+                                                          Radius.circular(
+                                                              8.0),
                                                         ),
                                                       ),
                                                       alignment:
-                                                          const AlignmentDirectional(
-                                                              0.0, 0.0),
+                                                      const AlignmentDirectional(
+                                                          0.0, 0.0),
                                                       child: Column(
                                                         mainAxisSize:
-                                                            MainAxisSize.max,
+                                                        MainAxisSize.max,
                                                         mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
+                                                        MainAxisAlignment
+                                                            .center,
                                                         children: [
                                                           Text(
                                                             '풍향',
                                                             style: FlutterFlowTheme
-                                                                    .of(context)
+                                                                .of(context)
                                                                 .bodyMedium
                                                                 .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily,
-                                                                  color: const Color(
-                                                                      0xFF1E2224),
-                                                                  fontSize:
-                                                                      16.0,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily),
-                                                                ),
+                                                              fontFamily: FlutterFlowTheme.of(
+                                                                  context)
+                                                                  .bodyMediumFamily,
+                                                              color: const Color(
+                                                                  0xFF1E2224),
+                                                              fontSize:
+                                                              16.0,
+                                                              letterSpacing:
+                                                              0.0,
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .w600,
+                                                              useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                                  .containsKey(
+                                                                  FlutterFlowTheme.of(context)
+                                                                      .bodyMediumFamily),
+                                                            ),
                                                           ),
                                                           Container(
                                                             width: 36.0,
                                                             height: 36.0,
                                                             clipBehavior:
-                                                                Clip.antiAlias,
+                                                            Clip.antiAlias,
                                                             decoration:
-                                                                const BoxDecoration(
+                                                            const BoxDecoration(
                                                               shape: BoxShape
                                                                   .circle,
                                                             ),
                                                             child:
-                                                                Image.network(
+                                                            Image.network(
                                                               functions.vecStringToImage(
                                                                   functions.vecToString(
                                                                       RealtimeWeatherAPICall
                                                                           .dataList(
-                                                                containerRealtimeWeatherAPIResponse
-                                                                    .jsonBody,
-                                                              )?[5])),
+                                                                        containerRealtimeWeatherAPIResponse
+                                                                            .jsonBody,
+                                                                      )?[5])),
                                                               fit: BoxFit.cover,
                                                             ),
                                                           ),
@@ -526,31 +531,31 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                                               functions.vecToString(
                                                                   RealtimeWeatherAPICall
                                                                       .dataList(
-                                                                containerRealtimeWeatherAPIResponse
-                                                                    .jsonBody,
-                                                              )?[5]),
+                                                                    containerRealtimeWeatherAPIResponse
+                                                                        .jsonBody,
+                                                                  )?[5]),
                                                               '서버 응답없음',
                                                             ),
                                                             style: FlutterFlowTheme
-                                                                    .of(context)
+                                                                .of(context)
                                                                 .bodyMedium
                                                                 .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily,
-                                                                  fontSize:
-                                                                      12.0,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily),
-                                                                ),
+                                                              fontFamily: FlutterFlowTheme.of(
+                                                                  context)
+                                                                  .bodyMediumFamily,
+                                                              fontSize:
+                                                              12.0,
+                                                              letterSpacing:
+                                                              0.0,
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .w600,
+                                                              useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                                  .containsKey(
+                                                                  FlutterFlowTheme.of(context)
+                                                                      .bodyMediumFamily),
+                                                            ),
                                                           ),
                                                         ],
                                                       ),
@@ -561,44 +566,44 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                               Padding(
                                                 padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        0.0, 0.0, 0.0, 4.0),
+                                                    0.0, 0.0, 0.0, 4.0),
                                                 child: Material(
                                                   color: Colors.transparent,
                                                   elevation: 4.0,
                                                   shape: const RoundedRectangleBorder(
                                                     borderRadius:
-                                                        BorderRadius.only(
+                                                    BorderRadius.only(
                                                       bottomLeft:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       bottomRight:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       topLeft:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       topRight:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                     ),
                                                   ),
                                                   child: ClipRRect(
                                                     borderRadius:
-                                                        const BorderRadius.only(
+                                                    const BorderRadius.only(
                                                       bottomLeft:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       bottomRight:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       topLeft:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       topRight:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                     ),
                                                     child: Container(
                                                       width: MediaQuery.sizeOf(
-                                                                  context)
-                                                              .width *
+                                                          context)
+                                                          .width *
                                                           0.21,
                                                       height: 100.0,
                                                       decoration: BoxDecoration(
                                                         color: FlutterFlowTheme
-                                                                .of(context)
+                                                            .of(context)
                                                             .primaryBackground,
                                                         boxShadow: const [
                                                           BoxShadow(
@@ -612,59 +617,59 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                                           )
                                                         ],
                                                         borderRadius:
-                                                            const BorderRadius.only(
+                                                        const BorderRadius.only(
                                                           bottomLeft:
-                                                              Radius.circular(
-                                                                  8.0),
+                                                          Radius.circular(
+                                                              8.0),
                                                           bottomRight:
-                                                              Radius.circular(
-                                                                  8.0),
+                                                          Radius.circular(
+                                                              8.0),
                                                           topLeft:
-                                                              Radius.circular(
-                                                                  8.0),
+                                                          Radius.circular(
+                                                              8.0),
                                                           topRight:
-                                                              Radius.circular(
-                                                                  8.0),
+                                                          Radius.circular(
+                                                              8.0),
                                                         ),
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    12.0,
-                                                                    0.0,
-                                                                    12.0),
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                            0.0,
+                                                            12.0,
+                                                            0.0,
+                                                            12.0),
                                                         child: Column(
                                                           mainAxisSize:
-                                                              MainAxisSize.max,
+                                                          MainAxisSize.max,
                                                           mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
+                                                          MainAxisAlignment
+                                                              .center,
                                                           children: [
                                                             Text(
                                                               '풍속',
                                                               style: FlutterFlowTheme
-                                                                      .of(context)
+                                                                  .of(context)
                                                                   .bodyMedium
                                                                   .override(
-                                                                    fontFamily:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .bodyMediumFamily,
-                                                                    color: const Color(
-                                                                        0xFF1E2224),
-                                                                    fontSize:
-                                                                        16.0,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    useGoogleFonts: GoogleFonts
-                                                                            .asMap()
-                                                                        .containsKey(
-                                                                            FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                  ),
+                                                                fontFamily:
+                                                                FlutterFlowTheme.of(context)
+                                                                    .bodyMediumFamily,
+                                                                color: const Color(
+                                                                    0xFF1E2224),
+                                                                fontSize:
+                                                                16.0,
+                                                                letterSpacing:
+                                                                0.0,
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .w600,
+                                                                useGoogleFonts: GoogleFonts
+                                                                    .asMap()
+                                                                    .containsKey(
+                                                                    FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                              ),
                                                             ),
                                                             Text(
                                                               valueOrDefault<
@@ -680,24 +685,24 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                                                 '서버 응답없음',
                                                               ),
                                                               style: FlutterFlowTheme
-                                                                      .of(context)
+                                                                  .of(context)
                                                                   .bodyMedium
                                                                   .override(
-                                                                    fontFamily:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .bodyMediumFamily,
-                                                                    fontSize:
-                                                                        12.0,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    useGoogleFonts: GoogleFonts
-                                                                            .asMap()
-                                                                        .containsKey(
-                                                                            FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                  ),
+                                                                fontFamily:
+                                                                FlutterFlowTheme.of(context)
+                                                                    .bodyMediumFamily,
+                                                                fontSize:
+                                                                12.0,
+                                                                letterSpacing:
+                                                                0.0,
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .w600,
+                                                                useGoogleFonts: GoogleFonts
+                                                                    .asMap()
+                                                                    .containsKey(
+                                                                    FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                              ),
                                                             ),
                                                           ],
                                                         ),
@@ -709,44 +714,44 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                               Padding(
                                                 padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        0.0, 0.0, 0.0, 4.0),
+                                                    0.0, 0.0, 0.0, 4.0),
                                                 child: Material(
                                                   color: Colors.transparent,
                                                   elevation: 4.0,
                                                   shape: const RoundedRectangleBorder(
                                                     borderRadius:
-                                                        BorderRadius.only(
+                                                    BorderRadius.only(
                                                       bottomLeft:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       bottomRight:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       topLeft:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       topRight:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                     ),
                                                   ),
                                                   child: ClipRRect(
                                                     borderRadius:
-                                                        const BorderRadius.only(
+                                                    const BorderRadius.only(
                                                       bottomLeft:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       bottomRight:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       topLeft:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       topRight:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                     ),
                                                     child: Container(
                                                       width: MediaQuery.sizeOf(
-                                                                  context)
-                                                              .width *
+                                                          context)
+                                                          .width *
                                                           0.21,
                                                       height: 100.0,
                                                       decoration: BoxDecoration(
                                                         color: FlutterFlowTheme
-                                                                .of(context)
+                                                            .of(context)
                                                             .primaryBackground,
                                                         boxShadow: const [
                                                           BoxShadow(
@@ -760,59 +765,59 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                                           )
                                                         ],
                                                         borderRadius:
-                                                            const BorderRadius.only(
+                                                        const BorderRadius.only(
                                                           bottomLeft:
-                                                              Radius.circular(
-                                                                  8.0),
+                                                          Radius.circular(
+                                                              8.0),
                                                           bottomRight:
-                                                              Radius.circular(
-                                                                  8.0),
+                                                          Radius.circular(
+                                                              8.0),
                                                           topLeft:
-                                                              Radius.circular(
-                                                                  8.0),
+                                                          Radius.circular(
+                                                              8.0),
                                                           topRight:
-                                                              Radius.circular(
-                                                                  8.0),
+                                                          Radius.circular(
+                                                              8.0),
                                                         ),
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    12.0,
-                                                                    0.0,
-                                                                    12.0),
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                            0.0,
+                                                            12.0,
+                                                            0.0,
+                                                            12.0),
                                                         child: Column(
                                                           mainAxisSize:
-                                                              MainAxisSize.max,
+                                                          MainAxisSize.max,
                                                           mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
+                                                          MainAxisAlignment
+                                                              .center,
                                                           children: [
                                                             Text(
                                                               '파고',
                                                               style: FlutterFlowTheme
-                                                                      .of(context)
+                                                                  .of(context)
                                                                   .bodyMedium
                                                                   .override(
-                                                                    fontFamily:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .bodyMediumFamily,
-                                                                    color: const Color(
-                                                                        0xFF1E2224),
-                                                                    fontSize:
-                                                                        16.0,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    useGoogleFonts: GoogleFonts
-                                                                            .asMap()
-                                                                        .containsKey(
-                                                                            FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                  ),
+                                                                fontFamily:
+                                                                FlutterFlowTheme.of(context)
+                                                                    .bodyMediumFamily,
+                                                                color: const Color(
+                                                                    0xFF1E2224),
+                                                                fontSize:
+                                                                16.0,
+                                                                letterSpacing:
+                                                                0.0,
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .w600,
+                                                                useGoogleFonts: GoogleFonts
+                                                                    .asMap()
+                                                                    .containsKey(
+                                                                    FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                              ),
                                                             ),
                                                             Text(
                                                               valueOrDefault<
@@ -828,24 +833,24 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                                                 '서버 응답없음',
                                                               ),
                                                               style: FlutterFlowTheme
-                                                                      .of(context)
+                                                                  .of(context)
                                                                   .bodyMedium
                                                                   .override(
-                                                                    fontFamily:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .bodyMediumFamily,
-                                                                    fontSize:
-                                                                        12.0,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    useGoogleFonts: GoogleFonts
-                                                                            .asMap()
-                                                                        .containsKey(
-                                                                            FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                  ),
+                                                                fontFamily:
+                                                                FlutterFlowTheme.of(context)
+                                                                    .bodyMediumFamily,
+                                                                fontSize:
+                                                                12.0,
+                                                                letterSpacing:
+                                                                0.0,
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .w600,
+                                                                useGoogleFonts: GoogleFonts
+                                                                    .asMap()
+                                                                    .containsKey(
+                                                                    FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                              ),
                                                             ),
                                                           ],
                                                         ),
@@ -857,44 +862,44 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                               Padding(
                                                 padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        0.0, 0.0, 0.0, 4.0),
+                                                    0.0, 0.0, 0.0, 4.0),
                                                 child: Material(
                                                   color: Colors.transparent,
                                                   elevation: 4.0,
                                                   shape: const RoundedRectangleBorder(
                                                     borderRadius:
-                                                        BorderRadius.only(
+                                                    BorderRadius.only(
                                                       bottomLeft:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       bottomRight:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       topLeft:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       topRight:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                     ),
                                                   ),
                                                   child: ClipRRect(
                                                     borderRadius:
-                                                        const BorderRadius.only(
+                                                    const BorderRadius.only(
                                                       bottomLeft:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       bottomRight:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       topLeft:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                       topRight:
-                                                          Radius.circular(8.0),
+                                                      Radius.circular(8.0),
                                                     ),
                                                     child: Container(
                                                       width: MediaQuery.sizeOf(
-                                                                  context)
-                                                              .width *
+                                                          context)
+                                                          .width *
                                                           0.21,
                                                       height: 100.0,
                                                       decoration: BoxDecoration(
                                                         color: FlutterFlowTheme
-                                                                .of(context)
+                                                            .of(context)
                                                             .primaryBackground,
                                                         boxShadow: const [
                                                           BoxShadow(
@@ -908,59 +913,59 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                                           )
                                                         ],
                                                         borderRadius:
-                                                            const BorderRadius.only(
+                                                        const BorderRadius.only(
                                                           bottomLeft:
-                                                              Radius.circular(
-                                                                  8.0),
+                                                          Radius.circular(
+                                                              8.0),
                                                           bottomRight:
-                                                              Radius.circular(
-                                                                  8.0),
+                                                          Radius.circular(
+                                                              8.0),
                                                           topLeft:
-                                                              Radius.circular(
-                                                                  8.0),
+                                                          Radius.circular(
+                                                              8.0),
                                                           topRight:
-                                                              Radius.circular(
-                                                                  8.0),
+                                                          Radius.circular(
+                                                              8.0),
                                                         ),
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    12.0,
-                                                                    0.0,
-                                                                    12.0),
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                            0.0,
+                                                            12.0,
+                                                            0.0,
+                                                            12.0),
                                                         child: Column(
                                                           mainAxisSize:
-                                                              MainAxisSize.max,
+                                                          MainAxisSize.max,
                                                           mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
+                                                          MainAxisAlignment
+                                                              .center,
                                                           children: [
                                                             Text(
                                                               '강수량',
                                                               style: FlutterFlowTheme
-                                                                      .of(context)
+                                                                  .of(context)
                                                                   .bodyMedium
                                                                   .override(
-                                                                    fontFamily:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .bodyMediumFamily,
-                                                                    color: const Color(
-                                                                        0xFF1E2224),
-                                                                    fontSize:
-                                                                        16.0,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    useGoogleFonts: GoogleFonts
-                                                                            .asMap()
-                                                                        .containsKey(
-                                                                            FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                  ),
+                                                                fontFamily:
+                                                                FlutterFlowTheme.of(context)
+                                                                    .bodyMediumFamily,
+                                                                color: const Color(
+                                                                    0xFF1E2224),
+                                                                fontSize:
+                                                                16.0,
+                                                                letterSpacing:
+                                                                0.0,
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .w600,
+                                                                useGoogleFonts: GoogleFonts
+                                                                    .asMap()
+                                                                    .containsKey(
+                                                                    FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                              ),
                                                             ),
                                                             Text(
                                                               valueOrDefault<
@@ -976,24 +981,24 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                                                 '서버 응답없음',
                                                               ),
                                                               style: FlutterFlowTheme
-                                                                      .of(context)
+                                                                  .of(context)
                                                                   .bodyMedium
                                                                   .override(
-                                                                    fontFamily:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .bodyMediumFamily,
-                                                                    fontSize:
-                                                                        12.0,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    useGoogleFonts: GoogleFonts
-                                                                            .asMap()
-                                                                        .containsKey(
-                                                                            FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                  ),
+                                                                fontFamily:
+                                                                FlutterFlowTheme.of(context)
+                                                                    .bodyMediumFamily,
+                                                                fontSize:
+                                                                12.0,
+                                                                letterSpacing:
+                                                                0.0,
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .w600,
+                                                                useGoogleFonts: GoogleFonts
+                                                                    .asMap()
+                                                                    .containsKey(
+                                                                    FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                              ),
                                                             ),
                                                           ],
                                                         ),
@@ -1396,45 +1401,45 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                         },
                                       ),
                                       Padding(
-                                          padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Tiddatebutton(
-                                                color: const Color(0xffF9FAFF),
-                                                text: '전날',
-                                                borderColor: const Color(0xff949494),
-                                                ontap:() async {
-                                                  _model.tidDate =
-                                                      _model.tidDate! + -1;
-                                                  _model.tidDateString =
-                                                      functions.tidDateButton(
-                                                          false,
-                                                          true,
-                                                          _model.tidDateString!);
-                                                  safeSetState(() {});
-                                                },
-                                              ),
-                                              Tiddatebutton(
-                                                color: const Color(0xffF9FAFF),
-                                                text: '다음날',
-                                                borderColor: const Color(0xff949494),
-                                                ontap: () async {
-                                                  _model.tidDate =
-                                                      _model.tidDate! + 1;
-                                                  safeSetState(() {});
-                                                  _model.tidDateString =
-                                                      functions.tidDateButton(
-                                                          true,
-                                                          false,
-                                                          _model.tidDateString!);
-                                                  safeSetState(() {});
-                                                },
-                                              ),
-                                            ],
-                                          ),
+                                        padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Tiddatebutton(
+                                              color: const Color(0xffF9FAFF),
+                                              text: '전날',
+                                              borderColor: const Color(0xff949494),
+                                              ontap:() async {
+                                                _model.tidDate =
+                                                    _model.tidDate! + -1;
+                                                _model.tidDateString =
+                                                    functions.tidDateButton(
+                                                        false,
+                                                        true,
+                                                        _model.tidDateString!);
+                                                safeSetState(() {});
+                                              },
+                                            ),
+                                            Tiddatebutton(
+                                              color: const Color(0xffF9FAFF),
+                                              text: '다음날',
+                                              borderColor: const Color(0xff949494),
+                                              ontap: () async {
+                                                _model.tidDate =
+                                                    _model.tidDate! + 1;
+                                                safeSetState(() {});
+                                                _model.tidDateString =
+                                                    functions.tidDateButton(
+                                                        true,
+                                                        false,
+                                                        _model.tidDateString!);
+                                                safeSetState(() {});
+                                              },
+                                            ),
+                                          ],
+                                        ),
                                       ),
 
                                     ].divide(const SizedBox(height: 8.0)),
@@ -1570,7 +1575,7 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                                     const AlignmentDirectional(
                                                         0.0, -1.0),
                                                     child: Text(
-                                                        '일주일 예보',
+                                                      '일주일 예보',
                                                       style: FlutterFlowTheme.of(context).bodyMedium
                                                           .override(
                                                         fontFamily: 'PretendardSeries',

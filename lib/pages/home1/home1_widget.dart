@@ -349,13 +349,14 @@ class _Home1WidgetState extends State<Home1Widget> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 pointButton(
-                                                    text: '방파제\n선착장',
+                                                    text: '방파제',
+                                                    secondText: '선착장',
                                                     ontap: () async {
                                                       context.pushNamed(
                                                           'exploreMapSW');
                                                     },
                                                     image: Image.asset(
-                                                      'assets/images/방파제.png',
+                                                      'assets/images/1007방파제.png',
                                                       fit: BoxFit.cover,
                                                     ),
                                                 ),
@@ -366,40 +367,43 @@ class _Home1WidgetState extends State<Home1Widget> {
                                                         'fishingParkMap');
                                                   },
                                                   image: Image.asset(
-                                                    'assets/images/낚시공원.png',
+                                                    'assets/images/1007낚시공원.png',
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),
                                                 pointButton(
-                                                  text: '해변\n갯바위',
+                                                  text: '해변',
+                                                  secondText: '갯바위',
                                                   ontap: () async {
                                                     context.pushNamed(
                                                         'exploreMapOcean');
                                                   },
                                                   image: Image.asset(
-                                                    'assets/images/해변.png',
+                                                    'assets/images/1007해변.png',
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),
                                                 pointButton(
-                                                  text: '해상펜션\n 좌대',
+                                                  text: '해상펜션',
+                                                  secondText: '좌대',
                                                   ontap: () async {
                                                     context.pushNamed(
                                                         'exploreMap_stand');
                                                   },
                                                   image: Image.asset(
-                                                    'assets/images/해상펜션.png',
+                                                    'assets/images/1007해상펜션.png',
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),
                                                 pointButton(
-                                                  text: '낚시펜션\n 민박',
+                                                  text: '낚시펜션',
+                                                  secondText: '민박',
                                                   ontap: () async {
                                                     context.pushNamed(
                                                         'exploreMapFishingPension');
                                                   },
                                                   image: Image.asset(
-                                                    'assets/images/낚시펜션.png',
+                                                    'assets/images/1007민박.png',
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),
@@ -457,7 +461,7 @@ class _Home1WidgetState extends State<Home1Widget> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 16.0, 0.0, 32.0),
+                                          0.0, 0.0, 0.0, 32.0),
                                       child: Container(
                                         width: double.infinity,
                                         decoration: const BoxDecoration(
@@ -472,19 +476,19 @@ class _Home1WidgetState extends State<Home1Widget> {
                                           children: [
                                             Fishbutton(
                                                 text: '돔',
-                                                image: Image.asset('assets/images/돔.png'),
+                                                image: Image.asset('assets/images/감성돔_리사이즈.png'),
                                             ),
                                             Fishbutton(
                                               text: '두족류',
-                                              image: Image.asset('assets/images/두족류.png'),
+                                              image: Image.asset('assets/images/무늬오징어_리사이즈.png'),
                                             ),
                                             Fishbutton(
                                               text: '중상층',
-                                              image: Image.asset('assets/images/중상층.png'),
+                                              image: Image.asset('assets/images/전갱이_리사이즈.png'),
                                             ),
                                             Fishbutton(
                                               text: '원투낚시',
-                                              image: Image.asset('assets/images/원투낚시.png'),
+                                              image: Image.asset('assets/images/광어_리사이즈.png'),
                                             ),
                                           ].divide(const SizedBox(width: 8.0)),
                                         ),

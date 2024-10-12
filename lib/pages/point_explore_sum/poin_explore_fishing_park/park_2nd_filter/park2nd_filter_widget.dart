@@ -49,6 +49,7 @@ class _Park2ndFilterWidgetState extends State<Park2ndFilterWidget> {
     return Filterbackground(
       child: Column(
         mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             '인근편의시설',
@@ -87,6 +88,15 @@ class _Park2ndFilterWidgetState extends State<Park2ndFilterWidget> {
                     _model.checkboxValue2 = newValue!);
                   },
                 ),
+                Filtercheckbox(
+                  filterText: '낚 시 방',
+                  checkBoxValue: _model.checkboxValue5,
+                  onChecked: (newValue) async{
+                    safeSetState(() =>
+                    _model.checkboxValue5 = newValue
+                    );
+                  },
+                )
               ],
             ),
           ),
@@ -105,7 +115,7 @@ class _Park2ndFilterWidgetState extends State<Park2ndFilterWidget> {
                   },
                 ),
                 Filtercheckbox(
-                  filterText: '낚 시 방',
+                  filterText: '숙     소',
                   checkBoxValue:  _model.checkboxValue4,
                   onChecked: (newValue) async {
                     safeSetState(() =>
@@ -126,10 +136,12 @@ class _Park2ndFilterWidgetState extends State<Park2ndFilterWidget> {
                 Navigator.pop(
                     context,
                     functions.park2ndFilterBottomsheet(
-                        _model.checkboxValue3!,
                         _model.checkboxValue1!,
                         _model.checkboxValue2!,
-                        _model.checkboxValue4!));
+                        _model.checkboxValue5,
+                        _model.checkboxValue3!,
+                        _model.checkboxValue4!,
+                    ));
               },
               child: Container(
                 width: 100.0,

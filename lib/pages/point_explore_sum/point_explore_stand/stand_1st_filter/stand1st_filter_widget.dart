@@ -64,6 +64,7 @@ class _Stand1stFilterWidgetState extends State<Stand1stFilterWidget> {
     return Filterbackground(
       child: Column(
         mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             '시설구분',
@@ -80,95 +81,101 @@ class _Stand1stFilterWidgetState extends State<Stand1stFilterWidget> {
             thickness: 1.0,
             color: FlutterFlowTheme.of(context).secondaryText,
           ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Filtercheckbox(
-                filterText: '좌       대',
-                checkBoxValue: _model.checkboxValue1 ??=
-                    FFAppState()
-                        .standFacility1
-                        .contains('좌대') ==
-                        true,
-                onChecked:(newValue) async {
-                  safeSetState(() =>
-                  _model.checkboxValue1 = newValue!);
-                  if (newValue!) {
-                    FFAppState().addToStandFacility1('좌대');
-                    safeSetState(() {});
-                  } else {
-                    FFAppState()
-                        .removeFromStandFacility1('좌대');
-                    safeSetState(() {});
-                  }
-                },
-              ),
-              Filtercheckbox(
-                filterText: '해상펜션',
-                checkBoxValue: _model.checkboxValue2 ??=
-                    FFAppState()
-                        .standFacility1
-                        .contains('해상펜션') ==
-                        true,
-                onChecked:(newValue) async {
-                  safeSetState(() =>
-                  _model.checkboxValue2 = newValue!);
-                  if (newValue!) {
-                    FFAppState().addToStandFacility1('해상펜션');
-                    safeSetState(() {});
-                  } else {
-                    FFAppState()
-                        .removeFromStandFacility1('해상펜션');
-                    safeSetState(() {});
-                  }
-                },
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Filtercheckbox(
+                  filterText: '좌       대',
+                  checkBoxValue: _model.checkboxValue1 ??=
+                      FFAppState()
+                          .standFacility1
+                          .contains('좌대') ==
+                          true,
+                  onChecked:(newValue) async {
+                    safeSetState(() =>
+                    _model.checkboxValue1 = newValue!);
+                    if (newValue!) {
+                      FFAppState().addToStandFacility1('좌대');
+                      safeSetState(() {});
+                    } else {
+                      FFAppState()
+                          .removeFromStandFacility1('좌대');
+                      safeSetState(() {});
+                    }
+                  },
+                ),
+                Filtercheckbox(
+                  filterText: '해상펜션',
+                  checkBoxValue: _model.checkboxValue2 ??=
+                      FFAppState()
+                          .standFacility1
+                          .contains('해상펜션') ==
+                          true,
+                  onChecked:(newValue) async {
+                    safeSetState(() =>
+                    _model.checkboxValue2 = newValue!);
+                    if (newValue!) {
+                      FFAppState().addToStandFacility1('해상펜션');
+                      safeSetState(() {});
+                    } else {
+                      FFAppState()
+                          .removeFromStandFacility1('해상펜션');
+                      safeSetState(() {});
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Filtercheckbox(
-                filterText: '당일낚시',
-                checkBoxValue: _model.checkboxValue3 ??=
-                    FFAppState()
-                        .standFacility2
-                        .contains('당일낚시'),
-                onChecked:(newValue) async {
-                  safeSetState(() =>
-                  _model.checkboxValue3 = newValue!);
-                  if (newValue!) {
-                    FFAppState().addToStandFacility1('당일낚시');
-                    safeSetState(() {});
-                  } else {
-                    FFAppState()
-                        .removeFromStandFacility1('당일낚시');
-                    safeSetState(() {});
-                  }
-                },
-              ),
-              Filtercheckbox(
-                filterText: '숙박가능',
-                checkBoxValue: _model.checkboxValue4 ??=
-                    FFAppState()
-                        .standFacility2
-                        .contains('숙박가능'),
-                onChecked:(newValue) async {
-                  safeSetState(() =>
-                  _model.checkboxValue4 = newValue!);
-                  if (newValue!) {
-                    FFAppState().addToStandFacility1('숙박가능');
-                    safeSetState(() {});
-                  } else {
-                    FFAppState()
-                        .removeFromStandFacility1('숙박가능');
-                    safeSetState(() {});
-                  }
-                },
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Filtercheckbox(
+                  filterText: '당일낚시',
+                  checkBoxValue: _model.checkboxValue3 ??=
+                      FFAppState()
+                          .standFacility2
+                          .contains('당일낚시'),
+                  onChecked:(newValue) async {
+                    safeSetState(() =>
+                    _model.checkboxValue3 = newValue!);
+                    if (newValue!) {
+                      FFAppState().addToStandFacility1('당일낚시');
+                      safeSetState(() {});
+                    } else {
+                      FFAppState()
+                          .removeFromStandFacility1('당일낚시');
+                      safeSetState(() {});
+                    }
+                  },
+                ),
+                Filtercheckbox(
+                  filterText: '숙박가능',
+                  checkBoxValue: _model.checkboxValue4 ??=
+                      FFAppState()
+                          .standFacility2
+                          .contains('숙박가능'),
+                  onChecked:(newValue) async {
+                    safeSetState(() =>
+                    _model.checkboxValue4 = newValue!);
+                    if (newValue!) {
+                      FFAppState().addToStandFacility1('숙박가능');
+                      safeSetState(() {});
+                    } else {
+                      FFAppState()
+                          .removeFromStandFacility1('숙박가능');
+                      safeSetState(() {});
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
@@ -213,7 +220,7 @@ class _Stand1stFilterWidgetState extends State<Stand1stFilterWidget> {
               ),
             ),
           ),
-        ].divide(const SizedBox(height: 8.0)),
+        ]
       ),
     );
   }

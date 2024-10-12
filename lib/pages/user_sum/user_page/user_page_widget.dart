@@ -22,6 +22,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
   late UserPageModel _model;
   List<Widget>? pointReviews;
   int reviewLimit = 3;
+  int postLimit = 3;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -60,7 +61,6 @@ class _UserPageWidgetState extends State<UserPageWidget> {
       },
       child: Container(
         width: double.infinity,
-        height: 124.0,
         decoration: BoxDecoration(
           color:
           FlutterFlowTheme.of(context)
@@ -68,7 +68,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
         ),
         child: Padding(
           padding: const EdgeInsetsDirectional
-              .fromSTEB(10.0, 8.0, 10.0, 8.0),
+              .fromSTEB(10.0, 8.0, 10.0, 0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment:
@@ -148,6 +148,121 @@ class _UserPageWidgetState extends State<UserPageWidget> {
       else{
         for(int i = 0; i<reviewLimit; i++){
           pointReviews?.add(pointReviewBuilder(list[i])!);
+        }
+      }
+      return pointReviews!;
+    }
+    else{
+      return [const SizedBox(height: 42,)];
+    }
+  }
+  Widget? carrotPostBuilder(TBCarrotPostRecord carrotPost){
+    return InkWell(
+      splashColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onTap: () async {
+        context.pushNamed(
+          'carrotPost',
+          queryParameters: {
+            'carrotPost': serializeParam(
+              carrotPost
+                  .reference,
+              ParamType.DocumentReference,
+            ),
+          }.withoutNulls,
+        );
+      },
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color:
+          FlutterFlowTheme.of(context)
+              .primaryBackground,
+        ),
+        child: Padding(
+          padding: const EdgeInsetsDirectional
+              .fromSTEB(10.0, 8.0, 10.0, 16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment:
+            CrossAxisAlignment.start,
+            children: [
+              Text(
+                carrotPost
+                    .postTitle,
+                style: FlutterFlowTheme.of(
+                    context)
+                    .bodyMedium
+                    .override(
+                  fontFamily:
+                  'PretendardSeries',
+                  fontSize: 16.0,
+                  letterSpacing: 0.0,
+                  fontWeight:
+                  FontWeight.w600,
+                  useGoogleFonts:
+                  GoogleFonts
+                      .asMap()
+                      .containsKey(
+                      'PretendardSeries'),
+                ),
+              ),
+              Text(
+                carrotPost.postCategory,
+                style: FlutterFlowTheme.of(
+                    context)
+                    .bodyMedium
+                    .override(
+                  fontFamily:
+                  'PretendardSeries',
+                  letterSpacing: 0.0,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  useGoogleFonts:
+                  GoogleFonts
+                      .asMap()
+                      .containsKey(
+                      'PretendardSeries'),
+                ),
+              ),
+              Text(
+                carrotPost
+                    .postDatetime.toString() ?? '카테고리 미지정',
+                style: FlutterFlowTheme.of(
+                    context)
+                    .bodyMedium
+                    .override(
+                  fontFamily:
+                  'PretendardSeries',
+                  letterSpacing: 0.0,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  useGoogleFonts:
+                  GoogleFonts
+                      .asMap()
+                      .containsKey(
+                      'PretendardSeries'),
+                ),
+              ),
+            ].divide(const SizedBox(height: 8.0)),
+          ),
+        ),
+      ),
+    );
+  }
+  List<Widget> postListBuilder(List<TBCarrotPostRecord>? list){
+    pointReviews = [];
+    if(list != null){
+      if(list.length <reviewLimit){
+        for(int i = 0; i<list.length; i++){
+          pointReviews?.add(carrotPostBuilder(list[i])!);
+        }
+      }
+      else{
+        for(int i = 0; i<reviewLimit; i++){
+          pointReviews?.add(carrotPostBuilder(list[i])!);
         }
       }
       return pointReviews!;
@@ -738,7 +853,6 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
                       child: Column(
-                        mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Align(
@@ -776,6 +890,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                               color: FlutterFlowTheme.of(context)
                                   .primaryBackground,
                             ),
+                            margin: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 24),
                             child: StreamBuilder<List<TBUserReviewPointRecord>>(
                               stream: queryTBUserReviewPointRecord(
                                 queryBuilder: (tBUserReviewPointRecord) =>
@@ -805,7 +920,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                     snapshot.data!;
 
                                 return Column(
-                                  children: reviewListBuilder(listViewTBUserReviewPointRecordList)
+                                  children: reviewListBuilder(listViewTBUserReviewPointRecordList).divide(const SizedBox(height: 32,))
                                 );
                               },
                             ),
@@ -816,37 +931,54 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                 reviewLimit = reviewLimit + 10;
                               });
                             },
-                            child: Container(
-                              width: 100,
-                              height: 36,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).primary,
-                                borderRadius: BorderRadius.circular(20)
+                            child: IntrinsicWidth(
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme
+                                        .of(context)
+                                        .primaryBackground,
+                                    borderRadius:
+                                    BorderRadius.circular(
+                                        12.0),
+                                    border: Border.all(
+                                      color: FlutterFlowTheme
+                                          .of(context)
+                                          .secondaryText,
+                                    ),
+                                  ),
+                                  padding: const EdgeInsetsDirectional.only(start: 12, end: 8, top: 4, bottom: 4),
+                                  alignment:
+                                  const AlignmentDirectional(
+                                      -1.0, 0.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        '더보기',
+                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                          fontFamily:
+                                          'PretendardSeries',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                              'PretendardSeries'),
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.add,
+                                        color: FlutterFlowTheme
+                                            .of(context)
+                                            .secondaryText,
+                                        size: 14,
+                                      )
+                                    ],
+                                  )
                               ),
-                              alignment: const Alignment(0, 0),
-                              child: Text(
-                                '더보기',
-                                style: FlutterFlowTheme.of(
-                                    context)
-                                    .bodyMedium
-                                    .override(
-                                  fontFamily:
-                                  'PretendardSeries',
-                                  color: FlutterFlowTheme
-                                      .of(context)
-                                      .primaryBackground,
-                                  fontSize: 13.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight:
-                                  FontWeight.w500,
-                                  useGoogleFonts:
-                                  GoogleFonts
-                                      .asMap()
-                                      .containsKey(
-                                      'PretendardSeries'),
-                                ),
-                              ),
-                            ),
+                            )
                           )
                         ],
                       ),
@@ -859,9 +991,10 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                           valueOrDefault<double>(
                             MediaQuery.sizeOf(context).height * 0.08,
                             0.0,
-                          )),
+                          )
+                      ),
                       child: Column(
-                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Align(
                             alignment: const AlignmentDirectional(-1.0, -1.0),
@@ -870,19 +1003,25 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                   0.0, 0.0, 0.0, 12.0),
                               child: Text(
                                 '내가 작성한 게시물',
-                                style: FlutterFlowTheme.of(context)
+                                style: FlutterFlowTheme.of(
+                                    context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily,
-                                      fontSize: 20.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily),
-                                    ),
+                                  fontFamily:
+                                  'PretendardSeries',
+                                  color: FlutterFlowTheme
+                                      .of(context)
+                                      .primary,
+                                  fontSize: 12.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight:
+                                  FontWeight.w600,
+                                  useGoogleFonts:
+                                  GoogleFonts
+                                      .asMap()
+                                      .containsKey(
+                                      'PretendardSeries'),
+                                ),
                               ),
                             ),
                           ),
@@ -914,102 +1053,66 @@ class _UserPageWidgetState extends State<UserPageWidget> {
 
                               return Column(
                                 mainAxisSize: MainAxisSize.max,
-                                children: List.generate(
-                                    columnTBCarrotPostRecordList.length,
-                                    (columnIndex) {
-                                  final columnTBCarrotPostRecord =
-                                      columnTBCarrotPostRecordList[columnIndex];
-                                  return Container(
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          12.0, 8.0, 12.0, 8.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            columnTBCarrotPostRecord.postTitle,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily,
-                                                  fontSize: 16.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w600,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMediumFamily),
-                                                ),
-                                          ),
-                                          Text(
-                                            columnTBCarrotPostRecord
-                                                .postCategory,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  letterSpacing: 0.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMediumFamily),
-                                                ),
-                                          ),
-                                          Text(
-                                            valueOrDefault<String>(
-                                              columnTBCarrotPostRecord
-                                                  .postDatetime
-                                                  ?.toString(),
-                                              '20240905',
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  fontSize: 12.0,
-                                                  letterSpacing: 0.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMediumFamily),
-                                                ),
-                                          ),
-                                        ].divide(const SizedBox(height: 8.0)),
-                                      ),
-                                    ),
-                                  );
-                                }),
+                                children: postListBuilder(columnTBCarrotPostRecordList).divide(const SizedBox(height: 16,)),
                               );
                             },
                           ),
+                          InkWell(
+                            onTap: (){
+                              setState(() {
+                                postLimit = postLimit + 10;
+                                print(postLimit);
+                              });
+                            },
+                            child: IntrinsicWidth(
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme
+                                        .of(context)
+                                        .primaryBackground,
+                                    borderRadius:
+                                    BorderRadius.circular(
+                                        12.0),
+                                    border: Border.all(
+                                      color: FlutterFlowTheme
+                                          .of(context)
+                                          .secondaryText,
+                                    ),
+                                  ),
+                                  padding: const EdgeInsetsDirectional.only(start: 12, end: 8, top: 4, bottom: 4),
+                                  alignment:
+                                  const AlignmentDirectional(
+                                      -1.0, 0.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        '더보기',
+                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                          fontFamily:
+                                          'PretendardSeries',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                              'PretendardSeries'),
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.add,
+                                        color: FlutterFlowTheme
+                                            .of(context)
+                                            .secondaryText,
+                                        size: 14,
+                                      )
+                                    ],
+                                  )
+                              ),
+                            )
+                          )
                         ],
                       ),
                     ),

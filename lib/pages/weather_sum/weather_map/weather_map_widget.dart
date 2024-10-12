@@ -67,57 +67,59 @@ class _WeatherMapWidgetState extends State<WeatherMapWidget> {
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(64.0),
-              child: AppBar(
-                backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-                automaticallyImplyLeading: false,
-                leading: Align(
-                  alignment: const AlignmentDirectional(-1.0, -3.7),
-                  child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
-                    child: FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 30.0,
-                      borderWidth: 1.0,
-                      buttonSize: 60.0,
-                      icon: const Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.black,
-                        size: 30.0,
-                      ),
-                      onPressed: () async {
-                        context.pop();
-                      },
+            appBar: AppBar(
+              backgroundColor: Colors.white,
+              automaticallyImplyLeading: false,
+              leading: Align(
+                alignment: const AlignmentDirectional(-1.0, -3.7),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
+                  child: FlutterFlowIconButton(
+                    borderColor: Colors.transparent,
+                    borderRadius: 30.0,
+                    borderWidth: 1.0,
+                    buttonSize: 60.0,
+                    icon: const Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.black,
+                      size: 30.0,
                     ),
+                    onPressed: () async {
+                      context.pop();
+                    },
                   ),
                 ),
-                actions: const [],
-                flexibleSpace: FlexibleSpaceBar(
-                  title: Align(
-                    alignment: const AlignmentDirectional(0.0, 0.8),
-                    child: Text(
-                      '날씨',
-                      style:
-                          FlutterFlowTheme.of(context).headlineMedium.override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .headlineMediumFamily,
-                                color: Colors.black,
-                                fontSize: 20.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w600,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .headlineMediumFamily),
-                              ),
-                    ),
-                  ),
-                  centerTitle: true,
-                  expandedTitleScale: 1.0,
-                ),
-                elevation: 2.0,
               ),
+              title: Align(
+                alignment: const AlignmentDirectional(0.0, -1.0),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  child: Text(
+                    '날씨',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: 'PretendardSeries',
+                      fontSize: 20.0,
+                      letterSpacing: 0.0,
+                      fontWeight: FontWeight.w800,
+                      useGoogleFonts:
+                      GoogleFonts.asMap().containsKey('PretendardSeries'),
+                    ),
+                  ),
+                ),
+              ),
+              actions: const [FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30.0,
+                borderWidth: 1.0,
+                buttonSize: 60.0,
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.transparent,
+                  size: 30.0,
+                ),
+              ),],
+              centerTitle: false,
+              elevation: 2.0,
             ),
             body: SafeArea(
               top: true,

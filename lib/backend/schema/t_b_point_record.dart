@@ -45,6 +45,11 @@ class TBPointRecord extends FirestoreRecord {
   List<String> get pointTags => _pointTags ?? const [];
   bool hasPointTags() => _pointTags != null;
 
+  List<String>? _pointFishType;
+  List<String> get pointFishType => _pointFishType ?? const [];
+  bool hasPointFishType() => _pointFishType != null;
+
+
   // "point_address" field.
   String? _pointAddress;
   String get pointAddress => _pointAddress ?? '';
@@ -127,6 +132,7 @@ class TBPointRecord extends FirestoreRecord {
     _pointArround = snapshotData['point_arround'] as String?;
     _pointImages = getDataList(snapshotData['point_images']);
     _pointInvolvedVideo = getDataList(snapshotData['point_involvedVideo']);
+    _pointFishType = getDataList(snapshotData['point_fishType']);
   }
 
   static CollectionReference get collection =>
@@ -156,6 +162,7 @@ class TBPointRecord extends FirestoreRecord {
 
   @override
   int get hashCode => reference.path.hashCode;
+
 
   @override
   bool operator ==(other) =>
@@ -218,7 +225,8 @@ class TBPointRecordDocumentEquality implements Equality<TBPointRecord> {
         e1?.pointSpecialNote == e2?.pointSpecialNote &&
         e1?.pointArround == e2?.pointArround &&
         listEquality.equals(e1?.pointImages, e2?.pointImages) &&
-        listEquality.equals(e1?.pointInvolvedVideo, e2?.pointInvolvedVideo);
+        listEquality.equals(e1?.pointInvolvedVideo, e2?.pointInvolvedVideo) &&
+        listEquality.equals(e1?.pointFishType, e2?.pointFishType);
   }
 
   @override
@@ -240,7 +248,8 @@ class TBPointRecordDocumentEquality implements Equality<TBPointRecord> {
         e?.pointSpecialNote,
         e?.pointArround,
         e?.pointImages,
-        e?.pointInvolvedVideo
+        e?.pointInvolvedVideo,
+        e?.pointFishType
       ]);
 
   @override

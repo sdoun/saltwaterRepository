@@ -14,6 +14,8 @@ class Park2ndFilterModel extends FlutterFlowModel<Park2ndFilterWidget> {
   // State field(s) for Checkbox widget.
   bool? checkboxValue4;
 
+  bool checkboxValue5 = false;
+
   @override
   void initState(BuildContext context) {}
 

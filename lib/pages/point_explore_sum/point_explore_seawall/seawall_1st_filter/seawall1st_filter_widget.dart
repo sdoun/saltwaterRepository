@@ -47,6 +47,7 @@ class _Seawall1stFilterWidgetState extends State<Seawall1stFilterWidget> {
     return Filterbackground(
       child: Column(
         mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             '시설구분',
@@ -64,7 +65,7 @@ class _Seawall1stFilterWidgetState extends State<Seawall1stFilterWidget> {
             color: FlutterFlowTheme.of(context).secondaryText,
           ),
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -80,19 +81,22 @@ class _Seawall1stFilterWidgetState extends State<Seawall1stFilterWidget> {
               ],
             ),
           ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Filtercheckbox(
-                filterText: '외향 테트라포드',
-                checkBoxValue: _model.checkboxValue2,
-                onChecked: (newValue) async {
-                  safeSetState(() =>
-                  _model.checkboxValue2 = newValue!);
-                },
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Filtercheckbox(
+                  filterText: '외항 테트라포드',
+                  checkBoxValue: _model.checkboxValue2,
+                  onChecked: (newValue) async {
+                    safeSetState(() =>
+                    _model.checkboxValue2 = newValue!);
+                  },
+                ),
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
@@ -137,7 +141,7 @@ class _Seawall1stFilterWidgetState extends State<Seawall1stFilterWidget> {
               ),
             ),
           ),
-        ].divide(const SizedBox(height: 8.0)),
+        ]
       ),
     );
   }

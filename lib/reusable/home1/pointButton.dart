@@ -6,9 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../flutter_flow/flutter_flow_theme.dart';
 
 class pointButton extends StatefulWidget {
-  const pointButton({super.key, this.ontap, required this.text, this.image});
+  const pointButton({super.key, this.ontap, required this.text, this.image, this.secondText});
   final ontap;
   final String text;
+  final String? secondText;
   final Widget? image;
 
 
@@ -64,6 +65,7 @@ class _pointButtonState extends State<pointButton> {
             mainAxisAlignment:
             MainAxisAlignment
                 .spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                 width: MediaQuery
@@ -106,6 +108,27 @@ class _pointButtonState extends State<pointButton> {
                       'PretendardSeries'),
                 ),
               ),
+              Text(
+                widget.secondText ?? '',
+                style: FlutterFlowTheme
+                    .of(context)
+                    .bodyMedium
+                    .override(
+                  fontFamily:
+                  'PretendardSeries',
+                  fontSize:
+                  14.0,
+                  letterSpacing:
+                  0.0,
+                  fontWeight:
+                  FontWeight
+                      .w500,
+                  useGoogleFonts: GoogleFonts
+                      .asMap()
+                      .containsKey(
+                      'PretendardSeries'),
+                ),
+              )
             ],
           ),
         ),

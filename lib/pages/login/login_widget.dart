@@ -549,6 +549,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       _model
                                                                           .emailAddressCreateTextController
                                                                           .text,
+                                                                  photoUrl: 'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%EC%95%B1%EC%95%84%EC%9D%B4%EC%BD%98%2F%EC%A7%A0%EB%82%B4%ED%88%AC%EC%96%B4%2B%EC%96%B4%ED%94%8C%EB%B2%84%EC%A0%84%2B%EC%9B%90%EB%B3%B8_%EB%8F%84%EC%98%81%EC%88%98%EC%A0%95.jpg?alt=media&token=11a95a9b-1721-461b-b8e8-3d04fcaef2d2'
                                                                 ));
 
                                                             navigate = () =>

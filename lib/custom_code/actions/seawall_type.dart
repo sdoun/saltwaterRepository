@@ -16,10 +16,10 @@ Future<List<String>?> seawallType(
   // Add your function code here!
   List<String> resultString = [];
   if (isTetra) {
-    resultString.add('외향테트라');
+    resultString.add('외항테트라');
   }
   if (isShift) {
-    resultString.add('외향시프트');
+    resultString.add('외항시프트');
   }
   return resultString;
 }

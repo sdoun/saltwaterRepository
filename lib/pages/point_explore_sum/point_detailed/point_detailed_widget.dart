@@ -1,3 +1,5 @@
+import 'package:salt_water_beta_ver1/pages/point_explore_sum/review_bottomsheet/review_edit_view.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -44,6 +46,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
 
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -94,31 +97,52 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                       size: 30.0,
                     ),
                     onPressed: () async {
-                      context.safePop();
+                      context.pop();
                     },
                   ),
                 ),
               ),
               title: Align(
-                alignment: const AlignmentDirectional(0.0, 0.0),
-                child: Text(
-                  pointDetailedTBPointRecord.pointName,
-                  style: FlutterFlowTheme.of(context).headlineMedium.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).headlineMediumFamily,
-                        letterSpacing: 0.0,
-                        fontWeight: FontWeight.w600,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).headlineMediumFamily),
-                      ),
+                alignment: const AlignmentDirectional(0.0, -1.0),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  child: Text(
+                    pointDetailedTBPointRecord.pointName,
+                    style: FlutterFlowTheme
+                        .of(context)
+                        .bodyMedium
+                        .override(
+                      fontFamily:
+                      'PretendardSeries',
+                      color: FlutterFlowTheme.of(
+                          context)
+                          .primaryText,
+                      fontSize:
+                      19.0,
+                      letterSpacing:
+                      0.0,
+                      fontWeight:
+                      FontWeight
+                          .w700,
+                      useGoogleFonts: GoogleFonts
+                          .asMap()
+                          .containsKey(
+                          'PretendardSeries'),
+                    ),
+                  ),
                 ),
               ),
-              actions: const [
-                SizedBox(
-                  width: 60.0,
-                  height: 60.0,
-                )
-              ],
+              actions: const [FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30.0,
+                borderWidth: 1.0,
+                buttonSize: 60.0,
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.transparent,
+                  size: 30.0,
+                ),
+              ),],
               centerTitle: false,
               elevation: 2.0,
             ),
@@ -371,9 +395,13 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                           ),
                           StreamBuilder<List<TBFishRecord>>(
                             stream: queryTBFishRecord(
-                              queryBuilder: (tBFishRecord) =>
-                                  tBFishRecord.whereIn('fish_name',
-                                      pointDetailedTBPointRecord.pointFishes),
+                              queryBuilder: (tBFishRecord) {
+                                if(pointDetailedTBPointRecord.pointFishType.isEmpty){
+                                  return tBFishRecord.where('fish_name' == '전갱이');
+                                }
+                                return tBFishRecord.whereIn('fish_name',
+                                    pointDetailedTBPointRecord.pointFishType);
+                              }
                             ),
                             builder: (context, snapshot) {
                               // Customize what your widget looks like when it's loading.
@@ -394,7 +422,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                               List.from(snapshot.data!.reversed);
 
                               return Container(
-                                margin: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
+                                margin: const EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
                                 width: 563.0,
                                 height: 92.0,
                                 decoration: BoxDecoration(
@@ -406,55 +434,61 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                     final pointFishes =
                                     containerTBFishRecordList.toList();
 
-                                    return Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children:
-                                      List.generate(pointFishes.length,
-                                              (pointFishesIndex) {
-                                            final pointFishesItem =
-                                            pointFishes[pointFishesIndex];
-                                            return Container(
-                                              height: 100.0,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryBackground,
-                                              ),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Container(
-                                                    height: 48.0,
-                                                    clipBehavior: Clip.antiAlias,
-                                                    decoration: const BoxDecoration(
+                                    return SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children:
+                                        List.generate(pointFishes.length,
+                                                (pointFishesIndex) {
+                                              final pointFishesItem =
+                                              pointFishes[pointFishesIndex];
+                                              return Container(
+                                                height: 100.0,
+                                                decoration: BoxDecoration(
+                                                  color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                                ),
+                                                child: Column(
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  children: [
+                                                    Container(
+                                                      width: 64.0,
+                                                      clipBehavior: Clip.antiAlias,
+                                                      decoration: const BoxDecoration(
+                                                      ),
+                                                      child: Image.network(
+                                                        pointFishesItem.fishIcon,
+                                                        fit: BoxFit.cover,
+                                                      ),
                                                     ),
-                                                    child: Image.network(
-                                                      pointFishesItem.fishIcon,
-                                                      fit: BoxFit.cover,
+                                                    Text(
+                                                      pointFishesItem.fishName,
+                                                      style: FlutterFlowTheme.of(
+                                                          context)
+                                                          .bodyMedium
+                                                          .override(
+                                                        fontFamily:
+                                                        'PretendardSeries',
+                                                        letterSpacing: 0.0,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                        FontWeight.w500,
+                                                        useGoogleFonts:
+                                                        GoogleFonts
+                                                            .asMap()
+                                                            .containsKey(
+                                                            'PretendardSeries'),
+                                                      ),
                                                     ),
-                                                  ),
-                                                  Text(
-                                                    pointFishesItem.fishName,
-                                                    style: FlutterFlowTheme.of(
-                                                        context)
-                                                        .bodyMedium
-                                                        .override(
-                                                      fontFamily:
-                                                      'PretendardSeries',
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                      FontWeight.w500,
-                                                      useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                          .containsKey(
-                                                          'PretendardSeries'),
-                                                    ),
-                                                  ),
-                                                ].divide(const SizedBox(height: 8.0)),
-                                              ),
-                                            );
-                                          }),
+                                                  ].divide(const SizedBox(height: 8.0)),
+                                                ),
+                                              );
+                                            }
+                                          ).divide(const SizedBox(width: 4.0,)),
+                                      ),
                                     );
                                   },
                                 ),
@@ -923,22 +957,60 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            columnTBUserReviewPointRecord
-                                                .reviewTitle,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
+                                          Row(
+                                            children: [
+                                              Text(
+                                                columnTBUserReviewPointRecord
+                                                    .reviewTitle,
+                                                style: FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .override(
                                                   fontFamily:
-                                                      'PretendardSeries',
+                                                  'PretendardSeries',
                                                   fontSize: 16.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w600,
                                                   useGoogleFonts: GoogleFonts
-                                                          .asMap()
+                                                      .asMap()
                                                       .containsKey(
-                                                          'PretendardSeries'),
+                                                      'PretendardSeries'),
                                                 ),
+                                              ),
+                                              Visibility(
+                                                  visible: currentUserReference == columnTBUserReviewPointRecord.reviewWrittenBy,
+                                                  child: InkWell(
+                                                onTap: () async {
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor: Colors.transparent,
+                                                    enableDrag: false,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return WebViewAware(
+                                                        child: GestureDetector(
+                                                          onTap: () =>
+                                                              FocusScope.of(context).unfocus(),
+                                                          child: Padding(
+                                                            padding:
+                                                            MediaQuery.viewInsetsOf(context),
+                                                            child: SizedBox(
+                                                                height: 520.0,
+                                                                child: ReviewEditView(
+                                                                  reviewRef: columnTBUserReviewPointRecord.reference,
+                                                                )
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ).then((value) => safeSetState(() {}));
+                                                },
+                                                child: Container(
+                                                  height: 24,
+                                                  child: Image.asset('assets/images/KakaoTalk_20240717_160550314.png'),
+                                                ),
+                                              ))
+                                            ],
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,

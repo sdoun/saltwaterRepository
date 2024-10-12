@@ -49,6 +49,7 @@ class _Pension3rdFilterWidgetState extends State<Pension3rdFilterWidget> {
     return Filterbackground(
       child: Column(
         mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
@@ -66,49 +67,55 @@ class _Pension3rdFilterWidgetState extends State<Pension3rdFilterWidget> {
             thickness: 1.0,
             color: FlutterFlowTheme.of(context).secondaryText,
           ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Filtercheckbox(
-                filterText: '식사제공',
-                checkBoxValue: _model.checkboxValue1,
-                onChecked: (newValue) async {
-                  safeSetState(() =>
-                  _model.checkboxValue1 = newValue!);
-                },
-              ),
-              Filtercheckbox(
-                filterText: '낚시대대여',
-                checkBoxValue: _model.checkboxValue2,
-                onChecked: (newValue) async {
-                  safeSetState(() =>
-                  _model.checkboxValue2 = newValue!);
-                },
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Filtercheckbox(
+                  filterText: '식사제공',
+                  checkBoxValue: _model.checkboxValue1,
+                  onChecked: (newValue) async {
+                    safeSetState(() =>
+                    _model.checkboxValue1 = newValue!);
+                  },
+                ),
+                Filtercheckbox(
+                  filterText: '낚시대대여',
+                  checkBoxValue: _model.checkboxValue2,
+                  onChecked: (newValue) async {
+                    safeSetState(() =>
+                    _model.checkboxValue2 = newValue!);
+                  },
+                ),
+              ],
+            ),
           ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Filtercheckbox(
-                filterText: '낚시배&좌대 이용가능',
-                checkBoxValue: _model.checkboxValue3,
-                onChecked: (newValue) async {
-                  safeSetState(() =>
-                  _model.checkboxValue3 = newValue!);
-                },
-              ),
-              Filtercheckbox(
-                filterText: '물놀이가능',
-                checkBoxValue: _model.checkboxValue4,
-                onChecked: (newValue) async {
-                  safeSetState(() =>
-                  _model.checkboxValue4 = newValue!);
-                },
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Filtercheckbox(
+                  filterText: '낚시배, 좌대 이용가능',
+                  checkBoxValue: _model.checkboxValue3,
+                  onChecked: (newValue) async {
+                    safeSetState(() =>
+                    _model.checkboxValue3 = newValue!);
+                  },
+                ),
+                Filtercheckbox(
+                  filterText: '해변물놀이 가능',
+                  checkBoxValue: _model.checkboxValue4,
+                  onChecked: (newValue) async {
+                    safeSetState(() =>
+                    _model.checkboxValue4 = newValue!);
+                  },
+                ),
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
@@ -123,8 +130,8 @@ class _Pension3rdFilterWidgetState extends State<Pension3rdFilterWidget> {
                     functions.pension3rdFilterBottomsheet(
                         _model.checkboxValue1!,
                         _model.checkboxValue3!,
-                        _model.checkboxValue2!,
-                        _model.checkboxValue4!));
+                        _model.checkboxValue4!,
+                        _model.checkboxValue2!));
               },
               child: Container(
                 width: 100.0,
@@ -153,7 +160,7 @@ class _Pension3rdFilterWidgetState extends State<Pension3rdFilterWidget> {
               ),
             ),
           ),
-        ].divide(const SizedBox(height: 8.0)),
+        ]
       ),
     );
   }

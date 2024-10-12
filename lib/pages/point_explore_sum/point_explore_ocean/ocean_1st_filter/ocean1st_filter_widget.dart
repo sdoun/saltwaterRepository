@@ -47,6 +47,7 @@ class _Ocean1stFilterWidgetState extends State<Ocean1stFilterWidget> {
     return Filterbackground(
       child: Column(
         mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             '시설구분',

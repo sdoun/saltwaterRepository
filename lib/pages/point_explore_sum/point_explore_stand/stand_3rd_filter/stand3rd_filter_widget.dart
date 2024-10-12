@@ -47,7 +47,7 @@ class _Stand3rdFilterWidgetState extends State<Stand3rdFilterWidget> {
     return Filterbackground(
       child: Column(
         mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             '편의사항',
@@ -64,27 +64,30 @@ class _Stand3rdFilterWidgetState extends State<Stand3rdFilterWidget> {
             thickness: 1.0,
             color: FlutterFlowTheme.of(context).secondaryText,
           ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Filtercheckbox(
-                filterText: '장비대여',
-                checkBoxValue: _model.checkboxValue1,
-                onChecked: (newValue) async {
-                  safeSetState(() =>
-                  _model.checkboxValue1 = newValue!);
-                },
-              ),
-              Filtercheckbox(
-                filterText: '장비판매',
-                checkBoxValue: _model.checkboxValue2,
-                onChecked: (newValue) async {
-                  safeSetState(() =>
-                  _model.checkboxValue2 = newValue!);
-                },
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Filtercheckbox(
+                  filterText: '낚시장비 대여',
+                  checkBoxValue: _model.checkboxValue1,
+                  onChecked: (newValue) async {
+                    safeSetState(() =>
+                    _model.checkboxValue1 = newValue!);
+                  },
+                ),
+                Filtercheckbox(
+                  filterText: '낚시용품 판매',
+                  checkBoxValue: _model.checkboxValue2,
+                  onChecked: (newValue) async {
+                    safeSetState(() =>
+                    _model.checkboxValue2 = newValue!);
+                  },
+                ),
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
@@ -126,7 +129,7 @@ class _Stand3rdFilterWidgetState extends State<Stand3rdFilterWidget> {
               ),
             ),
           ),
-        ].divide(const SizedBox(height: 8.0)),
+        ]
       ),
     );
   }

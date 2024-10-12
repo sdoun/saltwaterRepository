@@ -102,6 +102,7 @@ Map<String, dynamic> createTBUserReviewPointRecordData({
   return firestoreData;
 }
 
+
 class TBUserReviewPointRecordDocumentEquality
     implements Equality<TBUserReviewPointRecord> {
   const TBUserReviewPointRecordDocumentEquality();
