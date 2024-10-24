@@ -59,4 +59,11 @@ class ReviewEditModel {
     }
     return;
   }
+  void deleteReview(
+      DocumentReference? reviewRef
+      ){
+    if(reviewRef != null) {
+      reviewRef.delete();
+    }
+  }
 }

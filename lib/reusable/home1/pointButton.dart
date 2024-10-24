@@ -2,6 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:salt_water_beta_ver1/backend/api_requests/api_calls.dart';
+import 'package:salt_water_beta_ver1/flutter_flow/flutter_flow_util.dart';
 
 import '../../flutter_flow/flutter_flow_theme.dart';
 
@@ -87,6 +89,9 @@ class _pointButtonState extends State<pointButton> {
                 ),
                 child: widget.image,
               ),
+              const SizedBox(
+                height: 8,
+              ),
               AutoSizeText(
                 widget.text,
                 style: FlutterFlowTheme
@@ -129,7 +134,7 @@ class _pointButtonState extends State<pointButton> {
                       'PretendardSeries'),
                 ),
               )
-            ],
+            ]
           ),
         ),
       ),

@@ -44,6 +44,10 @@ class TBUserReviewPointRecord extends FirestoreRecord {
     _reviewPointRef = snapshotData['review_pointRef'] as DocumentReference?;
   }
 
+  void deleteRecord(DocumentReference reviewRef){
+    reviewRef.delete();
+  }
+
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
       parent != null
           ? parent.collection('TB_userReview_point')

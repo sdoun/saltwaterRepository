@@ -136,6 +136,9 @@ class _MenuWidgetState extends State<MenuWidget> {
                             ),
                           ],
                         ),
+                        const SizedBox(
+                          height: 8,
+                        ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

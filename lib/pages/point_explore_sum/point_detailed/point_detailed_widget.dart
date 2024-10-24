@@ -1,5 +1,6 @@
 import 'package:salt_water_beta_ver1/pages/point_explore_sum/review_bottomsheet/review_edit_view.dart';
 
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -175,13 +176,28 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                       (pointImagesIndex) {
                                     final pointImagesItem =
                                         pointImages[pointImagesIndex];
-                                    return ClipRRect(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      child: Image.network(
-                                        pointImagesItem,
-                                        width: 168.0,
-                                        height: 176.0,
-                                        fit: BoxFit.cover,
+                                    return InkWell(
+                                      onTap: () async {
+                                        context.pushNamed(
+                                          'imageDetailView',
+                                          queryParameters: {
+                                            'imageList': serializeParam(
+                                              pointDetailedTBPointRecord
+                                                  .pointImages,
+                                              ParamType.String,
+                                              isList: true,
+                                            ),
+                                          }.withoutNulls,
+                                        );
+                                      },
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(8.0),
+                                        child: Image.network(
+                                          pointImagesItem,
+                                          width: 168.0,
+                                          height: 176.0,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     );
                                   }).divide(const SizedBox(width: 8.0)),
@@ -395,13 +411,14 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                           ),
                           StreamBuilder<List<TBFishRecord>>(
                             stream: queryTBFishRecord(
-                              queryBuilder: (tBFishRecord) {
-                                if(pointDetailedTBPointRecord.pointFishType.isEmpty){
-                                  return tBFishRecord.where('fish_name' == '전갱이');
+                                queryBuilder: (tBFishRecord) {
+                                  if (pointDetailedTBPointRecord.pointFishType.isEmpty) {
+                                    return tBFishRecord.where('fish_name', isEqualTo: '전갱이');
+                                  }
+                                  return tBFishRecord
+                                      .whereIn('fish_name', pointDetailedTBPointRecord.pointFishType)
+                                      .orderBy('fish_num');
                                 }
-                                return tBFishRecord.whereIn('fish_name',
-                                    pointDetailedTBPointRecord.pointFishType);
-                              }
                             ),
                             builder: (context, snapshot) {
                               // Customize what your widget looks like when it's loading.
@@ -419,7 +436,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                 );
                               }
                               List<TBFishRecord> containerTBFishRecordList =
-                              List.from(snapshot.data!.reversed);
+                              List.from(snapshot.data!);
 
                               return Container(
                                 margin: const EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
@@ -828,12 +845,8 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                         'PretendardSeries'),
                                   ),
                                 ),
-                                FFButtonWidget(
-                                  icon: const Icon(
-                                    Icons.create_outlined,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: () async {
+                                InkWell(
+                                  onTap: () async {
                                     await showModalBottomSheet(
                                       isScrollControlled: true,
                                       backgroundColor: Colors.transparent,
@@ -860,32 +873,49 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                       },
                                     ).then((value) => safeSetState(() {}));
                                   },
-                                  text: '의견쓰기',
-                                  options: FFButtonOptions(
-                                    height: 40.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        12.0, 0.0, 12.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .titleSmallFamily,
-                                      color: Colors.white,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                          FlutterFlowTheme.of(context)
-                                              .titleSmallFamily),
+                                  child: IntrinsicWidth(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme
+                                            .of(context)
+                                            .primary,
+                                        borderRadius:
+                                        BorderRadius.circular(
+                                            12.0),
+                                      ),
+                                      padding: const EdgeInsetsDirectional.only(start: 4, end: 8, top: 4, bottom: 4),
+                                      alignment:
+                                      const AlignmentDirectional(
+                                          0.0, 0.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                            size: 16,
+                                            Icons.create_outlined,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                            child: Align(
+                                              alignment: const Alignment(0, 0),
+                                              child: Text(
+                                                  '의견쓰기',
+                                                  style: GoogleFonts.getFont(
+                                                    'Readex Pro',
+                                                    color: FlutterFlowTheme.of(context).primaryBackground,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 13.0,
+                                                    height: 1.1,
+                                                  )
+                                              ),
+                                            )
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                    elevation: 3.0,
-                                    borderSide: const BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
                                   ),
                                 ),
                               ],
@@ -976,40 +1006,58 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                       'PretendardSeries'),
                                                 ),
                                               ),
+                                              const SizedBox(
+                                                width: 16
+                                              ),
                                               Visibility(
                                                   visible: currentUserReference == columnTBUserReviewPointRecord.reviewWrittenBy,
-                                                  child: InkWell(
-                                                onTap: () async {
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor: Colors.transparent,
-                                                    enableDrag: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return WebViewAware(
-                                                        child: GestureDetector(
-                                                          onTap: () =>
-                                                              FocusScope.of(context).unfocus(),
-                                                          child: Padding(
-                                                            padding:
-                                                            MediaQuery.viewInsetsOf(context),
-                                                            child: SizedBox(
-                                                                height: 520.0,
-                                                                child: ReviewEditView(
-                                                                  reviewRef: columnTBUserReviewPointRecord.reference,
-                                                                )
-                                                            ),
-                                                          ),
+                                                  child: Row(
+                                                    children: [
+                                                      InkWell(
+                                                        onTap: () async {
+                                                          await showModalBottomSheet(
+                                                            isScrollControlled: true,
+                                                            backgroundColor: Colors.transparent,
+                                                            enableDrag: false,
+                                                            context: context,
+                                                            builder: (context) {
+                                                              return WebViewAware(
+                                                                child: GestureDetector(
+                                                                  onTap: () =>
+                                                                      FocusScope.of(context).unfocus(),
+                                                                  child: Padding(
+                                                                    padding:
+                                                                    MediaQuery.viewInsetsOf(context),
+                                                                    child: SizedBox(
+                                                                        height: 520.0,
+                                                                        child: ReviewEditView(
+                                                                          reviewRef: columnTBUserReviewPointRecord.reference,
+                                                                        )
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                          ).then((value) => safeSetState(() {}));
+                                                        },
+                                                        child: SizedBox(
+                                                          height: 24,
+                                                          child: Image.asset('assets/images/리뷰수정.png'),
                                                         ),
-                                                      );
-                                                    },
-                                                  ).then((value) => safeSetState(() {}));
-                                                },
-                                                child: Container(
-                                                  height: 24,
-                                                  child: Image.asset('assets/images/KakaoTalk_20240717_160550314.png'),
-                                                ),
-                                              ))
+                                                      ),
+                                                      InkWell(
+                                                        onTap: (){
+                                                          columnTBUserReviewPointRecord.deleteRecord(columnTBUserReviewPointRecord.reference);
+                                                        },
+                                                        child: 
+                                                          SizedBox(
+                                                          height: 24,
+                                                            child: Image.asset('assets/images/리뷰삭제.png'),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  )
+                                              ),
                                             ],
                                           ),
                                           Row(
@@ -1023,7 +1071,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                   shape: BoxShape.circle,
                                                 ),
                                                 child: Image.network(
-                                                  containerUsersRecord.photoUrl,
+                                                  functions.basicProfile(currentUserPhoto),
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),

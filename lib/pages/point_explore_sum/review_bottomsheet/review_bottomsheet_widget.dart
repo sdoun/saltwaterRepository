@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'review_bottomsheet_model.dart';
 export 'review_bottomsheet_model.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 
 import 'package:salt_water_beta_ver1/reusable/pointDetailed/review_textform.dart';
 
@@ -130,7 +131,7 @@ class _ReviewBottomsheetWidgetState extends State<ReviewBottomsheetWidget> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(40.0),
                         child: Image.network(
-                            currentUserPhoto,
+                          functions.basicProfile(currentUserPhoto),
                           width: 40.0,
                           height: 40.0,
                           fit: BoxFit.cover,

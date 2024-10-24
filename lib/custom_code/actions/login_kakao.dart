@@ -24,7 +24,7 @@ Future loginKakao() async {
       FirebaseFunctions.instance.httpsCallable('redirectionCloudLog');
   try {
     if (await kakao.isKakaoTalkInstalled()) {
-      await kakao.UserApi.instance.loginWithKakaoAccount();
+      await kakao.UserApi.instance.loginWithKakaoTalk();
     } else {
       await kakao.UserApi.instance.loginWithKakaoAccount();
     }

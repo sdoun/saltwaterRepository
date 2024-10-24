@@ -36,7 +36,7 @@ class ExploreMapSWModel extends FlutterFlowModel<ExploreMapSWWidget> {
   // Stores action output result for [Bottom Sheet - seawall_3rdFilter] action in Container widget.
   List<String>? sW3rdFilter;
   // Stores action output result for [Custom Action - sWFilterSumString] action in Button widget.
-  List<String>? sWPointList;
+  List<String>? sWPointList = [];
   // Model for customNavbar component.
   late CustomNavbarModel customNavbarModel;
 

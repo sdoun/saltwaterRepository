@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:salt_water_beta_ver1/reusable/common/imageDetailView.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 
@@ -108,6 +109,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'login',
           path: '/login',
           builder: (context, params) => const LoginWidget(),
+        ),
+        FFRoute(
+          name: 'imageDetailView',
+          path: '/imageDetailView',
+          builder: (context, params) => Imagedetailview(imageList: params.getParam<String>('imageList', ParamType.String, isList: true)),
         ),
         FFRoute(
           name: 'googlemapErrorSolve',

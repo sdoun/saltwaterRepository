@@ -67,16 +67,18 @@ class _ExploreMapSWWidgetState extends State<ExploreMapSWWidget> {
     context.watch<FFAppState>();
 
     return StreamBuilder<List<TBPointRecord>>(
+      //쿼리 페이지에서 필터링해서 처리해봄
       stream: queryTBPointRecord(
-        queryBuilder: (tBPointRecord) => tBPointRecord
-            .whereIn('point_name',
-                _model.sWPointList != '' ? _model.sWPointList : null)
-            .where(
-              'point_categories',
-              isEqualTo: '방파제, 선착장' != '' ? '방파제, 선착장' : null,
-              isNull: ('방파제, 선착장' != '' ? '방파제, 선착장' : null) == null,
-            ),
-      )..listen((snapshot) {
+        queryBuilder: (tBPointRecord) => tBPointRecord,
+          ).map((snapshot) {
+          return snapshot.where((record) {
+          bool matchesName = _model.sWPointList == '' ||
+          _model.sWPointList!.contains(record.pointName);
+          bool matchesCategory = '방파제, 선착장' == '' ||
+          record.pointCategories == '방파제, 선착장';
+          return matchesName && matchesCategory;
+          }).toList();
+    })..listen((snapshot) {
           List<TBPointRecord> exploreMapSWTBPointRecordList = snapshot;
           if (_model.exploreMapSWPreviousSnapshot != null &&
               !const ListEquality(TBPointRecordDocumentEquality()).equals(

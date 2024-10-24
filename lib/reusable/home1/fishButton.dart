@@ -57,65 +57,73 @@ class _FishbuttonState extends State<Fishbutton> {
         ).then((value) =>
             safeSetState(() {}));
       },
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment:
-        MainAxisAlignment
-            .spaceBetween,
-        children: [
-          Container(
-            width: MediaQuery.sizeOf(
-                context)
-                .width *
-                0.16,
-            height: 72.0,
-            decoration: BoxDecoration(
-              color: FlutterFlowTheme
-                  .of(context)
-                  .primaryBackground,
-              borderRadius:
-              const BorderRadius.only(
-                bottomLeft:
-                Radius.circular(
-                    8.0),
-                bottomRight:
-                Radius.circular(
-                    8.0),
-                topLeft:
-                Radius.circular(
-                    8.0),
-                topRight:
-                Radius.circular(
-                    8.0),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment:
+          MainAxisAlignment
+              .spaceBetween,
+          children: [
+            Container(
+              width: MediaQuery.sizeOf(
+                  context)
+                  .width *
+                  0.16,
+              height:  MediaQuery
+                  .sizeOf(
+                  context)
+                  .width *
+                  0.12,
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme
+                    .of(context)
+                    .primaryBackground,
+                borderRadius:
+                const BorderRadius.only(
+                  bottomLeft:
+                  Radius.circular(
+                      8.0),
+                  bottomRight:
+                  Radius.circular(
+                      8.0),
+                  topLeft:
+                  Radius.circular(
+                      8.0),
+                  topRight:
+                  Radius.circular(
+                      8.0),
+                ),
+              ),
+              child: ClipRRect(
+                  borderRadius:
+                  BorderRadius.circular(
+                      8.0),
+                  child: widget.image
               ),
             ),
-            child: ClipRRect(
-              borderRadius:
-              BorderRadius.circular(
-                  8.0),
-              child: widget.image
+            const SizedBox(height: 4,),
+            Text(
+              widget.text,
+              style: FlutterFlowTheme.of(
+                  context)
+                  .bodyMedium
+                  .override(
+                fontFamily:
+                'PretendardSeries',
+                fontSize: 14.0,
+                letterSpacing: 0.0,
+                fontWeight:
+                FontWeight.w500,
+                useGoogleFonts:
+                GoogleFonts
+                    .asMap()
+                    .containsKey(
+                    'PretendardSeries'),
+              ),
             ),
-          ),
-          Text(
-            widget.text,
-            style: FlutterFlowTheme.of(
-                context)
-                .bodyMedium
-                .override(
-              fontFamily:
-              'PretendardSeries',
-              fontSize: 14.0,
-              letterSpacing: 0.0,
-              fontWeight:
-              FontWeight.w500,
-              useGoogleFonts:
-              GoogleFonts
-                  .asMap()
-                  .containsKey(
-                  'PretendardSeries'),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -28,4 +28,7 @@ class ReviewEditController{
   void updatePointReview(){
     _model.updateReview(reviewRef, _model.titleController1?.text, _model.contentController?.text);
   }
+  void deletePointReview(){
+    _model.deleteReview(reviewRef);
+  }
 }

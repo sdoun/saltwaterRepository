@@ -27,6 +27,15 @@ List<String>? sW1stFilterBottomsheet(
   return resultString;
 }
 
+String basicProfile(String userPhoto){
+  if(userPhoto.isEmpty){
+    return 'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%EA%B8%B0%EB%B3%B8%ED%94%84%EC%82%AC.png?alt=media&token=d26edeec-66ce-4ded-b65e-24d32ca362b1';
+  }
+  else{
+    return userPhoto;
+  }
+}
+
 List<String>? sW2ndFilterBottomsheet(
   bool istoilet,
   bool isrestaurant,

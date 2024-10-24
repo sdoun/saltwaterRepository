@@ -83,8 +83,7 @@ class _PointCategoryWidgetState extends State<PointCategoryWidget> {
                     pointType: '방파제, 선착장',
                     onTap: () async {
                       context.pushNamed('exploreMapSW');
-
-                      Navigator.pop(context, '방파제, 선착장');
+                      Navigator.pop(context);
                     },
                   ),
                   Pointcategory(

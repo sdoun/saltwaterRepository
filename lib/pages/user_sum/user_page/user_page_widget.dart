@@ -289,6 +289,9 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                   padding: EdgeInsets.zero,
                   scrollDirection: Axis.vertical,
                   children: [
+                    const SizedBox(
+                      height: 32,
+                    ),
                     Container(
                       width: 586.0,
                       height: 356.0,
@@ -302,18 +305,34 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             AuthUserStreamWidget(
-                              builder: (context) => Container(
-                                width: 80.0,
-                                height: 80.0,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Image.network(
-                                  currentUserPhoto,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                              builder: (context) {
+                                if(currentUserPhoto.isEmpty){
+                                  return Container(
+                                      width: 80.0,
+                                      height: 80.0,
+                                      clipBehavior: Clip.antiAlias,
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Image.asset(
+                                          'assets/images/기본프사.png',
+                                          fit: BoxFit.cover
+                                      ),
+                                  );
+                                }
+                                return Container(
+                                    width: 80.0,
+                                    height: 80.0,
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Image.network(
+                                      currentUserPhoto,
+                                      fit: BoxFit.fill,
+                                    ),
+                                );
+                              },
                             ),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(

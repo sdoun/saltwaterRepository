@@ -34,6 +34,7 @@ class _PointAdsPageviewState extends State<PointAdsPageview> {
     if (data != null && data['ads_image'] != null) {
       return GestureDetector(
         onTap: () async {
+          print('pointRef is : ${data['ads_pointRef']}');
           if (data['ads_pointRef'] != null) {
             await context.pushNamed(
               'point_detailed',

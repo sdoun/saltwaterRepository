@@ -19,7 +19,7 @@ Future<List<String>?> seawallType(
     resultString.add('외항테트라');
   }
   if (isShift) {
-    resultString.add('외항시프트');
+    resultString.add('외항석축');
   }
   return resultString;
 }

@@ -36,10 +36,11 @@ class _UserEditWidgetState extends State<UserEditWidget> {
     super.initState();
     _model = createModel(context, () => UserEditModel());
 
-    _model.textController ??= TextEditingController();
+    _model.textController ??= TextEditingController(text: currentUserDisplayName);
     _model.textFieldFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
+    FFAppState().newProfileImage = currentUserPhoto;
   }
 
   @override
@@ -200,7 +201,6 @@ class _UserEditWidgetState extends State<UserEditWidget> {
                               focusNode: _model.textFieldFocusNode,
                               autofocus: true,
                               obscureText: false,
-                              initialValue: currentUserDisplayName,
                               decoration: InputDecoration(
                                 labelText: '여기에 입력하세요',
                                 labelStyle: FlutterFlowTheme.of(

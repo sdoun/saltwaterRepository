@@ -146,30 +146,7 @@ class _Home1WidgetState extends State<Home1Widget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
-                            await showModalBottomSheet(
-                              isScrollControlled: true,
-                              backgroundColor: Colors.transparent,
-                              enableDrag: false,
-                              context: context,
-                              builder: (context) {
-                                return WebViewAware(
-                                  child: GestureDetector(
-                                    onTap: () => FocusScope.of(context).unfocus(),
-                                    child: Padding(
-                                      padding: MediaQuery.viewInsetsOf(context),
-                                      child: SizedBox(
-                                        height: 480.0,
-                                        child: UnReadChatWidget(
-                                          unReadChat: badgeTBChatRecordList
-                                              .map((e) => e.reference)
-                                              .toList(),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            ).then((value) => safeSetState(() {}));
+                            context.pushNamed('service_is_not_ready');
                           },
                           child: Container(
                             height: 40.0,
@@ -235,7 +212,7 @@ class _Home1WidgetState extends State<Home1Widget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.pushNamed('Checkout1');
+                        context.pushNamed('service_is_not_ready');
                       },
                       child: Container(
                         width: 36.0,

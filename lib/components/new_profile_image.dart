@@ -68,8 +68,6 @@ class _NewProfileImageState extends State<NewProfileImage> {
       elevation: 2.0,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(12.0),
-          bottomRight: Radius.circular(12.0),
           topLeft: Radius.circular(12.0),
           topRight: Radius.circular(12.0),
         ),
@@ -89,8 +87,6 @@ class _NewProfileImageState extends State<NewProfileImage> {
             )
           ],
           borderRadius: const BorderRadius.only(
-            bottomLeft: Radius.circular(12.0),
-            bottomRight: Radius.circular(12.0),
             topLeft: Radius.circular(12.0),
             topRight: Radius.circular(12.0),
           ),

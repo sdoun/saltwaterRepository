@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salt_water_beta_ver1/flutter_flow/flutter_flow_util.dart';
 import 'package:salt_water_beta_ver1/pages/point_explore_sum/review_bottomsheet/review_edit_controller.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 
 import '../../../auth/firebase_auth/auth_util.dart';
 import '../../../backend/schema/t_b_user_review_point_record.dart';
@@ -24,7 +25,7 @@ class _ReviewEditViewState extends State<ReviewEditView> {
 
   @override
   void initState(){
-    // TODO: implement initState
+
     super.initState();
     _controller = ReviewEditController(reviewRef: widget.reviewRef);
     print('reviewEdit reviewRef: ${widget.reviewRef.toString()}');
@@ -132,7 +133,7 @@ class _ReviewEditViewState extends State<ReviewEditView> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(40.0),
                                 child: Image.network(
-                                  currentUserPhoto,
+                                  functions.basicProfile(currentUserPhoto),
                                   width: 40.0,
                                   height: 40.0,
                                   fit: BoxFit.cover,
