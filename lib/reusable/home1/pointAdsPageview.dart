@@ -53,7 +53,7 @@ class _PointAdsPageviewState extends State<PointAdsPageview> {
         child: Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
           child: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.20,
+            width: MediaQuery.of(context).size.width,
             child:  Column(
               children: [
                 Image.network(
