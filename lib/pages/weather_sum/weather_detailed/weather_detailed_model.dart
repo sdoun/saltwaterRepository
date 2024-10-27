@@ -1,3 +1,5 @@
+import 'package:salt_water_beta_ver1/backend/api_requests/api_manager.dart';
+
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/custom_navbar_widget.dart';
@@ -29,10 +31,23 @@ class WeatherDetailedModel extends FlutterFlowModel<WeatherDetailedWidget> {
   // Model for customNavbar component.
   late CustomNavbarModel customNavbarModel;
 
+  ApiCallResponse? realtimeWeatherResponse;
+
+  ApiCallResponse? fcstWeatherResponse;
+
+  ApiCallResponse? tidalFcstResponse;
+
+  ApiCallResponse? midTmpResponse;
+
+  ApiCallResponse? realtimeWtrTmpResponse;
+
+  ApiCallResponse? midFcstResponse;
+
   @override
   void initState(BuildContext context) {
     customNavbarModel = createModel(context, () => CustomNavbarModel());
   }
+  
 
   @override
   void dispose() {
