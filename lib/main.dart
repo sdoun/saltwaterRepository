@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+
 import '/custom_code/actions/index.dart' as actions;
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'auth/firebase_auth/firebase_user_provider.dart';
 import 'auth/firebase_auth/auth_util.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
 import 'backend/push_notifications/push_notifications_util.dart';
 import 'backend/firebase/firebase_config.dart';
@@ -19,7 +22,8 @@ void main() async {
   GoRouter.optionURLReflectsImperativeAPIs = true;
   usePathUrlStrategy();
 
-
+  await Firebase.initializeApp(
+  );
   await initFirebase();
 
   // Start initial custom actions code
@@ -49,6 +53,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  static FirebaseAnalyticsObserver observer = FirebaseAnalyticsObserver(analytics: analytics);
+
   ThemeMode _themeMode = FlutterFlowTheme.themeMode;
 
   late AppStateNotifier _appStateNotifier;
@@ -63,7 +71,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _appStateNotifier = AppStateNotifier.instance;
-    _router = createRouter(_appStateNotifier);
+    _router = createRouter(_appStateNotifier, observer);
     userStream = saltWaterBetaVer1FirebaseUserStream()
       ..listen((user) {
         _appStateNotifier.update(user);
@@ -117,6 +125,7 @@ class _MyAppState extends State<MyApp> {
       ),
       themeMode: _themeMode,
       routerConfig: _router,
+    
     );
   }
 }

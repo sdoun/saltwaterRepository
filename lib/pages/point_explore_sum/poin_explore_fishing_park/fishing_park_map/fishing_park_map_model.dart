@@ -26,6 +26,11 @@ class FishingParkMapModel extends FlutterFlowModel<FishingParkMapWidget> {
   // Model for customNavbar component.
   late CustomNavbarModel customNavbarModel;
 
+  bool filterValueExit = false;
+  void setFilterValueExit(){
+    filterValueExit = !(park1stFilter == null && park2ndFilter == null &&park3rdFilter == null && FFAppState().fishes.isEmpty);
+  }
+
   /// Query cache managers for this widget.
 
   final _pointCacheManager = StreamRequestManager<List<TBPointRecord>>();

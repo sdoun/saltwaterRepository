@@ -40,6 +40,11 @@ class ExploreMapOceanModel extends FlutterFlowModel<ExploreMapOceanWidget> {
   // Model for customNavbar component.
   late CustomNavbarModel customNavbarModel;
 
+  bool filterValueExit = false;
+  void setFilterValueExit(){
+    filterValueExit = !(ocean1stFilter == null && ocean2ndFilter == null &&oceean3rdFilter == null && FFAppState().fishes.isEmpty);
+  }
+
   @override
   void initState(BuildContext context) {
     columnController = ScrollController();

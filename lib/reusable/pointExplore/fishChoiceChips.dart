@@ -30,7 +30,12 @@ class _FishchoicechipsState extends State<Fishchoicechips> {
           ChipData('중상층'),
           ChipData('원투낚시')
         ],
-        onChanged: widget.onChanged,
+        onChanged: (val){
+          setState(() {
+            FFAppState().fishes = val ?? [];
+            widget.controller.value = FFAppState().fishes;
+          });
+        },
         selectedChipStyle: ChipStyle(
           backgroundColor:
           const Color(0xff949494),

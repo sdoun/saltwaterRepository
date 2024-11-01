@@ -23,6 +23,11 @@ class ExploreMapStandModel extends FlutterFlowModel<ExploreMapStandWidget> {
   // Model for customNavbar component.
   late CustomNavbarModel customNavbarModel;
 
+  bool filterValueExit = false;
+  void setFilterValueExit(){
+    filterValueExit = !(stand1stFilter == null && stand2ndFilter == null &&stand3rdFilter == null && FFAppState().fishes.isEmpty);
+  }
+
   @override
   void initState(BuildContext context) {
     customNavbarModel = createModel(context, () => CustomNavbarModel());

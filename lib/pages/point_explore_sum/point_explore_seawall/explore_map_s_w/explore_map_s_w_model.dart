@@ -18,6 +18,12 @@ class ExploreMapSWModel extends FlutterFlowModel<ExploreMapSWWidget> {
       filterValue[index] = updateFn(filterValue[index]);
 
   ///  State fields for stateful widgets in this page.
+  ///
+
+  bool filterValueExit = false;
+  void setFilterValueExit(){
+    filterValueExit = !(sW1stFilter == null && sW2ndFilter == null &&sW3rdFilter == null && FFAppState().fishes.isEmpty);
+  }
 
   List<TBPointRecord>? exploreMapSWPreviousSnapshot;
   // State field(s) for Column widget.

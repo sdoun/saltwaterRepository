@@ -37,6 +37,11 @@ class ExploreMapFishingPensionModel
   // Model for customNavbar component.
   late CustomNavbarModel customNavbarModel;
 
+  bool filterValueExit = false;
+  void setFilterValueExit(){
+    filterValueExit = !(pension1stFilter == null && pension2ndFilter == null &&pension3rdFilter == null && FFAppState().fishes.isEmpty);
+  }
+
   @override
   void initState(BuildContext context) {
     customNavbarModel = createModel(context, () => CustomNavbarModel());

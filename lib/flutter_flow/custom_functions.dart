@@ -151,22 +151,24 @@ List<String> datetimeToDateCopyFcst(String datetime) {
     print(dateTime.day);
   }
 
-  if (dateTime.hour >= 23) {
+
+  if (dateTime.hour < 2 || (dateTime.hour == 2 && dateTime.minute < 10)) {
+    dateTime = dateTime.subtract(Duration(days: 1));
     result.add('2300');
-  } else if (dateTime.hour >= 20) {
-    result.add('2000');
-  } else if (dateTime.hour >= 17) {
-    result.add('1700');
-  } else if (dateTime.hour >= 14) {
-    result.add('1400');
-  } else if (dateTime.hour >= 11) {
-    result.add('1100');
-  } else if (dateTime.hour >= 8) {
-    result.add('0800');
-  } else if (dateTime.hour >= 5) {
-    result.add('0500');
-  } else if (dateTime.hour >= 2) {
+  } else if (dateTime.hour < 5 || (dateTime.hour == 5 && dateTime.minute < 10)) {
     result.add('0200');
+  } else if (dateTime.hour < 8 || (dateTime.hour == 8 && dateTime.minute < 10)) {
+    result.add('0500');
+  } else if (dateTime.hour < 11 || (dateTime.hour == 11 && dateTime.minute < 10)) {
+    result.add('0800');
+  } else if (dateTime.hour < 14 || (dateTime.hour == 14 && dateTime.minute < 10)) {
+    result.add('1100');
+  } else if (dateTime.hour < 17 || (dateTime.hour == 17 && dateTime.minute < 10)) {
+    result.add('1400');
+  } else if (dateTime.hour < 20 || (dateTime.hour == 20 && dateTime.minute < 10)) {
+    result.add('1700');
+  } else if (dateTime.hour < 23 || (dateTime.hour == 23 && dateTime.minute < 10)) {
+    result.add('2000');
   } else {
     result.add('2300');
   }
@@ -186,7 +188,8 @@ List<String> datetimeToDateCopyFcst(String datetime) {
 
 int datetimeToDateCopy(String datetime) {
   DateTime dateTime = DateTime.parse(datetime);
-
+  if(dateTime.hour <= 1)
+  dateTime.subtract(Duration(days: 1));
   // 문자열 길이를 10으로 만들기
   String formattedDateTime = dateTime.toString().substring(0, 10);
 
@@ -211,9 +214,8 @@ String? datetimeToTimeString(String dateTimeString) {
   int hour = dateTime.hour;
   int minute = dateTime.minute;
 
-  if (minute <= 40) {
-    hour = hour - 1;
-  }
+  hour = hour - 1;
+
   hour = hour * 100;
   String hourString = hour.toString();
   if (hourString.length == 3) {
@@ -250,7 +252,7 @@ String vecToString(String? vecString) {
 
   if (vecString == null) {
     print('vec is null!');
-    return '서버 응답없음';
+    return '남';
   }
   double vec = double.parse(vecString);
   vec = (vec + 22.5 * 0.5) / 22.5;

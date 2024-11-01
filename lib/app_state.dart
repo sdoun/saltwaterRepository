@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
 
-  factory FFAppState() {
+  factory  FFAppState() {
     return _instance;
   }
 

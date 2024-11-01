@@ -61,35 +61,61 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
     super.dispose();
   }
 
+  void filterClear(){
+    setState((){
+        _model.ocean1stFilter = null;
+        _model.ocean2ndFilter = null;
+        _model.oceean3rdFilter = null;
+        FFAppState().fishes.clear();
+        _model.setFilterValueExit();
+      }
+    );
+  }
+
+  void pop(bool filterExit){
+    if(filterExit){
+      filterClear();
+    }
+    else{
+      context.pushNamed('home1');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return StreamBuilder<List<TBPointRecord>>(
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didpop, result){
+        _model.setFilterValueExit();
+        pop(_model.filterValueExit);
+      },
+        child: StreamBuilder<List<TBPointRecord>>(
       stream: queryTBPointRecord(
         queryBuilder: (tBPointRecord) =>
             tBPointRecord.whereIn('point_name', _model.pointList).where(
-                  'point_categories',
-                  isEqualTo: '해변, 갯바위',
-                ),
+              'point_categories',
+              isEqualTo: '해변, 갯바위',
+            ),
       )..listen((snapshot) {
-          List<TBPointRecord> exploreMapOceanTBPointRecordList = snapshot;
-          if (_model.exploreMapOceanPreviousSnapshot != null &&
-              !const ListEquality(TBPointRecordDocumentEquality()).equals(
-                  exploreMapOceanTBPointRecordList,
-                  _model.exploreMapOceanPreviousSnapshot)) {
-            () async {
-              await _model.columnController?.animateTo(
-                _model.columnController!.position.maxScrollExtent,
-                duration: const Duration(milliseconds: 100),
-                curve: Curves.ease,
-              );
+        List<TBPointRecord> exploreMapOceanTBPointRecordList = snapshot;
+        if (_model.exploreMapOceanPreviousSnapshot != null &&
+            !const ListEquality(TBPointRecordDocumentEquality()).equals(
+                exploreMapOceanTBPointRecordList,
+                _model.exploreMapOceanPreviousSnapshot)) {
+          () async {
+            await _model.columnController?.animateTo(
+              _model.columnController!.position.maxScrollExtent,
+              duration: const Duration(milliseconds: 100),
+              curve: Curves.ease,
+            );
 
-              safeSetState(() {});
-            }();
-          }
-          _model.exploreMapOceanPreviousSnapshot = snapshot;
-        }),
+            safeSetState(() {});
+          }();
+        }
+        _model.exploreMapOceanPreviousSnapshot = snapshot;
+      }),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -133,7 +159,8 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
                       size: 30.0,
                     ),
                     onPressed: () async {
-                      context.safePop();
+                      _model.setFilterValueExit();
+                      pop(_model.filterValueExit);
                     },
                   ),
                 ),
@@ -183,43 +210,43 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+                    const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
                     child: SingleChildScrollView(
                       controller: _model.columnController,
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 12.0, 0.0, 0.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Fishchoicechips(
-                                        controller: _model.choiceChipsValueController
-                                        ??=
-                                            FormFieldController<List<String>>(
-                                              FFAppState().fishes,
-                                            ),
-                                        chipValues: _model.choiceChipsValues,
-                                        onChanged: (val) => safeSetState(
-                                                () => _model.choiceChipsValues = val),
-                                      ),
+                            padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                            child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 12.0, 0.0, 0.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Fishchoicechips(
+                                      controller: _model.choiceChipsValueController
+                                      ??=
+                                          FormFieldController<List<String>>(
+                                            FFAppState().fishes,
+                                          ),
+                                      chipValues: _model.choiceChipsValues,
+                                      onChanged: (val) => safeSetState(
+                                              () => _model.choiceChipsValues = val),
+                                    ),
 
-                                      Align(
-                                        alignment: const AlignmentDirectional(-1.0, 0.0),
-                                        child: Padding(
-                                          padding: const EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
-                                          child: SingleChildScrollView(
+                                    Align(
+                                      alignment: const AlignmentDirectional(-1.0, 0.0),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                                        child: SingleChildScrollView(
                                           scrollDirection: Axis.horizontal,
                                           controller: _model.rowController,
                                           child: Row(
@@ -269,7 +296,7 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
                                                       BorderRadius.circular(
                                                           8.0),
                                                       border: Border.all(
-                                                        color: FlutterFlowTheme.of(context).primary,
+                                                          color: FlutterFlowTheme.of(context).primary,
                                                           width: 2
                                                       ),
                                                     ),
@@ -441,66 +468,66 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
                                             ].divide(const SizedBox(width: 4.0)),
                                           ),
                                         ),
-                                        ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 12.0, 0.0, 24.0),
-                                        child: FFButtonWidget(
-                                          onPressed: () async {
-                                            _model.pointList =
-                                            await actions.pointListFromFilter(
-                                              _model.ocean1stFilter?.toList(),
-                                              _model.ocean2ndFilter?.toList(),
-                                              _model.oceean3rdFilter?.toList(),
-                                              _model.choiceChipsValues?.toList(),
-                                              'TB_point',
-                                            );
-                                            _model.filterValue =
-                                                exploreMapOceanTBPointRecordList
-                                                    .toList()
-                                                    .cast<TBPointRecord>();
-                                            safeSetState(() {});
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 12.0, 0.0, 24.0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          _model.pointList =
+                                          await actions.pointListFromFilter(
+                                            _model.ocean1stFilter?.toList(),
+                                            _model.ocean2ndFilter?.toList(),
+                                            _model.oceean3rdFilter?.toList(),
+                                            _model.choiceChipsValues?.toList(),
+                                            'TB_point',
+                                          );
+                                          _model.filterValue =
+                                              exploreMapOceanTBPointRecordList
+                                                  .toList()
+                                                  .cast<TBPointRecord>();
+                                          safeSetState(() {});
 
-                                            safeSetState(() {});
-                                          },
-                                          text: '선택완료',
-                                          options: FFButtonOptions(
-                                            width:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.8,
-                                            height: 40.0,
-                                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                            iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                            color: FlutterFlowTheme.of(context).primary,
-                                            textStyle: FlutterFlowTheme.of(context)
-                                                .titleSmall
-                                                .override(
-                                              fontFamily: 'PretendardSeries',
-                                              color: Colors.white,
-                                              fontSize: 16.0,
-                                              fontWeight: FontWeight.w500,
-                                              letterSpacing: 0.0,
-                                              useGoogleFonts: GoogleFonts.asMap()
-                                                  .containsKey('PretendardSeries'),
-                                            ),
-                                            elevation: 3.0,
-                                            borderSide: const BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1.0,
-                                            ),
-                                            borderRadius:
-                                            BorderRadius.circular(8.0),
+                                          safeSetState(() {});
+                                        },
+                                        text: '선택완료',
+                                        options: FFButtonOptions(
+                                          width:
+                                          MediaQuery.sizeOf(context).width *
+                                              0.8,
+                                          height: 40.0,
+                                          padding: const EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                          iconPadding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context).primary,
+                                          textStyle: FlutterFlowTheme.of(context)
+                                              .titleSmall
+                                              .override(
+                                            fontFamily: 'PretendardSeries',
+                                            color: Colors.white,
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w500,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey('PretendardSeries'),
                                           ),
+                                          elevation: 3.0,
+                                          borderSide: const BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1.0,
+                                          ),
+                                          borderRadius:
+                                          BorderRadius.circular(8.0),
                                         ),
                                       ),
-                                    ].divide(const SizedBox(height: 8.0)),
-                                  ),
+                                    ),
+                                  ].divide(const SizedBox(height: 8.0)),
                                 ),
                               ),
+                            ),
                           ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(10.0),
@@ -518,12 +545,12 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
                                     width: double.infinity,
                                     height: double.infinity,
                                     child:
-                                        custom_widgets.NaverMapWidgetPointCopy(
+                                    custom_widgets.NaverMapWidgetPointCopy(
                                       width: double.infinity,
                                       height: double.infinity,
                                       mapType: FFAppState().mapTypeString,
                                       pointList:
-                                          exploreMapOceanTBPointRecordList,
+                                      exploreMapOceanTBPointRecordList,
                                       currentUser: currentUserReference!,
                                       onClickMarker: (markerDoc) async {
                                         context.pushNamed(
@@ -566,6 +593,6 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
           ),
         );
       },
-    );
+    ));
   }
 }

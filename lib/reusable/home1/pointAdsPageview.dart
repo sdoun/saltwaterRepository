@@ -51,37 +51,51 @@ class _PointAdsPageviewState extends State<PointAdsPageview> {
           }
         },
         child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child:  Column(
-              children: [
-                Image.network(
-                  data['ads_image'],
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      color: Colors.black,
-                      child: const Center(child: Text('Image load failed')),
-                    );
-                  },
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return const Center(child: CircularProgressIndicator());
-                  },
-                ),
-                const SizedBox(
-                  height: 32,
-                )
-              ]
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  AspectRatio(
+                    aspectRatio: 16 / 9, // 이미지 비율 설정 (예: 16:9)
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Image.network(
+                        data['ads_image'] ?? 'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%ED%8F%AC%EC%9D%B8%ED%8A%B8%EC%88%98%EC%A0%95%ED%8E%98%EC%9D%B4%EC%A7%80%2F%ED%8F%AC%EC%9D%B8%ED%8A%B8%EC%9D%B4%EB%AF%B8%EC%A7%80%EC%97%86%EC%9D%8C.png?alt=media&token=b357c611-3df0-4134-bf83-6d72fa96b82e',
+                        fit: BoxFit.contain, // cover 대신 contain 사용
+                        errorBuilder: (context, error, stackTrace) {
+                          print('Image error: $error');
+                          return Container(
+                            color: Colors.grey[200],
+                            child: const Center(child: Text('이미지를 불러올 수 없습니다')),
+                          );
+                        },
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return Center(
+                            child: CircularProgressIndicator(
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                  loadingProgress.expectedTotalBytes!
+                                  : null,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  )
+                ]
             )
-          )
         ),
       );
     } else {
-      return Container(
-        color: Colors.cyan,
-        child: const Center(child: Text('광고 이미지 없음')),
+      return Center(
+        child: Container(
+          color: Colors.cyan,
+          child: const Center(child: Text('광고 이미지 없음')),
+        ),
       );
     }
   }
@@ -166,34 +180,31 @@ class _PointAdsPageviewState extends State<PointAdsPageview> {
     } else if (_error != null) {
       return Center(child: Text('Error: $_error'));
     } else {
-      return SizedBox(
-        height: MediaQuery.of(context).size.height * 0.32,
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            PageView(
-              controller: adsController,
-              children: _pages,
+      return Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          PageView(
+            controller: adsController,
+            children: _pages,
+          ),
+          SmoothPageIndicator(
+            controller: adsController,
+            count: _pages.length,
+            axisDirection: Axis.horizontal,
+            effect: ExpandingDotsEffect(
+              dotColor: FlutterFlowTheme.of(context).secondaryBackground,
+              activeDotColor: FlutterFlowTheme.of(context).primary,
             ),
-            SmoothPageIndicator(
-              controller: adsController,
-              count: _pages.length,
-              axisDirection: Axis.horizontal,
-              effect: ExpandingDotsEffect(
-                dotColor: FlutterFlowTheme.of(context).secondaryBackground,
-                activeDotColor: FlutterFlowTheme.of(context).primary,
-              ),
-              onDotClicked: (i) async {
-                await adsController.animateToPage(
-                  i,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.ease,
-                );
-                safeSetState(() {});
-              },
-            ),
-          ],
-        ),
+            onDotClicked: (i) async {
+              await adsController.animateToPage(
+                i,
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.ease,
+              );
+              safeSetState(() {});
+            },
+          ),
+        ],
       );
     }
   }

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salt_water_beta_ver1/reusable/common/imageDetailView.dart';
@@ -72,7 +73,7 @@ class AppStateNotifier extends ChangeNotifier {
   }
 }
 
-GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
+GoRouter createRouter(AppStateNotifier appStateNotifier, FirebaseAnalyticsObserver observer) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
@@ -355,7 +356,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const WeatherMapCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
-      observers: [routeObserver],
+      observers: [routeObserver, observer],
     );
 
 extension NavParamExtensions on Map<String, String?> {

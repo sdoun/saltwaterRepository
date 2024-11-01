@@ -63,11 +63,37 @@ class _ExploreMapFishingPensionWidgetState
     super.dispose();
   }
 
+  void filterClear(){
+    setState((){
+      _model.pension1stFilter = null;
+      _model.pension2ndFilter = null;
+      _model.pension3rdFilter = null;
+      FFAppState().fishes.clear();
+      _model.setFilterValueExit();
+    }
+    );
+  }
+
+  void pop(bool filterExit){
+    if(filterExit){
+      filterClear();
+    }
+    else{
+      context.pushNamed('home1');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return GestureDetector(
+    return PopScope(
+      canPop: false,
+        onPopInvokedWithResult: (didpop, result){
+          _model.setFilterValueExit();
+          pop(_model.filterValueExit);
+        },
+        child: GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
@@ -90,7 +116,8 @@ class _ExploreMapFishingPensionWidgetState
                   size: 30.0,
                 ),
                 onPressed: () async {
-                  context.safePop();
+                  _model.setFilterValueExit();
+                  pop(_model.filterValueExit);
                 },
               ),
             ),
@@ -124,7 +151,7 @@ class _ExploreMapFishingPensionWidgetState
           ),
           actions: const[
             Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
               child: SizedBox(
                 width: 60,
                 height: 60,
@@ -170,203 +197,203 @@ class _ExploreMapFishingPensionWidgetState
                                 child: Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
                                   child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          await showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            backgroundColor: const Color(0x24000000),
-                                            enableDrag: false,
-                                            context: context,
-                                            builder: (context) {
-                                              return WebViewAware(
-                                                child: GestureDetector(
-                                                  onTap: () =>
-                                                      FocusScope.of(context)
-                                                          .unfocus(),
-                                                  child: Padding(
-                                                    padding:
-                                                        MediaQuery.viewInsetsOf(
-                                                            context),
-                                                    child:
-                                                        const PointCategoryWidget(),
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ).then(
-                                              (value) => safeSetState(() {}));
-                                        },
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Container(
-                                            height: 32.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                              border: Border.all(
-                                                color: FlutterFlowTheme.of(context)
-                                                    .primary, width: 2
-                                              ),
-                                            ),
-                                            alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
-                                            child: Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(8.0, 0.0, 4.0, 0.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    '낚시펜션, 민박',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'PretendardSeries',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          fontSize: 12.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          useGoogleFonts:
-                                                              GoogleFonts
-                                                                      .asMap()
-                                                                  .containsKey(
-                                                                      'PretendardSeries'),
-                                                        ),
-                                                  ),
-                                                  Align(
-                                                    alignment:
-                                                        const AlignmentDirectional(
-                                                            1.0, 0.0),
-                                                    child: Icon(
-                                                      Icons
-                                                          .keyboard_arrow_down_outlined,
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .primaryText,
-                                                      size: 18.0,
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor: const Color(0x24000000),
+                                              enableDrag: false,
+                                              context: context,
+                                              builder: (context) {
+                                                return WebViewAware(
+                                                  child: GestureDetector(
+                                                    onTap: () =>
+                                                        FocusScope.of(context)
+                                                            .unfocus(),
+                                                    child: Padding(
+                                                      padding:
+                                                      MediaQuery.viewInsetsOf(
+                                                          context),
+                                                      child:
+                                                      const PointCategoryWidget(),
                                                     ),
                                                   ),
-                                                ],
+                                                );
+                                              },
+                                            ).then(
+                                                    (value) => safeSetState(() {}));
+                                          },
+                                          child: ClipRRect(
+                                            borderRadius:
+                                            BorderRadius.circular(8.0),
+                                            child: Container(
+                                              height: 32.0,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
+                                                borderRadius:
+                                                BorderRadius.circular(8.0),
+                                                border: Border.all(
+                                                    color: FlutterFlowTheme.of(context)
+                                                        .primary, width: 2
+                                                ),
+                                              ),
+                                              alignment:
+                                              const AlignmentDirectional(0.0, 0.0),
+                                              child: Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(8.0, 0.0, 4.0, 0.0),
+                                                child: Row(
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      '낚시펜션, 민박',
+                                                      style: FlutterFlowTheme.of(
+                                                          context)
+                                                          .bodyMedium
+                                                          .override(
+                                                        fontFamily:
+                                                        'PretendardSeries',
+                                                        color: FlutterFlowTheme
+                                                            .of(context)
+                                                            .primaryText,
+                                                        fontSize: 12.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                        FontWeight.w700,
+                                                        useGoogleFonts:
+                                                        GoogleFonts
+                                                            .asMap()
+                                                            .containsKey(
+                                                            'PretendardSeries'),
+                                                      ),
+                                                    ),
+                                                    Align(
+                                                      alignment:
+                                                      const AlignmentDirectional(
+                                                          1.0, 0.0),
+                                                      child: Icon(
+                                                        Icons
+                                                            .keyboard_arrow_down_outlined,
+                                                        color: FlutterFlowTheme
+                                                            .of(context)
+                                                            .primaryText,
+                                                        size: 18.0,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      Standfilterbutton(
-                                        iniitalText: '시설구분',
-                                        onTap: () async{
-                                          await showModalBottomSheet(
-                                              isScrollControlled: true,
-                                              backgroundColor: Colors.transparent,
-                                              enableDrag: false,
-                                              context: context,
-                                              builder: (context) {
-                                                return WebViewAware(
-                                                  child: GestureDetector(
-                                                    onTap: () =>
-                                                        FocusScope.of(context)
-                                                            .unfocus(),
-                                                    child: Padding(
-                                                      padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                      child:
-                                                      const Pension1stFilterWidget(),
+                                        Standfilterbutton(
+                                          iniitalText: '시설구분',
+                                          onTap: () async{
+                                            await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor: Colors.transparent,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder: (context) {
+                                                  return WebViewAware(
+                                                    child: GestureDetector(
+                                                      onTap: () =>
+                                                          FocusScope.of(context)
+                                                              .unfocus(),
+                                                      child: Padding(
+                                                        padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                        child:
+                                                        const Pension1stFilterWidget(),
+                                                      ),
                                                     ),
-                                                  ),
-                                                );
-                                              }
-                                          ).then((value) => safeSetState(() =>
-                                          _model.pension1stFilter = value));
+                                                  );
+                                                }
+                                            ).then((value) => safeSetState(() =>
+                                            _model.pension1stFilter = value));
 
-                                          safeSetState(() {});
-                                        },
-                                        filterValue: _model.pension1stFilter,
-                                      ),
-                                      Standfilterbutton(
-                                        iniitalText: '편의시설',
-                                        onTap: () async{
-                                          await showModalBottomSheet(
-                                              isScrollControlled: true,
-                                              backgroundColor: Colors.transparent,
-                                              enableDrag: false,
-                                              context: context,
-                                              builder: (context) {
-                                                return WebViewAware(
-                                                  child: GestureDetector(
-                                                    onTap: () =>
-                                                        FocusScope.of(context)
-                                                            .unfocus(),
-                                                    child: Padding(
-                                                      padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                      child:
-                                                      const Pension2ndFilterWidget(),
+                                            safeSetState(() {});
+                                          },
+                                          filterValue: _model.pension1stFilter,
+                                        ),
+                                        Standfilterbutton(
+                                          iniitalText: '편의시설',
+                                          onTap: () async{
+                                            await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor: Colors.transparent,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder: (context) {
+                                                  return WebViewAware(
+                                                    child: GestureDetector(
+                                                      onTap: () =>
+                                                          FocusScope.of(context)
+                                                              .unfocus(),
+                                                      child: Padding(
+                                                        padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                        child:
+                                                        const Pension2ndFilterWidget(),
+                                                      ),
                                                     ),
-                                                  ),
-                                                );
-                                              }
-                                          ).then((value) => safeSetState(() =>
-                                          _model.pension2ndFilter = value));
+                                                  );
+                                                }
+                                            ).then((value) => safeSetState(() =>
+                                            _model.pension2ndFilter = value));
 
-                                          safeSetState(() {});
-                                        },
-                                        filterValue: _model.pension2ndFilter,
-                                      ),
-                                      Standfilterbutton(
-                                        iniitalText: '편의사항',
-                                        onTap: () async{
-                                          await showModalBottomSheet(
-                                              isScrollControlled: true,
-                                              backgroundColor: Colors.transparent,
-                                              enableDrag: false,
-                                              context: context,
-                                              builder: (context) {
-                                                return WebViewAware(
-                                                  child: GestureDetector(
-                                                    onTap: () =>
-                                                        FocusScope.of(context)
-                                                            .unfocus(),
-                                                    child: Padding(
-                                                      padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                      child:
-                                                      const Pension3rdFilterWidget(),
+                                            safeSetState(() {});
+                                          },
+                                          filterValue: _model.pension2ndFilter,
+                                        ),
+                                        Standfilterbutton(
+                                          iniitalText: '편의사항',
+                                          onTap: () async{
+                                            await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor: Colors.transparent,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder: (context) {
+                                                  return WebViewAware(
+                                                    child: GestureDetector(
+                                                      onTap: () =>
+                                                          FocusScope.of(context)
+                                                              .unfocus(),
+                                                      child: Padding(
+                                                        padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                        child:
+                                                        const Pension3rdFilterWidget(),
+                                                      ),
                                                     ),
-                                                  ),
-                                                );
-                                              }
-                                          ).then((value) => safeSetState(() =>
-                                          _model.pension3rdFilter = value));
+                                                  );
+                                                }
+                                            ).then((value) => safeSetState(() =>
+                                            _model.pension3rdFilter = value));
 
-                                          safeSetState(() {});
-                                        },
-                                        filterValue: _model.pension3rdFilter,
-                                      ),
-                                    ].divide(const SizedBox(width: 4.0)),
+                                            safeSetState(() {});
+                                          },
+                                          filterValue: _model.pension3rdFilter,
+                                        ),
+                                      ].divide(const SizedBox(width: 4.0)),
+                                    ),
                                   ),
-                                ),
                                 ),
                               ),
                               Padding(
@@ -375,7 +402,7 @@ class _ExploreMapFishingPensionWidgetState
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     _model.pensionPointList =
-                                        await actions.sWFilterSumString(
+                                    await actions.sWFilterSumString(
                                       context,
                                       _model.pension1stFilter?.toList(),
                                       _model.pension2ndFilter?.toList(),
@@ -388,7 +415,7 @@ class _ExploreMapFishingPensionWidgetState
                                   text: '선택완료',
                                   options: FFButtonOptions(
                                     width:
-                                        MediaQuery.sizeOf(context).width * 0.8,
+                                    MediaQuery.sizeOf(context).width * 0.8,
                                     height: 40.0,
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
@@ -424,9 +451,9 @@ class _ExploreMapFishingPensionWidgetState
                           queryBuilder: (tBPointRecord) => tBPointRecord
                               .whereIn('point_name', _model.pensionPointList)
                               .where(
-                                'point_categories',
-                                isEqualTo: '낚시펜션, 민박',
-                              ),
+                            'point_categories',
+                            isEqualTo: '낚시펜션, 민박',
+                          ),
                         ),
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
@@ -444,7 +471,7 @@ class _ExploreMapFishingPensionWidgetState
                             );
                           }
                           List<TBPointRecord> containerTBPointRecordList =
-                              snapshot.data!;
+                          snapshot.data!;
 
                           return ClipRRect(
                             borderRadius: BorderRadius.circular(10.0),
@@ -462,7 +489,7 @@ class _ExploreMapFishingPensionWidgetState
                                     width: double.infinity,
                                     height: double.infinity,
                                     child:
-                                        custom_widgets.NaverMapWidgetPointCopy(
+                                    custom_widgets.NaverMapWidgetPointCopy(
                                       width: double.infinity,
                                       height: double.infinity,
                                       mapType: FFAppState().mapTypeString,
@@ -512,6 +539,6 @@ class _ExploreMapFishingPensionWidgetState
           ),
         ),
       ),
-    );
+    ));
   }
 }

@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "333207855339-07rf0e89hsn0qbtbkaot6bgc60mmduv4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.saltwaterbetaver1",
+            "certificate_hash": "909fe5a42f03285bb351c0769606351fd4e769ed"
+          }
+        },
+        {
+          "client_id": "333207855339-66tcgnuc82088vvk8u3a2g4b2j4thlpb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.saltwaterbetaver1",
+            "certificate_hash": "ef7548475a8de26edbb2a8fbe42feec0f4bed050"
+          }
+        },
+        {
           "client_id": "333207855339-ae7a5una2gansskcoct3braauih3bpuv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -22,11 +38,35 @@
           }
         },
         {
+          "client_id": "333207855339-cm86fn2c9ioknfrnr6pcvt3vb1na6oo1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.saltwaterbetaver1",
+            "certificate_hash": "229adb3a51c0dfecfa7eda376172c0a31b04ad5f"
+          }
+        },
+        {
           "client_id": "333207855339-cpkg9nim9vuea3rfa0uule6g4ojtim2b.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.mycompany.saltwaterbetaver1",
             "certificate_hash": "5eaae432921764b96b73fd2c33a23a8a50bc2b2c"
+          }
+        },
+        {
+          "client_id": "333207855339-gjv6j53iio29khch74h90dpt3d0736lj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.saltwaterbetaver1",
+            "certificate_hash": "2e03e585fc495758ba13208f786d8f4184882c72"
+          }
+        },
+        {
+          "client_id": "333207855339-kh210ap1rqqg44vec5d0aj22ouh5p4qo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.saltwaterbetaver1",
+            "certificate_hash": "8b289635888623f2f550478aff061aa151bd2d1c"
           }
         },
         {
