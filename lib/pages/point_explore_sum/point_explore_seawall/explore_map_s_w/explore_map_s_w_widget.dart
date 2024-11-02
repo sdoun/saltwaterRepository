@@ -574,6 +574,9 @@ class _ExploreMapSWWidgetState extends State<ExploreMapSWWidget> {
                                   ),
                                 ),
                               ),
+                              const SizedBox(
+                                height: 36,
+                              )
                             ],
                           ),
                         ),

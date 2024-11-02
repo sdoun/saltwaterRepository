@@ -14,6 +14,7 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 import '/flutter_flow/lat_lng.dart' as latlng;
 import 'dart:async';
 import 'package:salt_water_beta_ver1/reusable/pointExplore/mapSelectButton.dart';
+import 'package:geolocator/geolocator.dart';
 
 class NaverMapWidgetPointCopy extends StatefulWidget {
   const NaverMapWidgetPointCopy({
@@ -49,12 +50,18 @@ class _NaverMapWidgetPointCopyState extends State<NaverMapWidgetPointCopy> {
   Set<NMarker> markerList = {};
   var pointLength;
   Completer<NaverMapController> mapControllerCompleter = Completer();
+
+
+  double? mapCenterLat;
+  double? mapCenterLng;
+
   @override
   void initState() {
     super.initState();
     pointLength = (widget.pointList ?? []).length;
     initializeNaverMap();
     markerList = _createMarkers();
+    setMapCenter();
   }
 
   Future<void> initializeNaverMap() async {
@@ -62,6 +69,40 @@ class _NaverMapWidgetPointCopyState extends State<NaverMapWidgetPointCopy> {
       clientId: '0q1kaenxe1', // 클라이언트 ID 설정
       onAuthFailed: (e) => print("네이버맵 인증오류: $e"),
     );
+  }
+
+  void setMapCenter() async{
+      getGeoData();
+      setState(() {
+        mapCenterLat = mapCenterLat ?? widget.initLat ?? 36.0;
+        mapCenterLng = mapCenterLng ?? widget.initLng ?? 126.0;
+      });
+  }
+  Future<void> moveCamera() async{
+    final cameraUpdate = NCameraUpdate.scrollAndZoomTo(
+        target: NLatLng(mapCenterLat!, mapCenterLng!),
+        zoom: 7
+    );
+    if(mapControllerCompleter.isCompleted){
+      final controller = await mapControllerCompleter.future;
+      controller.updateCamera(cameraUpdate);
+    }
+  }
+
+  getGeoData() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('permissions are denied');
+      }
+    }
+
+    Position position =  await Geolocator.getCurrentPosition();
+    setState(() {
+      mapCenterLat = position.latitude;
+      mapCenterLng = position.longitude;
+    });
   }
 
 /* 애셋 이미지로 마커 생성 테스트
@@ -149,6 +190,8 @@ class _NaverMapWidgetPointCopyState extends State<NaverMapWidgetPointCopy> {
     }
   }
 
+
+
   NMapType mapTypeSelect(String mapTypeString) {
     NMapType selected = switch (mapTypeString) {
       '일반' => NMapType.basic,
@@ -175,29 +218,50 @@ class _NaverMapWidgetPointCopyState extends State<NaverMapWidgetPointCopy> {
 
   @override
   Widget build(BuildContext context) {
-    return NaverMap(
-      options: NaverMapViewOptions(
-        mapType: mapTypeSelect(widget.mapType),
-        minZoom: 5,
-        maxZoom: 16,
-        extent: NLatLngBounds(
-          southWest: NLatLng(34.43, 125.37),
-          northEast: NLatLng(40.35, 132.0),
+    return Stack(
+      alignment: Alignment.bottomRight,
+      children: [
+        NaverMap(
+          options: NaverMapViewOptions(
+            mapType: mapTypeSelect(widget.mapType),
+            minZoom: 5,
+            maxZoom: 16,
+            extent: NLatLngBounds(
+              southWest: NLatLng(34.43, 125.37),
+              northEast: NLatLng(40.35, 132.0),
+            ),
+            initialCameraPosition: NCameraPosition(
+                target: NLatLng(mapCenterLat!, mapCenterLng!),
+                zoom: 6.0,
+                bearing: 0,
+                tilt: 0),
+            rotationGesturesEnable: false,
+            tiltGesturesEnable: false,
+          ),
+          onMapReady: (NaverMapController controller) async {
+            mapControllerCompleter.complete(controller);
+            controller.clearOverlays();
+            controller.addOverlayAll(markerList);
+            print('맵 로딩됨');
+          },
         ),
-        initialCameraPosition: NCameraPosition(
-            target: NLatLng(widget.initLat ?? 38.0, widget.initLng ?? 127.0),
-            zoom: 6.0,
-            bearing: 0,
-            tilt: 0),
-        rotationGesturesEnable: false,
-        tiltGesturesEnable: false,
-      ),
-      onMapReady: (NaverMapController controller) async {
-        mapControllerCompleter.complete(controller);
-        controller.clearOverlays();
-        controller.addOverlayAll(markerList);
-        print('맵 로딩됨');
-      },
+        InkWell(
+          onTap: (){
+            setState(() {
+              setMapCenter();
+            });
+            moveCamera();
+          },
+          child: Container(
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+            ),
+            width: 48,
+            height: 48,
+            child: Image.asset('assets/images/마이.png')
+          ),
+        )
+      ],
     );
   }
 }
