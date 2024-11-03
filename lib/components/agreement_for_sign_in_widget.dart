@@ -269,14 +269,6 @@ class _AgreementForSignInWidgetState extends State<AgreementForSignInWidget> {
                                       return WebViewAware(
                                         child: Padding(
                                           padding: MediaQuery.viewInsetsOf(context),
-                                          child: TermViewWidget(
-                                            term: containerTBServiceTermsRecordList
-                                                .where((e) =>
-                                            e.termsTitle == '서비스 이용 약관')
-                                                .toList()
-                                                .first
-                                                .reference,
-                                          ),
                                         ),
                                       );
                                     },
@@ -344,14 +336,6 @@ class _AgreementForSignInWidgetState extends State<AgreementForSignInWidget> {
                                 return WebViewAware(
                                   child: Padding(
                                     padding: MediaQuery.viewInsetsOf(context),
-                                    child: TermViewWidget(
-                                      term: containerTBServiceTermsRecordList
-                                          .where((e) =>
-                                              e.termsTitle == '개인정보 이용 약관')
-                                          .toList()
-                                          .first
-                                          .reference,
-                                    ),
                                   ),
                                 );
                               },

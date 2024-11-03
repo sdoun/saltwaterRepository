@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../components/term_view_widget.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/agreement_for_sign_in_widget.dart';
@@ -563,7 +564,6 @@ class _LoginWidgetState extends State<LoginWidget>
                                               ],
                                             ),
                                           ),
-
                                           Align(
                                             alignment: const AlignmentDirectional(
                                                 0.0, 0.0),
@@ -620,38 +620,6 @@ class _LoginWidgetState extends State<LoginWidget>
                                           Column(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              Align(
-                                                alignment:
-                                                    const AlignmentDirectional(
-                                                        0.0, 0.0),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(16.0, 0.0,
-                                                              16.0, 24.0),
-                                                  child: Text(
-                                                    'Or sign up with',
-                                                    textAlign:
-                                                        TextAlign.center,
-                                                    style:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelMedium
-                                                            .override(
-                                                              fontFamily: FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMediumFamily,
-                                                              letterSpacing:
-                                                                  0.0,
-                                                              useGoogleFonts: GoogleFonts
-                                                                      .asMap()
-                                                                  .containsKey(
-                                                                      FlutterFlowTheme.of(context)
-                                                                          .labelMediumFamily),
-                                                            ),
-                                                  ),
-                                                ),
-                                              ),
                                               Align(
                                                 alignment:
                                                     const AlignmentDirectional(
@@ -769,6 +737,41 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         textColor: FlutterFlowTheme.of(context).primaryText,
                                                       ),
                                                     ],
+                                                  ),
+                                                ),
+                                              ),
+                                              InkWell(
+                                                onTap: () async {
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor: Colors.transparent,
+                                                    enableDrag: false,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return WebViewAware(
+                                                        child: Padding(
+                                                          padding: MediaQuery.viewInsetsOf(context),
+                                                          child: const TermViewWidget(
+                                                            termsType:
+                                                            "서비스 이용 약관",
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                                child: Text(
+                                                  '로그인/회원가입 시\n이용약관, 개인정보 취급방침에 동의하게 됩니다.',
+                                                  style: FlutterFlowTheme.of(context).headlineMedium.override(
+                                                    fontFamily:
+                                                    'PretendardSeries',
+                                                    color: FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                    fontSize: 12.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w400,
+                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                        'PretendardSeries'),
                                                   ),
                                                 ),
                                               ),
