@@ -68,7 +68,7 @@ class _TermViewWidgetState extends State<TermViewWidget> {
           child: Stack(
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -79,8 +79,22 @@ class _TermViewWidgetState extends State<TermViewWidget> {
                             16.0, 0.0, 16.0, 0.0),
                         child: Text(
                           term.termsTitle ?? '',
-                          style: FlutterFlowTheme.of(context).titleMedium,
+                          style: FlutterFlowTheme.of(context).headlineMedium.override(
+                            fontFamily:
+                            'PretendardSeries',
+                            color: FlutterFlowTheme.of(context)
+                                .primaryText,
+                            fontSize: 18.0,
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.w600,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                'PretendardSeries'),
+                          ),
                         ),
+                      ),
+                      Divider(
+                        thickness: 0.5,
+                        color: FlutterFlowTheme.of(context).secondaryText,
                       ),
                       Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(

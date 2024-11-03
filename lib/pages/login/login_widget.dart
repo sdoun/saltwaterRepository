@@ -193,7 +193,7 @@ class _LoginWidgetState extends State<LoginWidget>
       }
 
       GoRouter.of(context).prepareAuthEvent(); // 회원가입 이벤트 준비
-      
+
       final newUser = await authManager.createAccountWithEmail(
         context,
         _model.emailAddressCreateTextController.text.trim(),
@@ -301,7 +301,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                            CrossAxisAlignment.center,
                                         children: [
                                           if (responsiveVisibility(
                                             context: context,
@@ -333,288 +333,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                             ),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(
-                                                    0.0, 4.0, 0.0, 24.0),
-                                            child: Text(
-                                              '이메일 회원가입/이메일 로그인',
-                                              textAlign: TextAlign.start,
-                                              style: FlutterFlowTheme.of(context).labelMedium.override(
-                                                fontFamily:
-                                                'PretendardSeries',
-                                                color: FlutterFlowTheme.of(context)
-                                                    .secondaryText,
-                                                fontSize: 15.0,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.w500,
-                                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                                    'PretendardSeries'),
-                                              ),
-                                            ),
-                                          ),
-                                          LoginTextForm(
-                                            controller: _model
-                                                .emailAddressCreateTextController,
-                                            focusNode: _model
-                                                .emailAddressCreateFocusNode,
-                                            labelText: '이메일',
-                                            isPassword: false,
-                                            autofillHints: const [AutofillHints.email],
-                                            icon: null,
-                                            keyboardType: TextInputType.emailAddress,
-                                            validator: _model
-                                                .emailAddressCreateTextControllerValidator
-                                                .asValidator(context),
-                                          ),
-                                          LoginTextForm(
-                                            controller: _model
-                                                .passwordCreateTextController,
-                                            focusNode: _model.passwordCreateFocusNode,
-                                            labelText: '비밀번호',
-                                            isPassword: true,
-                                            autofillHints: const [AutofillHints.password],
-                                            icon: Icon(
-                                              _model.passwordCreateConfirmVisibility
-                                                  ? Icons
-                                                  .visibility_outlined
-                                                  : Icons
-                                                  .visibility_off_outlined,
-                                              color:
-                                              FlutterFlowTheme.of(
-                                                  context)
-                                                  .secondaryText,
-                                              size: 20.0,
-                                            ),
-                                              validator: _model
-                                                  .passwordCreateTextControllerValidator
-                                                  .asValidator(context),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(
-                                                    0.0, 0.0, 0.0, 12.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Theme(
-                                                  data: ThemeData(
-                                                    checkboxTheme:
-                                                        CheckboxThemeData(
-                                                      visualDensity:
-                                                          VisualDensity
-                                                              .compact,
-                                                      materialTapTargetSize:
-                                                          MaterialTapTargetSize
-                                                              .shrinkWrap,
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    4.0),
-                                                      ),
-                                                    ),
-                                                    unselectedWidgetColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .secondaryText,
-                                                  ),
-                                                  child: Checkbox(
-                                                    value: _model
-                                                            .checkboxValue ??=
-                                                        FFAppState()
-                                                                .termsAgreement
-                                                                .serviceTerms ==
-                                                            true,
-                                                    onChanged: ((FFAppState()
-                                                            .termsAgreement
-                                                            .personalData ==
-                                                        false) ||
-                                                    (FFAppState()
-                                                            .termsAgreement
-                                                            .serviceTerms ==
-                                                        false) ||
-                                                    (FFAppState()
-                                                            .termsAgreement
-                                                            .geoBased ==
-                                                        false) ||
-                                                    (FFAppState()
-                                                            .termsAgreement
-                                                            .phoneAuth ==
-                                                        false))
-                                                        ? null
-                                                        : (newValue) async {
-                                                            safeSetState(() =>
-                                                                _model.checkboxValue =
-                                                                    newValue!);
-
-                                                            if (!newValue!) {
-                                                              FFAppState()
-                                                                      .termsAgreement =
-                                                                  SignInAgreementStruct();
-                                                              safeSetState(
-                                                                  () {});
-                                                            }
-                                                          },
-                                                    side: BorderSide(
-                                                      width: 2,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryText,
-                                                    ),
-                                                    activeColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primary,
-                                                    checkColor: ((FFAppState()
-                                                            .termsAgreement
-                                                            .personalData ==
-                                                        false) ||
-                                                    (FFAppState()
-                                                            .termsAgreement
-                                                            .serviceTerms ==
-                                                        false) ||
-                                                    (FFAppState()
-                                                            .termsAgreement
-                                                            .geoBased ==
-                                                        false) ||
-                                                    (FFAppState()
-                                                            .termsAgreement
-                                                            .phoneAuth ==
-                                                        false))
-                                                        ? null
-                                                        : FlutterFlowTheme.of(
-                                                                context)
-                                                            .info,
-                                                  ),
-                                                ),
-                                                Align(
-                                                  alignment:
-                                                      const AlignmentDirectional(
-                                                          0.0, 0.0),
-                                                  child: InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      await showModalBottomSheet(
-                                                        isScrollControlled:
-                                                            true,
-                                                        backgroundColor:
-                                                            Colors
-                                                                .transparent,
-                                                        enableDrag: false,
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return WebViewAware(
-                                                            child:
-                                                                GestureDetector(
-                                                              onTap: () =>
-                                                                  FocusScope.of(
-                                                                          context)
-                                                                      .unfocus(),
-                                                              child: Padding(
-                                                                padding: MediaQuery
-                                                                    .viewInsetsOf(
-                                                                        context),
-                                                                child:
-                                                                    const AgreementForSignInWidget(),
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
-                                                      ).then((value) =>
-                                                          safeSetState(() =>
-                                                              _model.allAgree =
-                                                                  value));
-
-                                                      safeSetState(() {
-                                                        _model.checkboxValue =
-                                                            _model.allAgree!;
-                                                      });
-
-                                                      safeSetState(() {});
-                                                    },
-                                                    child: Text(
-                                                      '약관 동의하기',
-                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                        fontFamily:
-                                                        'PretendardSeries',
-                                                        color: FlutterFlowTheme.of(context)
-                                                            .secondaryText,
-                                                        fontSize: 14.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight: FontWeight.w600,
-                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                                            'PretendardSeries'),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Align(
-                                            alignment: const AlignmentDirectional(
-                                                0.0, 0.0),
-                                            child: Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 0.0, 16.0),
-                                              child: FFButtonWidget(
-                                                onPressed: handleEmailAuth,
-                                                text: '가입하고 시작하기!',
-                                                //버튼 크기 바꾸는 중이었음
-                                                options: FFButtonOptions(
-                                                  width: 230.0,
-                                                  height: 44.0,
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
-                                                  iconPadding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  textStyle: FlutterFlowTheme
-                                                          .of(context)
-                                                      .titleSmall
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleSmallFamily,
-                                                        color: Colors.white,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(context)
-                                                                    .titleSmallFamily),
-                                                      ),
-                                                  elevation: 3.0,
-                                                  borderSide: const BorderSide(
-                                                    color: Colors.transparent,
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.0),
-                                                ),
-                                              ),
+                                            padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
+                                            child: Divider(
+                                              thickness: 0.8,
+                                              color: FlutterFlowTheme.of(context).secondaryText,
                                             ),
                                           ),
                                           Column(
@@ -667,16 +389,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         },
                                                         text: '구글 회원가입',
                                                         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-                                                        icon: const FaIcon(
-                                                          FontAwesomeIcons
-                                                              .google,
-                                                          size: 20.0,
-                                                        ),
+                                                        icon: Image.asset('assets/images/구글로고.png', height: 24,),
                                                         textColor: FlutterFlowTheme.of(context).primaryText,
                                                       ),
-                                                      isAndroid
-                                                          ? Container()
-                                                          :
+
                                                       socialButton(
                                                         onPressed:  () async {
                                                           GoRouter.of(
@@ -700,7 +416,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         icon: const FaIcon(
                                                           FontAwesomeIcons
                                                               .apple,
-                                                          size: 20.0,
+                                                          size: 28.0,
                                                         ),
                                                         textColor: FlutterFlowTheme.of(context).primaryText,
                                                       ),
@@ -711,13 +427,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         },
                                                         text: '카카오 회원가입',
                                                         backgroundColor: const Color(
-                                                            0xFFFFE700),
-                                                        icon: Icon(
-                                                          Icons
-                                                          .chat_bubble_outlined,
-                                                          color: FlutterFlowTheme.of(context).primaryText,
-                                                          size: 20.0,
-                                                        ),
+                                                            0xFFF7E600),
+                                                        icon:Image.asset('assets/images/카카오톡.png', height: 24,),
                                                         textColor: FlutterFlowTheme.of(context).primaryText,
                                                       ),
                                                       socialButton(
@@ -727,14 +438,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         },
                                                         text: '네이버 회원가입',
                                                         backgroundColor: const Color(
-                                                            0xFF00CC66),
-                                                        icon: Icon(
-                                                          Icons
-                                                          .chat_bubble_outlined,
-                                                          size: 20.0,
-                                                          color: FlutterFlowTheme.of(context).primaryText,
-                                                        ),
-                                                        textColor: FlutterFlowTheme.of(context).primaryText,
+                                                            0xFF2DB400),
+                                                        icon: Image.asset('assets/images/네이버로고.png', height: 18,),
+                                                        textColor: FlutterFlowTheme.of(context).primaryBackground,
                                                       ),
                                                     ],
                                                   ),
