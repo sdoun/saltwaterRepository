@@ -202,7 +202,6 @@ class _AgreementForSignInWidgetState extends State<AgreementForSignInWidget> {
                   ),
                 ),
                 Container(
-                  width: double.infinity,
                   height: 37.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primaryBackground,
@@ -211,7 +210,8 @@ class _AgreementForSignInWidgetState extends State<AgreementForSignInWidget> {
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
                     child: Row(
-                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         ToggleIcon(
                           onPressed: () async {
@@ -238,49 +238,56 @@ class _AgreementForSignInWidgetState extends State<AgreementForSignInWidget> {
                             size: 25.0,
                           ),
                         ),
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            await showModalBottomSheet(
-                              isScrollControlled: true,
-                              backgroundColor: Colors.transparent,
-                              enableDrag: false,
-                              context: context,
-                              builder: (context) {
-                                return WebViewAware(
-                                  child: Padding(
-                                    padding: MediaQuery.viewInsetsOf(context),
-                                    child: TermViewWidget(
-                                      term: containerTBServiceTermsRecordList
-                                          .where((e) =>
-                                              e.termsTitle == '서비스 이용 약관')
-                                          .toList()
-                                          .first
-                                          .reference,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ).then((value) => safeSetState(() {}));
-                          },
-                          child: Text(
-                            '(필수) 서비스 이용 약관',
-                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily:
-                              'PretendardSeries',
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryText,
-                              fontSize: 14.0,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w500,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  'PretendardSeries'),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '(필수) 서비스 이용 약관',
+                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                fontFamily:
+                                'PretendardSeries',
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryText,
+                                fontSize: 14.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w500,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    'PretendardSeries'),
+                              ),
                             ),
-                          ),
+                            Align(
+                              alignment: const Alignment(1, 0),
+                              child: InkWell(
+                                onTap:
+                                    () async {
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    enableDrag: false,
+                                    context: context,
+                                    builder: (context) {
+                                      return WebViewAware(
+                                        child: Padding(
+                                          padding: MediaQuery.viewInsetsOf(context),
+                                          child: TermViewWidget(
+                                            term: containerTBServiceTermsRecordList
+                                                .where((e) =>
+                                            e.termsTitle == '서비스 이용 약관')
+                                                .toList()
+                                                .first
+                                                .reference,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ).then((value) => safeSetState(() {}));
+                                },
+                                child: const Text('더보기'),
+                              ),
+                            )
+                          ],
                         ),
+
                       ],
                     ),
                   ),
