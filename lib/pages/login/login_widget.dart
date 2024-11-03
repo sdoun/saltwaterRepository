@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 
 import '../../components/term_view_widget.dart';
 import '/auth/firebase_auth/auth_util.dart';
@@ -292,6 +293,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                 context: context,
                                 phone: false,
                                 tablet: false,
+
                               ))
                                 Container(
                                   width: 230.0,
@@ -434,44 +436,59 @@ class _LoginWidgetState extends State<LoginWidget>
                                     ),
                                   ),
                                   const SizedBox(height: 16,),
-                                  InkWell(
-                                    onTap: () async {
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        enableDrag: false,
-                                        context: context,
-                                        builder: (context) {
-                                          return WebViewAware(
-                                            child: Padding(
-                                              padding: MediaQuery.viewInsetsOf(context),
-                                              child: const TermViewWidget(
-                                                termsType:
-                                                "서비스 이용 약관",
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child:RichText(
-                                      text: TextSpan(
-                                        text: '로그인/회원가입 시\n',
-                                        style: FlutterFlowTheme.of(context).headlineMedium.override(
-                                          fontFamily:
-                                          'PretendardSeries',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          fontSize: 12.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.w400,
-                                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                              'PretendardSeries'),
+                                  RichText(
+                                    text: TextSpan(
+                                      text: '로그인/회원가입 시\n',
+                                      style: FlutterFlowTheme.of(context).headlineMedium.override(
+                                        fontFamily:
+                                        'PretendardSeries',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        fontSize: 12.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.w400,
+                                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                            'PretendardSeries'),
+                                      ),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: '이용약관, ',
+                                          style: FlutterFlowTheme.of(context).headlineMedium.override(
+                                            fontFamily:
+                                            'PretendardSeries',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            fontSize: 12.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w400,
+                                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                'PretendardSeries'),
+                                            decoration: TextDecoration.underline,
+                                          ),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () async{
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor: Colors.transparent,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder: (context) {
+                                                  return WebViewAware(
+                                                    child: Padding(
+                                                      padding: MediaQuery.viewInsetsOf(context),
+                                                      child: const TermViewWidget(
+                                                        termsType:
+                                                        "서비스 이용 약관",
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                            }
                                         ),
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                            text: '이용약관, 개인정보 취급방침',
-                                            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                                        TextSpan(
+                                          text: '개인정보 취급방침',
+                                          style: FlutterFlowTheme.of(context).headlineMedium.override(
                                               fontFamily:
                                               'PretendardSeries',
                                               color: FlutterFlowTheme.of(context)
@@ -482,25 +499,45 @@ class _LoginWidgetState extends State<LoginWidget>
                                               useGoogleFonts: GoogleFonts.asMap().containsKey(
                                                   'PretendardSeries'),
                                               decoration: TextDecoration.underline
-                                            ),
                                           ),
-                                          TextSpan(
-                                            text: '에 동의하게 됩니다.',
-                                            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                                            fontFamily:
-                                            'PretendardSeries',
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontSize: 12.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w400,
-                                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                                'PretendardSeries'),
-                                          ),
-                                          )
-                                        ]
-                                      )
-                                    ),
+                                            recognizer: TapGestureRecognizer()
+                                              ..onTap = () async{
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor: Colors.transparent,
+                                                  enableDrag: false,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return WebViewAware(
+                                                      child: Padding(
+                                                        padding: MediaQuery.viewInsetsOf(context),
+                                                        child: const TermViewWidget(
+                                                          termsType:
+                                                          "개인정보 이용 약관",
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                              }
+                                        ),
+                                        TextSpan(
+                                          text: '에 동의하게 됩니다.',
+                                          style: FlutterFlowTheme.of(context).headlineMedium.override(
+                                          fontFamily:
+                                          'PretendardSeries',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontSize: 12.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w400,
+                                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                              'PretendardSeries'),
+                                        ),
+
+                                        )
+                                      ]
+                                    )
                                   ),
                                 ],
                               ),
