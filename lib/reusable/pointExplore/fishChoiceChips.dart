@@ -35,6 +35,7 @@ class _FishchoicechipsState extends State<Fishchoicechips> {
             FFAppState().fishes = val ?? [];
             widget.controller.value = FFAppState().fishes;
           });
+          widget.onChanged;
         },
         selectedChipStyle: ChipStyle(
           backgroundColor:

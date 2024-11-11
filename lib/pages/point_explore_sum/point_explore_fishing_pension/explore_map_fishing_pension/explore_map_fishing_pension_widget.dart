@@ -54,6 +54,7 @@ class _ExploreMapFishingPensionWidgetState
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
+    filterPoint();
   }
 
   @override
@@ -81,6 +82,23 @@ class _ExploreMapFishingPensionWidgetState
     else{
       context.pushNamed('home1');
     }
+  }
+
+  void filterPoint() async{
+    _model.pensionPointList =
+    await actions.sWFilterSumString(
+      context,
+      _model.pension1stFilter?.toList(),
+      _model.pension2ndFilter?.toList(),
+      _model.pension3rdFilter?.toList(),
+      _model.choiceChipsValues?.toList(),
+    );
+    if(_model.pensionPointList == null || _model.pensionPointList!.isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('조건에 일치하는 포인트가 없습니다.')),
+      );
+    }
+    safeSetState(() {});
   }
 
   @override
@@ -184,8 +202,12 @@ class _ExploreMapFishingPensionWidgetState
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Fishchoicechips(
-                                onChanged: (val) => safeSetState(
-                                        () => _model.choiceChipsValues = val),
+                                onChanged: (val){safeSetState(
+                                        () => _model.choiceChipsValues = val);
+                                  filterPoint();
+                                  setState(() {
+                                  });
+                                },
                                 controller: _model.choiceChipsValueController ??=
                                     FormFieldController<List<String>>(
                                       FFAppState().fishes,
@@ -324,6 +346,7 @@ class _ExploreMapFishingPensionWidgetState
                                                 }
                                             ).then((value) => safeSetState(() =>
                                             _model.pension1stFilter = value));
+                                            filterPoint();
 
                                             safeSetState(() {});
                                           },
@@ -355,6 +378,7 @@ class _ExploreMapFishingPensionWidgetState
                                                 }
                                             ).then((value) => safeSetState(() =>
                                             _model.pension2ndFilter = value));
+                                            filterPoint();
 
                                             safeSetState(() {});
                                           },
@@ -386,6 +410,7 @@ class _ExploreMapFishingPensionWidgetState
                                                 }
                                             ).then((value) => safeSetState(() =>
                                             _model.pension3rdFilter = value));
+                                            filterPoint();
 
                                             safeSetState(() {});
                                           },
@@ -401,14 +426,7 @@ class _ExploreMapFishingPensionWidgetState
                                     0.0, 12.0, 0.0, 24.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    _model.pensionPointList =
-                                    await actions.sWFilterSumString(
-                                      context,
-                                      _model.pension1stFilter?.toList(),
-                                      _model.pension2ndFilter?.toList(),
-                                      _model.pension3rdFilter?.toList(),
-                                      _model.choiceChipsValues?.toList(),
-                                    );
+                                    filterPoint();
 
                                     safeSetState(() {});
                                   },
@@ -449,12 +467,16 @@ class _ExploreMapFishingPensionWidgetState
                       StreamBuilder<List<TBPointRecord>>(
                         stream: queryTBPointRecord(
                           queryBuilder: (tBPointRecord) => tBPointRecord
-                              .whereIn('point_name', _model.pensionPointList)
-                              .where(
-                            'point_categories',
-                            isEqualTo: '낚시펜션, 민박',
-                          ),
-                        ),
+                        ).map((snapshot){
+                          return snapshot.where((record) {
+                            bool matchesName = _model.pensionPointList == [] ||
+                                _model.pensionPointList!.contains(record.pointName);
+                            bool matchesCategory = '낚시펜션, 민박' == '' ||
+                                record.pointCategories == '낚시펜션, 민박';
+                            return matchesName && matchesCategory;
+                          }).toList();
+                        })..listen((snapshot) {
+                        }),
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
                           if (!snapshot.hasData) {
@@ -484,6 +506,7 @@ class _ExploreMapFishingPensionWidgetState
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               child: Stack(
+                                alignment: Alignment.topRight,
                                 children: [
                                   SizedBox(
                                     width: double.infinity,

@@ -15,6 +15,9 @@ class UsersRecord extends FirestoreRecord {
     _initializeFields();
   }
 
+  List<DocumentReference>? _bannedUser;
+  List<DocumentReference>? get bannedUser => _bannedUser ?? [];
+
   // "email" field.
   String? _email;
   String get email => _email ?? '';
@@ -60,6 +63,7 @@ class UsersRecord extends FirestoreRecord {
     _phoneNumber = snapshotData['phone_number'] as String?;
     _termsAgreement =
         SignInAgreementStruct.maybeFromMap(snapshotData['termsAgreement']);
+    _bannedUser = snapshotData['banned_user'] as List<DocumentReference>?;
   }
 
   static CollectionReference get collection =>

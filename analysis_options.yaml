@@ -32,6 +32,5 @@ linter:
 analyzer:
   exclude:
     - lib/custom_code/**/*.g.dart
-    - lib/flutter_flow/custom_functions.dart
   include:
     - lib/custom_code/**

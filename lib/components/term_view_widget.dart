@@ -9,10 +9,10 @@ export 'term_view_model.dart';
 class TermViewWidget extends StatefulWidget {
   const TermViewWidget({
     super.key,
-    required this.term,
+    required this.termsType,
   });
 
-  final DocumentReference? term;
+  final String termsType;
 
   @override
   State<TermViewWidget> createState() => _TermViewWidgetState();
@@ -22,139 +22,113 @@ class _TermViewWidgetState extends State<TermViewWidget> {
   late TermViewModel _model;
 
   @override
-  void setState(VoidCallback callback) {
-    super.setState(callback);
-    _model.onUpdate();
-  }
-
-  @override
   void initState() {
     super.initState();
     _model = createModel(context, () => TermViewModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
   void dispose() {
-    _model.maybeDispose();
-
+    _model.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(),
-      child: Stack(
-        children: [
-          Container(
+    return StreamBuilder<List<TBServiceTermsRecord>>(
+      stream: queryTBServiceTermsRecord(
+        queryBuilder: (q) => q.where('terms_title', isEqualTo: widget.termsType),
+      ),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        final terms = snapshot.data!;
+        if (terms.isEmpty) {
+          return Container(
             width: double.infinity,
             height: 360.0,
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).primaryBackground,
             ),
-            alignment: const AlignmentDirectional(0.0, -1.0),
-            child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 64.0, 0.0, 0.0),
-              child: Text(
-                '약관을 불러오지\n못했습니다!',
-                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                      fontSize: 21.0,
-                      letterSpacing: 0.0,
-                      fontWeight: FontWeight.bold,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).bodyMediumFamily),
-                    ),
-              ),
+            child: const Center(
+              child: Text('약관을 불러올 수 없습니다.'),
             ),
+          );
+        }
+
+        final term = terms.first;
+        return Container(
+          width: double.infinity,
+          height: 360.0,
+          decoration: BoxDecoration(
+            color: FlutterFlowTheme.of(context).primaryBackground,
           ),
-          StreamBuilder<TBServiceTermsRecord>(
-            stream: TBServiceTermsRecord.getDocument(widget.term!),
-            builder: (context, snapshot) {
-              // Customize what your widget looks like when it's loading.
-              if (!snapshot.hasData) {
-                return Center(
-                  child: SizedBox(
-                    width: 50.0,
-                    height: 50.0,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        FlutterFlowTheme.of(context).primary,
-                      ),
-                    ),
-                  ),
-                );
-              }
-
-              final containerTBServiceTermsRecord = snapshot.data!;
-
-              return Container(
-                width: double.infinity,
-                height: 360.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).primaryBackground,
-                ),
-                child: Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(12.0, 20.0, 12.0, 0.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text(
-                          containerTBServiceTermsRecord.termsTitle,
-                          style: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyMediumFamily,
-                                fontSize: 21.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.bold,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily),
-                              ),
-                        ),
-                        Divider(
-                          thickness: 1.0,
-                          color: FlutterFlowTheme.of(context).primary,
-                        ),
-                        Align(
-                          alignment: const AlignmentDirectional(-1.0, 0.0),
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                8.0, 0.0, 8.0, 0.0),
-                            child: Text(
-                              containerTBServiceTermsRecord.termsContent,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w600,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                    lineHeight: 1.5,
-                                  ),
-                            ),
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            16.0, 0.0, 16.0, 0.0),
+                        child: Text(
+                          term.termsTitle ?? '',
+                          style: FlutterFlowTheme.of(context).headlineMedium.override(
+                            fontFamily:
+                            'PretendardSeries',
+                            color: FlutterFlowTheme.of(context)
+                                .primaryText,
+                            fontSize: 18.0,
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.w600,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                'PretendardSeries'),
                           ),
                         ),
-                      ].divide(const SizedBox(height: 8.0)),
-                    ),
+                      ),
+                      Divider(
+                        thickness: 0.5,
+                        color: FlutterFlowTheme.of(context).secondaryText,
+                      ),
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            16.0, 8.0, 16.0, 0.0),
+                        child: Text(
+                          term.termsContent ?? '',
+                          style: FlutterFlowTheme.of(context).bodyMedium,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              );
-            },
+              ),
+              Align(
+                alignment: const AlignmentDirectional(1.0, -1.0),
+                child: Padding(
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 8.0, 0.0),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.close_rounded,
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      size: 24.0,
+                    ),
+                    onPressed: () async {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

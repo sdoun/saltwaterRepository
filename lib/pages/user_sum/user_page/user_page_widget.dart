@@ -1,3 +1,6 @@
+import 'package:salt_water_beta_ver1/pages/user_sum/user_page/deleteUserBottonsheet.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/custom_navbar_widget.dart';
@@ -294,7 +297,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                     ),
                     Container(
                       width: 586.0,
-                      height: 356.0,
+                      height: 400,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).primaryBackground,
                       ),
@@ -487,6 +490,76 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                       0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                    fontFamily: 'PretendardSeries',
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14,
+                                    letterSpacing: 0.0,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                        'PretendardSeries'),
+                                  ),
+                                  elevation: 3.0,
+                                  borderSide: const BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 12.0, 24.0, 0.0),
+                              child: FFButtonWidget(
+                                onPressed: () async{
+                                  await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      enableDrag: false,
+                                      context: context,
+                                      builder: (context) {
+                                    return WebViewAware(
+                                      child: GestureDetector(
+                                        onTap: () =>
+                                            FocusScope.of(context)
+                                                .unfocus(),
+                                        child: Padding(
+                                          padding:
+                                          MediaQuery.viewInsetsOf(
+                                              context),
+                                          child:
+                                          Deleteuserbottonsheet(
+                                            clickYes: () async{
+                                              GoRouter.of(context).prepareAuthEvent();
+                                              await authManager.deleteUser(context);
+                                              await authManager.signOut();
+
+                                              context.goNamedAuth('login', context.mounted);
+                                              GoRouter.of(context).clearRedirectLocation();
+
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  );
+                                },
+                                text: '회원탈퇴',
+                                options: FFButtonOptions(
+                                  width:
+                                  MediaQuery.sizeOf(context).width * 0.85,
+                                  height: 40.0,
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      24.0, 0.0, 24.0, 0.0),
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context)
+                                      .alternate,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(

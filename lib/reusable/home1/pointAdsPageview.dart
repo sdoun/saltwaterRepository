@@ -52,41 +52,33 @@ class _PointAdsPageviewState extends State<PointAdsPageview> {
         },
         child: Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-            child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  AspectRatio(
-                    aspectRatio: 16 / 9, // 이미지 비율 설정 (예: 16:9)
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Image.network(
-                        data['ads_image'] ?? 'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%ED%8F%AC%EC%9D%B8%ED%8A%B8%EC%88%98%EC%A0%95%ED%8E%98%EC%9D%B4%EC%A7%80%2F%ED%8F%AC%EC%9D%B8%ED%8A%B8%EC%9D%B4%EB%AF%B8%EC%A7%80%EC%97%86%EC%9D%8C.png?alt=media&token=b357c611-3df0-4134-bf83-6d72fa96b82e',
-                        fit: BoxFit.contain, // cover 대신 contain 사용
-                        errorBuilder: (context, error, stackTrace) {
-                          print('Image error: $error');
-                          return Container(
-                            color: Colors.grey[200],
-                            child: const Center(child: Text('이미지를 불러올 수 없습니다')),
-                          );
-                        },
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) return child;
-                          return Center(
-                            child: CircularProgressIndicator(
-                              value: loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes!
-                                  : null,
-                            ),
-                          );
-                        },
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: AspectRatio(
+                aspectRatio: 16 / 9, // 이미지 비율 설정 (예: 16:9)
+                child: Image.network(
+                  data['ads_image'] ?? 'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%ED%8F%AC%EC%9D%B8%ED%8A%B8%EC%88%98%EC%A0%95%ED%8E%98%EC%9D%B4%EC%A7%80%2F%ED%8F%AC%EC%9D%B8%ED%8A%B8%EC%9D%B4%EB%AF%B8%EC%A7%80%EC%97%86%EC%9D%8C.png?alt=media&token=b357c611-3df0-4134-bf83-6d72fa96b82e',
+                  fit: BoxFit.contain, // cover 대신 contain 사용
+                  errorBuilder: (context, error, stackTrace) {
+                    print('Image error: $error');
+                    return Container(
+                      color: Colors.grey[200],
+                      child: const Center(child: Text('이미지를 불러올 수 없습니다')),
+                    );
+                  },
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes!
+                            : null,
                       ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  )
-                ]
+                    );
+                  },
+                ),
+              ),
             )
         ),
       );
@@ -148,15 +140,17 @@ class _PointAdsPageviewState extends State<PointAdsPageview> {
 
     loadData();
     timer = Timer.periodic(const Duration(seconds: 2), (timer) {
-      if (adsController.hasClients) {
+
         int currentPage = adsController.page!.toInt();
         int nextPage = (currentPage + 1) % _pages.length;
+        print(nextPage);
         adsController.animateToPage(
           nextPage,
           duration: const Duration(milliseconds: 500),
           curve: Curves.ease,
         );
-      }
+        setState(() {});
+
     });
   }
 
@@ -183,9 +177,19 @@ class _PointAdsPageviewState extends State<PointAdsPageview> {
       return Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          PageView(
-            controller: adsController,
-            children: _pages,
+          Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.width * (9/16),
+                child: PageView(
+                  controller: adsController,
+                  children: _pages,
+                ),
+              ),
+              const SizedBox(
+                height: 36,
+              )
+            ],
           ),
           SmoothPageIndicator(
             controller: adsController,

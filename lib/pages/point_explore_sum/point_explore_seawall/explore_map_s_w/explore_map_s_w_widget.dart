@@ -57,6 +57,7 @@ class _ExploreMapSWWidgetState extends State<ExploreMapSWWidget> {
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
+    filterPoint();
   }
   void filterClear(){
     setState((){
@@ -84,6 +85,23 @@ class _ExploreMapSWWidgetState extends State<ExploreMapSWWidget> {
     _model.dispose();
 
     super.dispose();
+  }
+
+  void filterPoint() async{
+    _model.sWPointList =
+        await actions.sWFilterSumString(
+      context,
+      _model.sW1stFilter?.toList(),
+      _model.sW2ndFilter?.toList(),
+      _model.sW3rdFilter?.toList(),
+      FFAppState().fishes.toList(),
+    );
+    if(_model.sWPointList == null || _model.sWPointList!.isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('조건에 일치하는 포인트가 없습니다.')),
+      );
+    }
+    safeSetState(() {});
   }
 
   @override
@@ -247,11 +265,17 @@ class _ExploreMapSWWidgetState extends State<ExploreMapSWWidget> {
                                               FormFieldController<List<String>>(
                                                 FFAppState().fishes,
                                               ),
-                                          onChanged: (val) => safeSetState(
-                                                  () {
-                                                    _model.choiceChipsValues = val;
-                                                    FFAppState().fishes = val;
-                                                  }),
+                                          onChanged: (val) {
+                                            safeSetState(
+                                                    () {
+                                                  _model.choiceChipsValues =
+                                                      val;
+                                                  FFAppState().fishes = val;
+                                                  filterPoint();
+                                                });
+                                            setState(() {
+                                            });
+                                          },
                                           chipValues: FFAppState().fishes,
                                         ),
                                         Align(
@@ -390,13 +414,19 @@ class _ExploreMapSWWidgetState extends State<ExploreMapSWWidget> {
                                                                   MediaQuery.viewInsetsOf(
                                                                       context),
                                                                   child:
-                                                                  const Seawall1stFilterWidget(),
+                                                                  Seawall1stFilterWidget(
+                                                                    filterAction: () async{
+                                                                      filterPoint;
+                                                                      safeSetState(() {});
+                                                                    },
+                                                                  ),
                                                                 ),
                                                               ),
                                                             );
                                                           }
                                                       ).then((value) => safeSetState(() =>
                                                       _model.sW1stFilter = value));
+                                                      filterPoint();
 
                                                       safeSetState(() {});
                                                     },
@@ -428,6 +458,7 @@ class _ExploreMapSWWidgetState extends State<ExploreMapSWWidget> {
                                                           }
                                                       ).then((value) => safeSetState(() =>
                                                       _model.sW2ndFilter = value));
+                                                      filterPoint();
 
                                                       safeSetState(() {});
                                                     },
@@ -459,6 +490,7 @@ class _ExploreMapSWWidgetState extends State<ExploreMapSWWidget> {
                                                           }
                                                       ).then((value) => safeSetState(() =>
                                                       _model.sW3rdFilter = value));
+                                                      filterPoint();
 
                                                       safeSetState(() {});
                                                     },
@@ -474,14 +506,7 @@ class _ExploreMapSWWidgetState extends State<ExploreMapSWWidget> {
                                               0.0, 12.0, 0.0, 24.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
-                                              _model.sWPointList =
-                                              await actions.sWFilterSumString(
-                                                context,
-                                                _model.sW1stFilter?.toList(),
-                                                _model.sW2ndFilter?.toList(),
-                                                _model.sW3rdFilter?.toList(),
-                                                FFAppState().fishes.toList(),
-                                              );
+                                             filterPoint();
                                               _model.filterValue =
                                                   exploreMapSWTBPointRecordList
                                                       .toList()
@@ -540,6 +565,7 @@ class _ExploreMapSWWidgetState extends State<ExploreMapSWWidget> {
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   child: Stack(
+                                    alignment: Alignment.topRight,
                                     children: [
                                       SizedBox(
                                         width: double.infinity,
