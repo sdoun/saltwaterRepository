@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
+import 'package:salt_water_beta_ver1/components/terms_view_html.dart';
 
 import '../../components/term_view_widget.dart';
 import '/auth/firebase_auth/auth_util.dart';
@@ -412,7 +413,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                           socialButton(
                                             onPressed: () async {
                                               await actions
-                                                  .loginKakao();
+                                                  .loginKakao(context);
+                                              setState(() {
+
+                                              });
                                             },
                                             text: '카카오 회원가입',
                                             backgroundColor: const Color(
@@ -476,9 +480,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                   return WebViewAware(
                                                     child: Padding(
                                                       padding: MediaQuery.viewInsetsOf(context),
-                                                      child: const TermViewWidget(
+                                                      child: const TermsViewHtml(
                                                         termsType:
-                                                        "서비스 이용 약관",
+                                                        "서비스 이용약관",
                                                       ),
                                                     ),
                                                   );
@@ -511,9 +515,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                     return WebViewAware(
                                                       child: Padding(
                                                         padding: MediaQuery.viewInsetsOf(context),
-                                                        child: const TermViewWidget(
+                                                        child: const TermsViewHtml(
                                                           termsType:
-                                                          "개인정보 이용 약관",
+                                                          "개인정보 처리방침",
                                                         ),
                                                       ),
                                                     );

@@ -219,7 +219,7 @@ class _NaverMapWidgetPointCopyState extends State<NaverMapWidgetPointCopy> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: Alignment.bottomRight,
+      alignment: Alignment.topRight,
       children: [
         NaverMap(
           options: NaverMapViewOptions(
@@ -245,20 +245,32 @@ class _NaverMapWidgetPointCopyState extends State<NaverMapWidgetPointCopy> {
             print('맵 로딩됨');
           },
         ),
-        InkWell(
-          onTap: (){
-            setState(() {
-              setMapCenter();
-            });
-            moveCamera();
-          },
-          child: Container(
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-            ),
-            width: 48,
-            height: 48,
-            child: Image.asset('assets/images/마이.png')
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              SizedBox(
+                width: MediaQuery.sizeOf(context).width * 0.08,
+                height: MediaQuery.sizeOf(context).width *   0.08,
+              ),
+              InkWell(
+                onTap: (){
+                  setState(() {
+                    setMapCenter();
+                  });
+                  moveCamera();
+                },
+                child: Container(
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                  ),
+                  width: MediaQuery.sizeOf(context).width * 0.08,
+                  height: MediaQuery.sizeOf(context).width *   0.08,
+                  child: Image.asset('assets/images/내위치.png')
+                ),
+              ),
+            ],
           ),
         )
       ],

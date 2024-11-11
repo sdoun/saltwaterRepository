@@ -148,9 +148,9 @@ List<String> datetimeToDateCopyFcst(String datetime) {
   print(dateTime.day);
   if (dateTime.hour < 2) {
     dateTime = dateTime.subtract(Duration(days: 1));
-    print(dateTime.day);
-  }
 
+  }
+  print('fcst date is ${dateTime}');
 
   if (dateTime.hour < 2 || (dateTime.hour == 2 && dateTime.minute < 10)) {
     dateTime = dateTime.subtract(Duration(days: 1));
@@ -172,7 +172,7 @@ List<String> datetimeToDateCopyFcst(String datetime) {
   } else {
     result.add('2300');
   }
-  print(result[0]);
+  print('fcst Time is ${result[0]}');
 
   // 문자열 길이를 10으로 만들기
   String formattedDateTime = dateTime.toString().substring(0, 10);
@@ -188,14 +188,14 @@ List<String> datetimeToDateCopyFcst(String datetime) {
 
 int datetimeToDateCopy(String datetime) {
   DateTime dateTime = DateTime.parse(datetime);
-  if(dateTime.hour <= 1)
+  if(dateTime.hour <= 2)
   dateTime.subtract(Duration(days: 1));
   // 문자열 길이를 10으로 만들기
   String formattedDateTime = dateTime.toString().substring(0, 10);
 
   // 문자열에서 '-' 제거하기
   formattedDateTime = formattedDateTime.replaceAll('-', '');
-  print(formattedDateTime);
+  print('formatted Date is $formattedDateTime');
   // 문자열을 int 값으로 변환하여 반환
   return int.parse(formattedDateTime);
 }
@@ -214,7 +214,9 @@ String? datetimeToTimeString(String dateTimeString) {
   int hour = dateTime.hour;
   int minute = dateTime.minute;
 
-  hour = hour - 1;
+  if(minute <= 40){
+    hour = hour - 1;
+  }
 
   hour = hour * 100;
   String hourString = hour.toString();
@@ -557,13 +559,25 @@ List<dynamic>? fcsTmpForTommorow(
   String basedate,
   int datePlus,
 ) {
-  int tomorrow = int.parse(basedate) + datePlus;
+
+  DateTime date = DateTime.parse(basedate);
+  DateTime tomorrow = date.add(Duration(days:datePlus));
+
+  String tomorrowString = tomorrow.toString();
+  tomorrowString = tomorrowString.substring(0, 10);
+
+  // 문자열에서 '-' 제거하기
+  tomorrowString = tomorrowString.replaceAll('-', '');
+
+  print('Tomorrow String is $tomorrowString');
 
   for (var item in fcstList!) {
-    if (item["fcstDate"] == tomorrow.toString() && item["category"] == 'TMP') {
+    if (item["fcstDate"] == tomorrowString && item["category"] == 'TMP') {
+      print('TMP is ${item["fcstValue"]}');
       return [item["fcstValue"]];
     }
   }
+  print('there are no TMP');
   return null;
 }
 

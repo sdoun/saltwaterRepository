@@ -10,7 +10,9 @@ import 'package:salt_water_beta_ver1/reusable/pointExplore/filterCheckBox.dart';
 import 'package:salt_water_beta_ver1/reusable/pointExplore/filterBackground.dart';
 
 class Seawall1stFilterWidget extends StatefulWidget {
-  const Seawall1stFilterWidget({super.key});
+  const Seawall1stFilterWidget({super.key, this.filterAction});
+
+  final filterAction;
 
   @override
   State<Seawall1stFilterWidget> createState() => _Seawall1stFilterWidgetState();
@@ -111,7 +113,7 @@ class _Seawall1stFilterWidgetState extends State<Seawall1stFilterWidget> {
                   _model.checkboxValue1   !,
                 );
                 Navigator.pop(context, _model.sWType);
-
+                widget.filterAction;
                 safeSetState(() {});
               },
               child: Container(

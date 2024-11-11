@@ -85,7 +85,7 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
               : functions.datetimeToTimeString(getCurrentTimestamp.toString()),
         ),
         FcstWeatherApiCall.call(
-            numOfRows: 10,
+            numOfRows: 1100,
             pageNo: 1,
             dataType: 'JSON',
             baseDate: functions.datetimeToDateCopyFcst(getCurrentTimestamp.toString()).last,
@@ -382,7 +382,7 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                                 '${RealtimeWeatherAPICall
                                                     .dataList(
                                                   _model.realtimeWeatherResponse?.jsonBody,
-                                                )?[3]}℃',
+                                                )?[3] ?? '15'}℃',
                                                 '20℃',
                                               ),
                                               style: FlutterFlowTheme

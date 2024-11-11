@@ -51,6 +51,7 @@ class _FishingParkMapWidgetState extends State<FishingParkMapWidget> {
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
+    filterPoint();
   }
 
   @override
@@ -80,6 +81,24 @@ class _FishingParkMapWidgetState extends State<FishingParkMapWidget> {
     }
   }
 
+  void filterPoint() async{
+    _model.pensionPointList =
+    await actions.sWFilterSumString(
+      context,
+      _model.park1stFilter?.toList(),
+      _model.park2ndFilter?.toList(),
+      _model.park3rdFilter?.toList(),
+      _model.choiceChipsValues?.toList(),
+    );
+    if(_model.pensionPointList == null || _model.pensionPointList!.isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('조건에 일치하는 포인트가 없습니다.')),
+      );
+    }
+
+    safeSetState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
@@ -91,8 +110,8 @@ class _FishingParkMapWidgetState extends State<FishingParkMapWidget> {
         pop(_model.filterValueExit);
       },
       child: GestureDetector(
-  onTap: () => FocusScope.of(context).unfocus(),
-  child: Scaffold(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Scaffold(
     key: scaffoldKey,
     backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
     appBar: AppBar(
@@ -181,8 +200,13 @@ class _FishingParkMapWidgetState extends State<FishingParkMapWidget> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Fishchoicechips(
-                            onChanged: (val) => safeSetState(
-                                    () => _model.choiceChipsValues = val),
+                            onChanged: (val) {
+                              safeSetState(
+                                    () => _model.choiceChipsValues = val);
+                              filterPoint();
+                              setState(() {
+                              });
+                            },
                             controller: _model.choiceChipsValueController ??=
                                 FormFieldController<List<String>>(
                                   FFAppState().fishes,
@@ -332,6 +356,7 @@ class _FishingParkMapWidgetState extends State<FishingParkMapWidget> {
                                             }
                                         ).then((value) => safeSetState(() =>
                                         _model.park1stFilter = value));
+                                        filterPoint();
 
                                         safeSetState(() {});
                                       },
@@ -363,6 +388,7 @@ class _FishingParkMapWidgetState extends State<FishingParkMapWidget> {
                                             }
                                         ).then((value) => safeSetState(() =>
                                         _model.park2ndFilter = value));
+                                        filterPoint();
 
                                         safeSetState(() {});
                                       },
@@ -394,6 +420,7 @@ class _FishingParkMapWidgetState extends State<FishingParkMapWidget> {
                                             }
                                         ).then((value) => safeSetState(() =>
                                         _model.park3rdFilter = value));
+                                        filterPoint();
 
                                         safeSetState(() {});
                                       },
@@ -409,14 +436,7 @@ class _FishingParkMapWidgetState extends State<FishingParkMapWidget> {
                                 0.0, 12.0, 0.0, 24.0),
                             child: FFButtonWidget(
                               onPressed: () async {
-                                _model.pensionPointList =
-                                await actions.sWFilterSumString(
-                                  context,
-                                  _model.park1stFilter?.toList(),
-                                  _model.park2ndFilter?.toList(),
-                                  _model.park3rdFilter?.toList(),
-                                  _model.choiceChipsValues?.toList(),
-                                );
+                                filterPoint();
 
                                 safeSetState(() {});
 
@@ -460,19 +480,17 @@ class _FishingParkMapWidgetState extends State<FishingParkMapWidget> {
                     stream: _model.pointCache(
                       requestFn: () => queryTBPointRecord(
                         queryBuilder: (tBPointRecord) => tBPointRecord
-                            .whereIn(
-                            'point_name',
-                            _model.pensionPointList != ''
-                                ? _model.pensionPointList
-                                : null)
-                            .where(
-                          'point_categories',
-                          isEqualTo: '낚시공원' != '' ? '낚시공원' : null,
-                          isNull:
-                          ('낚시공원' != '' ? '낚시공원' : null) == null,
-                        ),
                       ),
-                    ),
+                    ).map((snapshot){
+                      return snapshot.where((record) {
+                        bool matchesName = _model.pensionPointList == [] ||
+                            _model.pensionPointList!.contains(record.pointName);
+                        bool matchesCategory = '낚시공원' == '' ||
+                            record.pointCategories == '낚시공원';
+                        return matchesName && matchesCategory;
+                      }).toList();
+                    })..listen((snapshot) {
+                    }),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
                       if (!snapshot.hasData) {
@@ -502,6 +520,7 @@ class _FishingParkMapWidgetState extends State<FishingParkMapWidget> {
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           child: Stack(
+                            alignment: Alignment.topRight,
                             children: [
                               SizedBox(
                                 width: double.infinity,

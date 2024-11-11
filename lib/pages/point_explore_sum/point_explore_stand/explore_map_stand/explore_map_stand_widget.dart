@@ -51,6 +51,7 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
+    filterPoint();
   }
 
   @override
@@ -78,6 +79,25 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
     else{
       context.pushNamed('home1');
     }
+  }
+
+  void filterPoint() async{
+    _model.standList =
+    await actions.standListFromFilter(
+      FFAppState().standFacility1.toList(),
+      _model.stand2ndFilter?.toList(),
+      _model.stand3rdFilter?.toList(),
+      _model.choiceChipsValues?.toList(),
+      '1',
+      FFAppState().standFacility2.toList(),
+    );
+    if(_model.standList == null || _model.standList!.isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('조건에 일치하는 포인트가 없습니다.')),
+      );
+    }
+
+    safeSetState(() {});
   }
 
   @override
@@ -187,8 +207,12 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
                                       FormFieldController<List<String>>(
                                         FFAppState().fishes,
                                       ),
-                                  onChanged: (val) => safeSetState(
-                                          () => _model.choiceChipsValues = val),
+                                  onChanged: (val) {
+                                    safeSetState(() => _model.choiceChipsValues = val);
+                                    filterPoint();
+                                    setState(() {
+                                    });
+                                  },
                                   chipValues: _model.choiceChipsValues,
                                 ),
                                 Align(
@@ -336,6 +360,7 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
                                                   },
                                                 ).then((value) => safeSetState(() =>
                                                 _model.stand1stFilter = value));
+                                                filterPoint();
 
                                                 safeSetState(() {});
                                               },
@@ -367,6 +392,7 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
                                                   },
                                                 ).then((value) => safeSetState(() =>
                                                 _model.stand2ndFilter = value));
+                                                filterPoint();
 
                                                 safeSetState(() {});
                                               },
@@ -398,6 +424,8 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
                                                   },
                                                 ).then((value) => safeSetState(() =>
                                                 _model.stand3rdFilter = value));
+                                                filterPoint();
+
 
                                                 safeSetState(() {});
                                               },
@@ -413,15 +441,7 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
                                       0.0, 12.0, 0.0, 24.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      _model.standList =
-                                      await actions.standListFromFilter(
-                                        FFAppState().standFacility1.toList(),
-                                        _model.stand2ndFilter?.toList(),
-                                        _model.stand3rdFilter?.toList(),
-                                        _model.choiceChipsValues?.toList(),
-                                        '1',
-                                        FFAppState().standFacility2.toList(),
-                                      );
+                                      filterPoint();
 
                                       safeSetState(() {});
 
@@ -463,20 +483,16 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
                         ),
                         StreamBuilder<List<TBPointRecord>>(
                           stream: queryTBPointRecord(
-                            queryBuilder: (tBPointRecord) => tBPointRecord
-                                .whereIn(
-                                'point_name',
-                                _model.standList != ''
-                                    ? _model.standList
-                                    : null)
-                                .where(
-                              'point_categories',
-                              isEqualTo: '해상펜션, 좌대' != '' ? '해상펜션, 좌대' : null,
-                              isNull:
-                              ('해상펜션, 좌대' != '' ? '해상펜션, 좌대' : null) ==
-                                  null,
-                            ),
-                          ),
+                            queryBuilder: (tBPointRecord) => tBPointRecord).map((snapshot){
+                            return snapshot.where((record) {
+                              bool matchesName = _model.standList == [] ||
+                                  _model.standList!.contains(record.pointName);
+                              bool matchesCategory = '해상펜션, 좌대' == '' ||
+                                  record.pointCategories == '해상펜션, 좌대';
+                              return matchesName && matchesCategory;
+                            }).toList();
+                          })..listen((snapshot) {
+                          }),
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
                             if (!snapshot.hasData) {
@@ -506,6 +522,7 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 child: Stack(
+                                  alignment: Alignment.topRight,
                                   children: [
                                     SizedBox(
                                       width: double.infinity,

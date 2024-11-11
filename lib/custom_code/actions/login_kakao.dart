@@ -17,7 +17,7 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart' as kakao;
 import '/auth/firebase_auth/auth_util.dart';
 import '../../auth/auth_manager.dart';
 
-Future loginKakao() async {
+Future loginKakao(BuildContext context) async {
   // Add your function code here!
   // 1. 카카오톡 사용 혹은 계정을 이용하여 카카오 로그인
   final HttpsCallable sdkCheckCallable =
@@ -70,9 +70,11 @@ Future loginKakao() async {
 
     // 5. DB 에 유저 데이터 동록
     await maybeCreateUser(credential.user!);
+    Navigator.pushNamed(context, 'home1');
   } catch (e) {
     print(e);
     sdkCheckCallable.call(<String, dynamic>{'logParam': e});
+    return;
   }
   // FlutterFlow의 AuthState 업데이
 }
