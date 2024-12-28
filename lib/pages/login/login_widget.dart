@@ -153,103 +153,6 @@ class _LoginWidgetState extends State<LoginWidget>
     super.dispose();
   }
 
-  Future<void> handleEmailAuth() async {
-    if (_formKey.currentState == null) return;
-    if(_model.emailAddressCreateTextController.text.isEmpty || _model.passwordCreateTextController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('이메일과 비밀번호를 올바르게 입력해주세요.'),
-          duration: Duration(milliseconds: 4000),
-        ),
-      );
-      return;
-    }
-    
-    if (!_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('이메일과 비밀번호를 올바르게 입력해주세요.'),
-          duration: Duration(milliseconds: 4000),
-        ),
-      );
-      return;
-    }
-    
-    try {
-    // 1. 로그인 시도
-    GoRouter.of(context).prepareAuthEvent(); // 중요: Auth 이벤트 준비
-
-
-    final  user = await authManager.signInWithEmail(
-        context,
-        _model.emailAddressCreateTextController.text.trim(),
-        _model.passwordCreateTextController.text,
-      );
-    if (user == null) {
-      // 2. 로그인 실패 시 회원가입 시도
-      if (!_model.checkboxValue!) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('약관에 동의해주세요!')),
-        );
-        return;
-      }
-
-      GoRouter.of(context).prepareAuthEvent(); // 회원가입 이벤트 준비
-
-      final newUser = await authManager.createAccountWithEmail(
-        context,
-        _model.emailAddressCreateTextController.text.trim(),
-        _model.passwordCreateTextController.text,
-      );
-
-      if (newUser == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('회원가입에 실패했습니다.')),
-        );
-        return;
-      }
-
-      // 3. 사용자 추가 정보 업데이트
-      await maybeCreateUser(newUser as User);
-    }
-
-    if (context.mounted) {
-      context.goNamedAuth('home1', context.mounted);
-    }
-  } on FirebaseAuthException catch (e) {
-    print('Firebase Auth Error: ${e.code} - ${e.message}');
-    String errorMessage;
-    
-    switch (e.code) {
-      case 'invalid-email':
-        errorMessage = '올바른 이메일 형식이 아닙니다.';
-        break;
-      case 'wrong-password':
-        errorMessage = '비밀번호가 올바르지 않습니다.';
-        break;
-      case 'email-already-in-use':
-        errorMessage = '이미 사용 중인 이메일입니다.';
-        break;
-      case 'operation-not-allowed':
-        errorMessage = '이메일/비밀번호 로그인이 비활성화되어 있습니다.';
-        break;
-      case 'weak-password':
-        errorMessage = '비밀번호가 너무 약합니다.';
-        break;
-      default:
-        errorMessage = '비밀번호가 올바르지 않거나 인증 오류가 발생했습니다: ${e.message}';
-    }
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(errorMessage)),
-    );
-  } catch (e) {
-    print('General Error: $e');
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('예기치 않은 오류가 발생했습니다.')),
-    );
-  }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -369,9 +272,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                   context);
                                               if (user ==
                                                   null) {
+                                                print('user is null');
                                                 return;
                                               }
-
+                                              print('user is $user');
                                               context.goNamedAuth(
                                                   'home1',
                                                   context

@@ -107,7 +107,7 @@ class _TermsViewHtmlState extends State<TermsViewHtml> {
         break;
       case "개인정보 처리방침":
         title = '개인정보 처리방침';
-        fileName = 'assets/terms/privacy_policy_merge.html';
+        fileName = 'assets/terms/privacy_policy_merge1113.html';
         break;
       default:
         throw Exception('Unknown terms type: $termsType');

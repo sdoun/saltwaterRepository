@@ -70,6 +70,7 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
       _model.setFilterValueExit();
     }
     );
+    filterPoint();
   }
 
   void pop(bool filterExit){
@@ -87,7 +88,7 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
       FFAppState().standFacility1.toList(),
       _model.stand2ndFilter?.toList(),
       _model.stand3rdFilter?.toList(),
-      _model.choiceChipsValues?.toList(),
+      FFAppState().fishes.toList(),
       '1',
       FFAppState().standFacility2.toList(),
     );

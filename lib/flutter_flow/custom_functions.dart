@@ -4,6 +4,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:salt_water_beta_ver1/models/weatherModels.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'lat_lng.dart';
 import 'place.dart';
@@ -12,6 +13,38 @@ import '/backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '/backend/schema/structs/index.dart';
 import '/auth/firebase_auth/auth_util.dart';
+
+
+String fcstDetailTime(SkyModel skyModel){
+  DateTime today = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day,);
+  DateTime fcstDate = DateTime.parse(skyModel.fcstDate);
+  String result = '${skyModel.fcstTime?.substring(0,2)}시' ?? '00시';
+  if(result == '00시'){
+    if(fcstDate == today.add(const Duration(days: 1))){
+      result = '내일';
+    }
+    else if(fcstDate == today.add(const Duration(days: 2))){
+      result = '모레';
+    }
+  }
+  return result;
+}
+
+Widget pointTypeImage(TBPointRecord data){
+  final record = data;
+  if(record.pointCategories == '방파제, 선착장') {
+    return Image.asset('assets/images/1007방파제.png');
+  }else if(record.pointCategories == '해변, 갯바위'){
+    return Image.asset('assets/images/1007해변.png');
+  }else if(record.pointCategories == '낚시펜션, 민박'){
+    return Image.asset('assets/images/1007민박.png');
+  }else if(record.pointCategories == '좌대, 해상펜션'){
+    return Image.asset('assets/images/1007해상펜션.png');
+  }
+  else{
+    return Image.asset('assets/images/1007낚시공원.png');
+  }
+}
 
 List<String>? sW1stFilterBottomsheet(
   bool isTetra,

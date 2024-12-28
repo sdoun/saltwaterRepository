@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:salt_water_beta_ver1/pages/point_explore_sum/review_bottomsheet/review_edit_view.dart';
 import 'package:salt_water_beta_ver1/reusable/common/report_bottomsheet.dart';
 
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/custom_code/actions/index.dart' as actions;
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -16,6 +19,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'point_detailed_model.dart';
 export 'point_detailed_model.dart';
+
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:platform/platform.dart';
+import 'package:android_intent_plus/android_intent.dart';
+import 'package:android_intent_plus/flag.dart';
+
+
 
 class PointDetailedWidget extends StatefulWidget {
   const PointDetailedWidget({
@@ -49,6 +60,20 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
     super.dispose();
   }
 
+  Future<void> _onOpen(LinkableElement link) async {
+    if (!await launchUrl(Uri.parse(link.url))) {
+      throw Exception('Could not launch ${link.url}');
+    }
+  }
+
+  void openNavi(String address){
+    final intent = AndroidIntent(
+      action: 'action_view',
+      data: "geo:0,0?q=$address"
+    );
+    intent.launch();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +99,6 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
         }
 
         final pointDetailedTBPointRecord = snapshot.data!;
-        print('포인트 설명 문구: ${pointDetailedTBPointRecord.pointIntroductionab}');
 
         return GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -261,27 +285,101 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                             ]
                           ),
 
-                          Text(
-                            pointDetailedTBPointRecord.pointAddress,
-                            style: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                fontFamily:
-                                'PretendardSeries',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 13.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w400,
-                                useGoogleFonts: GoogleFonts
-                                    .asMap()
-                                    .containsKey(
-                                    'PretendardSeries'),
+                          Flexible(
+                            child: Row(
+                              children: [
+                                Text(
+                                  pointDetailedTBPointRecord.pointAddress,
+                                  style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily:
+                                      'PretendardSeries',
+                                      color: FlutterFlowTheme.of(context).primaryText,
+                                      fontSize: 13.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w400,
+                                      useGoogleFonts: GoogleFonts
+                                          .asMap()
+                                          .containsKey(
+                                          'PretendardSeries'),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 8
+                                ),
+                                InkWell(
+                                  onTap: () async{
+                                    openNavi(pointDetailedTBPointRecord.pointAddress);
+                                  },
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        height: 13,
+                                        child: Image.asset('assets/images/길찾기.png'),
+                                      ),
+                                      Text(
+                                        '길찾기',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                          fontFamily:
+                                          'PretendardSeries',
+                                          color: FlutterFlowTheme.of(context).primary,
+                                          fontSize: 13.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w400,
+                                          useGoogleFonts: GoogleFonts
+                                              .asMap()
+                                              .containsKey(
+                                              'PretendardSeries'),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
                             ),
                           ),
-                          Divider(
-                            height: 32.0,
-                            thickness: 1.0,
-                            color: FlutterFlowTheme.of(context).secondary,
+                          InkWell(
+                            onTap: ()async {
+                              context.pushNamed(
+                                'weatherDetailed',
+                                queryParameters: {
+                                  'weatherRef': serializeParam(
+                                    await actions.findWeatherPoint(pointDetailedTBPointRecord.pointLatitude, pointDetailedTBPointRecord.pointLongitude),
+                                    ParamType.DocumentReference,
+                                  ),
+                                }.withoutNulls,
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  height: 36,
+                                  child: Image.asset('assets/images/맑음2.png'),
+                                ),
+                                Text(
+                                  '이곳의 날씨보기',
+                                  style:
+                                    FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                        fontFamily:
+                                        'PretendardSeries',
+                                        color: FlutterFlowTheme.of(context).primary,
+                                        fontSize: 13.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.w400,
+                                        useGoogleFonts: GoogleFonts
+                                            .asMap()
+                                            .containsKey(
+                                            'PretendardSeries'),
+                                    decoration: TextDecoration.underline
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
@@ -553,15 +651,37 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                       child: Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
                                             16.0, 20.0, 16.0, 20.0),
-                                        child: Text(
-                                          pointDetailedTBPointRecord
-                                              .pointIntroduction.toString(),
-                                          style: FlutterFlowTheme.of(context)
+                                        child:
+                                        Linkify(
+                                          onOpen:  (link) async {
+                                            if (!await launchUrl(Uri.parse(link.url))) {
+                                              throw Exception('Could not launch ${link.url}');
+                                            }
+                                          },
+                                            text:
+                                              pointDetailedTBPointRecord
+                                                  .pointIntroduction.toString(),
+                                            style: FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .override(
+                                                fontFamily:
+                                                'PretendardSeries',
+                                                color: FlutterFlowTheme.of(context).primaryText,
+                                                fontSize: 14.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w500,
+                                                useGoogleFonts: GoogleFonts
+                                                    .asMap()
+                                                    .containsKey(
+                                                    'PretendardSeries'),
+                                              ),
+                                          linkStyle: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
                                             fontFamily:
                                             'PretendardSeries',
-                                            color: FlutterFlowTheme.of(context).primaryText,
+                                            color: FlutterFlowTheme.of(context).primary,
+                                            decoration: TextDecoration.underline,
                                             fontSize: 14.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w500,
@@ -569,10 +689,9 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                 .asMap()
                                                 .containsKey(
                                                 'PretendardSeries'),
-                                          ),
-                                        ),
+                                            ),
                                       ),
-                                    ),
+                                    ),)
                                   ],
                                 )
                             ),
@@ -931,6 +1050,9 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                       child: StreamBuilder<List<TBUserReviewPointRecord>>(
                         stream: queryTBUserReviewPointRecord(
                           parent: widget.pointRefSW,
+                          queryBuilder: (tbReviewRecord){
+                            return tbReviewRecord.orderBy('timestamp', descending: true);
+                          }
                         ),
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
@@ -971,11 +1093,10 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                   }
 
                                   final containerUsersRecord = snapshot.data!;
-                                  print(containerUsersRecord.displayName);
 
                                   return Visibility(
-                                    visible: !(columnTBUserReviewPointRecord.reviewReportedBy!.contains(currentUserReference)) && !currentUserDocument!.bannedUser!
-                                        .contains(columnTBUserReviewPointRecord.reviewWrittenBy),
+                                    visible: !((columnTBUserReviewPointRecord.reviewReportedBy.contains(currentUserReference)) || currentUserDocument!.bannedUser.contains(columnTBUserReviewPointRecord
+                                        .reviewWrittenBy!)),
                                     child: Container(
                                       width: double.infinity,
                                       height: 124.0,
@@ -1016,7 +1137,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                 Row(
                                                   children: [
                                                     Visibility(
-                                                        visible: currentUserReference == columnTBUserReviewPointRecord.reviewWrittenBy,
+                                                        visible: currentUserReference == containerUsersRecord.reference,
                                                         child: Row(
                                                           children: [
                                                             InkWell(
@@ -1111,7 +1232,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                     shape: BoxShape.circle,
                                                   ),
                                                   child: Image.network(
-                                                    functions.basicProfile(currentUserPhoto),
+                                                    functions.basicProfile(containerUsersRecord.photoUrl),
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),

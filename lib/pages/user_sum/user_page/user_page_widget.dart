@@ -14,6 +14,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'user_page_model.dart';
 export 'user_page_model.dart';
 
+import 'package:salt_water_beta_ver1/custom_code/actions/deletePointLike.dart';
+
 class UserPageWidget extends StatefulWidget {
   const UserPageWidget({super.key});
 
@@ -26,6 +28,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
   List<Widget>? pointReviews;
   int reviewLimit = 3;
   int postLimit = 3;
+  List<TBUserReviewPointRecord>? userReviewRecords;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -159,119 +162,15 @@ class _UserPageWidgetState extends State<UserPageWidget> {
       return [const SizedBox(height: 42,)];
     }
   }
-  Widget? carrotPostBuilder(TBCarrotPostRecord carrotPost){
-    return InkWell(
-      splashColor: Colors.transparent,
-      focusColor: Colors.transparent,
-      hoverColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      onTap: () async {
-        context.pushNamed(
-          'carrotPost',
-          queryParameters: {
-            'carrotPost': serializeParam(
-              carrotPost
-                  .reference,
-              ParamType.DocumentReference,
-            ),
-          }.withoutNulls,
-        );
-      },
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color:
-          FlutterFlowTheme.of(context)
-              .primaryBackground,
-        ),
-        child: Padding(
-          padding: const EdgeInsetsDirectional
-              .fromSTEB(10.0, 8.0, 10.0, 16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment:
-            CrossAxisAlignment.start,
-            children: [
-              Text(
-                carrotPost
-                    .postTitle,
-                style: FlutterFlowTheme.of(
-                    context)
-                    .bodyMedium
-                    .override(
-                  fontFamily:
-                  'PretendardSeries',
-                  fontSize: 16.0,
-                  letterSpacing: 0.0,
-                  fontWeight:
-                  FontWeight.w600,
-                  useGoogleFonts:
-                  GoogleFonts
-                      .asMap()
-                      .containsKey(
-                      'PretendardSeries'),
-                ),
-              ),
-              Text(
-                carrotPost.postCategory,
-                style: FlutterFlowTheme.of(
-                    context)
-                    .bodyMedium
-                    .override(
-                  fontFamily:
-                  'PretendardSeries',
-                  letterSpacing: 0.0,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  useGoogleFonts:
-                  GoogleFonts
-                      .asMap()
-                      .containsKey(
-                      'PretendardSeries'),
-                ),
-              ),
-              Text(
-                carrotPost
-                    .postDatetime.toString() ?? '카테고리 미지정',
-                style: FlutterFlowTheme.of(
-                    context)
-                    .bodyMedium
-                    .override(
-                  fontFamily:
-                  'PretendardSeries',
-                  letterSpacing: 0.0,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  useGoogleFonts:
-                  GoogleFonts
-                      .asMap()
-                      .containsKey(
-                      'PretendardSeries'),
-                ),
-              ),
-            ].divide(const SizedBox(height: 8.0)),
-          ),
-        ),
-      ),
-    );
-  }
-  List<Widget> postListBuilder(List<TBCarrotPostRecord>? list){
-    pointReviews = [];
-    if(list != null){
-      if(list.length <reviewLimit){
-        for(int i = 0; i<list.length; i++){
-          pointReviews?.add(carrotPostBuilder(list[i])!);
-        }
-      }
-      else{
-        for(int i = 0; i<reviewLimit; i++){
-          pointReviews?.add(carrotPostBuilder(list[i])!);
-        }
-      }
-      return pointReviews!;
+  void deleteUserReview(List<TBUserReviewPointRecord>? list){
+    if(list == null || list.isEmpty){
+      return;
     }
-    else{
-      return [const SizedBox(height: 42,)];
+    for(var record in list){
+      final ref = record.reference;
+      if(record.reviewWrittenBy == currentUserReference){
+        ref.delete();
+      }
     }
   }
 
@@ -516,6 +415,9 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                   24.0, 12.0, 24.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async{
+                                  currentUserReference!.update({
+                                    'banned_user' : []
+                                  });
                                   await showModalBottomSheet(
                                       isScrollControlled: true,
                                       backgroundColor: Colors.transparent,
@@ -534,10 +436,12 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                           child:
                                           Deleteuserbottonsheet(
                                             clickYes: () async{
+                                              deletePointLikes(context, currentUserReference);
+                                              deleteUserReview(userReviewRecords);
+
                                               GoRouter.of(context).prepareAuthEvent();
                                               await authManager.deleteUser(context);
                                               await authManager.signOut();
-
                                               context.goNamedAuth('login', context.mounted);
                                               GoRouter.of(context).clearRedirectLocation();
 
@@ -1010,6 +914,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                 List<TBUserReviewPointRecord>
                                     listViewTBUserReviewPointRecordList =
                                     snapshot.data!;
+                                userReviewRecords = snapshot.data ?? [];
 
                                 return Column(
                                   children: reviewListBuilder(listViewTBUserReviewPointRecordList).divide(const SizedBox(height: 32,))
@@ -1116,38 +1021,6 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                 ),
                               ),
                             ),
-                          ),
-                          StreamBuilder<List<TBCarrotPostRecord>>(
-                            stream: queryTBCarrotPostRecord(
-                              queryBuilder: (tBCarrotPostRecord) =>
-                                  tBCarrotPostRecord.where(
-                                'post_seller',
-                                isEqualTo: currentUserReference,
-                              ),
-                            ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        FlutterFlowTheme.of(context).primary,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }
-                              List<TBCarrotPostRecord>
-                                  columnTBCarrotPostRecordList = snapshot.data!;
-
-                              return Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: postListBuilder(columnTBCarrotPostRecordList).divide(const SizedBox(height: 16,)),
-                              );
-                            },
                           ),
                           InkWell(
                             onTap: (){

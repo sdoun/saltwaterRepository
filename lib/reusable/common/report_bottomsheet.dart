@@ -251,14 +251,19 @@ class _ReportBottomsheetState extends State<ReportBottomsheet> {
                           ),
                         ),
                       ),
+                      const SizedBox(
+                        width: 12,
+                      ),
                       Padding(
                         padding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 44.0),
                         child: FFButtonWidget(
 
                           onPressed: () async {
-                            final bannedUser = reviewRecord.reviewWrittenBy;
+                            final newBannedUser = reviewRecord.reviewWrittenBy;
+                            final bannedUser = currentUserDocument!.bannedUser ?? [];
                             final reportedBy = reviewRecord.reviewReportedBy ?? [];
+                            bannedUser.add(newBannedUser!);
                             reportedBy.add(currentUserReference!);
                             await TBUserReviewReportRecord.collection.doc().set({
                               ...createTBUserReviewReportData(
@@ -279,7 +284,7 @@ class _ReportBottomsheetState extends State<ReportBottomsheet> {
                             );
                             Navigator.pop(context);
                           },
-                          text: '신고하고 사용자 차단하기',
+                          text: '신고 및 사용자 차단하기',
                           options: FFButtonOptions(
                             width: 150.0,
                             height: 30.0,
@@ -287,20 +292,20 @@ class _ReportBottomsheetState extends State<ReportBottomsheet> {
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
+                            color: FlutterFlowTheme.of(context).primaryBackground,
                             textStyle: FlutterFlowTheme.of(context).titleMedium.override(
                               fontFamily:
                               'PretendardSeries',
-                              color: Colors.white,
-                              fontSize: 14.0,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              fontSize: 12.0,
                               letterSpacing: 0.0,
                               fontWeight: FontWeight.w500,
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
                                   'PretendardSeries'),
                             ),
                             elevation: 3.0,
-                            borderSide: const BorderSide(
-                              color: Colors.transparent,
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).primaryText,
                               width: 1.0,
                             ),
                           ),

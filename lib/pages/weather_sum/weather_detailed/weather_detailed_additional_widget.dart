@@ -1,3 +1,4 @@
+import '../../../models/weatherModels.dart';
 import '../../../reusable/common/loadingAnimation.dart';
 import '../../../reusable/common/pulsatingImage.dart';
 import '/backend/api_requests/api_calls.dart';
@@ -17,9 +18,11 @@ export 'weather_detailed_model.dart';
 import 'package:salt_water_beta_ver1/reusable/weather/tidDateButton.dart';
 import 'package:get/get.dart';
 import 'package:salt_water_beta_ver1/reusable/common/loadingcontroller.dart';
+import 'package:fl_chart/fl_chart.dart';
+import 'package:sunrise_sunset_calc/sunrise_sunset_calc.dart';
 
-class WeatherDetailedWidget extends StatefulWidget {
-  const WeatherDetailedWidget({
+class WeatherDetailedAdditional extends StatefulWidget {
+  const WeatherDetailedAdditional({
     super.key,
     required this.weatherRef,
   });
@@ -27,14 +30,16 @@ class WeatherDetailedWidget extends StatefulWidget {
   final DocumentReference? weatherRef;
 
   @override
-  State<WeatherDetailedWidget> createState() => _WeatherDetailedWidgetState();
+  State<WeatherDetailedAdditional> createState() => _WeatherDetailedAdditionalState();
 }
 
-class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
+class _WeatherDetailedAdditionalState extends State<WeatherDetailedAdditional> {
   late WeatherDetailedModel _model;
   bool isLoading = true;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  List<int> showingTooltipOnSpots = [1, 3, 5];
 
   @override
   void initState() {
@@ -81,9 +86,9 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
       });
     }catch(e){
       print('Error detected while calling tidApi $e');
-      setState(() {
-        isLoading = false;
-      });
+    setState(() {
+      isLoading = false;
+    });
     }
     return;
   }
@@ -108,13 +113,13 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
               : functions.datetimeToTimeString(getCurrentTimestamp.toString()),
         ),
         FcstWeatherApiCall.call(
-            numOfRows: 1100,
-            pageNo: 1,
-            dataType: 'JSON',
-            baseDate: functions.datetimeToDateCopyFcst(getCurrentTimestamp.toString()).last,
-            baseTime: functions.datetimeToDateCopyFcst(getCurrentTimestamp.toString()).first,
-            nx: record.nx,
-            ny: record.ny,
+          numOfRows: 580,
+          pageNo: 1,
+          dataType: 'JSON',
+          baseDate: functions.datetimeToDateCopyFcst(getCurrentTimestamp.toString()).last,
+          baseTime: functions.datetimeToDateCopyFcst(getCurrentTimestamp.toString()).first,
+          nx: record.nx,
+          ny: record.ny,
         ),
         TidalFcstCall.call(
           date: _model.tidDateString,
@@ -145,6 +150,12 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
         _model.midTmpResponse = results[3];
         _model.midFcstResponse = results[4];
         _model.realtimeWtrTmpResponse = results[5];
+        _model.skyModelList = SkyModel.createSkyList(_model.fcstWeatherResponse?.jsonBody);
+        _model.windDirectionModelList = SkyModel.createWindDirectionList(_model.fcstWeatherResponse?.jsonBody);
+        _model.tmpModelList = SkyModel.createTmpList(_model.fcstWeatherResponse?.jsonBody);
+        _model.wsdModelList = SkyModel.createWsdList(_model.fcstWeatherResponse?.jsonBody);
+        _model.pcpModelList = SkyModel.createPcpList(_model.fcstWeatherResponse?.jsonBody);
+        _model.popModelList = SkyModel.createPopList(_model.fcstWeatherResponse?.jsonBody);
         print(results[0].jsonBody);
         print(results[1].jsonBody);
         print(results[2].jsonBody);
@@ -167,6 +178,55 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
 
     super.dispose();
   }
+  FlSpot createFlSpot(SkyModel data){
+    double dataX = data.itemNum.toDouble();//double.parse(data.fcstDate + data.fcstTime);
+    FlSpot spot = FlSpot(dataX, double.parse(data.fcstValue));
+    return spot;
+  }
+
+  List<FlSpot> createGraphDot(List<SkyModel> dataList){
+    List<FlSpot> result = [];
+
+    final data = dataList;
+    for(SkyModel item in data){
+      result.add(createFlSpot(item));
+    }
+    return result;
+  }
+
+  BarChartGroupData createBar(SkyModel data){
+    return BarChartGroupData(
+      x: data.itemNum,
+      barRods: [BarChartRodData(toY: double.parse(data.fcstValue), color: FlutterFlowTheme.of(context).primary, borderRadius: BorderRadius.circular(0), width: 16)],
+      showingTooltipIndicators: [0],
+    );
+  }
+  List<BarChartGroupData> createBarList(List<SkyModel> data){
+    List<BarChartGroupData> result = [];
+    for(final item in data){
+      final bar = createBar(item);
+      result.add(bar);
+    }
+    return result;
+  }
+
+  BarChartGroupData createWSDBar(SkyModel data){
+    return BarChartGroupData(
+      x: data.itemNum,
+      barRods: [BarChartRodData(toY: double.parse(data.fcstValue), color: const Color(0xffDDEFFF), borderRadius: BorderRadius.circular(0), width: 16)],
+      showingTooltipIndicators: [0],
+    );
+  }
+  List<BarChartGroupData> createWSDBarList(List<SkyModel> data){
+    List<BarChartGroupData> result = [];
+    for(final item in data){
+      final bar = createWSDBar(item);
+      result.add(bar);
+    }
+    return result;
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -200,6 +260,19 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
         }
 
         final weatherDetailedTBWeatherPointRecord = snapshot.data!;
+        final tmpGraphDots = createGraphDot(_model.tmpModelList ?? []);
+        final lineBarsData =
+          LineChartBarData(
+              dotData: FlDotData(show: true),
+              showingIndicators: [0,1,2,3,4,5,6,7,8,9],
+              color: FlutterFlowTheme.of(context).secondaryText,
+              spots: tmpGraphDots,
+              belowBarData: BarAreaData(show: false),
+              aboveBarData: BarAreaData(show:false),
+          );
+        final wsdBarData = createBarList(_model.wsdModelList);
+        final pcpBarData = createBarList(_model.pcpModelList);
+
 
         return Stack(
           children: [
@@ -352,15 +425,15 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                           ),
                                           InkWell(
                                             onTap: ()async{
-                                              context.pushNamed('weatherDetailedAdditional', queryParameters: {
+                                              context.goNamed('weatherDetailed', queryParameters: {
                                                 'weatherRef': serializeParam(
-                                                weatherDetailedTBWeatherPointRecord.reference,
-                                                ParamType.DocumentReference,
-                                              ),
+                                                  weatherDetailedTBWeatherPointRecord.reference,
+                                                  ParamType.DocumentReference,
+                                                ),
                                               }.withoutNulls,);
                                             },
                                             child: Text(
-                                              '날씨 상세히보기',
+                                              '날씨 간략히보기',
                                               style: FlutterFlowTheme
                                                   .of(
                                                   context)
@@ -714,6 +787,507 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                               ),
                             ),
                           ),
+                          if(!isLoading)
+
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '날씨',
+                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                      color: const Color(0xFF1E2224),
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w600,
+                                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                          FlutterFlowTheme.of(context).bodyMediumFamily),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 24,
+                                  ),
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: _model.skyModelList == null || _model.skyModelList!.isEmpty
+                                        ? Text(
+                                        "데이터가 없습니다.",
+                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                        color: const Color(0xFF1E2224),
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w600,
+                                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                            FlutterFlowTheme.of(context).bodyMediumFamily),
+                                      ),
+                                    )
+                                        : Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              color: FlutterFlowTheme.of(context).primaryBackground,
+                                              height: 120,
+                                              width: 52*_model.skyModelList!.length.toDouble()-16,
+                                              child: LineChart(
+                                                LineChartData(
+                                                  borderData: FlBorderData(show: false),
+                                                  minY: double.parse(_model.tmpModelList![0].fcstValue) - 12,
+                                                  maxY: double.parse(_model.tmpModelList![0].fcstValue) + 12,
+                                                  lineBarsData: [lineBarsData],
+                                                  titlesData: FlTitlesData(
+                                                      topTitles: AxisTitles(
+                                                        sideTitles: SideTitles(
+                                                          showTitles: true,
+                                                          reservedSize: 30,
+                                                          getTitlesWidget: (value, meta) {
+                                                            if (value >= 0 && value < _model.tmpModelList!.length) {
+                                                              return Text(
+                                                                double.parse(_model.tmpModelList![value.toInt()].fcstValue).toString() + '℃',
+                                                                style: FlutterFlowTheme.of(context).bodyMedium
+                                                                    .override(
+                                                                  fontFamily: 'PretendardSeries',
+                                                                  fontSize: 14.0,
+                                                                  color: FlutterFlowTheme.of(context).secondaryText,
+                                                                  letterSpacing:
+                                                                  0.0,
+                                                                  fontWeight: FontWeight.w500,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                      .asMap()
+                                                                      .containsKey(
+                                                                      'PretendardSeries'),
+                                                                ),
+                                                              );
+                                                            }
+                                                            return Text('2');
+                                                          },
+                                                        ),
+                                                      ),
+                                                    leftTitles: AxisTitles(
+                                                        sideTitles: SideTitles(
+                                                            showTitles: true,
+                                                          getTitlesWidget: (value, meta){
+                                                              return Text(
+                                                              ' ℃',
+                                                              style: FlutterFlowTheme.of(context).bodyMedium
+                                                                  .override(
+                                                                fontFamily: 'PretendardSeries',
+                                                                fontSize: 14.0,
+                                                                color: FlutterFlowTheme.of(context).primaryBackground,
+                                                                letterSpacing:
+                                                                0.0,
+                                                                fontWeight: FontWeight.w500,
+                                                                useGoogleFonts: GoogleFonts
+                                                                    .asMap()
+                                                                    .containsKey(
+                                                                    'PretendardSeries'),
+                                                              ),
+                                                            );
+
+                                                          }
+                                                        )
+                                                    ),
+                                                    rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                                                    bottomTitles: AxisTitles(sideTitles: SideTitles(showTitles: false))
+                                                  ),
+                                                  lineTouchData: LineTouchData(
+                                                    touchTooltipData: LineTouchTooltipData(
+                                                      getTooltipColor: (LineBarSpot touchedBarSpot){
+                                                        return FlutterFlowTheme.of(context).primaryBackground;
+                                                      },
+                                                      getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
+                                                        return touchedBarSpots.map((barSpot) {
+                                                          final flSpot = barSpot;
+                                                          return LineTooltipItem(
+                                                            '${flSpot.y.toStringAsFixed(2)}℃',
+                                                              FlutterFlowTheme.of(context).bodyMedium
+                                                                  .override(
+                                                                fontFamily: 'PretendardSeries',
+                                                                fontSize: 14.0,
+                                                                color: FlutterFlowTheme.of(context).primaryText,
+                                                                letterSpacing:
+                                                                0.0,
+                                                                fontWeight: FontWeight.w500,
+                                                                useGoogleFonts: GoogleFonts
+                                                                    .asMap()
+                                                                    .containsKey(
+                                                                    'PretendardSeries'),
+                                                              ),
+                                                          );
+                                                        }).toList();
+                                                      },
+                                                    ),
+                                                    touchCallback: (_, __) {},
+                                                    handleBuiltInTouches: true,
+                                                  ),
+                                                    showingTooltipIndicators: showingTooltipOnSpots.map((index) {
+                                                      return ShowingTooltipIndicators(
+                                                         [
+                                                           LineBarSpot(lineBarsData, index, tmpGraphDots[index])
+                                                         ]
+                                                      );
+                                                    }).toList(),
+                                                  gridData: FlGridData(show: false),
+                                                )
+                                              ),
+                                            ),
+                                            Row(
+                                              children:
+                                              List.generate(
+                                              _model.skyModelList!.length,
+                                                  (skyListIndex){
+                                                final skyItem = _model.skyModelList![skyListIndex];
+                                                return Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    children: [
+                                                      SizedBox(
+                                                        width: 36,
+                                                        height: 36,
+                                                        child: Image.network(functions.skyToImageLinkCopy(skyItem.fcstValue.toString())[0]),
+                                                      ),
+                                                      Text(
+                                                          functions.fcstDetailTime(skyItem),
+                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                            fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                            color: const Color(0xFF1E2224),
+                                                            fontSize: 14.0,
+                                                            fontWeight: FontWeight.w500,
+                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                                FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                          ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              }
+                                                                                  ),
+                                                                                ),
+                                          ],
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          if(!isLoading)
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '바람',
+                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                      color: const Color(0xFF1E2224),
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w600,
+                                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                          FlutterFlowTheme.of(context).bodyMediumFamily),
+                                    ),
+                                  ),
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: [
+                                                Text('풍속',
+                                                  style: FlutterFlowTheme.of(context).bodyMedium
+                                                      .override(
+                                                    fontFamily: 'PretendardSeries',
+                                                    fontSize: 16.0,
+                                                    color: FlutterFlowTheme.of(context).primaryText,
+                                                    letterSpacing:
+                                                    0.0,
+                                                    fontWeight: FontWeight.w600,
+                                                    useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                        .containsKey(
+                                                        'PretendardSeries'),
+                                                  ),
+                                                ),
+                                                Text('', style: FlutterFlowTheme.of(context).bodyMedium
+                                                    .override(
+                                                  fontFamily: 'PretendardSeries',
+                                                  fontSize: 14.0,
+                                                  color: FlutterFlowTheme.of(context).secondaryText,
+                                                  letterSpacing:
+                                                  0.0,
+                                                  fontWeight: FontWeight.w500,
+                                                  useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                      .containsKey(
+                                                      'PretendardSeries'),
+                                                ),
+                                                ),
+                                                SizedBox(height: 8,),
+                                              ],
+                                            ),
+                                            Container(
+                                              color: FlutterFlowTheme.of(context).primaryBackground,
+                                              height: 80,
+                                              width: 64*_model.skyModelList!.length.toDouble()+32,
+                                              child: BarChart(
+                                                BarChartData(
+                                                  backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+                                                    barTouchData: BarTouchData(
+                                                      touchTooltipData: BarTouchTooltipData(
+                                                        getTooltipColor: (group) => Colors.transparent,
+                                                        tooltipPadding: EdgeInsets.zero,
+                                                        tooltipMargin: 8,
+                                                        getTooltipItem: (
+                                                            BarChartGroupData group,
+                                                            int groupIndex,
+                                                            BarChartRodData rod,
+                                                            int rodIndex,
+                                                            ) {
+                                                          return BarTooltipItem(
+                                                            rod.toY.round().toString() + 'm/s',
+                                                            FlutterFlowTheme.of(context).bodyMedium
+                                                                .override(
+                                                              fontFamily: 'PretendardSeries',
+                                                              fontSize: 14.0,
+                                                              color: FlutterFlowTheme.of(context).secondaryText,
+                                                              letterSpacing:
+                                                              0.0,
+                                                              fontWeight: FontWeight.w500,
+                                                              useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                                  .containsKey(
+                                                                  'PretendardSeries'),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+                                                    ),
+                                                    gridData: FlGridData(show: false),
+                                                  maxY: wsdBarData[0].barRods[0].toY + 16,
+                                                  barGroups: wsdBarData,
+                                                    titlesData: FlTitlesData(show: false),
+                                                  borderData: FlBorderData(show:  false)
+                                                )
+                                              )
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                            height: 16,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              '풍향',
+                                              style: FlutterFlowTheme.of(context).bodyMedium
+                                                  .override(
+                                                fontFamily: 'PretendardSeries',
+                                                fontSize: 16.0,
+                                                color: FlutterFlowTheme.of(context).primaryText,
+                                                letterSpacing:
+                                                0.0,
+                                                fontWeight: FontWeight.w600,
+                                                useGoogleFonts: GoogleFonts
+                                                    .asMap()
+                                                    .containsKey(
+                                                    'PretendardSeries'),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                                width: 16
+                                            ),
+                                            Row(
+                                              children:
+                                              List.generate(
+                                                  _model.windDirectionModelList!.length,
+                                                      (skyListIndex){
+                                                    final vecItem = _model.windDirectionModelList![skyListIndex];
+                                                    return Padding(
+                                                      padding: EdgeInsets.fromLTRB(15.8, 0, 0, 0),
+                                                      child: Container(
+                                                        width: 48,
+                                                        child: Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                                          children: [
+                                                            SizedBox(
+                                                              height: 24,
+                                                              child: Image.network(functions.vecStringToImage(functions.vecToString(vecItem.fcstValue))),
+                                                            ),
+                                                            Text(
+                                                              functions.vecToString(vecItem.fcstValue),
+                                                              style: FlutterFlowTheme.of(context).bodyMedium
+                                                                  .override(
+                                                                fontFamily: 'PretendardSeries',
+                                                                fontSize: 14.0,
+                                                                color: FlutterFlowTheme.of(context).secondaryText,
+                                                                letterSpacing:
+                                                                0.0,
+                                                                fontWeight: FontWeight.w500,
+                                                                useGoogleFonts: GoogleFonts
+                                                                    .asMap()
+                                                                    .containsKey(
+                                                                    'PretendardSeries'),
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              functions.fcstDetailTime(vecItem),
+                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                color: const Color(0xFF1E2224),
+                                                                fontSize: 14.0,
+                                                                fontWeight: FontWeight.w500,
+                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                                    FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          if(!isLoading)
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '강수',
+                                    style: FlutterFlowTheme.of(context).bodyMedium
+                                        .override(
+                                      fontFamily: 'PretendardSeries',
+                                      fontSize: 16.0,
+                                      color: FlutterFlowTheme.of(context).primaryText,
+                                      letterSpacing:
+                                      0.0,
+                                      fontWeight: FontWeight.w600,
+                                      useGoogleFonts: GoogleFonts
+                                          .asMap()
+                                          .containsKey(
+                                          'PretendardSeries'),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                              color: FlutterFlowTheme.of(context).primaryBackground,
+                                              height: 96,
+                                              width: 64*_model.skyModelList!.length.toDouble()+32,
+                                              child: BarChart(
+                                                  BarChartData(
+                                                      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+                                                      barTouchData: BarTouchData(
+                                                        touchTooltipData: BarTouchTooltipData(
+                                                          getTooltipColor: (group) => Colors.transparent,
+                                                          tooltipPadding: EdgeInsets.zero,
+                                                          tooltipMargin: 8,
+                                                          getTooltipItem: (
+                                                              BarChartGroupData group,
+                                                              int groupIndex,
+                                                              BarChartRodData rod,
+                                                              int rodIndex,
+                                                              ) {
+                                                            return BarTooltipItem(
+                                                              rod.toY.round().toString() + 'mm',
+                                                              FlutterFlowTheme.of(context).bodyMedium
+                                                                  .override(
+                                                                fontFamily: 'PretendardSeries',
+                                                                fontSize: 14.0,
+                                                                color: FlutterFlowTheme.of(context).secondaryText,
+                                                                letterSpacing:
+                                                                0.0,
+                                                                fontWeight: FontWeight.w500,
+                                                                useGoogleFonts: GoogleFonts
+                                                                    .asMap()
+                                                                    .containsKey(
+                                                                    'PretendardSeries'),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ),
+                                                      ),
+                                                      gridData: FlGridData(show: false),
+                                                      maxY: wsdBarData[0].barRods[0].toY + 100,
+                                                      barGroups: pcpBarData,
+                                                      titlesData: FlTitlesData(show: false),
+                                                      borderData: FlBorderData(show:  false)
+                                                  )
+                                              )
+                                          ),
+                                          Row(
+                                            children: List.generate(
+                                                _model.skyModelList!.length,
+                                                (index){
+                                                  final popItem = _model.popModelList[index];
+                                                  return Padding(
+                                                    padding: EdgeInsets.fromLTRB(15.8, 0, 0, 0),
+                                                    child: Container(
+                                                      width: 48,
+                                                      child: Column(
+                                                        children: [
+                                                          Text(
+                                                            popItem.fcstValue + '%',
+                                                            style: FlutterFlowTheme.of(context).bodyMedium
+                                                              .override(
+                                                            fontFamily: 'PretendardSeries',
+                                                            fontSize: 14.0,
+                                                            color: FlutterFlowTheme.of(context).secondaryText,
+                                                            letterSpacing:
+                                                            0.0,
+                                                            fontWeight: FontWeight.w500,
+                                                            useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                                .containsKey(
+                                                                'PretendardSeries'),
+                                                          ),
+                                                          ),
+                                                          Text(
+                                                            functions.fcstDetailTime(popItem),
+                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                              fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                              color: const Color(0xFF1E2224),
+                                                              fontSize: 14.0,
+                                                              fontWeight: FontWeight.w500,
+                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                                                  FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
+                                                ),
+                                          )
+                                        ],
+                                      ),
+                                  )
+                                ],
+                              ),
+                            ),
                           Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -1337,17 +1911,12 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                                 imageUrl: functions.midFcstToImage(MidFcstCall.am3(
                                                   _model.midFcstResponse?.jsonBody,
                                                 )),
-                                                temperature: '${functions.fcsTmpForTommorow(
-                                                  FcstWeatherApiCall.itemList(_model.fcstWeatherResponse?.jsonBody)?.toList(),
-                                                  functions.datetimeToDateCopy(getCurrentTimestamp.toString()).toString(),
-                                                  3
-                                                  )?.first?.toString() ?? '21'}℃',
-                                                precipitation: '강수량: ${functions.fcstListForCategory(
-                                                  FcstWeatherApiCall.itemList(_model.fcstWeatherResponse?.jsonBody)?.toList(),
-                                                  getCurrentTimestamp.toString(),
-                                                  3,
-                                                  'PCP'
-                                                  )?.first?.toString() ?? '0mm'}',
+                                                temperature: MidFcstCall.am3(
+                                                  _model.midFcstResponse?.jsonBody ?? '맑음',
+                                                ),
+                                                precipitation: '강수량:${MidFcstCall.rnSt3Am(
+                                                  _model.midFcstResponse?.jsonBody ?? '0',
+                                                )?.toString()}mm',
                                                 windDirection: '',
                                                 windSpeed: '',
                                               ),

@@ -59,6 +59,8 @@ Future _handleDeepLink(String link) async {
 
     if (firebaseToken != null) {
       await FirebaseAuth.instance.signInWithCustomToken(firebaseToken);
+      print('firebase Token is $firebaseToken');
+      print('naver user name is $name');
       callable.call(<String, dynamic>{
         'logParam': 'logIn Success!',
       });

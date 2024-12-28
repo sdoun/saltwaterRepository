@@ -73,6 +73,7 @@ class _ExploreMapFishingPensionWidgetState
       _model.setFilterValueExit();
     }
     );
+    filterPoint();
   }
 
   void pop(bool filterExit){

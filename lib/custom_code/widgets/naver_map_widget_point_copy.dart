@@ -74,14 +74,14 @@ class _NaverMapWidgetPointCopyState extends State<NaverMapWidgetPointCopy> {
   void setMapCenter() async{
       getGeoData();
       setState(() {
-        mapCenterLat = mapCenterLat ?? widget.initLat ?? 36.0;
-        mapCenterLng = mapCenterLng ?? widget.initLng ?? 126.0;
+        mapCenterLat = mapCenterLat ?? widget.initLat ?? 34.9;
+        mapCenterLng = mapCenterLng ?? widget.initLng ?? 128.5;
       });
   }
   Future<void> moveCamera() async{
     final cameraUpdate = NCameraUpdate.scrollAndZoomTo(
         target: NLatLng(mapCenterLat!, mapCenterLng!),
-        zoom: 7
+        zoom: 14
     );
     if(mapControllerCompleter.isCompleted){
       final controller = await mapControllerCompleter.future;
@@ -225,14 +225,14 @@ class _NaverMapWidgetPointCopyState extends State<NaverMapWidgetPointCopy> {
           options: NaverMapViewOptions(
             mapType: mapTypeSelect(widget.mapType),
             minZoom: 5,
-            maxZoom: 16,
+            maxZoom: 21,
             extent: NLatLngBounds(
               southWest: NLatLng(34.43, 125.37),
               northEast: NLatLng(40.35, 132.0),
             ),
             initialCameraPosition: NCameraPosition(
                 target: NLatLng(mapCenterLat!, mapCenterLng!),
-                zoom: 6.0,
+                zoom: 8.0,
                 bearing: 0,
                 tilt: 0),
             rotationGesturesEnable: false,

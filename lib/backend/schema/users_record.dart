@@ -16,7 +16,7 @@ class UsersRecord extends FirestoreRecord {
   }
 
   List<DocumentReference>? _bannedUser;
-  List<DocumentReference>? get bannedUser => _bannedUser ?? [];
+  List<DocumentReference> get bannedUser => _bannedUser ?? [];
 
   // "email" field.
   String? _email;
@@ -61,9 +61,10 @@ class UsersRecord extends FirestoreRecord {
     _uid = snapshotData['uid'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
+    _bannedUser = getDataList(snapshotData['banned_user']);
+
     _termsAgreement =
         SignInAgreementStruct.maybeFromMap(snapshotData['termsAgreement']);
-    _bannedUser = snapshotData['banned_user'] as List<DocumentReference>?;
   }
 
   static CollectionReference get collection =>

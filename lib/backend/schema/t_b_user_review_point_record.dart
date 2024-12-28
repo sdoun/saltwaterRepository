@@ -15,8 +15,11 @@ class TBUserReviewPointRecord extends FirestoreRecord {
     _initializeFields();
   }
 
+  Timestamp? _timestamp;
+  Timestamp? get timestamp => _timestamp;
+
   List<DocumentReference>? _reviewReportedBy = [];
-  List<DocumentReference>? get reviewReportedBy => _reviewReportedBy ?? [];
+  List<DocumentReference> get reviewReportedBy => _reviewReportedBy ?? [];
   bool hasReviewReported() => _reviewReportedBy != null || _reviewReportedBy!.isEmpty;
 
   // "review_title" field.
@@ -46,7 +49,8 @@ class TBUserReviewPointRecord extends FirestoreRecord {
     _reviewWrittenBy = snapshotData['review_written_by'] as DocumentReference?;
     _reviewText = snapshotData['review_text'] as String?;
     _reviewPointRef = snapshotData['review_pointRef'] as DocumentReference?;
-    _reviewReportedBy = snapshotData['reported_by'] as List<DocumentReference>? ?? [];
+    _reviewReportedBy = getDataList(snapshotData['reported_by']);
+    _timestamp = snapshotData['timestamp'];
   }
 
   void deleteRecord(DocumentReference reviewRef){
@@ -98,6 +102,7 @@ Map<String, dynamic> createTBUserReviewPointRecordData({
   DocumentReference? reviewWrittenBy,
   String? reviewText,
   DocumentReference? reviewPointRef,
+  Timestamp? timestamp
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -105,6 +110,7 @@ Map<String, dynamic> createTBUserReviewPointRecordData({
       'review_written_by': reviewWrittenBy,
       'review_text': reviewText,
       'review_pointRef': reviewPointRef,
+      'timestamp':timestamp
     }.withoutNulls,
   );
 

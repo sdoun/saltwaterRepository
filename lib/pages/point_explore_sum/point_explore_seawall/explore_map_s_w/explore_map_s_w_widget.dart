@@ -74,6 +74,7 @@ class _ExploreMapSWWidgetState extends State<ExploreMapSWWidget> {
   void pop(bool filterExit){
     if(filterExit){
       filterClear();
+      filterPoint();
     }
     else{
       context.pushNamed('home1');
@@ -275,6 +276,7 @@ class _ExploreMapSWWidgetState extends State<ExploreMapSWWidget> {
                                                 });
                                             setState(() {
                                             });
+                                            filterPoint();
                                           },
                                           chipValues: FFAppState().fishes,
                                         ),

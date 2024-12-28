@@ -60,6 +60,13 @@ class FFAppState extends ChangeNotifier {
     chosenOptionList.insert(index, value);
   }
 
+  QuerySnapshot<Object?>? _pointAds;
+  QuerySnapshot<Object?>? get pointAds => _pointAds;
+  set pointAds(QuerySnapshot<Object?>? value){
+    _pointAds = value;
+  }
+
+
   String _newProfileImage = '';
   String get newProfileImage => _newProfileImage;
   set newProfileImage(String value) {

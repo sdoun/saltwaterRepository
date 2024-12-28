@@ -3,7 +3,10 @@ import 'dart:async';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:salt_water_beta_ver1/pages/home1/home_searchResult.dart';
 import 'package:salt_water_beta_ver1/reusable/common/imageDetailView.dart';
+import '../../pages/home1/home_searchPage.dart';
+import '../../pages/weather_sum/weather_detailed/weather_detailed_additional_widget.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 
@@ -145,49 +148,25 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, FirebaseAnalyticsObserv
             ),
           ),
         ),
-        FFRoute(
-          name: 'carrotHome',
-          path: '/carrotHome',
-          builder: (context, params) => const CarrotHomeWidget(),
-        ),
-        FFRoute(
-          name: 'carrotPost',
-          path: '/carrotPost',
-          builder: (context, params) => CarrotPostWidget(
-            carrotPost: params.getParam(
-              'carrotPost',
-              ParamType.DocumentReference,
-              isList: false,
-              collectionNamePath: ['TB_carrotPost'],
-            ),
-          ),
-        ),
-        FFRoute(
-          name: 'carrot_create',
-          path: '/carrotCreate',
-          builder: (context, params) => const CarrotCreateWidget(),
-        ),
-        FFRoute(
-          name: 'carrot_chatHome',
-          path: '/carrotChatHome',
-          builder: (context, params) => const CarrotChatHomeWidget(),
-        ),
-        FFRoute(
-          name: 'carrot_chatRoom',
-          path: '/carrotChatRoom',
-          builder: (context, params) => CarrotChatRoomWidget(
-            chatRoom: params.getParam(
-              'chatRoom',
-              ParamType.DocumentReference,
-              isList: false,
-              collectionNamePath: ['TB_chatRoom'],
-            ),
-          ),
-        ),
+
         FFRoute(
           name: 'userPage',
           path: '/userPage',
           builder: (context, params) => const UserPageWidget(),
+        ),
+        FFRoute(
+          name: 'homeSearchPage',
+          path: '/homeSearchPage',
+          builder: (context, params) => HomeSearchpage(
+
+          ),
+        ),
+        FFRoute(
+          name: 'homeSearchResult',
+          path: '/homeSearchResult',
+          builder: (context, params) => HomeSearchresult(
+            searchText: params.getParam('searchText', ParamType.String),
+          ),
         ),
         FFRoute(
           name: 'weatherMap',
@@ -198,6 +177,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, FirebaseAnalyticsObserv
           name: 'weatherDetailed',
           path: '/weatherDetailed',
           builder: (context, params) => WeatherDetailedWidget(
+            weatherRef: params.getParam(
+              'weatherRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['TB_weatherPoint'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'weatherDetailedAdditional',
+          path: '/weatherDetailedAdditional',
+          builder: (context, params) => WeatherDetailedAdditional(
             weatherRef: params.getParam(
               'weatherRef',
               ParamType.DocumentReference,
@@ -265,35 +256,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, FirebaseAnalyticsObserv
           path: '/fishingParkMap',
           builder: (context, params) => const FishingParkMapWidget(),
         ),
-        FFRoute(
-          name: 'carrot_liked',
-          path: '/carrotLiked',
-          builder: (context, params) => const CarrotLikedWidget(),
-        ),
-        FFRoute(
-          name: 'carrot_search',
-          path: '/carrotSearch',
-          builder: (context, params) => CarrotSearchWidget(
-            searchText: params.getParam(
-              'searchText',
-              ParamType.String,
-            ),
-          ),
-        ),
+
         FFRoute(
           name: 'exploreMap_travel',
           path: '/exploreMapTravel',
           builder: (context, params) => const ExploreMapTravelWidget(),
-        ),
-        FFRoute(
-          name: 'carrot_searchResult',
-          path: '/carrotSearchResult',
-          builder: (context, params) => CarrotSearchResultWidget(
-            searchText: params.getParam(
-              'searchText',
-              ParamType.String,
-            ),
-          ),
         ),
         FFRoute(
           name: 'travel_list',

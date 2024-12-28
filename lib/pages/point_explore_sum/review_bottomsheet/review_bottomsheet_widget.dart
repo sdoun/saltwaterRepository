@@ -191,6 +191,7 @@ class _ReviewBottomsheetWidgetState extends State<ReviewBottomsheetWidget> {
                             reviewTitle: _model.textController1.text,
                             reviewWrittenBy: currentUserReference,
                             reviewText: _model.shortBioTextController.text,
+                            timestamp: Timestamp.fromDate(DateTime.now())
                           ));
                           Navigator.pop(context);
                         },

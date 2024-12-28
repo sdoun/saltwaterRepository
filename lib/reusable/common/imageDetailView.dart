@@ -4,6 +4,7 @@ import 'package:salt_water_beta_ver1/backend/api_requests/api_calls.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../flutter_flow/flutter_flow_theme.dart';
+import 'package:photo_view/photo_view.dart';
 
 class Imagedetailview extends StatefulWidget {
   const Imagedetailview({super.key, required this.imageList});
@@ -16,10 +17,30 @@ class Imagedetailview extends StatefulWidget {
 class _ImagedetailviewState extends State<Imagedetailview> {
   final PageController pageController = PageController(initialPage: 0);
 
+  int nDown = 0;
+  int nUp = 0;
+
+  bool isEnableScroll = true;
 
   @override
   Widget build(BuildContext context) {
     final imageList = widget.imageList!.toList();
+    var onDownEVT = (PointerDownEvent e){
+      nDown = e.pointer;
+      if(nDown - nUp > 1){
+        setState(() {
+          isEnableScroll = false;
+        });
+      }
+    };
+    var onUpEVT = (PointerUpEvent e){
+      nUp = e.pointer;
+      if(nDown - nUp < 1){
+        setState(() {
+          isEnableScroll = true;
+        });
+      }
+    };
     return Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
@@ -37,6 +58,7 @@ class _ImagedetailviewState extends State<Imagedetailview> {
             children: [
               Expanded(  // PageView를 Expanded로 감싸 남은 공간을 모두 차지하도록 함
                 child: PageView.builder(
+                  physics: isEnableScroll ? const PageScrollPhysics() : const NeverScrollableScrollPhysics(),
                   controller: pageController,
                   itemCount: imageList.isEmpty ? 1 : imageList.length,  // 리스트가 비어있을 때도 최소 1개의 아이템을 표시
                   itemBuilder: (context, index) {
@@ -57,20 +79,27 @@ class _ImagedetailviewState extends State<Imagedetailview> {
                         ],
                       );
                     } else {
-                      return Image.network(
-                        imageList[index],
-                        fit: BoxFit.contain,  // 이미지가 잘리지 않도록 contain으로 변경
-                        errorBuilder: (context, error, stackTrace) {
-                          print('Image error: $error');
-                          return Center(  // 에러 메시지를 중앙에 표시
-                            child: Text(
-                              'Image load failed: $error',
-                              style: TextStyle(color: Colors.white),  // 텍스트 색상 지정
-                              textAlign: TextAlign.center,
-                            ),
-                          );
-                        },
-                      );
+                      return //PhotoView(imageProvider: NetworkImage(imageList[index]));
+
+                        Listener(
+                          onPointerDown: onDownEVT,
+                          onPointerUp: onUpEVT,
+                          child: InteractiveViewer(child: Image.network(
+
+                            imageList[index],
+                            fit: BoxFit.contain,  // 이미지가 잘리지 않도록 contain으로 변경
+                            errorBuilder: (context, error, stackTrace) {
+                              print('Image error: $error');
+                              return Center(  // 에러 메시지를 중앙에 표시
+                                child: Text(
+                                  'Image load failed: $error',
+                                  style: TextStyle(color: Colors.white),  // 텍스트 색상 지정
+                                  textAlign: TextAlign.center,
+                                ),
+                              );
+                            },
+                          )),
+                        );
                     }
                   },
                 ),

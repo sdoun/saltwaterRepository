@@ -39,6 +39,10 @@ Future<List<String>?> standListFromFilter(
     final tags =
         List<String>.from(documentSnapshot.get('point_tags') as List<dynamic>);
 
+    if (documentSnapshot.data().containsKey('point_fishes')) {
+      tags.addAll(List<String>.from(documentSnapshot.get('point_fishes') as List<dynamic>));
+    }
+
     bool facility1 = (facilityfilter1st == null ||
         facilityfilter1st.any((facility) => tags.contains(facility)) ||
         facilityfilter1st.isEmpty);

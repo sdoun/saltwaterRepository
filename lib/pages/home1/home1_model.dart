@@ -8,7 +8,14 @@ class Home1Model extends FlutterFlowModel<Home1Widget> {
 
   // Model for customNavbar component.
   late CustomNavbarModel customNavbarModel;
+  String? searchText;
 
+  ///  State fields for stateful widgets in this page.
+
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController;
+  String? Function(BuildContext, String?)? textControllerValidator;
 
   @override
   void initState(BuildContext context) {

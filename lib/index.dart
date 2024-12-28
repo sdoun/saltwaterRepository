@@ -12,16 +12,6 @@ export '/pages/point_explore_sum/point_detailed/point_detailed_widget.dart'
     show PointDetailedWidget;
 export '/pages/shop_summary/product_detail/product_detail/product_detail_widget.dart'
     show ProductDetailWidget;
-export '/pages/carrot_sum/carrot_home/carrot_home_widget.dart'
-    show CarrotHomeWidget;
-export '/pages/carrot_sum/carrot_post/carrot_post_widget.dart'
-    show CarrotPostWidget;
-export '/pages/carrot_sum/carrot_create/carrot_create_widget.dart'
-    show CarrotCreateWidget;
-export '/pages/carrot_sum/carrot_chat_home/carrot_chat_home_widget.dart'
-    show CarrotChatHomeWidget;
-export '/pages/carrot_sum/carrot_chat_room/carrot_chat_room_widget.dart'
-    show CarrotChatRoomWidget;
 export '/pages/user_sum/user_page/user_page_widget.dart' show UserPageWidget;
 export '/pages/weather_sum/weather_map/weather_map_widget.dart'
     show WeatherMapWidget;
@@ -43,14 +33,8 @@ export '/pages/guid_content/guide_content/guide_content_widget.dart'
     show GuideContentWidget;
 export '/pages/point_explore_sum/poin_explore_fishing_park/fishing_park_map/fishing_park_map_widget.dart'
     show FishingParkMapWidget;
-export '/pages/carrot_sum/carrot_liked/carrot_liked_widget.dart'
-    show CarrotLikedWidget;
-export '/pages/carrot_sum/carrot_search/carrot_search_widget.dart'
-    show CarrotSearchWidget;
 export '/pages/point_explore_sum/point_travel_package/explore_map_travel/explore_map_travel_widget.dart'
     show ExploreMapTravelWidget;
-export '/pages/carrot_sum/carrot_search_result/carrot_search_result_widget.dart'
-    show CarrotSearchResultWidget;
 export '/pages/point_explore_sum/point_travel_package/travel_list/travel_list_widget.dart'
     show TravelListWidget;
 export '/pages/shop_summary/shopping_guide/shopping_guide_widget.dart'

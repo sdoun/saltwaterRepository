@@ -2,14 +2,19 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_common/get_reset.dart';
 import 'package:salt_water_beta_ver1/flutter_flow/flutter_flow_util.dart';
+import 'package:salt_water_beta_ver1/reusable/common/pulsatingImage.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../flutter_flow/flutter_flow_theme.dart';
 import '../../flutter_flow/nav/serialization_util.dart';
 
 class PointAdsPageview extends StatefulWidget {
-  const PointAdsPageview({super.key});
+  PointAdsPageview({super.key, this.loadingAlert, this.data});
+
+  final loadingAlert;
+  QuerySnapshot<Object?>? data;
 
   @override
   State<PointAdsPageview> createState() => _PointAdsPageviewState();
@@ -68,13 +73,8 @@ class _PointAdsPageviewState extends State<PointAdsPageview> {
                   },
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
-                    return Center(
-                      child: CircularProgressIndicator(
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                            loadingProgress.expectedTotalBytes!
-                            : null,
-                      ),
+                    return const Center(
+                      child: PulsatingImage(),
                     );
                   },
                 ),
@@ -137,8 +137,15 @@ class _PointAdsPageviewState extends State<PointAdsPageview> {
   @override
   void initState() {
     super.initState();
-
-    loadData();
+    if(FFAppState().pointAds == null){
+      loadData();
+    }
+    else{
+      _pages = FFAppState().pointAds!.docs.map((doc){
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      return buildPages(data);
+      }).toList();
+    }
     timer = Timer.periodic(const Duration(seconds: 2), (timer) {
 
         int currentPage = adsController.page!.toInt();

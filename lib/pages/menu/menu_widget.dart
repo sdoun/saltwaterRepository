@@ -1,3 +1,5 @@
+import 'package:url_launcher/url_launcher.dart';
+
 import '/components/custom_navbar_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -20,6 +22,13 @@ class _MenuWidgetState extends State<MenuWidget> {
   late MenuModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final Uri userCs = Uri.parse('https://saltwatercustomer.modoo.at/?link=qxji9fil');
+
+  Future<void> _launchUrl(Uri url) async {
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
+  }
 
   @override
   void initState() {
@@ -180,7 +189,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                context.pushNamed('service_is_not_ready');
+                                _launchUrl(userCs);
                               },
                               child: Container(
                                 width: MediaQuery.sizeOf(context).width * 0.4,
@@ -246,7 +255,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                context.pushNamed('service_is_not_ready');
+                                _launchUrl(userCs);
                               },
                               child: Container(
                                 width: MediaQuery.sizeOf(context).width * 0.43,

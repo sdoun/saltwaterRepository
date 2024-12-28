@@ -40,6 +40,9 @@ Future<List<String>?> pointListFromFilter(
     final tags =
         List<String>.from(documentSnapshot.get('point_tags') as List<dynamic>);
 
+    if (documentSnapshot.data().containsKey('point_fishes')) {
+      tags.addAll(List<String>.from(documentSnapshot.get('point_fishes') as List<dynamic>));
+    }
     // Get the 'point_tags_boolen' field value
     // Create a list to store tags from boolean structure
     List<String> tagsFromBoolenStruct = [];

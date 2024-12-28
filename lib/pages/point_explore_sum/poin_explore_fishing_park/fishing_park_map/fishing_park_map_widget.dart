@@ -70,6 +70,7 @@ class _FishingParkMapWidgetState extends State<FishingParkMapWidget> {
       _model.setFilterValueExit();
     }
     );
+    filterPoint();
   }
 
   void pop(bool filterExit){

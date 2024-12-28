@@ -11,9 +11,7 @@ import 'schema/t_b_user_review_point_record.dart';
 import 'schema/t_b_point_tags_record.dart';
 import 'schema/t_b_fishing_record.dart';
 import 'schema/t_b_fish_record.dart';
-import 'schema/t_b_carrot_post_record.dart';
-import 'schema/t_b_chat_room_record.dart';
-import 'schema/t_b_chat_record.dart';
+
 import 'schema/t_b_weather_point_record.dart';
 import 'schema/t_b_fishing_bus_record.dart';
 import 'schema/t_b_shopping_product_record.dart';
@@ -39,9 +37,6 @@ export 'schema/t_b_user_review_point_record.dart';
 export 'schema/t_b_point_tags_record.dart';
 export 'schema/t_b_fishing_record.dart';
 export 'schema/t_b_fish_record.dart';
-export 'schema/t_b_carrot_post_record.dart';
-export 'schema/t_b_chat_room_record.dart';
-export 'schema/t_b_chat_record.dart';
 export 'schema/t_b_weather_point_record.dart';
 export 'schema/t_b_fishing_bus_record.dart';
 export 'schema/t_b_shopping_product_record.dart';
@@ -280,118 +275,8 @@ Future<List<TBFishRecord>> queryTBFishRecordOnce({
     );
 
 /// Functions to query TBCarrotPostRecords (as a Stream and as a Future).
-Future<int> queryTBCarrotPostRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      TBCarrotPostRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<TBCarrotPostRecord>> queryTBCarrotPostRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      TBCarrotPostRecord.collection,
-      TBCarrotPostRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<TBCarrotPostRecord>> queryTBCarrotPostRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      TBCarrotPostRecord.collection,
-      TBCarrotPostRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
 
 /// Functions to query TBChatRoomRecords (as a Stream and as a Future).
-Future<int> queryTBChatRoomRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      TBChatRoomRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<TBChatRoomRecord>> queryTBChatRoomRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      TBChatRoomRecord.collection,
-      TBChatRoomRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<TBChatRoomRecord>> queryTBChatRoomRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      TBChatRoomRecord.collection,
-      TBChatRoomRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-/// Functions to query TBChatRecords (as a Stream and as a Future).
-Future<int> queryTBChatRecordCount({
-  DocumentReference? parent,
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      TBChatRecord.collection(parent),
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<TBChatRecord>> queryTBChatRecord({
-  DocumentReference? parent,
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      TBChatRecord.collection(parent),
-      TBChatRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<TBChatRecord>> queryTBChatRecordOnce({
-  DocumentReference? parent,
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      TBChatRecord.collection(parent),
-      TBChatRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
 
 /// Functions to query TBWeatherPointRecords (as a Stream and as a Future).
 Future<int> queryTBWeatherPointRecordCount({
