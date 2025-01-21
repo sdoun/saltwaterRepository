@@ -15,6 +15,10 @@ class TBPointRecord extends FirestoreRecord {
     _initializeFields();
   }
 
+  bool? _isIsland;
+  bool? get isIsland => _isIsland ?? false;
+
+
   // "point_name" field.
   String? _pointName;
   String get pointName => _pointName ?? '';
@@ -133,6 +137,7 @@ class TBPointRecord extends FirestoreRecord {
     _pointImages = getDataList(snapshotData['point_images']);
     _pointInvolvedVideo = getDataList(snapshotData['point_involvedVideo']);
     _pointFishType = getDataList(snapshotData['point_fishType']);
+    _isIsland = snapshotData['point_isIsalnd'] as bool?;
   }
 
   static CollectionReference get collection =>

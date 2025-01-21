@@ -112,6 +112,7 @@ class _HomeSearchpageState extends State<HomeSearchpage> {
                                         focusNode: searchTextFieldFocusNode,
                                         autofocus: true,
                                         obscureText: false,
+                                        cursorColor: FlutterFlowTheme.of(context).primary,
                                         decoration: InputDecoration(
                                           hintText: '검색어를 입력해주세요.',
                                           hintStyle: FlutterFlowTheme.of(context)
@@ -130,14 +131,29 @@ class _HomeSearchpageState extends State<HomeSearchpage> {
                                                   color: Colors.transparent
                                               )
                                           ),
+
                                           border: const UnderlineInputBorder(
                                             borderSide: BorderSide(
                                               color: Colors.transparent
                                             )
                                           ),
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: const BorderSide(
+                                              color: Colors.transparent,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius: BorderRadius.circular(8.0),
+                                          ),
+                                          disabledBorder: UnderlineInputBorder(
+                                            borderSide: const BorderSide(
+                                              color: Colors.transparent,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius: BorderRadius.circular(8.0),
+                                          ),
                                           focusedErrorBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: FlutterFlowTheme.of(context).error,
+                                            borderSide: const BorderSide(
+                                              color: Colors.transparent,
                                               width: 2.0,
                                             ),
                                             borderRadius: BorderRadius.circular(8.0),
@@ -181,7 +197,7 @@ class _HomeSearchpageState extends State<HomeSearchpage> {
                                           shape: BoxShape.circle,
                                         ),
                                         child: Image.asset(
-                                          'assets/images/beyv2_.png',
+                                          'assets/images/검색옅은색.png',
                                           fit: BoxFit.cover,
                                         ),
                                       ),

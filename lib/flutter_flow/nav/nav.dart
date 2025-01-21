@@ -4,6 +4,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salt_water_beta_ver1/pages/home1/home_searchResult.dart';
+import 'package:salt_water_beta_ver1/pages/manager_chat/chat_room.dart';
 import 'package:salt_water_beta_ver1/reusable/common/imageDetailView.dart';
 import '../../pages/home1/home_searchPage.dart';
 import '../../pages/weather_sum/weather_detailed/weather_detailed_additional_widget.dart';
@@ -148,7 +149,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, FirebaseAnalyticsObserv
             ),
           ),
         ),
-
+        FFRoute(
+          name: 'managerChatRoom',
+          path: '/managerChatRoom',
+          builder: (context, params) => const ChatRoom(),
+        ),
         FFRoute(
           name: 'userPage',
           path: '/userPage',

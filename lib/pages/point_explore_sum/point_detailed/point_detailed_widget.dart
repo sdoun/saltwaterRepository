@@ -42,6 +42,7 @@ class PointDetailedWidget extends StatefulWidget {
 
 class _PointDetailedWidgetState extends State<PointDetailedWidget> {
   late PointDetailedModel _model;
+  String haewoonLink = 'https://island.haewoon.co.kr/';
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -60,9 +61,9 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
     super.dispose();
   }
 
-  Future<void> _onOpen(LinkableElement link) async {
-    if (!await launchUrl(Uri.parse(link.url))) {
-      throw Exception('Could not launch ${link.url}');
+  Future<void> _onOpen(String link) async {
+    if (!await launchUrl(Uri.parse(link))) {
+      throw Exception('Could not launch $link');
     }
   }
 
@@ -282,6 +283,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                   size: 20.0,
                                 ),
                               ),
+
                             ]
                           ),
 
@@ -320,6 +322,40 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                       ),
                                       Text(
                                         '길찾기',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                          fontFamily:
+                                          'PretendardSeries',
+                                          color: FlutterFlowTheme.of(context).primary,
+                                          fontSize: 13.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w400,
+                                          useGoogleFonts: GoogleFonts
+                                              .asMap()
+                                              .containsKey(
+                                              'PretendardSeries'),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                if(pointDetailedTBPointRecord.isIsland ?? false)
+                                InkWell(
+                                  onTap: () async{
+                                    _onOpen(haewoonLink);
+                                  },
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                          height: 20,
+                                          child: Image.asset('assets/images/배편보기.png'),
+                                        ),
+                                      Text(
+                                        '배편 예약',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(

@@ -57,3 +57,4 @@ export '/not_used_widget/point_detialed_unused/point_detialed_unused_widget.dart
     show PointDetialedUnusedWidget;
 export '/pages/weather_sum/weather_map_copy/weather_map_copy_widget.dart'
     show WeatherMapCopyWidget;
+export '/pages/manager_chat/chat_room.dart' show ChatRoom;

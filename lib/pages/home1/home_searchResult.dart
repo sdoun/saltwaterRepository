@@ -162,7 +162,7 @@ class _HomeSearchresultState extends State<HomeSearchresult> {
                                           context.pushNamed('homeSearchPage');
                                         },
                                         child: Text(
-                                          widget.searchText,
+                                          '검색어를 입력해주세요.',
                                           style: FlutterFlowTheme.of(context).bodyMedium
                                               .override(
                                             fontFamily: 'PretendardSeries',
@@ -170,7 +170,7 @@ class _HomeSearchresultState extends State<HomeSearchresult> {
                                             color: FlutterFlowTheme.of(context).secondaryText,
                                             letterSpacing:
                                             0.0,
-                                            fontWeight: FontWeight.w500,
+                                            fontWeight: FontWeight.w400,
                                             useGoogleFonts: GoogleFonts
                                                 .asMap()
                                                 .containsKey(
@@ -195,7 +195,7 @@ class _HomeSearchresultState extends State<HomeSearchresult> {
                                             shape: BoxShape.circle,
                                           ),
                                           child: Image.asset(
-                                            'assets/images/검색.png',
+                                            'assets/images/검색옅은색.png',
                                             fit: BoxFit.cover,
                                           ),
                                         ),

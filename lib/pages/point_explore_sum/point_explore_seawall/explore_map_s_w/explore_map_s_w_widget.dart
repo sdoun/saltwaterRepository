@@ -164,7 +164,6 @@ class _ExploreMapSWWidgetState extends State<ExploreMapSWWidget> {
               );
             }
             List<TBPointRecord> exploreMapSWTBPointRecordList = snapshot.data!;
-            print('쿼리길이: ${exploreMapSWTBPointRecordList.length}');
 
             return GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),

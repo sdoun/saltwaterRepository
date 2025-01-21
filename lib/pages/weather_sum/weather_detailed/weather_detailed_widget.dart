@@ -174,7 +174,7 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
       stream: TBWeatherPointRecord.getDocument(widget.weatherRef!),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
-        if (!snapshot.hasData) {
+        if (!snapshot.hasData) {  
           return Scaffold(
             backgroundColor: FlutterFlowTheme
                 .of(context)

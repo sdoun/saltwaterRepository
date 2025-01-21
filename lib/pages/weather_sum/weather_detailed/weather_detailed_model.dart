@@ -38,12 +38,12 @@ class WeatherDetailedModel extends FlutterFlowModel<WeatherDetailedWidget> {
   String getWaterTime(String lunarDate){
     final days = lunarDate.substring(8,10);
     final daysInt = int.parse(days);
-    int num = (daysInt + 6);
+    int num = (daysInt + 7);
     if(num >= 15 ){
       num = num  % 15;
     }
     switch (num) {
-      case 0: return '무시';
+      case 0: return '조금';
       case 1: return '$num물';
       case 2: return '$num물';
       case 3: return '$num물';
@@ -57,7 +57,7 @@ class WeatherDetailedModel extends FlutterFlowModel<WeatherDetailedWidget> {
       case 11: return '$num물';
       case 12: return '$num물';
       case 13: return '$num물';
-      case 14: return '조금';
+      case 14: return '$num물';
     }
     return '물때';
   }

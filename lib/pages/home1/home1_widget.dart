@@ -1,3 +1,4 @@
+import 'package:salt_water_beta_ver1/components/chatFAB.dart';
 import 'package:salt_water_beta_ver1/reusable/home1/pointAdsPageview.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -291,7 +292,7 @@ class _Home1WidgetState extends State<Home1Widget> {
                                       shape: BoxShape.circle,
                                     ),
                                     child: Image.asset(
-                                      'assets/images/검색.png',
+                                      'assets/images/검색옅은색.png',
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -346,7 +347,7 @@ class _Home1WidgetState extends State<Home1Widget> {
                                         ),
                                       ),
                                       Image.asset(
-                                        'assets/images/포인트별검색.png',
+                                        'assets/images/포인트별검색2.png',
                                         width: 24,
                                         height: 24,
                                       )
@@ -554,22 +555,22 @@ class _Home1WidgetState extends State<Home1Widget> {
                       ),
                     ),
                   ),
-                Align(
-                  alignment: const AlignmentDirectional(0.0, 1.0),
-                  child: Container(
-                    width: double.infinity,
-                    height: MediaQuery.sizeOf(context).height * 0.08,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).primaryBackground,
-                    ),
-                    child: wrapWithModel(
-                      model: _model.customNavbarModel,
-                      updateCallback: () => safeSetState(() {}),
-                      child: const CustomNavbarWidget(),
-                    ),
-                  ),
-                ),
+
               ],
+            ),
+          ),
+          floatingActionButton: const ChatFab(),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          bottomNavigationBar: Container(
+            width: double.infinity,
+            height: MediaQuery.sizeOf(context).height * 0.08,
+            decoration: BoxDecoration(
+              color: FlutterFlowTheme.of(context).primaryBackground,
+            ),
+            child: wrapWithModel(
+              model: _model.customNavbarModel,
+              updateCallback: () => safeSetState(() {}),
+              child: const CustomNavbarWidget(),
             ),
           ),
         ),
