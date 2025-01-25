@@ -80,7 +80,7 @@ dependencies:
   google_sign_in_platform_interface: 2.4.2
   google_sign_in_web: 0.12.1
   http: 1.2.1
-  iamport_flutter: ^0.10.19
+  
   image_picker: 1.0.4
   image_picker_android: 0.8.8
   image_picker_for_web: 3.0.1
@@ -146,6 +146,7 @@ dependencies:
   fl_chart: ^0.69.2
   photo_view: ^0.15.0
   sunrise_sunset_calc: ^3.0.0
+  portone_flutter: ^0.11.0
 
 dependency_overrides:
   http: 1.2.1
@@ -177,7 +178,6 @@ flutter:
     - assets/fonts/
     - assets/images/
     - assets/videos/
-    - assets/audios/
     - assets/lottie_animations/
     - assets/rive_animations/
     - assets/pdfs/
