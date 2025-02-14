@@ -5,6 +5,7 @@ import 'package:salt_water_beta_ver1/auth/firebase_auth/auth_util.dart';
 import 'package:salt_water_beta_ver1/backend/schema/t_b_manager_chat_chat.dart';
 import 'package:salt_water_beta_ver1/backend/schema/t_b_manager_chat_room_record.dart';
 import 'package:salt_water_beta_ver1/flutter_flow/flutter_flow_util.dart';
+import 'package:salt_water_beta_ver1/reusable/chat/chatBubble.dart';
 
 import '../../components/chatFAB.dart';
 import '../../components/custom_navbar_widget.dart';
@@ -19,35 +20,58 @@ class ChatRoom extends StatefulWidget {
   State<ChatRoom> createState() => _ChatRoomState();
 }
 
-Future<DocumentSnapshot> accessOrCreateChatRoom() async{
-  final chatRoomRef = FirebaseFirestore.instance.collection('/TB_managerChat_room').doc(currentUserReference!.id);
-  try{
-    final chatRoomDoc = await chatRoomRef.get();
-    if(chatRoomDoc.data() == null || chatRoomDoc.data()!.isEmpty){
-      await chatRoomRef.set({
-        "room_chatUser" : currentUserReference
-      });
-    }
-    else{
-      print('room exist');
-    }
-  }catch(e){
-    print('Error on Create Or Access ChatRoom $e');
-  }
-  TBManagerChatRecord.createDoc(TBManagerChatRecord.createId(chatRoomRef, 'Test'), currentUserReference!, 'Test');
-  return await chatRoomRef.get();
-}
 
-@override
-void initState() async{
-  print('chatRoom get in');
-  await accessOrCreateChatRoom();
-}
 
 class _ChatRoomState extends State<ChatRoom> {
+
+  DocumentSnapshot? chatRoomSnapshot;
+  final _textFormKey = GlobalKey<FormState>();
+
+  Future<DocumentSnapshot> accessOrCreateChatRoom() async{
+    final chatRoomRef = FirebaseFirestore.instance.collection('/TB_managerChat_room').doc(currentUserReference!.id);
+    try{
+      final chatRoomDoc = await chatRoomRef.get();
+      if(chatRoomDoc.data() == null || chatRoomDoc.data()!.isEmpty){
+        await chatRoomRef.set({
+          "room_chatUser" : currentUserReference
+        });
+      }
+      else{
+        print('room exist');
+      }
+    }catch(e){
+      print('Error on Create Or Access ChatRoom $e');
+    }
+    return chatRoomRef.get();
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> fetchChats(DocumentSnapshot roomSnapshot){
+    final chatCollection = roomSnapshot.reference.collection('room_chatCollection').orderBy('chat_createdAt', descending: false).snapshots();
+    print('chat collection reference ${FirebaseFirestore.instance.doc(roomSnapshot.reference.toString()).collection('room_chatCollection')}');
+    return chatCollection;
+  }
+
+  void createChat(String content){
+    final chatRoomRef = FirebaseFirestore.instance.collection('/TB_managerChat_room').doc(currentUserReference!.id);
+    TBManagerChatRecord.createDoc(TBManagerChatRecord.createId(chatRoomRef, null), currentUserReference!, content);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print('chatRoom get in');
+    accessOrCreateChatRoom().then((DocumentSnapshot snapshot){
+      setState(() {
+        chatRoomSnapshot = snapshot;
+      });
+    }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     accessOrCreateChatRoom();
+    final chatInputController = TextEditingController(text: '');
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -110,23 +134,74 @@ class _ChatRoomState extends State<ChatRoom> {
         centerTitle: false,
         elevation: 2.0,
       ),
-      body: FutureBuilder<DocumentSnapshot>(
-          future: accessOrCreateChatRoom(),
-          builder: (context, snapshot){
-
-            if(snapshot.hasData){
-              final data = snapshot.data!['room_chatUser'];
-              final docSnapshot = snapshot.data;
-              final roomRecord = TBManagerChatRoomRecord.fromSnapshot(docSnapshot!);
-              return Text(
-                  roomRecord.chatUser.toString()
-              );
-            }
-            else{
-              return Text('snapshot no data');
-            }
-          }
-      ),
+      body: Stack(
+        children: [
+          StreamBuilder(
+              stream: fetchChats(chatRoomSnapshot!),
+              builder: (context, snapshot){
+                if(snapshot.hasData){
+                  final chatList = snapshot.data!.docs.map((doc){
+                    return TBManagerChatRecord.fromSnapshot(doc);
+                  }).toList();
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 80, left:  16, right: 16),
+                    child: ListView.builder(
+                      itemCount: chatList.length,
+                        itemBuilder: (context, index){
+                        final chat = chatList[index];
+                          return Chatbubble(chatRecord: chat);
+                        }
+                    ),
+                  );
+                }
+                if(snapshot.hasError){
+                  return Center(
+                    child: Text('HasError'),
+                  );
+                }
+                else{
+                  return Center(
+                    child: Text('Its Not an snapshot error, but there is something wrong'),
+                  );
+                }
+              }
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              width: double.maxFinite,
+              height: 64,
+              child: Form(
+                key: _textFormKey,
+                child: TextFormField(
+                  validator: (value){
+                    if(value!.isEmpty){
+                      return '내용을 입력해주세요.';
+                    }
+                    else{
+                      return null;
+                    }
+                  },
+                  controller: chatInputController,
+                  decoration: InputDecoration(
+                      suffixIcon: InkWell(
+                        onTap: () async{
+                          if(_textFormKey.currentState!.validate()) {
+                            createChat(chatInputController.text);
+                            chatInputController.text = '';
+                          }
+                        },
+                        child: Icon(
+                            Icons.arrow_right_alt
+                        ),
+                      )
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      )
     );
   }
 }

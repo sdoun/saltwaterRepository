@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
-import 'package:google_maps/google_maps.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 
@@ -13,20 +12,26 @@ class TBManagerChatRecord extends FirestoreRecord{
     _initialLizeFields();
   }
 
-  DocumentReference? sendBy;
-  String? content;
+  DocumentReference? _sendBy;
+  String? _content;
   Timestamp? createdAt;
 
+  String? get content => _content;
+  DocumentReference? get sendBy => _sendBy;
+
   void _initialLizeFields(){
-    sendBy = snapshotData['chat_sendBy'];
+    _sendBy = snapshotData['chat_sendBy'];
+    _content = snapshotData['chat_content'];
   }
 
   static DocumentReference createId(DocumentReference parent, String? id)
   => parent.collection('room_chatCollection').doc(id);
 
-  static Future<void> createDoc(DocumentReference parentId, DocumentReference sendBy, String content) async{
-    parentId.set(createTBManagerChatRecordData(sendBy, content, Timestamp.fromDate(DateTime.now())));
+  static Future<void> createDoc(DocumentReference id, DocumentReference sendBy, String content) async{
+    id.set(createTBManagerChatRecordData(sendBy, content, Timestamp.fromDate(DateTime.now())));
   }
+
+  static fromSnapshot(DocumentSnapshot snapshot) => TBManagerChatRecord._(snapshot.reference, mapToFirestore(snapshot.data() as Map<String, dynamic>)) ;
 
   static Map<String, dynamic> createTBManagerChatRecordData(
       DocumentReference sendBy,

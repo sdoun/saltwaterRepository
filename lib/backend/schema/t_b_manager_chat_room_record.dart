@@ -15,7 +15,7 @@ class TBManagerChatRoomRecord extends FirestoreRecord{
       _initialLizeFields();
   }
 
-  String hi = 'hi';
+
   DocumentReference? _chatUser;
   DocumentReference? get chatUser => _chatUser;
 

@@ -31,7 +31,6 @@ class _HomeadspageviewState extends State<Homeadspageview> {
   // 상품 이미지 페이지뷰 컨트롤러 설정하던 중이었음. productImages 호출 성공함
 
   Widget buildPages(Map<String, dynamic>? data) {
-    print("buildPages called with data: $data");
     if (data != null && data['ads_image'] != null) {
       return SizedBox(
         height: MediaQuery
@@ -96,28 +95,25 @@ class _HomeadspageviewState extends State<Homeadspageview> {
       Query query = _firestore.collection('TB_productAds').orderBy('timestamp', descending: true).limit(_pageSize);
 
       QuerySnapshot querySnapshot = await query.get();
-      print('Query completed. Document count: ${querySnapshot.docs.length}');
+
 
       setState(() {
 
         if (querySnapshot.docs.isNotEmpty) {
-          print('Document query is not empty, Data Counted ${querySnapshot.docs.length}');
           _pages = querySnapshot.docs.map((doc) {
             Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
             return buildPages(data);
           }).toList();
-          print("_pages updated, length: ${_pages.length}");
+
           _isLoading = false;
         }
         else{
             _pages = querySnapshot.docs.map((doc) => buildPages(doc.data() as Map<String, dynamic>)).toList();
-            print('Document query is empty');
             _isLoading = false;
         }
 
       });
     } catch (e) {
-      print('Error loading data: $e');
       setState(() {
         _error = e.toString();
         _isLoading = false;
@@ -156,9 +152,7 @@ class _HomeadspageviewState extends State<Homeadspageview> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
 
     });
-    print('Building PageView, _pages length: ${_pages.length}, _isLoading is $_isLoading');
     if (_isLoading == true) {
-      print('Query is waiting');
       return const Center(child: CircularProgressIndicator());
     } else if (_error != null) {
       return Center(child: Text('Error: $_error'));

@@ -152,7 +152,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, FirebaseAnalyticsObserv
         FFRoute(
           name: 'managerChatRoom',
           path: '/managerChatRoom',
-          builder: (context, params) => const ChatRoom(),
+          builder: (context, params) {
+            print('builder work');
+            return const ChatRoom();
+          },
         ),
         FFRoute(
           name: 'userPage',

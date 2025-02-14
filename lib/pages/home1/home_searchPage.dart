@@ -27,6 +27,17 @@ class _HomeSearchpageState extends State<HomeSearchpage> {
     searchTextController = TextEditingController(text: '');
   }
 
+  void searchWithText(String data){
+    FFAppState().recentSearch.remove(searchTextController.text);
+    if(searchTextController.text != '')
+      FFAppState().insertAtIndexInRecentSearch(
+          0, searchTextController.text);
+    safeSetState(() {});
+    context.pushNamed('homeSearchResult', queryParameters: {
+      'searchText' : searchTextController.text
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
@@ -108,6 +119,10 @@ class _HomeSearchpageState extends State<HomeSearchpage> {
                                   children: [
                                     Expanded(
                                       child: TextFormField(
+                                        textInputAction: TextInputAction.search,
+                                        onFieldSubmitted: (data){
+                                          searchWithText(data);
+                                        },
                                         controller: searchTextController,
                                         focusNode: searchTextFieldFocusNode,
                                         autofocus: true,

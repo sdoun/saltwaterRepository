@@ -691,7 +691,7 @@ class _RangeDateWidgetState extends State<RangeDateWidget> {
         fontWeight: FontWeight.bold,
       ),
       dynamicCalendarRows: true,
-      modePickerBuilder: ({required monthDate, isMonthPicker}) {
+      modePickerBuilder: ({required monthDate, required viewMode, isMonthPicker}) {
         return Center(
           child: Container(
             padding: const EdgeInsets.all(5),
