@@ -18,33 +18,41 @@ class Chatbubble extends StatelessWidget {
     final alignX = isMyMessage ? -1.0 : 1.0;
     final alignment = isMyMessage ?  Alignment.centerRight : Alignment.centerLeft;
     final bubbleType = isMyMessage ? BubbleType.sendBubble : BubbleType.receiverBubble;
-    return Row(
-      mainAxisAlignment: isMyMessage? MainAxisAlignment.end : MainAxisAlignment.start,
-      children: [
-        Align(
-          alignment: isMyMessage ?  Alignment.centerRight : Alignment.centerLeft,
-          child: ChatBubble(
-            backGroundColor: isMyMessage ? FlutterFlowTheme.of(context).primary : FlutterFlowTheme.of(context).primaryBackground,
-            clipper: ChatBubbleClipper2(type: bubbleType),
-            child: Text(
-              chatRecord.content ?? '',
-              style: FlutterFlowTheme.of(context)
-                  .bodyMedium.override(
-                  fontFamily:
-                  'PretendardSeries',
-                  color: isMyMessage ? FlutterFlowTheme.of(context).primaryBackground : FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 13.0,
-                  letterSpacing: 0.0,
-                  fontWeight: FontWeight.w400,
-                  useGoogleFonts: GoogleFonts
-                      .asMap()
-                      .containsKey(
-                  'PretendardSeries'),
-              ),
-            )
+    return Padding(
+      padding: EdgeInsets.only(top: 4, bottom: 4),
+      child: Row(
+        mainAxisAlignment: isMyMessage? MainAxisAlignment.end : MainAxisAlignment.start,
+        children: [
+          Align(
+            alignment: isMyMessage ?  Alignment.centerRight : Alignment.centerLeft,
+            child: ChatBubble(
+              backGroundColor: isMyMessage ? FlutterFlowTheme.of(context).primary : FlutterFlowTheme.of(context).primaryBackground,
+              clipper: ChatBubbleClipper2(type: bubbleType),
+              child: Container(
+                constraints: BoxConstraints(
+                  maxWidth: MediaQuery.of(context).size.width*0.6
+                ),
+                child: Text(
+                  chatRecord.content ?? '',
+                  style: FlutterFlowTheme.of(context)
+                      .bodyMedium.override(
+                      fontFamily:
+                      'PretendardSeries',
+                      color: isMyMessage ? FlutterFlowTheme.of(context).primaryBackground : FlutterFlowTheme.of(context).primaryText,
+                      fontSize: 13.0,
+                      letterSpacing: 0.0,
+                      fontWeight: FontWeight.w400,
+                      useGoogleFonts: GoogleFonts
+                          .asMap()
+                          .containsKey(
+                      'PretendardSeries'),
+                  ),
+                ),
+              )
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

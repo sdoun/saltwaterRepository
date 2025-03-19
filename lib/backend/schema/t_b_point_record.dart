@@ -18,6 +18,8 @@ class TBPointRecord extends FirestoreRecord {
   bool? _isIsland;
   bool? get isIsland => _isIsland ?? false;
 
+  List<DocumentReference>? _pointThemes;
+  List<DocumentReference> get pointThemes => _pointThemes ?? [];
 
   // "point_name" field.
   String? _pointName;
@@ -138,6 +140,7 @@ class TBPointRecord extends FirestoreRecord {
     _pointInvolvedVideo = getDataList(snapshotData['point_involvedVideo']);
     _pointFishType = getDataList(snapshotData['point_fishType']);
     _isIsland = snapshotData['point_isIsalnd'] as bool?;
+    _pointThemes = getDataList(snapshotData['point_themes']);
   }
 
   static CollectionReference get collection =>

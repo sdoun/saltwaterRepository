@@ -26,12 +26,9 @@ class _ChatFabState extends State<ChatFab> {
           }
         },
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
-        child: Image.asset(
-            'assets/images/1대1문의.png',
-          fit: BoxFit.fill,
-        ),
+      child: Image.asset(
+          'assets/images/1대1문의.png',
+        fit: BoxFit.fill,
       ),
     );
   }

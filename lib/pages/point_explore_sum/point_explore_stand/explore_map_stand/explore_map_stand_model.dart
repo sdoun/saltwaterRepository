@@ -19,7 +19,7 @@ class ExploreMapStandModel extends FlutterFlowModel<ExploreMapStandWidget> {
   // Stores action output result for [Bottom Sheet - stand_3rdFilter] action in Container widget.
   List<String>? stand3rdFilter;
   // Stores action output result for [Custom Action - standListFromFilter] action in Button widget.
-  List<String>? standList;
+  List<String>? standList = [];
   // Model for customNavbar component.
   late CustomNavbarModel customNavbarModel;
 

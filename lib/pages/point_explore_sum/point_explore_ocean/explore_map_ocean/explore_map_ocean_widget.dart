@@ -1,3 +1,4 @@
+import '../../../../reusable/common/basicScaffold.dart';
 import '../ocean_3rd_filter/ocean3rd_filter_widget.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
@@ -112,20 +113,20 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
           },
           child: StreamBuilder<List<TBPointRecord>>(
             stream: queryTBPointRecord(
-                queryBuilder: (tBPointRecord) =>
-                tBPointRecord).map((snapshot) {
+              queryBuilder: (tBPointRecord) => tBPointRecord,
+            ).map((snapshot) {
               return snapshot.where((record) {
-                bool matchesName = _model.pointList == '' ||
+                bool matchesName = _model.pointList == [] ||
                     _model.pointList!.contains(record.pointName);
                 bool matchesCategory = '해변, 갯바위' == '' ||
                     record.pointCategories == '해변, 갯바위';
                 return matchesName && matchesCategory;
               }).toList();
             })..listen((snapshot) {
-              List<TBPointRecord> exploreMapOceanTBPointRecordList = snapshot;
+              List<TBPointRecord> exploreMapSWTBPointRecordList = snapshot;
               if (_model.exploreMapOceanPreviousSnapshot != null &&
                   !const ListEquality(TBPointRecordDocumentEquality()).equals(
-                      exploreMapOceanTBPointRecordList,
+                      exploreMapSWTBPointRecordList,
                       _model.exploreMapOceanPreviousSnapshot)) {
                 () async {
                   await _model.columnController?.animateTo(
@@ -161,9 +162,8 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
 
               return GestureDetector(
                 onTap: () => FocusScope.of(context).unfocus(),
-                child: Scaffold(
+                child: Basicscaffold(
                   key: scaffoldKey,
-                  backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
                   appBar: AppBar(
                     backgroundColor: Colors.white,
                     automaticallyImplyLeading: false,
@@ -235,13 +235,11 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
                           padding:
                           const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
                           child: SingleChildScrollView(
-                            controller: _model.columnController,
+                            //controller: _model.columnController,
                             child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                            Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                            child: Container(
+                            Container(
                               width: double.infinity,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
@@ -553,7 +551,6 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
                                   ),
                                 ),
                               ),
-                            ),
                             ClipRRect(
                               borderRadius: BorderRadius.circular(10.0),
                               child: Container(
@@ -605,14 +602,6 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
                         ),
                       ),
                     ),
-                  Align(
-                    alignment: const AlignmentDirectional(0.0, 1.0),
-                    child: wrapWithModel(
-                      model: _model.customNavbarModel,
-                      updateCallback: () => safeSetState(() {}),
-                      child: const CustomNavbarWidget(),
-                    ),
-                  ),
                 ],
               ),
             ),

@@ -36,7 +36,7 @@ class ExploreMapOceanModel extends FlutterFlowModel<ExploreMapOceanWidget> {
   // Stores action output result for [Bottom Sheet - seawall_3rdFilter] action in Container widget.
   List<String>? oceean3rdFilter;
   // Stores action output result for [Custom Action - pointListFromFilter] action in Button widget.
-  List<String>? pointList;
+  List<String>? pointList =[];
   // Model for customNavbar component.
   late CustomNavbarModel customNavbarModel;
 

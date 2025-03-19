@@ -222,6 +222,7 @@ class _NaverMapWidgetPointCopyState extends State<NaverMapWidgetPointCopy> {
       alignment: Alignment.topRight,
       children: [
         NaverMap(
+          forceGesture: true,
           options: NaverMapViewOptions(
             mapType: mapTypeSelect(widget.mapType),
             minZoom: 5,
@@ -237,6 +238,9 @@ class _NaverMapWidgetPointCopyState extends State<NaverMapWidgetPointCopy> {
                 tilt: 0),
             rotationGesturesEnable: false,
             tiltGesturesEnable: false,
+            scrollGesturesEnable: true,
+            zoomGesturesEnable: true,
+
           ),
           onMapReady: (NaverMapController controller) async {
             mapControllerCompleter.complete(controller);

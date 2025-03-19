@@ -1,6 +1,7 @@
 import 'package:salt_water_beta_ver1/pages/user_sum/user_page/deleteUserBottonsheet.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 
+import '../../../reusable/common/basicScaffold.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/custom_navbar_widget.dart';
@@ -178,9 +179,8 @@ class _UserPageWidgetState extends State<UserPageWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
+      child: Basicscaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
           child: Stack(
@@ -911,6 +911,12 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                     ),
                                   );
                                 }
+                                if(snapshot.hasError){
+                                  print('snapshot Error ${snapshot.error}');
+                                  return Center(
+                                    child: Text(snapshot.error.toString()),
+                                  );
+                                }
                                 List<TBUserReviewPointRecord>
                                     listViewTBUserReviewPointRecordList =
                                     snapshot.data!;
@@ -1082,21 +1088,6 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                       ),
                     ),
                   ],
-                ),
-              ),
-              Align(
-                alignment: const AlignmentDirectional(0.0, 1.0),
-                child: Container(
-                  width: double.infinity,
-                  height: MediaQuery.sizeOf(context).height * 0.08,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).primaryBackground,
-                  ),
-                  child: wrapWithModel(
-                    model: _model.customNavbarModel,
-                    updateCallback: () => safeSetState(() {}),
-                    child: const CustomNavbarWidget(),
-                  ),
                 ),
               ),
             ],

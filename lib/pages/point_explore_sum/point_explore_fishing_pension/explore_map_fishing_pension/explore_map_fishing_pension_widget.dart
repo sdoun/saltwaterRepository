@@ -1,3 +1,4 @@
+import '../../../../reusable/common/basicScaffold.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/custom_navbar_widget.dart';
@@ -114,9 +115,8 @@ class _ExploreMapFishingPensionWidgetState
         },
         child: GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
+      child: Basicscaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
           backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
@@ -545,17 +545,6 @@ class _ExploreMapFishingPensionWidgetState
                         },
                       ),
                     ],
-                  ),
-                ),
-              ),
-              Align(
-                alignment: const AlignmentDirectional(0.0, 1.0),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 640.0, 0.0, 0.0),
-                  child: wrapWithModel(
-                    model: _model.customNavbarModel,
-                    updateCallback: () => safeSetState(() {}),
-                    child: const CustomNavbarWidget(),
                   ),
                 ),
               ),

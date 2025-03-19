@@ -1,5 +1,6 @@
 import 'package:salt_water_beta_ver1/components/new_profile_image.dart';
 
+import '../../../reusable/common/basicScaffold.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/custom_navbar_widget.dart';
@@ -56,9 +57,8 @@ class _UserEditWidgetState extends State<UserEditWidget> {
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
+      child: Basicscaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
           backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
@@ -391,14 +391,6 @@ class _UserEditWidgetState extends State<UserEditWidget> {
                       ),
                     ].divide(const SizedBox(height: 8.0)),
                   ),
-                ),
-              ),
-              Align(
-                alignment: const AlignmentDirectional(0.0, 1.0),
-                child: wrapWithModel(
-                  model: _model.customNavbarModel,
-                  updateCallback: () => safeSetState(() {}),
-                  child: const CustomNavbarWidget(),
                 ),
               ),
             ],

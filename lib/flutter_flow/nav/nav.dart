@@ -5,7 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salt_water_beta_ver1/pages/home1/home_searchResult.dart';
 import 'package:salt_water_beta_ver1/pages/manager_chat/chat_room.dart';
+import 'package:salt_water_beta_ver1/pages/point_explore_sum/point_detailed/storeBoat_detailed.dart';
+import 'package:salt_water_beta_ver1/pages/point_explore_sum/point_explore_boat/explore_map_boat.dart';
+import 'package:salt_water_beta_ver1/pages/point_explore_sum/point_explore_store/explore_map_store.dart';
+import 'package:salt_water_beta_ver1/pages/point_explore_sum/point_explore_theme/point_explore_theme.dart';
 import 'package:salt_water_beta_ver1/reusable/common/imageDetailView.dart';
+import 'package:salt_water_beta_ver1/reusable/common/photoViewPage.dart';
 import '../../pages/home1/home_searchPage.dart';
 import '../../pages/weather_sum/weather_detailed/weather_detailed_additional_widget.dart';
 import '/backend/backend.dart';
@@ -84,6 +89,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, FirebaseAnalyticsObserv
       errorBuilder: (context, state) =>
           appStateNotifier.loggedIn ? const Home1Widget() : const LoginWidget(),
       routes: [
+        FFRoute(name: 'photoViewPage', path: '/photoViewPage',
+            builder: (context, params) => PhotoViewPage(imageList: params.getParam<String>('imageList', ParamType.String, isList: true),
+                currentIndex: params.getParam('currentIndex', ParamType.int))),
+        FFRoute(name: 'exploreMapStore', path: '/exploreMapStore', builder: (context, params) => ExploreMapStore()),
+        FFRoute(name: 'exploreMapBoat', path: '/exploreMapBoat', builder: (context, params) => ExploreMapBoat()),
+        FFRoute(
+          name: 'pointExploreTheme',
+          path: '/pointExploreTheme',
+          builder: (context, params) => PointExploreTheme(themeRef: params.getParam('themeRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['TB_pointTheme']
+          ))
+        ),
         FFRoute(
           name: '_initialize',
           path: '/',
@@ -129,6 +148,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, FirebaseAnalyticsObserv
           name: 'point_detailed',
           path: '/pointDetailed',
           builder: (context, params) => PointDetailedWidget(
+            pointRefSW: params.getParam(
+              'pointRefSW',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['TB_point'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'boat_detailed',
+          path: '/boatDetailed',
+          builder: (context, params) => StoreboatDetailed(
             pointRefSW: params.getParam(
               'pointRefSW',
               ParamType.DocumentReference,

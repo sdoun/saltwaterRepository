@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salt_water_beta_ver1/auth/firebase_auth/auth_util.dart';
 import 'package:salt_water_beta_ver1/backend/schema/t_b_manager_chat_chat.dart';
@@ -26,6 +27,8 @@ class _ChatRoomState extends State<ChatRoom> {
 
   DocumentSnapshot? chatRoomSnapshot;
   final _textFormKey = GlobalKey<FormState>();
+  ScrollController _scrollController = ScrollController();
+  //TODO: 채팅 자동 스크롤 구현
 
   Future<DocumentSnapshot> accessOrCreateChatRoom() async{
     final chatRoomRef = FirebaseFirestore.instance.collection('/TB_managerChat_room').doc(currentUserReference!.id);
@@ -59,6 +62,7 @@ class _ChatRoomState extends State<ChatRoom> {
   @override
   void initState() {
     super.initState();
+    //_scrollController = ScrollController(initialScrollOffset: _scrollController.position.maxScrollExtent);
     print('chatRoom get in');
     accessOrCreateChatRoom().then((DocumentSnapshot snapshot){
       setState(() {
@@ -66,10 +70,26 @@ class _ChatRoomState extends State<ChatRoom> {
       });
     }
     );
+
   }
 
   @override
   Widget build(BuildContext context) {
+    /*
+    WidgetsBinding.instance
+        .addPostFrameCallback((_){
+          if(_scrollController.hasClients){
+            _scrollController
+                .jumpTo(_scrollController.position.maxScrollExtent);
+          }
+    });
+     */
+    /*
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      _scrollController
+          .jumpTo(_scrollController.position.maxScrollExtent);
+    });
+     */
     accessOrCreateChatRoom();
     final chatInputController = TextEditingController(text: '');
     return Scaffold(
@@ -136,65 +156,157 @@ class _ChatRoomState extends State<ChatRoom> {
       ),
       body: Stack(
         children: [
-          StreamBuilder(
-              stream: fetchChats(chatRoomSnapshot!),
-              builder: (context, snapshot){
-                if(snapshot.hasData){
-                  final chatList = snapshot.data!.docs.map((doc){
-                    return TBManagerChatRecord.fromSnapshot(doc);
-                  }).toList();
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 80, left:  16, right: 16),
-                    child: ListView.builder(
-                      itemCount: chatList.length,
-                        itemBuilder: (context, index){
-                        final chat = chatList[index];
-                          return Chatbubble(chatRecord: chat);
-                        }
-                    ),
-                  );
+          Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 24.0, bottom: 24),
+              child: Text(
+                '낚시장소정보에 대해 물어보세요 \n 약 1시간 이내에 답변해드립니다.',
+                style: FlutterFlowTheme.of(context)
+                    .labelMedium
+                    .override(
+                  fontFamily: FlutterFlowTheme.of(context)
+                      .labelMediumFamily,
+                  letterSpacing: 0.0,
+                  useGoogleFonts: GoogleFonts.asMap()
+                      .containsKey(
+                      FlutterFlowTheme.of(context)
+                          .labelMediumFamily),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 96.0),
+            child: StreamBuilder(
+                stream: fetchChats(chatRoomSnapshot!),
+                builder: (context, snapshot){
+                  if(snapshot.hasData){
+                    final chatList = snapshot.data!.docs.map((doc){
+                      return TBManagerChatRecord.fromSnapshot(doc);
+                    }).toList();
+
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 80, left:  16, right: 16),
+                      child: ListView.builder(
+                        controller: _scrollController,
+                        itemCount: chatList.length,
+                          itemBuilder: (context, index){
+                          final chat = chatList[index];
+                            return Chatbubble(chatRecord: chat);
+                          }
+                      ),
+                    );
+                  }
+                  if(snapshot.hasError){
+                    return Center(
+                      child: Text('HasError'),
+                    );
+                  }
+                  else{
+                    return Center(
+                      child: Text('Its Not an snapshot error, but there is something wrong'),
+                    );
+                  }
                 }
-                if(snapshot.hasError){
-                  return Center(
-                    child: Text('HasError'),
-                  );
-                }
-                else{
-                  return Center(
-                    child: Text('Its Not an snapshot error, but there is something wrong'),
-                  );
-                }
-              }
+            ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
               width: double.maxFinite,
-              height: 64,
+              //height: 64,
               child: Form(
                 key: _textFormKey,
-                child: TextFormField(
-                  validator: (value){
-                    if(value!.isEmpty){
-                      return '내용을 입력해주세요.';
-                    }
-                    else{
-                      return null;
-                    }
-                  },
-                  controller: chatInputController,
-                  decoration: InputDecoration(
-                      suffixIcon: InkWell(
-                        onTap: () async{
-                          if(_textFormKey.currentState!.validate()) {
-                            createChat(chatInputController.text);
-                            chatInputController.text = '';
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0, right: 16, bottom: 16),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(24),
+                        border: Border(
+                            top: BorderSide(color: FlutterFlowTheme.of(context).primary),
+                            left: BorderSide(color: FlutterFlowTheme.of(context).primary),
+                            right: BorderSide(color: FlutterFlowTheme.of(context).primary),
+                            bottom: BorderSide(color: FlutterFlowTheme.of(context).primary)
+                        )
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16.0),
+                      child: TextFormField(
+                        validator: (value){
+                          if(value!.isEmpty){
+                            return '내용을 입력해주세요.';
+                          }
+                          else{
+                            return null;
                           }
                         },
-                        child: Icon(
-                            Icons.arrow_right_alt
+                        controller: chatInputController,
+
+                        decoration: InputDecoration(
+                            hintText: '문의할 내용을 입력해주세요.',
+                            hintStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                              fontFamily: FlutterFlowTheme.of(context)
+                                  .labelMediumFamily,
+                              letterSpacing: 0.0,
+                              useGoogleFonts: GoogleFonts.asMap()
+                                  .containsKey(
+                                  FlutterFlowTheme.of(context)
+                                      .labelMediumFamily),
+                            ),
+                            focusedBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.transparent
+                                )
+                            ),
+
+                            border: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black,
+                                  width: 2
+                                )
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: const BorderSide(
+                                color: Colors.transparent,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            disabledBorder: UnderlineInputBorder(
+                              borderSide: const BorderSide(
+                                color: Colors.transparent,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedErrorBorder: UnderlineInputBorder(
+                              borderSide: const BorderSide(
+                                color: Colors.transparent,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            suffixIcon: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: InkWell(
+                                onTap: () async{
+                                  if(_textFormKey.currentState!.validate()) {
+                                    createChat(chatInputController.text);
+                                    chatInputController.text = '';
+                                  }
+                                },
+                                child: SizedBox(
+                                    height: 8,
+                                    width: 8,
+                                    child: Image.asset('assets/images/채팅전송.png'))
+                              ),
+                            )
                         ),
-                      )
+                      ),
+                    ),
                   ),
                 ),
               ),

@@ -66,6 +66,7 @@ class FFAppState extends ChangeNotifier {
     _pointAds = value;
   }
 
+  QuerySnapshot? pointThemes;
 
   String _newProfileImage = '';
   String get newProfileImage => _newProfileImage;

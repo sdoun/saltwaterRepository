@@ -1,4 +1,5 @@
 import '../../../models/weatherModels.dart';
+import '../../../reusable/common/basicScaffold.dart';
 import '../../../reusable/common/loadingAnimation.dart';
 import '../../../reusable/common/pulsatingImage.dart';
 import '/backend/api_requests/api_calls.dart';
@@ -235,10 +236,7 @@ class _WeatherDetailedAdditionalState extends State<WeatherDetailedAdditional> {
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
-          return Scaffold(
-            backgroundColor: FlutterFlowTheme
-                .of(context)
-                .primaryBackground,
+          return Basicscaffold(
             body: Center(
               child: Column(
                 children: [
@@ -278,11 +276,8 @@ class _WeatherDetailedAdditionalState extends State<WeatherDetailedAdditional> {
           children: [
             GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
-              child: Scaffold(
+              child: Basicscaffold(
                 key: scaffoldKey,
-                backgroundColor: FlutterFlowTheme
-                    .of(context)
-                    .primaryBackground,
                 appBar: AppBar(
                   backgroundColor: Colors.white,
                   automaticallyImplyLeading: false,
@@ -2010,29 +2005,6 @@ class _WeatherDetailedAdditionalState extends State<WeatherDetailedAdditional> {
                             ),
                           ),
                         ),
-                      Align(
-                        alignment: const AlignmentDirectional(0.0, 1.0),
-                        child: Container(
-                          width: double.infinity,
-                          height: MediaQuery
-                              .sizeOf(context)
-                              .height * 0.08,
-                          decoration: BoxDecoration(
-                            color:
-                            FlutterFlowTheme
-                                .of(context)
-                                .primaryBackground,
-                          ),
-                          child: Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
-                            child: wrapWithModel(
-                              model: _model.customNavbarModel,
-                              updateCallback: () => safeSetState(() {}),
-                              child: const CustomNavbarWidget(),
-                            ),
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),

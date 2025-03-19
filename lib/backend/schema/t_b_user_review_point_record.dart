@@ -15,8 +15,8 @@ class TBUserReviewPointRecord extends FirestoreRecord {
     _initializeFields();
   }
 
-  Timestamp? _timestamp;
-  Timestamp? get timestamp => _timestamp;
+  DateTime? _timestamp;
+  DateTime? get timestamp => _timestamp;
 
   List<DocumentReference>? _reviewReportedBy = [];
   List<DocumentReference> get reviewReportedBy => _reviewReportedBy ?? [];
