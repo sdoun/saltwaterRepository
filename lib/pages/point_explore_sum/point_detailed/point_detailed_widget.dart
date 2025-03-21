@@ -945,8 +945,13 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                   ),
                                                 ),
                                                 Flexible(
-                                                  child: Text(
-                                                    pointDetailedTBPointRecord.pointArround,
+                                                  child: Linkify(
+                                                    onOpen: (link) async {
+                                                      if (!await launchUrl(Uri.parse(link.url))) {
+                                                        throw Exception('Could not launch ${link.url}');
+                                                      }
+                                                    },
+                                                    text: pointDetailedTBPointRecord.pointArround,
                                                     style: FlutterFlowTheme.of(context)
                                                         .bodyMedium
                                                         .override(
