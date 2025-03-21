@@ -2,6 +2,24 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 	<dict>
+	    <!-- Permission options for the `location` group -->
+        <key>NSLocationWhenInUseUsageDescription</key>
+        <string>사용자 위치 중심으로 지도를 이동하는 기능에 필요</string>
+        <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+        <string>사용자 위치 중심으로 지도를 이동하는 기능에 필요</string>
+        <key>NSLocationUsageDescription</key>
+        <string>사용자 위치 중심으로 지도를 이동하는 기능에 필요</string>
+
+
+       <!-- Permission options for the `camera` group -->
+       <key>NSCameraUsageDescription</key>
+       <string>프로필 사진 설정을 위해 필요</string>
+
+        <!-- Permission options for the `photos` group -->
+        <key>NSPhotoLibraryUsageDescription</key>
+        <string>프로필 사진 설정을 위해 필요</string>
+
+
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>
@@ -81,5 +99,9 @@
 		<false/>
 		<key>UIStatusBarHidden</key>
 		<false/>
-	</dict>
+		<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+</dict>
 </plist>
