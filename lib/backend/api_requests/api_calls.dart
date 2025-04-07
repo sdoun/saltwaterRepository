@@ -65,7 +65,7 @@ class RealtimeWeatherAPICall {
 class RealtimeWtrTmpCall {
   static Future<ApiCallResponse> call({
     String? staCde = '',
-    String? key = 'qPwOeIrU-2403-NDHXBJ-0759',
+    String? key = 'qPwOeIrU-2503-GHKSEF-1092',//'qPwOeIrU-2403-NDHXBJ-0759',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'realtimeWtrTmp',

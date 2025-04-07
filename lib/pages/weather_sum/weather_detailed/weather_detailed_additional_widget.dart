@@ -1369,7 +1369,7 @@ class _WeatherDetailedAdditionalState extends State<WeatherDetailedAdditional> {
                                                   RealtimeWtrTmpCall.jsonItems(
                                                     _model.realtimeWtrTmpResponse?.jsonBody)?.toList(),
                                                   weatherDetailedTBWeatherPointRecord
-                                                      .staCde))}℃',
+                                                      .staCde))}',
                                           style: FlutterFlowTheme
                                               .of(
                                               context)
