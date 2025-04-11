@@ -193,15 +193,28 @@ class _PointExploreThemeState extends State<PointExploreTheme> {
                                             pointList: exploreMapThemeTBPointRecordList,
                                             currentUser: currentUserReference!,
                                             onClickMarker: (markerDoc) async {
-                                              context.pushNamed(
-                                                'point_detailed',
-                                                queryParameters: {
-                                                  'pointRefSW': serializeParam(
-                                                    markerDoc.reference,
-                                                    ParamType.DocumentReference,
-                                                  ),
-                                                }.withoutNulls,
-                                              );
+                                              if(themeRecord.themeName == '체험낚시배' || markerDoc.pointCategories == '낚시배') {
+                                                context.pushNamed(
+                                                  'boat_detailed',
+                                                  queryParameters: {
+                                                    'pointRefSW': serializeParam(
+                                                      markerDoc.reference,
+                                                      ParamType.DocumentReference,
+                                                    ),
+                                                  }.withoutNulls,
+                                                );
+                                              }
+                                              else{
+                                                context.pushNamed(
+                                                  'point_detailed',
+                                                  queryParameters: {
+                                                    'pointRefSW': serializeParam(
+                                                      markerDoc.reference,
+                                                      ParamType.DocumentReference,
+                                                    ),
+                                                  }.withoutNulls,
+                                                );
+                                              }
                                             },
                                           ),
                                         ),
