@@ -37,7 +37,11 @@ class TBManagerChatRecord extends FirestoreRecord{
     //id.set(newMessage);
     newId.set(newMessage);
     chatRoom.update({
-      'room_lastMessage':newMessage
+      'room_lastMessage': {
+        'messageContent' : newMessage['chat_content'],
+        'messageSentBy' : sendBy,
+        'createdAt' : newMessage['chat_createdAt']
+      }
     });
   }
 

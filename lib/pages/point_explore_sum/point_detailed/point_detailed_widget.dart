@@ -579,14 +579,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                     if (!snapshot.hasData) {
                                       return Center(
                                         child: SizedBox(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          child: CircularProgressIndicator(
-                                            valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                              FlutterFlowTheme.of(context).primary,
-                                            ),
-                                          ),
+                                          height: 102.0,
                                         ),
                                       );
                                     }
