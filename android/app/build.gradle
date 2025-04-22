@@ -1,9 +1,10 @@
 plugins {
    id "com.android.application"
    id "kotlin-android"
+    id "kotlin-kapt"
+    id "com.google.devtools.ksp" version "2.1.20-1.0.32"
    id "dev.flutter.flutter-gradle-plugin"
    id "com.google.gms.google-services"  // Google Services plugin
-
 }
 
 def localProperties = new Properties()
@@ -32,7 +33,21 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     compileSdkVersion 34
-    
+    namespace 'com.mycompany.saltwaterbetaver1'
+
+    kotlin {  // 필수 추가
+        jvmToolchain(17)
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -51,7 +66,6 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
-
    signingConfigs {
        release {
            keyAlias keystoreProperties['keyAlias']
@@ -75,5 +89,14 @@ flutter {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.10"
+    //implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.10"
+    //implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.1.20"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22"
+
+    implementation "com.google.dagger:hilt-android:2.55"
+    kapt "com.google.dagger:hilt-compiler:2.55"
+
+    constraints {
+        implementation("org.jetbrains.kotlinx:kotlinx-metadata-jvm:2.1.0")  // 버전 강제 지정
+    }
 }

@@ -7,7 +7,18 @@ allprojects {
 }
 
 
-
+buildscript {
+    repositories {
+        google()  // 필수 추가[1][2][4]
+        mavenCentral()
+    }
+    ext.kotlin_version = '1.8.22'
+    dependencies {
+        classpath "com.android.tools.build:gradle:8.3.0"  // AGP 버전 업데이트[5]
+        classpath "com.google.dagger:hilt-android-gradle-plugin:2.55"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
 
 rootProject.buildDir = '../build'
 subprojects {
