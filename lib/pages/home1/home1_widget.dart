@@ -536,7 +536,8 @@ class _Home1WidgetState extends State<Home1Widget> {
                                                 controller: ScrollController(initialScrollOffset: 0.0),
                                                 shrinkWrap: true,
                                                 scrollDirection: Axis.horizontal,
-                                                itemCount: min(themes.length, _themeLength),
+                                                //itemCount: min(themes.length, _themeLength),
+                                                  itemCount: themes.length,
                                                   itemBuilder: (context, index){
                                                     final theme = TBPointThemeRecord.fromSnapshot(themes[index]);
                                                     return Padding(

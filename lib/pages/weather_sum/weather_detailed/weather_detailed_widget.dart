@@ -140,7 +140,6 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
       setState(() {
         print('api call success!');
         _model.realtimeWeatherResponse = results[0];
-
         _model.fcstWeatherResponse = results[1];
         _model.tidalFcstResponse = results[2];
         _model.midTmpResponse = results[3];
@@ -151,7 +150,7 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
         print(results[2].jsonBody);
         print(results[3].jsonBody);
         print(results[4].jsonBody);
-        print(results[5].jsonBody);
+        print('wtrTmp response : ${results[5].jsonBody ?? 'no result'}');
         isLoading = false;
       });
     } catch (e) {
@@ -791,7 +790,7 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                             RealtimeWtrTmpCall.jsonItems(
                                               _model.realtimeWtrTmpResponse?.jsonBody)?.toList(),
                                             weatherDetailedTBWeatherPointRecord
-                                                .staCde))}℃',
+                                                .staCde))}',
                                     style: FlutterFlowTheme
                                         .of(
                                         context)

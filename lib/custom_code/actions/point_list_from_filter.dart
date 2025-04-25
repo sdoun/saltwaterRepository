@@ -37,8 +37,11 @@ Future<List<String>?> pointListFromFilter(
   // Loop through all the documents
   for (final documentSnapshot in querySnapshot.docs) {
     // Get the 'point_tags' field value and convert to a List<String>
-    final tags =
-        List<String>.from(documentSnapshot.get('point_tags') as List<dynamic>);
+    //final tags = List<String>.from(documentSnapshot.get('point_tags') as List<dynamic>);
+    List<String> tags = [];
+    if (documentSnapshot.data().containsKey('point_tags')) {
+      tags.addAll(List<String>.from(documentSnapshot.get('point_tags') as List<dynamic>));
+    }
 
     if (documentSnapshot.data().containsKey('point_fishes')) {
       tags.addAll(List<String>.from(documentSnapshot.get('point_fishes') as List<dynamic>));

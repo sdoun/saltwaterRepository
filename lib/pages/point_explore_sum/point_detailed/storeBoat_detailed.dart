@@ -43,7 +43,7 @@ class StoreboatDetailed extends StatefulWidget {
 
 class _PointDetailedWidgetState extends State<StoreboatDetailed> {
   late PointDetailedModel _model;
-  String haewoonLink = 'https://island.haewoon.co.kr/';
+  String haewoonLink = 'https://island.theksa.co.kr/page/booking';
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 

@@ -27,11 +27,31 @@ class TBManagerChatRecord extends FirestoreRecord{
   static DocumentReference createId(DocumentReference parent, String? id)
   => parent.collection('room_chatCollection').doc(id);
 
-  static Future<void> createDoc(DocumentReference id, DocumentReference sendBy, String content) async{
-    id.set(createTBManagerChatRecordData(sendBy, content, Timestamp.fromDate(DateTime.now())));
+  static Future<void> createDoc(
+      //DocumentReference id,
+      DocumentReference sendBy,
+      String content,
+      DocumentReference chatRoom) async{
+    final newMessage = createTBManagerChatRecordData(sendBy, content, Timestamp.fromDate(DateTime.now()));
+    final newId = createId(chatRoom, null);
+    //id.set(newMessage);
+    newId.set(newMessage);
+    chatRoom.update({
+      'room_lastMessage': {
+        'messageContent' : newMessage['chat_content'],
+        'messageSentBy' : sendBy,
+        'createdAt' : newMessage['chat_createdAt']
+      }
+    });
   }
 
   static fromSnapshot(DocumentSnapshot snapshot) => TBManagerChatRecord._(snapshot.reference, mapToFirestore(snapshot.data() as Map<String, dynamic>)) ;
+
+  Map<String, dynamic> toMap(String messageContent, DocumentReference sendBy, Timestamp createdAt) => {
+    'messageSentBy' : sendBy,
+    'messageContent' : messageContent,
+    'createdAt' : createdAt
+  };
 
   static Map<String, dynamic> createTBManagerChatRecordData(
       DocumentReference sendBy,

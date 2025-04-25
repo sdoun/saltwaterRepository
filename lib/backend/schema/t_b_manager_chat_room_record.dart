@@ -19,6 +19,8 @@ class TBManagerChatRoomRecord extends FirestoreRecord{
   DocumentReference? _chatUser;
   DocumentReference? get chatUser => _chatUser;
 
+
+
   void _initialLizeFields(){
     _chatUser = snapshotData['room_chatUser'] as DocumentReference;
   }

@@ -329,7 +329,7 @@ List<dynamic>? fcstListForCategory(
 String wrttempFromJson(dynamic jsonItem) {
   if (jsonItem != null) {
     if (jsonItem.containsKey('wtr_tmp')) {
-      return jsonItem['wtr_tmp'];
+      return '${jsonItem['wtr_tmp']}℃';
     } else {
       return ('wtr_tmp 키가 없거나 double 타입이 아닙니다.');
     }
@@ -356,6 +356,10 @@ dynamic findItemFromStacdeLay1(
   List<dynamic>? wtrTmpJsonList,
   String staCode,
 ) {
+  if(wtrTmpJsonList == null || wtrTmpJsonList.isEmpty){
+    print('no wtrTmp item');
+    return null;
+  }
   for (var item in wtrTmpJsonList!) {
     if (item["sta_cde"] == staCode) {
       return item;

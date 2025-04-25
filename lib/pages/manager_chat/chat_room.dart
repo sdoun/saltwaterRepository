@@ -56,7 +56,11 @@ class _ChatRoomState extends State<ChatRoom> {
 
   void createChat(String content){
     final chatRoomRef = FirebaseFirestore.instance.collection('/TB_managerChat_room').doc(currentUserReference!.id);
-    TBManagerChatRecord.createDoc(TBManagerChatRecord.createId(chatRoomRef, null), currentUserReference!, content);
+    TBManagerChatRecord.createDoc(
+        //TBManagerChatRecord.createId(chatRoomRef, null),
+        currentUserReference!,
+        content,
+        chatRoomRef);
   }
 
   @override
@@ -295,6 +299,7 @@ class _ChatRoomState extends State<ChatRoom> {
                                 onTap: () async{
                                   if(_textFormKey.currentState!.validate()) {
                                     createChat(chatInputController.text);
+
                                     chatInputController.text = '';
                                   }
                                 },
