@@ -438,8 +438,8 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                             clickYes: () async{
                                               deletePointLikes(context, currentUserReference);
                                               deleteUserReview(userReviewRecords);
-
                                               GoRouter.of(context).prepareAuthEvent();
+                                              await currentUserReference!.delete();
                                               await authManager.deleteUser(context);
                                               await authManager.signOut();
                                               context.goNamedAuth('login', context.mounted);
