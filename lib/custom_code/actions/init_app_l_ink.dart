@@ -58,7 +58,8 @@ Future _handleDeepLink(String link) async {
     });
 
     if (firebaseToken != null) {
-      await FirebaseAuth.instance.signInWithCustomToken(firebaseToken);
+      final userCredential = await FirebaseAuth.instance.signInWithCustomToken(firebaseToken);
+      await maybeCreateUser(userCredential.user!);
       print('firebase Token is $firebaseToken');
       print('naver user name is $name');
       callable.call(<String, dynamic>{

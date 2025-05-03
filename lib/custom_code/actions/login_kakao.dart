@@ -1,4 +1,6 @@
 // Automatic FlutterFlow imports
+import 'package:salt_water_beta_ver1/index.dart';
+
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -70,10 +72,12 @@ Future loginKakao(BuildContext context) async {
 
     // 5. DB 에 유저 데이터 동록
     await maybeCreateUser(credential.user!);
-    Navigator.pushNamed(context, 'home1');
+    //Navigator.pushNamed(context, 'home1');
+    //Navigator.push(context, MaterialPageRoute(builder: (context)=>Home1Widget()));
+    context.pushNamed('home1');
   } catch (e) {
-    print(e);
-    sdkCheckCallable.call(<String, dynamic>{'logParam': e});
+    print('kakao login error : $e');
+    //sdkCheckCallable.call(<String, dynamic>{'logParam': e});
     return;
   }
   // FlutterFlow의 AuthState 업데이

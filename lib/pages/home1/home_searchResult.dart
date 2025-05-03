@@ -219,9 +219,22 @@ class _HomeSearchresultState extends State<HomeSearchresult> {
                                         padding: const EdgeInsetsDirectional.all(8),
                                         child: InkWell(
                                           onTap: () {
-                                            context.pushNamed('point_detailed', queryParameters: {
+                                            if(point.pointCategories == '체험낚시배' || point.pointCategories == '낚시배'){
+                                              context.pushNamed(
+                                                'boat_detailed',
+                                                queryParameters: {
+                                                  'pointRefSW': serializeParam(
+                                                   point.reference,
+                                                    ParamType.DocumentReference,
+                                                  ),
+                                                }.withoutNulls,
+                                              );
+                                            }
+                                            else {
+                                              context.pushNamed('point_detailed', queryParameters: {
                                               'pointRefSW': serializeParam(point.reference, ParamType.DocumentReference)
                                             }.withoutNulls);
+                                            }
                                           },
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.start,
