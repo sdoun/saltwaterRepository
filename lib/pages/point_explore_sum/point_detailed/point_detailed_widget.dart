@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:salt_water_beta_ver1/pages/point_explore_sum/review_bottomsheet/review_edit_view.dart';
 import 'package:salt_water_beta_ver1/reusable/common/report_bottomsheet.dart';
 
+import '../../../custom_code/actions/iosMapOpen.dart';
 import '../../../reusable/common/basicScaffold.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/custom_code/actions/index.dart' as actions;
@@ -460,7 +461,12 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                     ),
                                     InkWell(
                                       onTap: () async{
-                                        openNavi(pointDetailedTBPointRecord.pointAddress);
+                                        if(isAndroid) {
+                                          openNavi(pointDetailedTBPointRecord.pointAddress);
+                                        }
+                                        else{
+                                          iosMapOpen(pointDetailedTBPointRecord);
+                                        }
                                       },
                                       child: Row(
                                         children: [

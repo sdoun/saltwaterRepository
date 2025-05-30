@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salt_water_beta_ver1/backend/backend.dart';
+import 'package:salt_water_beta_ver1/custom_code/actions/iosMapOpen.dart';
 import 'package:salt_water_beta_ver1/flutter_flow/flutter_flow_model.dart';
 import 'package:salt_water_beta_ver1/flutter_flow/flutter_flow_util.dart';
 
@@ -219,6 +220,8 @@ class _HomeSearchresultState extends State<HomeSearchresult> {
                                         padding: const EdgeInsetsDirectional.all(8),
                                         child: InkWell(
                                           onTap: () {
+                                            //iosMapOpen(point); 함수 테스트용 코드
+
                                             if(point.pointCategories == '체험낚시배' || point.pointCategories == '낚시배'){
                                               context.pushNamed(
                                                 'boat_detailed',
@@ -235,6 +238,7 @@ class _HomeSearchresultState extends State<HomeSearchresult> {
                                               'pointRefSW': serializeParam(point.reference, ParamType.DocumentReference)
                                             }.withoutNulls);
                                             }
+
                                           },
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.start,

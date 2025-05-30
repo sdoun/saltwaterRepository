@@ -29,7 +29,8 @@ Future<List<String>?> pointListFromFilter(
   List<String> result = [];
 
   // Combine all filter conditions into one list
-  List<String> Condition = (filter1st ?? []) +
+  List<String> Condition =
+      //(filter1st ?? []) +
       (filter2nd ?? []) +
       (filter3rd ?? []) +
       (fishType ?? []);
@@ -38,6 +39,8 @@ Future<List<String>?> pointListFromFilter(
   for (final documentSnapshot in querySnapshot.docs) {
     // Get the 'point_tags' field value and convert to a List<String>
     //final tags = List<String>.from(documentSnapshot.get('point_tags') as List<dynamic>);
+
+
     List<String> tags = [];
     if (documentSnapshot.data().containsKey('point_tags')) {
       tags.addAll(List<String>.from(documentSnapshot.get('point_tags') as List<dynamic>));
@@ -49,11 +52,11 @@ Future<List<String>?> pointListFromFilter(
     // Get the 'point_tags_boolen' field value
     // Create a list to store tags from boolean structure
     List<String> tagsFromBoolenStruct = [];
-
+    bool oceanTypeFit = filter1st!.isEmpty || (filter1st?.any((item) => tags.contains(item)) ?? true);
     // Add true items from 'point_tags_boolen' to tagsFromBoolenStruct
 
     // Check if all items in 'wCondition' are in 'tagsFromBoolenStruct'
-    if (Condition.every((element) => tags.contains(element))) {
+    if (Condition.every((element) => tags.contains(element)) && oceanTypeFit) {
       final nameValue = documentSnapshot.get('point_name') as String;
       result.add(nameValue);
     }

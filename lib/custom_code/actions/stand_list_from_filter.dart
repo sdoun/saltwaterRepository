@@ -52,19 +52,26 @@ Future<List<String>?> standListFromFilter(
         facilityFilter2nd.any((facility) => tags.contains(facility)) ||
         facilityFilter2nd.isEmpty);
 
+    List<String> facilList = (facilityfilter1st ?? []) + (facilityFilter2nd ?? []);
+    bool facilFit = facilList.isEmpty ? true : facilList.any((item)=>tags.contains(item));
     // Get the 'point_tags_boolen' field value
     // Create a list to store tags from boolean structure
+    if(Condition.isEmpty){ //시설구분을 제외한 조건이 없다면
 
-    // Add true items from 'point_tags_boolen' to tagsFromBoolenStruct
-
-    // Check if all items in 'wCondition' are in 'tagsFromBoolenStruct'
-    if (Condition.every((element) => tags.contains(element)) &&
-        facility1 &&
-        facility2) {
-      final nameValue = documentSnapshot.get('point_name') as String;
-      result.add(nameValue);
+      //if (Condition.every((element) => tags.contains(element)) && (facility1 || facility2))
+      if (facilFit) {
+        final nameValue = documentSnapshot.get('point_name') as String;
+        result.add(nameValue);
+      }
     }
-  }
+    else{
+      if (Condition.every((element) => tags.contains(element)) && facilFit) {
+        final nameValue = documentSnapshot.get('point_name') as String;
+        result.add(nameValue);
+      }
+    }
 
+  }
+  print('검색결과 길이${result.length}');
   return result;
 }

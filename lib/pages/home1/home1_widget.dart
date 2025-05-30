@@ -482,7 +482,7 @@ class _Home1WidgetState extends State<Home1Widget> {
                           ),
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
-                                12.0, 12.0, 12.0, 0.0),
+                                12.0, 12.0, 12.0, 12.0),
                             child: Container(
                               width: double.infinity,
                               decoration: BoxDecoration(
@@ -517,10 +517,11 @@ class _Home1WidgetState extends State<Home1Widget> {
                                     ],
                                   ),
                                   Padding(
+                                    
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 12.0, 0.0, 0.0),
                                     child: Container(
-                                      height:120,
+                                      height: 120+MediaQuery.of(context).size.height*0.05,
                                       width: double.infinity,
                                       decoration: const BoxDecoration(
                                         color: Color(0x00ffffff),

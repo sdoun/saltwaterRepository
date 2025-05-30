@@ -76,15 +76,15 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
 
         }
 
-            void pop(bool filterExit){
-    if(filterExit){
-    filterClear();
+    void pop(bool filterExit){
+      if(filterExit){
+        filterClear();
+      }
+      else{
+        context.pushNamed('home1');
+      }
     }
-    else{
-    context.pushNamed('home1');
-    }
-    }
-        void filterPoint() async{
+    void filterPoint() async{
       _model.pointList =
           await actions.pointListFromFilter(
         _model.ocean1stFilter?.toList(),
@@ -129,11 +129,14 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
                       exploreMapSWTBPointRecordList,
                       _model.exploreMapOceanPreviousSnapshot)) {
                 () async {
+                  /*
                   await _model.columnController?.animateTo(
                     _model.columnController!.position.maxScrollExtent,
                     duration: const Duration(milliseconds: 100),
                     curve: Curves.ease,
                   );
+                   */
+
 
                   safeSetState(() {});
                 }();
