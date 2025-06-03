@@ -146,11 +146,11 @@ class _Stand1stFilterWidgetState extends State<Stand1stFilterWidget> {
                     safeSetState(() =>
                     _model.checkboxValue3 = newValue!);
                     if (newValue!) {
-                      FFAppState().addToStandFacility1('당일낚시');
+                      FFAppState().addToStandFacility2('당일낚시');
                       safeSetState(() {});
                     } else {
                       FFAppState()
-                          .removeFromStandFacility1('당일낚시');
+                          .removeFromStandFacility2('당일낚시');
                       safeSetState(() {});
                     }
                   },
@@ -165,11 +165,11 @@ class _Stand1stFilterWidgetState extends State<Stand1stFilterWidget> {
                     safeSetState(() =>
                     _model.checkboxValue4 = newValue!);
                     if (newValue!) {
-                      FFAppState().addToStandFacility1('숙박가능');
+                      FFAppState().addToStandFacility2('숙박가능');
                       safeSetState(() {});
                     } else {
                       FFAppState()
-                          .removeFromStandFacility1('숙박가능');
+                          .removeFromStandFacility2('숙박가능');
                       safeSetState(() {});
                     }
                   },

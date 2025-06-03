@@ -4,8 +4,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 void iosMapOpen(//String address, double lat,
     TBPointRecord record) async{
-  final pointAddress = record.pointAddress;
-  final encodedAddress = Uri.encodeComponent(pointAddress);
   //final nMapUrl = 'nmap://search?query=$encodedAddress';
   //final kMapUrl = 'kakaomap://look?p=${record.pointLatitude},${record.pointLongitude}';
   final tMapUrl = Uri.parse('tmap://?rGoName=${record.pointName}'
@@ -23,15 +21,14 @@ void iosMapOpen(//String address, double lat,
     //카카오 네비로 열기
   }
   else if(await canLaunchUrl(tMapUrl)){
-    await launchUrl(tMapUrl);
+    await launchUrl(tMapUrl, mode: LaunchMode.externalApplication);
     //tmap으로 열기
   }
   else if(await canLaunchUrl(appleMapUrl)){
-    await launchUrl(appleMapUrl);
+    await launchUrl(appleMapUrl, mode: LaunchMode.externalApplication);
     //애플 맵으로 열기
   }
-
   else{
-    launchBrowserTab(Uri.parse(NaviApi.webNaviInstall));
+    await launchBrowserTab(Uri.parse(NaviApi.webNaviInstall));
   }
 }

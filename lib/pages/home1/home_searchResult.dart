@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -221,7 +223,15 @@ class _HomeSearchresultState extends State<HomeSearchresult> {
                                         child: InkWell(
                                           onTap: () {
                                             //iosMapOpen(point); 함수 테스트용 코드
+                                            /*
+                                            if(Platform.isAndroid) {
 
+                                            }
+                                            else{
+                                              iosMapOpen(point);
+                                            }
+
+                                             */
                                             if(point.pointCategories == '체험낚시배' || point.pointCategories == '낚시배'){
                                               context.pushNamed(
                                                 'boat_detailed',

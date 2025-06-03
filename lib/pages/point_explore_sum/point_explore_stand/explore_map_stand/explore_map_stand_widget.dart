@@ -359,7 +359,7 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
                                              ).then((value) => safeSetState(() =>
                                              _model.stand1stFilter = value));
                                              filterPoint();
-
+                                             print('FFAppState : ${FFAppState().standFacility2}');
                                              safeSetState(() {});
                                            },
                                          ),
@@ -507,7 +507,7 @@ class _ExploreMapStandWidgetState extends State<ExploreMapStandWidget> {
                            }
                            List<TBPointRecord> containerTBPointRecordList =
                            snapshot.data!;
-
+                           print('stand list length: ${containerTBPointRecordList.length}');
                            return ClipRRect(
                              borderRadius: BorderRadius.circular(10.0),
                              child: Container(
