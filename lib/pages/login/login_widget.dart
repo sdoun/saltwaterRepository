@@ -24,6 +24,7 @@ export 'login_model.dart';
 
 import 'package:salt_water_beta_ver1/reusable/login/loginTextForm.dart';
 import 'package:salt_water_beta_ver1/reusable/login/socialButton.dart';
+import 'package:app_version_update/app_version_update.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({super.key});
@@ -34,6 +35,85 @@ class LoginWidget extends StatefulWidget {
 
 class _LoginWidgetState extends State<LoginWidget>
     with TickerProviderStateMixin {
+
+  void verifyVersion(BuildContext context) async {
+
+
+    await AppVersionUpdate.checkForUpdates(
+      //앱 ID는 환경변수로 사용하는 방법 고려할 것
+      appleId: 'id6745240398',
+      playStoreId: 'com.mycompany.saltwaterbetaver1',
+      country: 'kr',
+    ).then((result) async {
+      print('id: ${result.playStoreId}');
+      if (result.canUpdate!) {
+        print('업데이트 가능: ${result.storeUrl}'); // 업데이트 가능한 경우 메시지 출력
+
+        await AppVersionUpdate.showAlertUpdate(
+            appVersionResult: result,
+            context: context,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            title: '새로운 업데이트가 있습니다!',
+            titleTextStyle: FlutterFlowTheme.of(context)
+                .headlineSmall
+                .override(
+              fontFamily:
+              'PretendardSeries',
+              color: FlutterFlowTheme.of(context).primaryText,
+              fontSize: 15.0,
+              letterSpacing: 0.0,
+              fontWeight: FontWeight.w800,
+              useGoogleFonts: GoogleFonts
+                  .asMap()
+                  .containsKey(
+                  'PretendardSeries'),
+            ),
+            content: '스토어로 이동하여 업데이트를 진행해주세요!',
+            contentTextStyle: FlutterFlowTheme.of(context)
+                .bodyMedium
+                .override(
+              fontFamily:
+              'PretendardSeries',
+              color: FlutterFlowTheme.of(context).primaryText,
+              fontSize: 12.0,
+              letterSpacing: 0.0,
+              fontWeight: FontWeight.w500,
+              useGoogleFonts: GoogleFonts
+                  .asMap()
+                  .containsKey(
+                  'PretendardSeries'),
+            ),
+            updateButtonText: '업데이트',
+            updateButtonStyle: ButtonStyle(
+              backgroundColor: WidgetStatePropertyAll(FlutterFlowTheme.of(context).primaryBackground)
+            ),
+            updateTextStyle:
+              FlutterFlowTheme.of(context)
+                  .headlineSmall
+                  .override(
+                fontFamily:
+                'PretendardSeries',
+                color: FlutterFlowTheme.of(context).primary,
+                fontSize: 15.0,
+                letterSpacing: 0.0,
+                fontWeight: FontWeight.w800,
+                useGoogleFonts: GoogleFonts
+                    .asMap()
+                    .containsKey(
+                    'PretendardSeries'),
+              ),
+            cancelButtonText: '취소',
+            cancelTextStyle: TextStyle(
+                color: FlutterFlowTheme.of(context).secondaryText
+            ),
+            cancelButtonStyle: ButtonStyle(
+              backgroundColor: WidgetStatePropertyAll(Colors.white12),
+            ));
+      } else {
+        print('업데이트 불가: $result'); // 업데이트 불가능한 경우 메시지 출력
+      }
+    });
+  }
 
   bool dummychange = true;
   late LoginModel _model;
@@ -48,6 +128,7 @@ class _LoginWidgetState extends State<LoginWidget>
     super.initState();
     _model = createModel(context, () => LoginModel());
     actions.initAppLInk();
+    verifyVersion(context);
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await actions.initAppLInk();

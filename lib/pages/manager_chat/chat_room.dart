@@ -165,7 +165,7 @@ class _ChatRoomState extends State<ChatRoom> {
             child: Padding(
               padding: const EdgeInsets.only(top: 24.0, bottom: 24),
               child: Text(
-                '낚시장소정보에 대해 물어보세요 \n 약 1시간 이내에 답변해드립니다.',
+                '낚시장소, 장비, 조회정보 등 낚시에 관한\n모든 것을 물어보세요. \n최대한 빠르고 정확하게 답변해드리겠습니다.',
                 style: FlutterFlowTheme.of(context)
                     .labelMedium
                     .override(

@@ -1,3 +1,4 @@
+import 'package:app_version_update/app_version_update.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import '/custom_code/actions/index.dart' as actions;
@@ -14,6 +15,41 @@ import 'backend/firebase/firebase_config.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+
+
+void verifyVersion(BuildContext context) async {
+
+  await AppVersionUpdate.checkForUpdates(
+    //앱 ID는 환경변수로 사용하는 방법 고려할 것
+    appleId: 'id6745240398',
+    playStoreId: 'com.mycompany.saltwaterbetaver1',
+    country: 'kr',
+  ).then((result) async {
+    if (result.canUpdate! || true) {
+      print('업데이트 가능: $result'); // 업데이트 가능한 경우 메시지 출력
+      await AppVersionUpdate.showAlertUpdate(
+          appVersionResult: result,
+
+          context: context,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          title: '새로운 업데이트가 있습니다!',
+          titleTextStyle: const TextStyle(
+              color: Colors.black, fontWeight: FontWeight.w600, fontSize: 16),
+          content: '스토어로 이동하여 업데이트를 진행해주세요!',
+          contentTextStyle: const TextStyle(
+              color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16),
+          updateButtonText: '업데이트',
+          cancelButtonText: '취소',
+          cancelTextStyle: TextStyle(color: Colors.black),
+          cancelButtonStyle: ButtonStyle(
+            backgroundColor: MaterialStatePropertyAll(Colors.white12),
+          ));
+    } else {
+      print('업데이트 불가: $result'); // 업데이트 불가능한 경우 메시지 출력
+    }
+  });
+}
+
 
 void main() async {
  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -69,6 +105,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    //verifyVersion(context);
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier, observer);
     userStream = saltWaterBetaVer1FirebaseUserStream()
@@ -84,7 +121,7 @@ class _MyAppState extends State<MyApp> {
   }
   Future<void> _initializeApp() async {
     // 여기에 추가적인 초기화 작업을 넣을 수 있습니다.
-    await Future.delayed(const Duration(seconds: 3)); // 예시로 3초 대기
+    //await Future.delayed(const Duration(seconds: 3)); // 예시로 3초 대기
 
     // 모든 초기화 작업이 완료된 후 스플래시 화면을 제거합니다.
     FlutterNativeSplash.remove();

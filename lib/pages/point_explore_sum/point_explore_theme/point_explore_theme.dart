@@ -128,15 +128,59 @@ class _PointExploreThemeState extends State<PointExploreTheme> {
                 ),
                 body: Center(
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(12, 10, 12, 0),
+                    padding: EdgeInsets.fromLTRB(12, 16, 12, 0),
                     child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SizedBox(
+                          if(themeRecord.themeDescImage.isNotEmpty)
+                          Container(
+                            constraints: BoxConstraints(
+                              maxWidth: 216
+                            ),
                             height: 72,
-                            child: Image.network(themeRecord.themeImagePath),
+                            //width: 72,//MediaQuery.sizeOf(context).width * 0.7,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: themeRecord.themeDescImage.length,
+                              itemBuilder: (context, index){
+                                List<String> themeDecImages = themeRecord.themeDescImage;
+                                return Padding(
+                                  padding: const EdgeInsets.only(right: 4),
+                                  child: SizedBox(
+                                    height: 72,
+                                    width: 72,
+                                    child: Image.network(themeDecImages[index]),
+                                  ),
+                                );
+                              },
+                            ),
                           ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Text(themeRecord.themeDesc ?? '',
+                            style: FlutterFlowTheme
+                                .of(context)
+                                .bodyMedium
+                                .override(
+                              fontFamily:
+                              'PretendardSeries',
+                              fontSize:
+                              16.0,
+                              letterSpacing:
+                              0.0,
+                              fontWeight:
+                              FontWeight
+                                  .w600,
+                              useGoogleFonts: GoogleFonts
+                                  .asMap()
+                                  .containsKey(
+                                  'PretendardSeries'),
+                            ),
+                          ),
+                          /*
                           Text(themeRecord.themeName ?? '테마 없음',
                             style: FlutterFlowTheme
                                 .of(context)
@@ -157,8 +201,10 @@ class _PointExploreThemeState extends State<PointExploreTheme> {
                                   'PretendardSeries'),
                             ),
                           ),
+                           */
+
                           SizedBox(
-                            height: 32,
+                            height: 16,
                           ),
                           FutureBuilder<QuerySnapshot>(
                             future: getPoints(themeRecord.reference),

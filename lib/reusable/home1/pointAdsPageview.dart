@@ -40,6 +40,8 @@ class _PointAdsPageviewState extends State<PointAdsPageview> {
       return GestureDetector(
         onTap: () async {
           print('pointRef is : ${data['ads_pointRef']}');
+          context.pushNamed('managerChatRoom');
+          /*
           if (data['ads_pointRef'] != null) {
             await context.pushNamed(
               'point_detailed',
@@ -54,32 +56,30 @@ class _PointAdsPageviewState extends State<PointAdsPageview> {
           else{
             return;
           }
+           */
         },
-        child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: AspectRatio(
-                aspectRatio: 16 / 9, // 이미지 비율 설정 (예: 16:9)
-                child: Image.network(
-                  data['ads_image'] ?? 'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%ED%8F%AC%EC%9D%B8%ED%8A%B8%EC%88%98%EC%A0%95%ED%8E%98%EC%9D%B4%EC%A7%80%2F%ED%8F%AC%EC%9D%B8%ED%8A%B8%EC%9D%B4%EB%AF%B8%EC%A7%80%EC%97%86%EC%9D%8C.png?alt=media&token=b357c611-3df0-4134-bf83-6d72fa96b82e',
-                  fit: BoxFit.contain, // cover 대신 contain 사용
-                  errorBuilder: (context, error, stackTrace) {
-                    print('Image error: $error');
-                    return Container(
-                      color: Colors.grey[200],
-                      child: const Center(child: Text('이미지를 불러올 수 없습니다')),
-                    );
-                  },
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return const Center(
-                      child: PulsatingImage(),
-                    );
-                  },
-                ),
-              ),
-            )
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: AspectRatio(
+            aspectRatio: 16 / 9, // 이미지 비율 설정 (예: 16:9)
+            child: Image.network(
+              data['ads_image'] ?? 'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%ED%8F%AC%EC%9D%B8%ED%8A%B8%EC%88%98%EC%A0%95%ED%8E%98%EC%9D%B4%EC%A7%80%2F%ED%8F%AC%EC%9D%B8%ED%8A%B8%EC%9D%B4%EB%AF%B8%EC%A7%80%EC%97%86%EC%9D%8C.png?alt=media&token=b357c611-3df0-4134-bf83-6d72fa96b82e',
+              fit: BoxFit.contain, // cover 대신 contain 사용
+              errorBuilder: (context, error, stackTrace) {
+                print('Image error: $error');
+                return Container(
+                  color: Colors.grey[200],
+                  child: const Center(child: Text('이미지를 불러올 수 없습니다')),
+                );
+              },
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) return child;
+                return const Center(
+                  child: PulsatingImage(),
+                );
+              },
+            ),
+          ),
         ),
       );
     } else {
