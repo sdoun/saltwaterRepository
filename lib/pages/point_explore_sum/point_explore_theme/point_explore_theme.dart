@@ -179,6 +179,7 @@ class _PointExploreThemeState extends State<PointExploreTheme> {
                                   .containsKey(
                                   'PretendardSeries'),
                             ),
+                            textAlign: TextAlign.center,
                           ),
                           /*
                           Text(themeRecord.themeName ?? '테마 없음',

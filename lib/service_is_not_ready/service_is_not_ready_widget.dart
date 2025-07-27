@@ -1,3 +1,5 @@
+import 'package:salt_water_beta_ver1/reusable/common/basicScaffold.dart';
+
 import '/components/custom_navbar_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -39,9 +41,7 @@ class _ServiceIsNotReadyWidgetState extends State<ServiceIsNotReadyWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      child: Basicscaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
@@ -117,25 +117,12 @@ class _ServiceIsNotReadyWidgetState extends State<ServiceIsNotReadyWidget> {
                   ],
                 ),
               ),
-              Align(
-                alignment: const AlignmentDirectional(0.0, 1.0),
-                child: Container(
-                  width: double.infinity,
-                  height: MediaQuery.sizeOf(context).height * 0.08,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).primaryBackground,
-                  ),
-                  child: wrapWithModel(
-                    model: _model.customNavbarModel,
-                    updateCallback: () => safeSetState(() {}),
-                    child: const CustomNavbarWidget(),
-                  ),
-                ),
-              ),
+
             ],
           ),
         ),
-      ),
+      )
     );
+
   }
 }

@@ -365,10 +365,10 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
                                               .of(
                                               context)
                                               .primary,
-                                          fontSize: 13,
+                                          fontSize: 15,
                                           letterSpacing: 0.0,
                                           decoration: TextDecoration.underline,
-                                          fontWeight: FontWeight.w500,
+                                          fontWeight: FontWeight.w700,
                                           useGoogleFonts: GoogleFonts
                                               .asMap()
                                               .containsKey(

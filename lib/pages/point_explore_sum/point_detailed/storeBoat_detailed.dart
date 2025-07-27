@@ -375,7 +375,7 @@ class _PointDetailedWidgetState extends State<StoreboatDetailed> {
                                       openNavi(pointDetailedTBPointRecord.pointAddress);
                                     }
                                     else{
-                                      iosMapOpen(pointDetailedTBPointRecord);
+                                      await iosMapOpen(pointDetailedTBPointRecord);
                                     }
                                   },
                                   child: Row(

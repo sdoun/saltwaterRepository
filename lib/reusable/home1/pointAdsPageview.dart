@@ -58,8 +58,9 @@ class _PointAdsPageviewState extends State<PointAdsPageview> {
           }
            */
         },
-        child: SizedBox(
+        child: Container(
           width: MediaQuery.of(context).size.width,
+          alignment: Alignment.topCenter,
           child: AspectRatio(
             aspectRatio: 16 / 9, // 이미지 비율 설정 (예: 16:9)
             child: Image.network(

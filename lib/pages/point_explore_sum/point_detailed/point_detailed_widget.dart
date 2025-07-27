@@ -324,7 +324,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
               child: Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 20.0),
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height - 40,
+                  height: MediaQuery.of(context).size.height - 40, //size 관련 프레임워크 에러 발생, 디버그 시에만 문제
                   child: SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     child: Column(
@@ -465,7 +465,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                           openNavi(pointDetailedTBPointRecord.pointAddress);
                                         }
                                         else{
-                                          iosMapOpen(pointDetailedTBPointRecord);
+                                          await iosMapOpen(pointDetailedTBPointRecord);
                                         }
                                       },
                                       child: Row(
