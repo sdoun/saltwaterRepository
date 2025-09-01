@@ -2,7 +2,7 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:salt_water_beta_ver1/backend/backend.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-void iosMapOpen(//String address, double lat,
+Future<void> iosMapOpen(//String address, double lat,
     TBPointRecord record) async{
   //final nMapUrl = 'nmap://search?query=$encodedAddress';
   //final kMapUrl = 'kakaomap://look?p=${record.pointLatitude},${record.pointLongitude}';

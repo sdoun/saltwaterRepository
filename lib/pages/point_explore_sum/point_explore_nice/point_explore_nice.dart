@@ -7,6 +7,7 @@ import 'package:salt_water_beta_ver1/reusable/common/basicScaffold.dart';
 
 import '../../../auth/firebase_auth/auth_util.dart';
 import '../../../backend/backend.dart';
+import '../../../backend/schema/TBniceFishing.dart';
 import '../../../backend/schema/t_b_point_record.dart';
 import '../../../custom_code/widgets/naver_map_widget_point_copy.dart' as custom_widgets;
 import '../../../flutter_flow/flutter_flow_icon_button.dart';
@@ -14,29 +15,29 @@ import '../../../flutter_flow/flutter_flow_theme.dart';
 import '../../../flutter_flow/nav/serialization_util.dart';
 import '../../../reusable/pointExplore/mapSelectButton.dart';
 
-class PointExploreTheme extends StatefulWidget {
-  const PointExploreTheme({super.key, required this.themeRef});
+class PointExploreNice extends StatefulWidget {
+  const PointExploreNice({super.key, required this.fishingRef});
 
-  final DocumentReference themeRef;
+  final DocumentReference fishingRef;
 
   @override
-  State<PointExploreTheme> createState() => _PointExploreThemeState();
+  State<PointExploreNice> createState() => _PointExploreThemeState();
 }
 
-class _PointExploreThemeState extends State<PointExploreTheme> {
+class _PointExploreThemeState extends State<PointExploreNice> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  Future<DocumentSnapshot> getTheme(DocumentReference themeRef) async{
-    final theme = await themeRef.get();
-    return theme;
+  Future<DocumentSnapshot> getFishing(DocumentReference fishingRef) async{
+    final fishing = await fishingRef.get();
+    return fishing;
   }
   void pop(){
     context.pushNamed('home1');
   }
-  
+
   Future<QuerySnapshot> getPoints(DocumentReference themeRef){
-    final querySnapshot = FirebaseFirestore.instance.collection('TB_point').where('point_themes', arrayContains: themeRef).get();
+    final querySnapshot = FirebaseFirestore.instance.collection('TB_point').where('point_niceFishing', arrayContains: themeRef).get();
     /*
     final pointRecords = querySnapshot.then((snapshot){
       final points = snapshot.docs.map((doc){
@@ -57,95 +58,95 @@ class _PointExploreThemeState extends State<PointExploreTheme> {
         pop();
       },
       //테마 레코드 불러와서 화면 적용하기
-        child: FutureBuilder(
-          future: getTheme(widget.themeRef),
-          builder: (context, snapshot){
+      child: FutureBuilder(
+        future: getFishing(widget.fishingRef),
+        builder: (context, snapshot){
 
-            if(snapshot.hasData){
-              final themeRecord = TBPointThemeRecord.fromSnapshot(snapshot.data!);
-              return Basicscaffold(
-                appBar: AppBar(
-                  backgroundColor: Colors.white,
-                  automaticallyImplyLeading: false,
-                  leading: Align(
-                    alignment: const AlignmentDirectional(-1.0, -3.7),
-                    child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
-                      child: FlutterFlowIconButton(
-                        borderColor: Colors.transparent,
-                        borderRadius: 30.0,
-                        borderWidth: 1.0,
-                        buttonSize: 60.0,
-                        icon: const Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.black,
-                          size: 30.0,
-                        ),
-                        onPressed: () async {
-                          pop();
-                        },
-                      ),
-                    ),
-                  ),
-                  title: Align(
-                    alignment: const AlignmentDirectional(0.0, 0.0),
-                    child: Text(
-                      '추천테마 검색하기',
-                      style: FlutterFlowTheme
-                          .of(context)
-                          .bodyMedium
-                          .override(
-                        fontFamily:
-                        'PretendardSeries',
-                        color: FlutterFlowTheme.of(
-                            context)
-                            .primaryText,
-                        fontSize:
-                        19.0,
-                        letterSpacing:
-                        0.0,
-                        fontWeight:
-                        FontWeight
-                            .w700,
-                        useGoogleFonts: GoogleFonts
-                            .asMap()
-                            .containsKey(
-                            'PretendardSeries'),
-                      ),
-                    ),
-                  ),
-                  actions: const [
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      child: SizedBox(
-                        width: 60,
-                        height: 60,
-                      ),
-                    ),
-                  ],
-                  centerTitle: false,
-                  elevation: 2.0,
-                ),
-                body: Center(
+          if(snapshot.hasData){
+            final fishingRecord = TBniceFishingRecord.fromSnapshot(snapshot.data!);
+            return Basicscaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.white,
+                automaticallyImplyLeading: false,
+                leading: Align(
+                  alignment: const AlignmentDirectional(-1.0, -3.7),
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(12, 16, 12, 0),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          if(themeRecord.themeDescImage.isNotEmpty)
+                    padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
+                    child: FlutterFlowIconButton(
+                      borderColor: Colors.transparent,
+                      borderRadius: 30.0,
+                      borderWidth: 1.0,
+                      buttonSize: 60.0,
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.black,
+                        size: 30.0,
+                      ),
+                      onPressed: () async {
+                        pop();
+                      },
+                    ),
+                  ),
+                ),
+                title: Align(
+                  alignment: const AlignmentDirectional(0.0, 0.0),
+                  child: Text(
+                    '지금잘잡혀',
+                    style: FlutterFlowTheme
+                        .of(context)
+                        .bodyMedium
+                        .override(
+                      fontFamily:
+                      'PretendardSeries',
+                      color: FlutterFlowTheme.of(
+                          context)
+                          .primaryText,
+                      fontSize:
+                      19.0,
+                      letterSpacing:
+                      0.0,
+                      fontWeight:
+                      FontWeight
+                          .w700,
+                      useGoogleFonts: GoogleFonts
+                          .asMap()
+                          .containsKey(
+                          'PretendardSeries'),
+                    ),
+                  ),
+                ),
+                actions: const [
+                  Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    child: SizedBox(
+                      width: 60,
+                      height: 60,
+                    ),
+                  ),
+                ],
+                centerTitle: false,
+                elevation: 2.0,
+              ),
+              body: Center(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(12, 16, 12, 0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        if(fishingRecord.themeDescImage.isNotEmpty) //TODO: 여기 필드명 고치는중
                           Container(
                             constraints: BoxConstraints(
-                              maxWidth: 216
+                                maxWidth: 216
                             ),
                             height: 72,
                             //width: 72,//MediaQuery.sizeOf(context).width * 0.7,
                             child: ListView.builder(
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
-                              itemCount: themeRecord.themeDescImage.length,
+                              itemCount: fishingRecord.themeDescImage.length,
                               itemBuilder: (context, index){
-                                List<String> themeDecImages = themeRecord.themeDescImage;
+                                List<String> themeDecImages = fishingRecord.themeDescImage;
                                 return Padding(
                                   padding: const EdgeInsets.only(right: 4),
                                   child: SizedBox(
@@ -157,31 +158,31 @@ class _PointExploreThemeState extends State<PointExploreTheme> {
                               },
                             ),
                           ),
-                          SizedBox(
-                            height: 16,
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Text(fishingRecord.themeDesc ?? '',
+                          style: FlutterFlowTheme
+                              .of(context)
+                              .bodyMedium
+                              .override(
+                            fontFamily:
+                            'PretendardSeries',
+                            fontSize:
+                            16.0,
+                            letterSpacing:
+                            0.0,
+                            fontWeight:
+                            FontWeight
+                                .w600,
+                            useGoogleFonts: GoogleFonts
+                                .asMap()
+                                .containsKey(
+                                'PretendardSeries'),
                           ),
-                          Text(themeRecord.themeDesc ?? '',
-                            style: FlutterFlowTheme
-                                .of(context)
-                                .bodyMedium
-                                .override(
-                              fontFamily:
-                              'PretendardSeries',
-                              fontSize:
-                              16.0,
-                              letterSpacing:
-                              0.0,
-                              fontWeight:
-                              FontWeight
-                                  .w600,
-                              useGoogleFonts: GoogleFonts
-                                  .asMap()
-                                  .containsKey(
-                                  'PretendardSeries'),
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          /*
+                          textAlign: TextAlign.center,
+                        ),
+                        /*
                           Text(themeRecord.themeName ?? '테마 없음',
                             style: FlutterFlowTheme
                                 .of(context)
@@ -204,11 +205,11 @@ class _PointExploreThemeState extends State<PointExploreTheme> {
                           ),
                            */
 
-                          SizedBox(
-                            height: 16,
-                          ),
-                          FutureBuilder<QuerySnapshot>(
-                            future: getPoints(themeRecord.reference),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        FutureBuilder<QuerySnapshot>(
+                            future: getPoints(fishingRecord.reference),
                             builder: (context, snapshot) {
                               if(snapshot.hasData){
 
@@ -240,7 +241,7 @@ class _PointExploreThemeState extends State<PointExploreTheme> {
                                             pointList: exploreMapThemeTBPointRecordList,
                                             currentUser: currentUserReference!,
                                             onClickMarker: (markerDoc) async {
-                                              if(themeRecord.themeName == '체험낚시배' || markerDoc.pointCategories == '낚시배') {
+                                              if(fishingRecord.themeName == '체험낚시배' || markerDoc.pointCategories == '낚시배') {
                                                 context.pushNamed(
                                                   'boat_detailed',
                                                   queryParameters: {
@@ -282,83 +283,83 @@ class _PointExploreThemeState extends State<PointExploreTheme> {
                                 );
                               }
                             }
-                          )
-                        ],
-                      ),
+                        )
+                      ],
                     ),
                   ),
                 ),
-              );
-            }
-            else{
-              return Basicscaffold(
-                appBar: AppBar(
-                  backgroundColor: Colors.white,
-                  automaticallyImplyLeading: false,
-                  leading: Align(
-                    alignment: const AlignmentDirectional(-1.0, -3.7),
-                    child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
-                      child: FlutterFlowIconButton(
-                        borderColor: Colors.transparent,
-                        borderRadius: 30.0,
-                        borderWidth: 1.0,
-                        buttonSize: 60.0,
-                        icon: const Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.black,
-                          size: 30.0,
-                        ),
-                        onPressed: () async {
-                          pop();
-                        },
+              ),
+            );
+          }
+          else{
+            return Basicscaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.white,
+                automaticallyImplyLeading: false,
+                leading: Align(
+                  alignment: const AlignmentDirectional(-1.0, -3.7),
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
+                    child: FlutterFlowIconButton(
+                      borderColor: Colors.transparent,
+                      borderRadius: 30.0,
+                      borderWidth: 1.0,
+                      buttonSize: 60.0,
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.black,
+                        size: 30.0,
                       ),
+                      onPressed: () async {
+                        pop();
+                      },
                     ),
                   ),
-                  title: Align(
-                    alignment: const AlignmentDirectional(0.0, 0.0),
-                    child: Text(
-                      '추천테마 검색하기',
-                      style: FlutterFlowTheme
-                          .of(context)
-                          .bodyMedium
-                          .override(
-                        fontFamily:
-                        'PretendardSeries',
-                        color: FlutterFlowTheme.of(
-                            context)
-                            .primaryText,
-                        fontSize:
-                        19.0,
-                        letterSpacing:
-                        0.0,
-                        fontWeight:
-                        FontWeight
-                            .w700,
-                        useGoogleFonts: GoogleFonts
-                            .asMap()
-                            .containsKey(
-                            'PretendardSeries'),
-                      ),
-                    ),
-                  ),
-                  actions: const [
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      child: SizedBox(
-                        width: 60,
-                        height: 60,
-                      ),
-                    ),
-                  ],
-                  centerTitle: false,
-                  elevation: 2.0,
                 ),
-                body: Center(child: Text('테마 불러오지 못함')),
-              );
-            }
-          },
-        ),
+                title: Align(
+                  alignment: const AlignmentDirectional(0.0, 0.0),
+                  child: Text(
+                    '추천테마 검색하기',
+                    style: FlutterFlowTheme
+                        .of(context)
+                        .bodyMedium
+                        .override(
+                      fontFamily:
+                      'PretendardSeries',
+                      color: FlutterFlowTheme.of(
+                          context)
+                          .primaryText,
+                      fontSize:
+                      19.0,
+                      letterSpacing:
+                      0.0,
+                      fontWeight:
+                      FontWeight
+                          .w700,
+                      useGoogleFonts: GoogleFonts
+                          .asMap()
+                          .containsKey(
+                          'PretendardSeries'),
+                    ),
+                  ),
+                ),
+                actions: const [
+                  Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    child: SizedBox(
+                      width: 60,
+                      height: 60,
+                    ),
+                  ),
+                ],
+                centerTitle: false,
+                elevation: 2.0,
+              ),
+              body: Center(child: Text('테마 불러오지 못함')),
+            );
+          }
+        },
+      ),
     );
   }
 }

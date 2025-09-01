@@ -31,6 +31,8 @@ class FFAppState extends ChangeNotifier {
 
   late SharedPreferences prefs;
 
+
+
   List<String> _chosenOptionList = [];
   List<String> get chosenOptionList => _chosenOptionList;
   set chosenOptionList(List<String> value) {
@@ -67,6 +69,7 @@ class FFAppState extends ChangeNotifier {
   }
 
   QuerySnapshot? pointThemes;
+  QuerySnapshot? niceFishings;
 
   String _newProfileImage = '';
   String get newProfileImage => _newProfileImage;

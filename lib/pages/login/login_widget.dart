@@ -41,7 +41,7 @@ class _LoginWidgetState extends State<LoginWidget>
 
     await AppVersionUpdate.checkForUpdates(
       //앱 ID는 환경변수로 사용하는 방법 고려할 것
-      appleId: 'id6745240398',
+      appleId: '6745240398',
       playStoreId: 'com.mycompany.saltwaterbetaver1',
       country: 'kr',
     ).then((result) async {

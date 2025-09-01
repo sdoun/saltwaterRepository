@@ -34,13 +34,48 @@ class _PointAdsPageviewState extends State<PointAdsPageview> {
     initialPage: 0,
   );
 
+  Map<String, String> encodeParam(String paramJson){
+    Map<String, String> param = jsonDecode(paramJson);
+
+    print(param.toString());
+    return param;
+  }
+  Future<void> _handlePush(String route, String paramJson) async {
+    Map<String, dynamic> initParam = jsonDecode(paramJson);
+    String value = '';
+    switch (route){
+      case 'managerChatRoom':
+        context.pushNamed(route);
+        return;
+      case 'pointExploreFishing':
+        value = initParam['fishingRef'] as String;
+        context.pushNamed(
+            route,
+            pathParameters: {'fishingRef' : value},
+            //queryParameters: {'fishingRef' : value},
+        );
+        return;
+      case 'pointExploreTheme':
+        return;
+      case 'point_detailed':
+        return;
+    }
+  }
+
+  // 애초에 Record로 변형을 안 하고 사용하는 듯 -> 필드 이름 그대로 적용해서 테스트해보기
   Widget buildPages(Map<String, dynamic>? data) {
     print("buildPages called with data: $data");
     if (data != null && data['ads_image'] != null) {
       return GestureDetector(
         onTap: () async {
           print('pointRef is : ${data['ads_pointRef']}');
+          String route = data['ads_path'];
+          String paramJson = data['ads_param'];
+          print('route: ${route}, param:$paramJson');
+          //await _handlePush(route, paramJson);
+          //홈광고에서 페이지 이동 테스트중
           context.pushNamed('managerChatRoom');
+
           /*
           if (data['ads_pointRef'] != null) {
             await context.pushNamed(
@@ -58,8 +93,9 @@ class _PointAdsPageviewState extends State<PointAdsPageview> {
           }
            */
         },
-        child: SizedBox(
+        child: Container(
           width: MediaQuery.of(context).size.width,
+          alignment: Alignment.topCenter,
           child: AspectRatio(
             aspectRatio: 16 / 9, // 이미지 비율 설정 (예: 16:9)
             child: Image.network(

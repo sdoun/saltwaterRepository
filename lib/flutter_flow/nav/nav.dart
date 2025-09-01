@@ -7,6 +7,7 @@ import 'package:salt_water_beta_ver1/pages/home1/home_searchResult.dart';
 import 'package:salt_water_beta_ver1/pages/manager_chat/chat_room.dart';
 import 'package:salt_water_beta_ver1/pages/point_explore_sum/point_detailed/storeBoat_detailed.dart';
 import 'package:salt_water_beta_ver1/pages/point_explore_sum/point_explore_boat/explore_map_boat.dart';
+import 'package:salt_water_beta_ver1/pages/point_explore_sum/point_explore_nice/point_explore_nice.dart';
 import 'package:salt_water_beta_ver1/pages/point_explore_sum/point_explore_store/explore_map_store.dart';
 import 'package:salt_water_beta_ver1/pages/point_explore_sum/point_explore_theme/point_explore_theme.dart';
 import 'package:salt_water_beta_ver1/reusable/common/imageDetailView.dart';
@@ -89,6 +90,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, FirebaseAnalyticsObserv
       errorBuilder: (context, state) =>
           appStateNotifier.loggedIn ? const Home1Widget() : const LoginWidget(),
       routes: [
+        FFRoute(name: 'pointExploreFishing', path: '/pointExploreFishing',
+            builder: (context, params)=>PointExploreNice(fishingRef: params.getParam(
+              'fishingRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['TB_niceFishing']
+            ))),
         FFRoute(name: 'photoViewPage', path: '/photoViewPage',
             builder: (context, params) => PhotoViewPage(imageList: params.getParam<String>('imageList', ParamType.String, isList: true),
                 currentIndex: params.getParam('currentIndex', ParamType.int))),

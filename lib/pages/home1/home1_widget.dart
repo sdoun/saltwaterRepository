@@ -1,4 +1,5 @@
 import 'package:salt_water_beta_ver1/backend/schema/TBPointThemeRecord.dart';
+import 'package:salt_water_beta_ver1/backend/schema/TBniceFishing.dart';
 import 'package:salt_water_beta_ver1/components/chatFAB.dart';
 import 'package:salt_water_beta_ver1/reusable/home1/pointAdsPageview.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -87,6 +88,24 @@ class _Home1WidgetState extends State<Home1Widget> {
     }
     else{
       return Future.value(FFAppState().pointThemes);
+    }
+  }
+
+  //TODO: 지금잘잡혀 불러오기 구현중
+  Future<QuerySnapshot> fetchFishings() async{
+
+    if(FFAppState().niceFishings == null || FFAppState().niceFishings!.docs.isEmpty){
+      setState(() {
+        _isLoading = true;
+      });
+      final allFishings = await FirebaseFirestore.instance.collection('/TB_niceFishing').where('active', isEqualTo: true).get();
+      print('fishing query snapshot docs ${allFishings.docs}');
+      FFAppState().niceFishings = allFishings;
+      return allFishings;
+
+    }
+    else{
+      return Future.value(FFAppState().niceFishings);
     }
   }
 
@@ -482,7 +501,7 @@ class _Home1WidgetState extends State<Home1Widget> {
                           ),
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
-                                12.0, 12.0, 12.0, 12.0),
+                                12.0, 12.0, 12.0, 0.0),
                             child: Container(
                               width: double.infinity,
                               decoration: BoxDecoration(
@@ -517,11 +536,11 @@ class _Home1WidgetState extends State<Home1Widget> {
                                     ],
                                   ),
                                   Padding(
-                                    
                                     padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 12.0, 0.0, 0.0),
+                                      0.0, 12.0, 0.0, 12.0),
                                     child: Container(
-                                      height: 120+MediaQuery.of(context).size.height*0.05,
+                                      height: MediaQuery.of(context).size.height * 0.12,
+                                        //120, +MediaQuery.of(context).size.height*0.05,
                                       width: double.infinity,
                                       decoration: const BoxDecoration(
                                         color: Color(0x00ffffff),
@@ -636,6 +655,128 @@ class _Home1WidgetState extends State<Home1Widget> {
                                             }
                                           },
                                       )
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 12.0),
+                                    child: Container(
+                                        height: MediaQuery.of(context).size.height * 0.12,
+                                        //120, +MediaQuery.of(context).size.height*0.05,
+                                        width: double.infinity,
+                                        decoration: const BoxDecoration(
+                                          color: Color(0x00ffffff),
+                                        ),
+                                        alignment: Alignment.center,
+                                        child: FutureBuilder(
+                                          future: fetchFishings(),
+                                          builder: (context, snapshot){
+                                            if(snapshot.hasData){
+                                              final themes = snapshot.data!.docs;
+                                              //print('theme length is ${themes.length}');
+                                              return ListView.builder(
+                                                  controller: ScrollController(initialScrollOffset: 0.0),
+                                                  shrinkWrap: true,
+                                                  scrollDirection: Axis.horizontal,
+                                                  //itemCount: min(themes.length, _themeLength),
+                                                  itemCount: themes.length,
+                                                  itemBuilder: (context, index){
+                                                    final fishing = TBniceFishingRecord.fromSnapshot(themes[index]);
+                                                    return Padding(
+                                                      padding: const EdgeInsets.only(right: 12.0),
+                                                      child: InkWell(
+                                                        onTap: () async{
+                                                          context.pushNamed('pointExploreFishing', queryParameters: {
+                                                            'fishingRef' : serializeParam(fishing.reference, ParamType.DocumentReference)
+                                                          }.withoutNulls);
+                                                        },
+                                                        child: Column(
+                                                          children: [
+                                                            SizedBox(
+                                                              height: MediaQuery
+                                                                  .sizeOf(
+                                                                  context)
+                                                                  .width *
+                                                                  0.12,
+                                                              width: MediaQuery
+                                                                  .sizeOf(
+                                                                  context)
+                                                                  .width *
+                                                                  0.14,
+                                                              child: Image.network(fishing.themeImagePath),
+                                                            ),
+                                                            AutoSizeText(
+                                                              fishing.themeName ??'no themeName',
+                                                              maxLines: 1,
+                                                              style: FlutterFlowTheme
+                                                                  .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                fontFamily:
+                                                                'PretendardSeries',
+                                                                fontSize: 14,
+                                                                letterSpacing:
+                                                                0.0,
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .w500,
+                                                                useGoogleFonts: GoogleFonts
+                                                                    .asMap()
+                                                                    .containsKey(
+                                                                    'PretendardSeries'),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                              );
+                                            }
+                                            if(snapshot.hasError){
+                                              return Center(
+                                                child: Text(
+                                                  '테마를 불러오지 못했습니다.',
+                                                  style: FlutterFlowTheme.of(context)
+                                                      .headlineSmall
+                                                      .override(
+                                                    fontFamily:
+                                                    'PretendardSeries',
+                                                    color: FlutterFlowTheme.of(context).primaryText,
+                                                    fontSize: 15.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w800,
+                                                    useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                        .containsKey(
+                                                        'PretendardSeries'),
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            else{
+                                              return Center(
+                                                child: Text(
+                                                  '표시 지정된 테마가 없습니다.',
+                                                  style: FlutterFlowTheme.of(context)
+                                                      .headlineSmall
+                                                      .override(
+                                                    fontFamily:
+                                                    'PretendardSeries',
+                                                    color: FlutterFlowTheme.of(context).primaryText,
+                                                    fontSize: 15.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w800,
+                                                    useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                        .containsKey(
+                                                        'PretendardSeries'),
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                          },
+                                        )
                                     ),
                                   )
                                 ],
