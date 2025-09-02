@@ -107,7 +107,18 @@ class ParameterData {
 
 final parametersBuilderMap =
     <String, Future<ParameterData> Function(Map<String, dynamic>)>{
+      'pointExploreFishing' : (data) async => ParameterData(
+        allParams: {
+          'fishingRef' : getParameter<DocumentReference>(data, 'fishingRef')
+        }
+      ),
+  'pointExploreTheme' : (data) async => ParameterData(
+      allParams: {
+        'themeRef': getParameter<DocumentReference>(data, 'themeRef'),
+      },
+  ),
   'home1': ParameterData.none(),
+  'managerChatRoom': ParameterData.none(),
   'exploreMapSW': ParameterData.none(),
   'shoppingHome': ParameterData.none(),
   'loading1': ParameterData.none(),
