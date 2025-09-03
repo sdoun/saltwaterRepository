@@ -80,6 +80,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
 
   @override
   Widget build(BuildContext context) {
+    print('param is null: ${widget.pointRefSW}');
     return StreamBuilder<TBPointRecord>(
       stream: TBPointRecord.getDocument(widget.pointRefSW!),
       builder: (context, snapshot) {

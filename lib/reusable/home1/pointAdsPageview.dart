@@ -41,30 +41,61 @@ class _PointAdsPageviewState extends State<PointAdsPageview> {
     return param;
   }
   Future<void> _handlePush(String route, String paramJson) async {
-    Map<String, dynamic> initParam = jsonDecode(paramJson);
+    //Map<String, dynamic> initParam = jsonDecode(paramJson);
     String value = '';
+    DocumentReference ref = FirebaseFirestore.instance.doc(paramJson);
     switch (route){
+
       case 'managerChatRoom':
         context.pushNamed(route);
         return;
+      
       case 'pointExploreFishing':
-        value = initParam['fishingRef'] as String;
         context.pushNamed(
-            route,
-            pathParameters: {'fishingRef' : value},
-            //queryParameters: {'fishingRef' : value},
+          'pointExploreFishing',
+          queryParameters: {
+            'fishingRef': serializeParam(
+              ref,
+              ParamType.DocumentReference,
+            ),
+          }.withoutNulls,
         );
         return;
+       
       case 'pointExploreTheme':
+        context.pushNamed(
+            'pointExploreTheme',
+          queryParameters: {
+              'themeRef' : serializeParam(ref, ParamType.DocumentReference)
+          }
+        );
         return;
       case 'point_detailed':
+        context.pushNamed(
+          'point_detailed',
+          queryParameters: {
+            'pointRefSW': serializeParam(
+              ref,
+              ParamType.DocumentReference,
+            ),
+          }.withoutNulls,
+        );
         return;
+      case 'boat_detailed':
+      context.pushNamed(
+        'boat_detailed',
+        queryParameters: {
+          'pointRefSW': serializeParam(
+            ref,
+            ParamType.DocumentReference,
+          ),
+        }.withoutNulls,
+      );
     }
   }
 
   // 애초에 Record로 변형을 안 하고 사용하는 듯 -> 필드 이름 그대로 적용해서 테스트해보기
   Widget buildPages(Map<String, dynamic>? data) {
-    print("buildPages called with data: $data");
     if (data != null && data['ads_image'] != null) {
       return GestureDetector(
         onTap: () async {
@@ -74,7 +105,8 @@ class _PointAdsPageviewState extends State<PointAdsPageview> {
           print('route: ${route}, param:$paramJson');
           //await _handlePush(route, paramJson);
           //홈광고에서 페이지 이동 테스트중
-          context.pushNamed('managerChatRoom');
+          //context.pushNamed('managerChatRoom');
+          _handlePush(route, paramJson);
 
           /*
           if (data['ads_pointRef'] != null) {
@@ -210,7 +242,6 @@ class _PointAdsPageviewState extends State<PointAdsPageview> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
 
     });
-    print('Building PageView, _pages length: ${_pages.length}, _isLoading is $_isLoading');
     if (_isLoading == true) {
       print('Query is waiting');
       return const Center(child: CircularProgressIndicator());

@@ -107,7 +107,18 @@ class ParameterData {
 
 final parametersBuilderMap =
     <String, Future<ParameterData> Function(Map<String, dynamic>)>{
+      'pointExploreFishing' : (data) async => ParameterData(
+        allParams: {
+          'fishingRef' : getParameter<DocumentReference>(data, 'fishingRef')
+        }
+      ),
+  'pointExploreTheme' : (data) async => ParameterData(
+      allParams: {
+        'themeRef': getParameter<DocumentReference>(data, 'themeRef'),
+      },
+  ),
   'home1': ParameterData.none(),
+  'managerChatRoom': ParameterData.none(),
   'exploreMapSW': ParameterData.none(),
   'shoppingHome': ParameterData.none(),
   'loading1': ParameterData.none(),
@@ -118,6 +129,11 @@ final parametersBuilderMap =
           'pointRefSW': getParameter<DocumentReference>(data, 'pointRefSW'),
         },
       ),
+  'boat_detailed': (data) async => ParameterData(
+    allParams: {
+      'pointRefSW': getParameter<DocumentReference>(data, 'pointRefSW'),
+    },
+  ),
   'productDetail': (data) async => ParameterData(
         allParams: {
           'product': getParameter<DocumentReference>(data, 'product'),

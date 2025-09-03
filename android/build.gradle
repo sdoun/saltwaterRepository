@@ -2,7 +2,11 @@
 allprojects {
     repositories {
         google()
+        jcenter()
         mavenCentral()
+        maven {
+            url 'https://maven.google.com/'
+        }
     }
 }
 
@@ -10,9 +14,13 @@ allprojects {
 buildscript {
     repositories {
         google()  // 필수 추가[1][2][4]
+        jcenter()
         mavenCentral()
+        maven {
+            url 'https://maven.google.com/'
+        }
     }
-    ext.kotlin_version = '1.8.22'
+    ext.kotlin_version = '1.8.22'//'1.8.10'//'1.8.22'
     dependencies {
         classpath "com.android.tools.build:gradle:8.3.0"  // AGP 버전 업데이트[5]
         classpath "com.google.dagger:hilt-android-gradle-plugin:2.55"

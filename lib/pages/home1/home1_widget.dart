@@ -657,6 +657,32 @@ class _Home1WidgetState extends State<Home1Widget> {
                                       )
                                     ),
                                   ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '지금 잘잡히는 곳',
+                                        style: FlutterFlowTheme.of(context)
+                                            .headlineSmall
+                                            .override(
+                                          fontFamily:
+                                          'PretendardSeries',
+                                          color: FlutterFlowTheme.of(context).primaryText,
+                                          fontSize: 15.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w800,
+                                          useGoogleFonts: GoogleFonts
+                                              .asMap()
+                                              .containsKey(
+                                              'PretendardSeries'),
+                                        ),
+                                      ),
+                                      Image.asset(
+                                        'assets/images/전문가용낚시.png',
+                                        width: 30,
+                                        height: 30,
+                                      )
+                                    ],
+                                  ),
                                   Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 12.0),
