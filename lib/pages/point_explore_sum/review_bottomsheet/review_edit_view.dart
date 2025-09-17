@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salt_water_beta_ver1/flutter_flow/flutter_flow_util.dart';
 import 'package:salt_water_beta_ver1/pages/point_explore_sum/review_bottomsheet/review_edit_controller.dart';
+import '../../../backend/firebase_storage/storage.dart';
+import '../../../flutter_flow/upload_data.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 
 import '../../../auth/firebase_auth/auth_util.dart';
@@ -23,6 +25,8 @@ class _ReviewEditViewState extends State<ReviewEditView> {
   late ReviewEditController _controller;
   late Future<TBUserReviewPointRecord?> _recordFuture;
 
+  List<String> temporaryImages = [];
+
   @override
   void initState(){
 
@@ -30,6 +34,7 @@ class _ReviewEditViewState extends State<ReviewEditView> {
     _controller = ReviewEditController(reviewRef: widget.reviewRef);
     print('reviewEdit reviewRef: ${widget.reviewRef.toString()}');
     _recordFuture = loadReviewData();
+    fetchImages();
   }
 
   Future<TBUserReviewPointRecord?> loadReviewData() async {
@@ -46,6 +51,11 @@ class _ReviewEditViewState extends State<ReviewEditView> {
     }
   }
 
+  void fetchImages() async{
+    final record = await loadReviewData();
+    temporaryImages = record?.reviewImages ?? [];
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -58,7 +68,12 @@ class _ReviewEditViewState extends State<ReviewEditView> {
           }
           else if(snapshot.hasData){
             final record = snapshot.data!;
-            _controller.updateModelByController(initialTitle: record.reviewTitle, initialContent: record.reviewText);
+            print('review edit record: $record');
+            _controller.updateModelByController(
+                initialTitle: record.reviewTitle, initialContent: record.reviewText,
+                images: record.reviewImages
+            );
+            //temporaryImages = _controller.reviewImages;
             return Material(
               color: Colors.transparent,
               elevation: 5.0,
@@ -107,6 +122,7 @@ class _ReviewEditViewState extends State<ReviewEditView> {
                             ),
                           ],
                         ),
+
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                           child: Text(
@@ -124,6 +140,159 @@ class _ReviewEditViewState extends State<ReviewEditView> {
                             ),
                           ),
                         ),
+                        InkWell(
+                          onTap: () async{
+                            final selectedMedia = await selectMedia(
+                              maxWidth: 640.00,
+                              maxHeight: 1280.00,
+                              multiImage: true,
+                            );
+                            if(selectedMedia != null && selectedMedia.every((m)
+                            => validateFileFormat(m.storagePath, context)
+                            )){
+                              safeSetState((){
+                                _controller.isImageUploaing = true;
+                              });
+                              var selectedUploadedFiles = <FFUploadedFile>[];
+
+                              List<String> downloadUrls = <String>[];
+                              try{
+
+                                selectedUploadedFiles = selectedMedia
+                                    .map((m) => FFUploadedFile(
+                                  name: m.storagePath.split('/').last,
+                                  bytes: m.bytes,
+                                  height: m.dimensions?.height ?? 144,
+                                  width: m.dimensions?.width ?? 144,
+                                  blurHash: m.blurHash ?? '',
+                                )).toList();
+
+                                downloadUrls = (await Future.wait(
+                                  selectedMedia.map(
+                                        (m) async => await uploadData(m.storagePath, m.bytes),),))
+                                    .where((u) => u != null)
+                                    .map((u) => u!)
+                                    .toList();
+                              }finally {
+                                _controller.isImageUploaing = false;
+                              }
+                              //TODO: ㅇㅣ미지 업로드 시 ui반영 안ㄷ ㅚㅁ
+                              if (selectedUploadedFiles.length == selectedMedia.length &&
+                                  downloadUrls.length == selectedMedia.length) {
+                                /*safeSetState(() {
+                                  _controller.uploadedImages += selectedUploadedFiles;
+                                  _controller.uploadedImageUrls += downloadUrls;
+                                  _controller.mergeImages(downloadUrls);
+                                });*/
+                                setState((){
+                                  temporaryImages += downloadUrls;
+                                  print('length: ${temporaryImages.length}');
+                                });
+                              } else {
+                                safeSetState(() {});
+                                return;
+                              }
+                            }
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: FlutterFlowTheme.of(context).secondaryBackground,
+                            ),
+                            width: 108,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.folder_open,
+                                    color: FlutterFlowTheme.of(context).primaryText,
+                                    size: 24.0,
+                                  ),
+                                  SizedBox(
+                                    width: 4,
+                                  ),
+                                  Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 2,
+                                      ),
+                                      Text(
+                                          '이미지 추가',
+                                          style: GoogleFonts.getFont(
+                                            'Readex Pro',
+                                            color: FlutterFlowTheme.of(context).primaryText,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 13.0,
+                                            //height: 1.3,
+                                          )
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        if(temporaryImages.isNotEmpty)
+                          SizedBox(
+                            height: 144,
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            child: ListView.builder(
+                                itemCount: temporaryImages.length,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index){
+                                  //final imageUrlLIst = temporaryImages;
+                                  final imageUrl = temporaryImages[index];
+                                  return Row(
+                                    children: [
+                                      Stack(
+                                        alignment: Alignment.topRight,
+                                        children: [
+                                          Container(
+                                              height: 144,
+                                              //width: 144,
+                                              child: Image.network(
+                                                  imageUrl,
+                                                  fit: BoxFit.fitHeight
+                                              )
+                                          ),
+                                          Padding(
+                                              padding: EdgeInsetsGeometry.all(0),
+                                              child: InkWell(
+                                                onTap: () {
+                                                  if(
+                                                  //_controller.reviewImages.isNotEmpty
+                                                  temporaryImages.isNotEmpty
+                                                  ){
+                                                    safeSetState((){
+                                                      //_controller.removeImageAt(index);
+                                                      temporaryImages.removeAt(index);
+                                                      //_controller.uploadedImages.removeAt(index);
+                                                      //_controller.uploadedImageUrls.removeAt(index);
+                                                    });
+                                                  }
+
+                                                },
+                                                child: Icon(
+                                                  Icons.highlight_remove,
+                                                  size: 36,
+                                                  color: FlutterFlowTheme.of(context).error,
+                                                ),
+                                              )
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        width: 8,
+                                      )
+                                    ],
+                                  );
+                                }
+                            ),
+                          ),
                         Padding(
                           padding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 120.0, 0.0),
@@ -187,6 +356,7 @@ class _ReviewEditViewState extends State<ReviewEditView> {
                               const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 44.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
+                                  _controller.setImages(temporaryImages);
                                   _controller.updatePointReview();
                                   Navigator.pop(context);
                                 },

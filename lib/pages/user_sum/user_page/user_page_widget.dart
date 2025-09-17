@@ -2,6 +2,7 @@ import 'package:salt_water_beta_ver1/pages/user_sum/user_page/deleteUserBottonsh
 import 'package:webviewx_plus/webviewx_plus.dart';
 
 import '../../../reusable/common/basicScaffold.dart';
+import '../../point_explore_sum/review_bottomsheet/review_edit_view.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/custom_navbar_widget.dart';
@@ -55,6 +56,16 @@ class _UserPageWidgetState extends State<UserPageWidget> {
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () async {
+        /*
+        context.pushNamed(
+          'reviewDetailed',
+          queryParameters: {
+            'reviewRef' : reviewRecord.reference.path
+          }
+        );
+        */
+
+
         context.pushNamed(
           'point_detailed',
           queryParameters: {
@@ -65,6 +76,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
             ),
           }.withoutNulls,
         );
+
       },
       child: Container(
         width: double.infinity,

@@ -6,6 +6,7 @@ class ReviewBottomsheetModel extends FlutterFlowModel<ReviewBottomsheetWidget> {
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for TextField widget.
+
   FocusNode? textFieldFocusNode;
   TextEditingController? textController1;
   String? Function(BuildContext, String?)? textController1Validator;
@@ -13,6 +14,10 @@ class ReviewBottomsheetModel extends FlutterFlowModel<ReviewBottomsheetWidget> {
   FocusNode? shortBioFocusNode;
   TextEditingController? shortBioTextController;
   String? Function(BuildContext, String?)? shortBioTextControllerValidator;
+
+  bool isImageUploaing = false;
+  List<FFUploadedFile> uploadedImages = [];
+  List<String> uploadedImageUrls = [];
 
   @override
   void initState(BuildContext context) {}

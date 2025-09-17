@@ -7,11 +7,13 @@ import 'package:salt_water_beta_ver1/backend/backend.dart';
 import 'package:salt_water_beta_ver1/custom_code/actions/iosMapOpen.dart';
 import 'package:salt_water_beta_ver1/flutter_flow/flutter_flow_model.dart';
 import 'package:salt_water_beta_ver1/flutter_flow/flutter_flow_util.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 
 import '../../app_state.dart';
 import '../../backend/schema/t_b_point_record.dart';
 import '../../flutter_flow/flutter_flow_icon_button.dart';
 import '../../flutter_flow/flutter_flow_theme.dart';
+import '../point_explore_sum/review_bottomsheet/review_bottomsheet_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 
@@ -221,17 +223,33 @@ class _HomeSearchresultState extends State<HomeSearchresult> {
                                       return Padding(
                                         padding: const EdgeInsetsDirectional.all(8),
                                         child: InkWell(
-                                          onTap: () {
-                                            //iosMapOpen(point); 함수 테스트용 코드
+                                          onTap: () async{
+
+                                            await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor: Colors.transparent,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder: (context) {
+                                                  // 권장: StatefulBuilder로 감쌈
+                                                  return StatefulBuilder(
+                                                    builder: (context, setState) {
+                                                      return Padding(
+                                                        padding: MediaQuery.of(context).viewInsets,
+                                                        child: SizedBox(
+                                                          height: 520,
+                                                          child: ReviewBottomsheetWidget(
+                                                              reviewPointRef: point.reference
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  );
+                                                }
+
+                                            );
+
                                             /*
-                                            if(Platform.isAndroid) {
-
-                                            }
-                                            else{
-                                              iosMapOpen(point);
-                                            }
-
-                                             */
                                             if(point.pointCategories == '체험낚시배' || point.pointCategories == '낚시배'){
                                               context.pushNamed(
                                                 'boat_detailed',
@@ -248,6 +266,7 @@ class _HomeSearchresultState extends State<HomeSearchresult> {
                                               'pointRefSW': serializeParam(point.reference, ParamType.DocumentReference)
                                             }.withoutNulls);
                                             }
+                                             */
 
                                           },
                                           child: Row(

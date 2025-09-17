@@ -71,6 +71,18 @@ class FFAppState extends ChangeNotifier {
   QuerySnapshot? pointThemes;
   QuerySnapshot? niceFishings;
 
+  List<String> _reviewUploadedImages = [];
+  List<String> get reviewUploadedImages => _reviewUploadedImages;
+  set reviewUploadedImages(List<String> value){
+    _reviewUploadedImages = value;
+  }
+  void insertReviewImages(String data){
+    _reviewUploadedImages.add(data);
+  }
+  void removeReviewImageAtIndex(int index){
+    _reviewUploadedImages.removeAt(index);
+  }
+
   String _newProfileImage = '';
   String get newProfileImage => _newProfileImage;
   set newProfileImage(String value) {

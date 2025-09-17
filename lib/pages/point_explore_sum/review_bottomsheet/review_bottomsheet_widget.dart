@@ -1,3 +1,6 @@
+import 'package:salt_water_beta_ver1/flutter_flow/upload_data.dart';
+
+import '../../../backend/firebase_storage/storage.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -136,6 +139,7 @@ class _ReviewBottomsheetWidgetState extends State<ReviewBottomsheetWidget> {
                           height: 40.0,
                           fit: BoxFit.cover,
                         ),
+                        
                       ),
                       Padding(
                         padding:
@@ -166,8 +170,155 @@ class _ReviewBottomsheetWidgetState extends State<ReviewBottomsheetWidget> {
                   validator: _model.textController1Validator.asValidator(context),
                   hintText: '제목을 입력해주세요.',
                 ),
+                InkWell(
+                  onTap: () async{
+                      final selectedMedia = await selectMedia(
+                        maxWidth: 640.00,
+                        maxHeight: 1280.00,
+                        multiImage: true,
+                      );
+                      if(selectedMedia != null && selectedMedia.every((m)
+                          => validateFileFormat(m.storagePath, context)
+                      )){
+                        safeSetState((){
+                          _model.isImageUploaing = true;
+                        });
+                        var selectedUploadedFiles = <FFUploadedFile>[];
+
+                        List<String> downloadUrls = <String>[];
+                        try{
+
+                          selectedUploadedFiles = selectedMedia
+                              .map((m) => FFUploadedFile(
+                            name: m.storagePath.split('/').last,
+                            bytes: m.bytes,
+                            height: m.dimensions?.height ?? 144,
+                            width: m.dimensions?.width ?? 144,
+                            blurHash: m.blurHash ?? '',
+                          )).toList();
+
+                          downloadUrls = (await Future.wait(
+                            selectedMedia.map(
+                                  (m) async => await uploadData(m.storagePath, m.bytes),
+                            ),
+                          )).where((u) => u != null)
+                              .map((u) => u!)
+                              .toList();
+                        }finally {
+                          _model.isImageUploaing = false;
+                        }
+                        if (selectedUploadedFiles.length == selectedMedia.length &&
+                            downloadUrls.length == selectedMedia.length) {
+                          print(selectedUploadedFiles);
+                          safeSetState(() {
+                            _model.uploadedImages += selectedUploadedFiles;
+                            _model.uploadedImageUrls += downloadUrls;
+                          });
+                        } else {
+                          safeSetState(() {});
+                          return;
+                        }
+                        print('업로드 이미지 길이${_model.uploadedImages.length}');
+                      }
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    width: 108,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.folder_open,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 24.0,
+                          ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                          Column(
+                            children: [
+                              SizedBox(
+                                height: 2,
+                              ),
+                              Text(
+                                '이미지 추가',
+                                  style: GoogleFonts.getFont(
+                                    'Readex Pro',
+                                    color: FlutterFlowTheme.of(context).primaryText,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13.0,
+                                    //height: 1.3,
+                                  )
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                if(_model.uploadedImageUrls.isNotEmpty)
+                SizedBox(
+                  height: 144,
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  child: ListView.builder(
+                    itemCount: _model.uploadedImageUrls.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index){
+                      final imageUrlLIst = _model.uploadedImageUrls;
+                      final imageUrl = imageUrlLIst[index];
+                      return Row(
+                        children: [
+                          Stack(
+                            alignment: Alignment.topRight,
+                            children: [
+                              Container(
+                                  height: 144,
+                                  //width: 144,
+                                  child: Image.network(
+                                      imageUrl,
+                                      fit: BoxFit.fitHeight
+                                  )
+                              ),
+                              Padding(
+                                padding: EdgeInsetsGeometry.all(0),
+                                child: InkWell(
+                                  onTap: () {
+                                    print('uploded Images ${_model.uploadedImages}');
+                                    if(_model.uploadedImages.isNotEmpty
+                                        && _model.uploadedImageUrls.isNotEmpty){
+                                      safeSetState((){
+                                        _model.uploadedImages.removeAt(index);
+                                        _model.uploadedImageUrls.removeAt(index);
+                                      });
+                                    }
+
+                                  },
+                                  child: Icon(
+                                    Icons.highlight_remove,
+                                    size: 36,
+                                    color: FlutterFlowTheme.of(context).error,
+                                  ),
+                                )
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            width: 8,
+                          )
+                        ],
+                      );
+                    }
+                  ),
+                ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                   child: ReviewTextform(
                     controller: _model.shortBioTextController,
                     focusNode: _model.shortBioFocusNode,
@@ -191,7 +342,10 @@ class _ReviewBottomsheetWidgetState extends State<ReviewBottomsheetWidget> {
                             reviewTitle: _model.textController1.text,
                             reviewWrittenBy: currentUserReference,
                             reviewText: _model.shortBioTextController.text,
-                            timestamp: Timestamp.fromDate(DateTime.now())
+                            timestamp: Timestamp.fromDate(DateTime.now()),
+                            reviewImages: _model.uploadedImageUrls.isEmpty ?
+                              ['https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%ED%8F%AC%EC%9D%B8%ED%8A%B8%EC%88%98%EC%A0%95%ED%8E%98%EC%9D%B4%EC%A7%80%2F%ED%8F%AC%EC%9D%B8%ED%8A%B8%EC%9D%B4%EB%AF%B8%EC%A7%80%EC%97%86%EC%9D%8C.png?alt=media&token=b357c611-3df0-4134-bf83-6d72fa96b82e']
+                              : _model.uploadedImageUrls
                           ));
                           Navigator.pop(context);
                         },

@@ -18,6 +18,10 @@ class TBUserReviewPointRecord extends FirestoreRecord {
   DateTime? _timestamp;
   DateTime? get timestamp => _timestamp;
 
+  List<String> _reviewImages = [];
+  List<String> get reviewImages => _reviewImages;
+
+
   List<DocumentReference>? _reviewReportedBy = [];
   List<DocumentReference> get reviewReportedBy => _reviewReportedBy ?? [];
   bool hasReviewReported() => _reviewReportedBy != null || _reviewReportedBy!.isEmpty;
@@ -51,6 +55,7 @@ class TBUserReviewPointRecord extends FirestoreRecord {
     _reviewPointRef = snapshotData['review_pointRef'] as DocumentReference?;
     _reviewReportedBy = getDataList(snapshotData['reported_by']);
     _timestamp = snapshotData['timestamp'];
+    _reviewImages = getDataList(snapshotData['review_images']) ?? [];
   }
 
   void deleteRecord(DocumentReference reviewRef){
@@ -72,11 +77,13 @@ class TBUserReviewPointRecord extends FirestoreRecord {
           DocumentReference ref) =>
       ref.get().then((s) => TBUserReviewPointRecord.fromSnapshot(s));
 
-  static TBUserReviewPointRecord fromSnapshot(DocumentSnapshot snapshot) =>
-      TBUserReviewPointRecord._(
-        snapshot.reference,
-        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
-      );
+  static TBUserReviewPointRecord fromSnapshot(DocumentSnapshot snapshot){
+    //print('snapshot to fromsnapshot ${snapshot}');
+    return TBUserReviewPointRecord._(
+      snapshot.reference,
+      mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+    );
+  }
 
   static TBUserReviewPointRecord getDocumentFromData(
     Map<String, dynamic> data,
@@ -102,7 +109,8 @@ Map<String, dynamic> createTBUserReviewPointRecordData({
   DocumentReference? reviewWrittenBy,
   String? reviewText,
   DocumentReference? reviewPointRef,
-  Timestamp? timestamp
+  Timestamp? timestamp,
+  List<String>? reviewImages
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -110,7 +118,8 @@ Map<String, dynamic> createTBUserReviewPointRecordData({
       'review_written_by': reviewWrittenBy,
       'review_text': reviewText,
       'review_pointRef': reviewPointRef,
-      'timestamp':timestamp
+      'timestamp':timestamp,
+      'review_images':reviewImages
     }.withoutNulls,
   );
 
