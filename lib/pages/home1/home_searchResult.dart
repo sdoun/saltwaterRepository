@@ -224,32 +224,6 @@ class _HomeSearchresultState extends State<HomeSearchresult> {
                                         padding: const EdgeInsetsDirectional.all(8),
                                         child: InkWell(
                                           onTap: () async{
-
-                                            await showModalBottomSheet(
-                                                isScrollControlled: true,
-                                                backgroundColor: Colors.transparent,
-                                                enableDrag: false,
-                                                context: context,
-                                                builder: (context) {
-                                                  // 권장: StatefulBuilder로 감쌈
-                                                  return StatefulBuilder(
-                                                    builder: (context, setState) {
-                                                      return Padding(
-                                                        padding: MediaQuery.of(context).viewInsets,
-                                                        child: SizedBox(
-                                                          height: 520,
-                                                          child: ReviewBottomsheetWidget(
-                                                              reviewPointRef: point.reference
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  );
-                                                }
-
-                                            );
-
-                                            /*
                                             if(point.pointCategories == '체험낚시배' || point.pointCategories == '낚시배'){
                                               context.pushNamed(
                                                 'boat_detailed',
@@ -266,7 +240,6 @@ class _HomeSearchresultState extends State<HomeSearchresult> {
                                               'pointRefSW': serializeParam(point.reference, ParamType.DocumentReference)
                                             }.withoutNulls);
                                             }
-                                             */
 
                                           },
                                           child: Row(
