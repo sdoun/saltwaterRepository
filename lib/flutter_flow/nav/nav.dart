@@ -10,10 +10,10 @@ import 'package:salt_water_beta_ver1/pages/point_explore_sum/point_explore_boat/
 import 'package:salt_water_beta_ver1/pages/point_explore_sum/point_explore_nice/point_explore_nice.dart';
 import 'package:salt_water_beta_ver1/pages/point_explore_sum/point_explore_store/explore_map_store.dart';
 import 'package:salt_water_beta_ver1/pages/point_explore_sum/point_explore_theme/point_explore_theme.dart';
-import 'package:salt_water_beta_ver1/pages/point_explore_sum/review_bottomsheet/review_detailed.dart';
 import 'package:salt_water_beta_ver1/reusable/common/imageDetailView.dart';
 import 'package:salt_water_beta_ver1/reusable/common/photoViewPage.dart';
 import '../../pages/home1/home_searchPage.dart';
+import '../../pages/point_explore_sum/review_bottomsheet/review_detailed.dart';
 import '../../pages/weather_sum/weather_detailed/weather_detailed_additional_widget.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';

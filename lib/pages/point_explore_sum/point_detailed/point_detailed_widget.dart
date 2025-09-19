@@ -1318,29 +1318,35 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
 
                                               child: Container(
                                                 width: double.infinity,
-                                                height: 124.0,
+                                                //height: 124.0,
                                                 decoration: BoxDecoration(
                                                   color: FlutterFlowTheme.of(context)
                                                       .primaryBackground,
                                                 ),
                                                 child: Padding(
                                                   padding: const EdgeInsetsDirectional.fromSTEB(
-                                                      8.0, 8.0, 8.0, 8.0),
+                                                      0.0, 0.0, 8.0, 8.0),
                                                   child: Row(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
                                                     children: [
                                                       Padding(
-                                                        padding: const EdgeInsets.all(4.0),
+                                                        padding: const EdgeInsets.only(right: 8.0),
                                                         child: Container(
-                                                          height: 120,
-                                                          width: 120,
+
+                                                          height: 88,
+                                                          width: 88,
                                                           decoration: BoxDecoration(
                                                             borderRadius: BorderRadius.circular(12)
                                                           ),
-                                                          child: Image.network(columnTBUserReviewPointRecord.reviewImages.first),
+                                                          clipBehavior: Clip.antiAlias,
+                                                          child: Image.network(
+                                                              columnTBUserReviewPointRecord.reviewImages.first,
+                                                            fit: BoxFit.cover,
+                                                          ),
                                                         ),
                                                       ),
                                                       Column(
-                                                        mainAxisSize: MainAxisSize.max,
+                                                        mainAxisSize: MainAxisSize.min,
                                                         crossAxisAlignment:
                                                         CrossAxisAlignment.start,
                                                         children: [
@@ -1480,14 +1486,19 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                                         .asMap()
                                                                         .containsKey(
                                                                         'PretendardSeries'),
+
                                                                   ),
+                                                                  maxLines: 3,
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 4,
                                                                 ),
                                                                 Row(
                                                                   mainAxisSize: MainAxisSize.max,
                                                                   children: [
                                                                     Container(
-                                                                      width: 36.0,
-                                                                      height: 36.0,
+                                                                      width: 32.0,
+                                                                      height: 32.0,
                                                                       clipBehavior: Clip.antiAlias,
                                                                       decoration: const BoxDecoration(
                                                                         shape: BoxShape.circle,
@@ -1512,6 +1523,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                                           .override(
                                                                         fontFamily:
                                                                         'PretendardSeries',
+                                                                        color: FlutterFlowTheme.of(context).secondaryText,
                                                                         fontSize: 14,
                                                                         fontWeight: FontWeight.w400,
                                                                         letterSpacing: 0.0,

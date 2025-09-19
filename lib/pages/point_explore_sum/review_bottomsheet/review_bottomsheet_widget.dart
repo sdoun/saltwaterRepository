@@ -139,7 +139,8 @@ class _ReviewBottomsheetWidgetState extends State<ReviewBottomsheetWidget> {
                           height: 40.0,
                           fit: BoxFit.cover,
                         ),
-                        
+
+
                       ),
                       Padding(
                         padding:

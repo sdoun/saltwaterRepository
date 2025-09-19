@@ -770,7 +770,6 @@ class _PointDetailedWidgetState extends State<StoreboatDetailed> {
                                   final columnTBUserReviewPointRecord =
                                   columnTBUserReviewPointRecordList[
                                   columnIndex];
-                                  print('리뷰 길이 = ${columnTBUserReviewPointRecordList.length}');
                                   return StreamBuilder<UsersRecord>(
                                     stream: UsersRecord.getDocument(
                                         columnTBUserReviewPointRecord
@@ -796,179 +795,398 @@ class _PointDetailedWidgetState extends State<StoreboatDetailed> {
                                           ),
                                           child: Padding(
                                             padding: const EdgeInsetsDirectional.fromSTEB(
-                                                8.0, 8.0, 8.0, 8.0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                                0.0, 0.0, 8.0, 8.0),
+                                            child: Row(
                                               children: [
-                                                Row(
+                                                Padding(
+                                                  padding: const EdgeInsets.only(right: 8.0),
+                                                  child: Container(
+
+                                                    height: 88,
+                                                    width: 88,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(12)
+                                                    ),
+                                                    clipBehavior: Clip.antiAlias,
+                                                    child: Image.network(
+                                                      columnTBUserReviewPointRecord.reviewImages.first,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Column(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                                   children: [
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          columnTBUserReviewPointRecord
+                                                              .reviewTitle,
+                                                          style: FlutterFlowTheme.of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                            fontFamily:
+                                                            'PretendardSeries',
+                                                            fontSize: 16.0,
+                                                            letterSpacing: 0.0,
+                                                            fontWeight: FontWeight.w600,
+                                                            useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                                .containsKey(
+                                                                'PretendardSeries'),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                            width: 16
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Visibility(
+                                                                visible: currentUserReference == containerUsersRecord.reference,
+                                                                child: Row(
+                                                                  children: [
+                                                                    InkWell(
+                                                                      onTap: () async {
+                                                                        await showModalBottomSheet(
+                                                                          isScrollControlled: true,
+                                                                          backgroundColor: Colors.transparent,
+                                                                          enableDrag: false,
+                                                                          context: context,
+                                                                          builder: (context) {
+                                                                            return WebViewAware(
+                                                                              child: GestureDetector(
+                                                                                onTap: () =>
+                                                                                    FocusScope.of(context).unfocus(),
+                                                                                child: Padding(
+                                                                                  padding:
+                                                                                  MediaQuery.viewInsetsOf(context),
+                                                                                  child: SizedBox(
+                                                                                      height: 520.0,
+                                                                                      child: ReviewEditView(
+                                                                                        reviewRef: columnTBUserReviewPointRecord.reference,
+                                                                                      )
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            );
+                                                                          },
+                                                                        ).then((value) => safeSetState(() {}));
+                                                                      },
+                                                                      child: SizedBox(
+                                                                        height: 24,
+                                                                        child: Image.asset('assets/images/리뷰수정.png'),
+                                                                      ),
+                                                                    ),
+                                                                    InkWell(
+                                                                      onTap: (){
+                                                                        columnTBUserReviewPointRecord.deleteRecord(columnTBUserReviewPointRecord.reference);
+                                                                      },
+                                                                      child:
+                                                                      SizedBox(
+                                                                        height: 24,
+                                                                        child: Image.asset('assets/images/리뷰삭제.png'),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                )
+                                                            ),
+                                                            InkWell(
+                                                                onTap: () async {
+                                                                  await showModalBottomSheet(
+                                                                    isScrollControlled: true,
+                                                                    backgroundColor: Colors.transparent,
+                                                                    enableDrag: false,
+                                                                    context: context,
+                                                                    builder: (context) {
+                                                                      return WebViewAware(
+                                                                        child: GestureDetector(
+                                                                          onTap: () =>
+                                                                              FocusScope.of(context).unfocus(),
+                                                                          child: Padding(
+                                                                            padding:
+                                                                            MediaQuery.viewInsetsOf(context),
+                                                                            child: SizedBox(
+                                                                              height: 520.0,
+                                                                              child: ReportBottomsheet(
+                                                                                reviewRef: columnTBUserReviewPointRecord.reference,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  ).then((value) => safeSetState(() {}));
+                                                                },
+                                                                child: SizedBox(
+                                                                    height: 24,
+                                                                    child: Image.asset('assets/images/낚시경보.png')
+                                                                )
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () async {
+                                                        context.pushNamed(
+                                                            'reviewDetailed',
+                                                            queryParameters: {
+                                                              'reviewRef' : columnTBUserReviewPointRecord.reference.path
+                                                            }
+                                                        );},
+                                                      child: Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: [
+                                                          Text(
+                                                            columnTBUserReviewPointRecord
+                                                                .reviewText,
+                                                            style: FlutterFlowTheme.of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                              fontFamily:
+                                                              'PretendardSeries',
+                                                              color: FlutterFlowTheme.of(context).primaryText,
+                                                              fontSize: 13.0,
+                                                              letterSpacing: 0.0,
+                                                              fontWeight: FontWeight.w400,
+                                                              useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                                  .containsKey(
+                                                                  'PretendardSeries'),
+
+                                                            ),
+                                                            maxLines: 3,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 4,
+                                                          ),
+                                                          Row(
+                                                            mainAxisSize: MainAxisSize.max,
+                                                            children: [
+                                                              Container(
+                                                                width: 32.0,
+                                                                height: 32.0,
+                                                                clipBehavior: Clip.antiAlias,
+                                                                decoration: const BoxDecoration(
+                                                                  shape: BoxShape.circle,
+                                                                ),
+                                                                child: Image.network(
+                                                                  functions.basicProfile(containerUsersRecord.photoUrl),
+                                                                  fit: BoxFit.cover,
+                                                                ),
+                                                              ),
+                                                              const SizedBox(
+                                                                width: 12,
+                                                              ),
+                                                              Text(
+                                                                '${containerUsersRecord
+                                                                    .displayName} | ${columnTBUserReviewPointRecord
+                                                                    .timestamp?.year} - ${columnTBUserReviewPointRecord
+                                                                    .timestamp?.month} - ${columnTBUserReviewPointRecord
+                                                                    .timestamp?.day}',
+                                                                style:
+                                                                FlutterFlowTheme.of(context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                  fontFamily:
+                                                                  'PretendardSeries',
+                                                                  color: FlutterFlowTheme.of(context).secondaryText,
+                                                                  fontSize: 14,
+                                                                  fontWeight: FontWeight.w400,
+                                                                  letterSpacing: 0.0,
+                                                                  useGoogleFonts:
+                                                                  GoogleFonts
+                                                                      .asMap()
+                                                                      .containsKey(
+                                                                      'PretendardSeries'),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+
+                                                  ].divide(const SizedBox(height: 8.0)),
+                                                ),
+                                                /*
+                                                Column(
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          columnTBUserReviewPointRecord
+                                                              .reviewTitle,
+                                                          style: FlutterFlowTheme.of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                            fontFamily:
+                                                            'PretendardSeries',
+                                                            fontSize: 16.0,
+                                                            letterSpacing: 0.0,
+                                                            fontWeight: FontWeight.w600,
+                                                            useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                                .containsKey(
+                                                                'PretendardSeries'),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                            width: 16
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Visibility(
+                                                                visible: currentUserReference == containerUsersRecord.reference,
+                                                                child: Row(
+                                                                  children: [
+                                                                    InkWell(
+                                                                      onTap: () async {
+                                                                        await showModalBottomSheet(
+                                                                          isScrollControlled: true,
+                                                                          backgroundColor: Colors.transparent,
+                                                                          enableDrag: false,
+                                                                          context: context,
+                                                                          builder: (context) {
+                                                                            return WebViewAware(
+                                                                              child: GestureDetector(
+                                                                                onTap: () =>
+                                                                                    FocusScope.of(context).unfocus(),
+                                                                                child: Padding(
+                                                                                  padding:
+                                                                                  MediaQuery.viewInsetsOf(context),
+                                                                                  child: SizedBox(
+                                                                                      height: 520.0,
+                                                                                      child: ReviewEditView(
+                                                                                        reviewRef: columnTBUserReviewPointRecord.reference,
+                                                                                      )
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            );
+                                                                          },
+                                                                        ).then((value) => safeSetState(() {}));
+                                                                      },
+                                                                      child: SizedBox(
+                                                                        height: 24,
+                                                                        child: Image.asset('assets/images/리뷰수정.png'),
+                                                                      ),
+                                                                    ),
+                                                                    InkWell(
+                                                                      onTap: (){
+                                                                        columnTBUserReviewPointRecord.deleteRecord(columnTBUserReviewPointRecord.reference);
+                                                                      },
+                                                                      child:
+                                                                      SizedBox(
+                                                                        height: 24,
+                                                                        child: Image.asset('assets/images/리뷰삭제.png'),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                )
+                                                            ),
+                                                            InkWell(
+                                                                onTap: () async {
+                                                                  await showModalBottomSheet(
+                                                                    isScrollControlled: true,
+                                                                    backgroundColor: Colors.transparent,
+                                                                    enableDrag: false,
+                                                                    context: context,
+                                                                    builder: (context) {
+                                                                      return WebViewAware(
+                                                                        child: GestureDetector(
+                                                                          onTap: () =>
+                                                                              FocusScope.of(context).unfocus(),
+                                                                          child: Padding(
+                                                                            padding:
+                                                                            MediaQuery.viewInsetsOf(context),
+                                                                            child: SizedBox(
+                                                                              height: 520.0,
+                                                                              child: ReportBottomsheet(
+                                                                                reviewRef: columnTBUserReviewPointRecord.reference,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  ).then((value) => safeSetState(() {}));
+                                                                },
+                                                                child: SizedBox(
+                                                                    height: 24,
+                                                                    child: Image.asset('assets/images/낚시경보.png')
+                                                                )
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      mainAxisSize: MainAxisSize.max,
+                                                      children: [
+                                                        Container(
+                                                          width: 36.0,
+                                                          height: 36.0,
+                                                          clipBehavior: Clip.antiAlias,
+                                                          decoration: const BoxDecoration(
+                                                            shape: BoxShape.circle,
+                                                          ),
+                                                          child: Image.network(
+                                                            functions.basicProfile(containerUsersRecord.photoUrl),
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 12,
+                                                        ),
+                                                        Text(
+                                                          containerUsersRecord
+                                                              .displayName,
+                                                          style:
+                                                          FlutterFlowTheme.of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                            fontFamily:
+                                                            'PretendardSeries',
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w400,
+                                                            letterSpacing: 0.0,
+                                                            useGoogleFonts:
+                                                            GoogleFonts
+                                                                .asMap()
+                                                                .containsKey(
+                                                                'PretendardSeries'),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                     Text(
                                                       columnTBUserReviewPointRecord
-                                                          .reviewTitle,
+                                                          .reviewText,
                                                       style: FlutterFlowTheme.of(context)
                                                           .bodyMedium
                                                           .override(
                                                         fontFamily:
                                                         'PretendardSeries',
-                                                        fontSize: 16.0,
+                                                        color: FlutterFlowTheme.of(context).primaryText,
+                                                        fontSize: 13.0,
                                                         letterSpacing: 0.0,
-                                                        fontWeight: FontWeight.w600,
+                                                        fontWeight: FontWeight.w400,
                                                         useGoogleFonts: GoogleFonts
                                                             .asMap()
                                                             .containsKey(
                                                             'PretendardSeries'),
                                                       ),
                                                     ),
-                                                    const SizedBox(
-                                                        width: 16
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Visibility(
-                                                            visible: currentUserReference == containerUsersRecord.reference,
-                                                            child: Row(
-                                                              children: [
-                                                                InkWell(
-                                                                  onTap: () async {
-                                                                    await showModalBottomSheet(
-                                                                      isScrollControlled: true,
-                                                                      backgroundColor: Colors.transparent,
-                                                                      enableDrag: false,
-                                                                      context: context,
-                                                                      builder: (context) {
-                                                                        return WebViewAware(
-                                                                          child: GestureDetector(
-                                                                            onTap: () =>
-                                                                                FocusScope.of(context).unfocus(),
-                                                                            child: Padding(
-                                                                              padding:
-                                                                              MediaQuery.viewInsetsOf(context),
-                                                                              child: SizedBox(
-                                                                                  height: 520.0,
-                                                                                  child: ReviewEditView(
-                                                                                    reviewRef: columnTBUserReviewPointRecord.reference,
-                                                                                  )
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                        );
-                                                                      },
-                                                                    ).then((value) => safeSetState(() {}));
-                                                                  },
-                                                                  child: SizedBox(
-                                                                    height: 24,
-                                                                    child: Image.asset('assets/images/리뷰수정.png'),
-                                                                  ),
-                                                                ),
-                                                                InkWell(
-                                                                  onTap: (){
-                                                                    columnTBUserReviewPointRecord.deleteRecord(columnTBUserReviewPointRecord.reference);
-                                                                  },
-                                                                  child:
-                                                                  SizedBox(
-                                                                    height: 24,
-                                                                    child: Image.asset('assets/images/리뷰삭제.png'),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            )
-                                                        ),
-                                                        InkWell(
-                                                            onTap: () async {
-                                                              await showModalBottomSheet(
-                                                                isScrollControlled: true,
-                                                                backgroundColor: Colors.transparent,
-                                                                enableDrag: false,
-                                                                context: context,
-                                                                builder: (context) {
-                                                                  return WebViewAware(
-                                                                    child: GestureDetector(
-                                                                      onTap: () =>
-                                                                          FocusScope.of(context).unfocus(),
-                                                                      child: Padding(
-                                                                        padding:
-                                                                        MediaQuery.viewInsetsOf(context),
-                                                                        child: SizedBox(
-                                                                          height: 520.0,
-                                                                          child: ReportBottomsheet(
-                                                                            reviewRef: columnTBUserReviewPointRecord.reference,
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  );
-                                                                },
-                                                              ).then((value) => safeSetState(() {}));
-                                                            },
-                                                            child: SizedBox(
-                                                                height: 24,
-                                                                child: Image.asset('assets/images/낚시경보.png')
-                                                            )
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ],
+                                                  ].divide(const SizedBox(height: 8.0)),
                                                 ),
-                                                Row(
-                                                  mainAxisSize: MainAxisSize.max,
-                                                  children: [
-                                                    Container(
-                                                      width: 36.0,
-                                                      height: 36.0,
-                                                      clipBehavior: Clip.antiAlias,
-                                                      decoration: const BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                      ),
-                                                      child: Image.network(
-                                                        functions.basicProfile(containerUsersRecord.photoUrl),
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 12,
-                                                    ),
-                                                    Text(
-                                                      containerUsersRecord
-                                                          .displayName,
-                                                      style:
-                                                      FlutterFlowTheme.of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                        fontFamily:
-                                                        'PretendardSeries',
-                                                        fontSize: 14,
-                                                        fontWeight: FontWeight.w400,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts:
-                                                        GoogleFonts
-                                                            .asMap()
-                                                            .containsKey(
-                                                            'PretendardSeries'),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Text(
-                                                  columnTBUserReviewPointRecord
-                                                      .reviewText,
-                                                  style: FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                    fontFamily:
-                                                    'PretendardSeries',
-                                                    color: FlutterFlowTheme.of(context).primaryText,
-                                                    fontSize: 13.0,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.w400,
-                                                    useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                        .containsKey(
-                                                        'PretendardSeries'),
-                                                  ),
-                                                ),
-                                              ].divide(const SizedBox(height: 8.0)),
+                                                 */
+                                              ],
                                             ),
                                           ),
                                         ),
