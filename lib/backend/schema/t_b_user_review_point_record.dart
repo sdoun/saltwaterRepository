@@ -55,7 +55,9 @@ class TBUserReviewPointRecord extends FirestoreRecord {
     _reviewPointRef = snapshotData['review_pointRef'] as DocumentReference?;
     _reviewReportedBy = getDataList(snapshotData['reported_by']);
     _timestamp = snapshotData['timestamp'];
-    _reviewImages = getDataList(snapshotData['review_images']) ?? [];
+    _reviewImages = getDataList(snapshotData['review_images']) ?? [
+      'https://firebasestorage.googleapis.com/v0/b/salt-water-beta-ver1-4dujup.appspot.com/o/%ED%8F%AC%EC%9D%B8%ED%8A%B8%EC%88%98%EC%A0%95%ED%8E%98%EC%9D%B4%EC%A7%80%2F%ED%8F%AC%EC%9D%B8%ED%8A%B8%EC%9D%B4%EB%AF%B8%EC%A7%80%EC%97%86%EC%9D%8C.png?alt=media&token=b357c611-3df0-4134-bf83-6d72fa96b82e'
+    ];
   }
 
   void deleteRecord(DocumentReference reviewRef){
