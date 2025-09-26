@@ -1018,7 +1018,7 @@ class _Home1WidgetState extends State<Home1Widget> {
                                           ),
                                         ),
                                         Image.asset(
-                                          'assets/images/지금잘잡혀.png',
+                                          'assets/images/1758787554180.png',
                                           width: 30,
                                           height: 30,
                                         )
