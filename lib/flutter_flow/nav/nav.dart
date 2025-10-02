@@ -10,6 +10,7 @@ import 'package:salt_water_beta_ver1/pages/point_explore_sum/point_explore_boat/
 import 'package:salt_water_beta_ver1/pages/point_explore_sum/point_explore_nice/point_explore_nice.dart';
 import 'package:salt_water_beta_ver1/pages/point_explore_sum/point_explore_store/explore_map_store.dart';
 import 'package:salt_water_beta_ver1/pages/point_explore_sum/point_explore_theme/point_explore_theme.dart';
+import 'package:salt_water_beta_ver1/pages/point_explore_sum/review_bottomsheet/review_list.dart';
 import 'package:salt_water_beta_ver1/reusable/common/imageDetailView.dart';
 import 'package:salt_water_beta_ver1/reusable/common/photoViewPage.dart';
 import '../../pages/home1/home_searchPage.dart';
@@ -91,6 +92,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, FirebaseAnalyticsObserv
       errorBuilder: (context, state) =>
           appStateNotifier.loggedIn ? const Home1Widget() : const LoginWidget(),
       routes: [
+        FFRoute(
+            name: 'reviewList',
+            path: '/reviewList',
+            builder: (context, params)=> const ReviewList()),
         FFRoute(
             name: 'reviewDetailed',
             path: '/reviewDetailed',

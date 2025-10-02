@@ -655,27 +655,74 @@ class _Home1WidgetState extends State<Home1Widget> {
                                  .addToEnd(
                                    InkWell(
                                      onTap: (){
+                                       context.pushNamed('reviewList');
                                      },
-                                     child: Text(
-                                         '더보기',
-                                       style: FlutterFlowTheme
-                                           .of(context)
-                                           .bodyMedium
-                                           .override(
-                                         fontFamily:
-                                         'PretendardSeries',
-                                         color: FlutterFlowTheme.of(context).secondaryText,
-                                         fontSize:
-                                         13.0,
-                                         letterSpacing:
-                                         0.0,
-                                         fontWeight:
-                                         FontWeight
-                                             .w500,
-                                         useGoogleFonts: GoogleFonts
-                                             .asMap()
-                                             .containsKey(
-                                             'PretendardSeries'),
+                                     child: Container(
+                                       decoration: BoxDecoration(
+                                         borderRadius: BorderRadius.circular(24),
+                                         border: Border(
+                                           top: BorderSide(color: FlutterFlowTheme.of(context).secondaryText),
+                                           left: BorderSide(color: FlutterFlowTheme.of(context).secondaryText),
+                                           bottom: BorderSide(color: FlutterFlowTheme.of(context).secondaryText),
+                                           right: BorderSide(color: FlutterFlowTheme.of(context).secondaryText)
+                                         )
+                                       ),
+                                       child: Padding(
+                                         padding: const EdgeInsets.fromLTRB(12, 8.0, 12, 8),
+                                         child: Row(
+                                           mainAxisSize: MainAxisSize.min,
+                                           mainAxisAlignment: MainAxisAlignment.center,
+                                           crossAxisAlignment: CrossAxisAlignment.center,
+                                           children: [
+                                           Text(
+                                             '최근 조황과 리뷰',
+                                             style: FlutterFlowTheme
+                                                 .of(context)
+                                                 .bodyMedium
+                                                 .override(
+                                               fontFamily:
+                                               'PretendardSeries',
+                                               color: FlutterFlowTheme.of(context).secondaryText,
+                                               fontSize:
+                                               14.0,
+                                               letterSpacing:
+                                               0.0,
+                                               fontWeight:
+                                               FontWeight
+                                                   .w700,
+                                               useGoogleFonts: GoogleFonts
+                                                   .asMap()
+                                                   .containsKey(
+                                                   'PretendardSeries'),
+                                             ),
+                                           ),
+                                             SizedBox(
+                                               width: 4,
+                                             ),
+                                             Text(
+                                                 '더보기',
+                                               style: FlutterFlowTheme
+                                                   .of(context)
+                                                   .bodyMedium
+                                                   .override(
+                                                 fontFamily:
+                                                 'PretendardSeries',
+                                                 color: FlutterFlowTheme.of(context).secondaryText,
+                                                 fontSize:
+                                                 13.0,
+                                                 letterSpacing:
+                                                 0.0,
+                                                 fontWeight:
+                                                 FontWeight
+                                                     .w500,
+                                                 useGoogleFonts: GoogleFonts
+                                                     .asMap()
+                                                     .containsKey(
+                                                     'PretendardSeries'),
+                                               ),
+                                             ),
+                                           ],
+                                         ),
                                        ),
                                      ),
                                    )
