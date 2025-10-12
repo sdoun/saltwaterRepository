@@ -32,7 +32,8 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion 35
+    compileSdk = 36
+    //compileSdkVersion 35
     namespace 'com.mycompany.saltwaterbetaver1'
 
     kotlin {  // 필수 추가
