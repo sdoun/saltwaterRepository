@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:salt_water_beta_ver1/auth/firebase_auth/auth_util.dart';
 import 'package:salt_water_beta_ver1/backend/backend.dart';
+import 'package:salt_water_beta_ver1/backend/schema/tbReviewCommentRecord.dart';
 import 'package:salt_water_beta_ver1/flutter_flow/flutter_flow_util.dart';
 import 'package:salt_water_beta_ver1/reusable/common/basicScaffold.dart';
 
@@ -17,6 +19,12 @@ class ReviewDetailed extends StatefulWidget {
 
   @override
   State<ReviewDetailed> createState() => _ReviewDetailedState();
+}
+
+Stream<QuerySnapshot<Map<String, dynamic>>> fetchComments(DocumentReference reviewRef){
+  final snapshots = FirebaseFirestore.instance.collection('TB_review_comments')
+      .where('comment_review', isEqualTo: reviewRef).snapshots();
+  return snapshots;
 }
 
 Future<TBUserReviewPointRecord> getDoc(String path) async{
@@ -252,6 +260,39 @@ class _ReviewDetailedState extends State<ReviewDetailed> {
                                 .containsKey(
                                 'PretendardSeries'),
                           ),
+                        ),
+                        InkWell(
+                          onTap: () async{
+                            TBReviewCommentRecord.createDoc(currentUserReference!, 'test', 
+                              reviewRecord.reference
+                            );
+                          },
+                          child: Text('리뷰 코멘트 테스트'),
+                        ),
+                        StreamBuilder(
+                            stream: fetchComments(reviewRecord.reference),
+                            builder: (context, snapshot){
+                              if(!snapshot.hasData){
+                                return Text('댓글이 없습니다');
+                              }
+                              else{
+                                List<TBReviewCommentRecord> comments = snapshot.data!.docs
+                                    .map((e) => TBReviewCommentRecord.fromSnapshot(e)).toList();
+
+                                return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: List.generate(comments.length, (index){
+                                    final comment = comments[index];
+                                    return Container(
+                                      height: 64,
+                                      child: Text(
+                                        comment.content
+                                      ),
+                                    );
+                                  }),
+                                );
+                              }
+                            },
                         )
                       ].divide(const SizedBox(height: 8.0)),
                     ),

@@ -363,6 +363,7 @@ class _Home1WidgetState extends State<Home1Widget> {
                   child: Column(
                     //mainAxisSize: MainAxisSize.max,
                     children: [
+
                       Padding(
                         padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
                         child: InkWell(
@@ -501,6 +502,7 @@ class _Home1WidgetState extends State<Home1Widget> {
                                                        0.0, 0.0, 8.0, 8.0),
                                                    child: InkWell(
                                                      onTap: (){
+
                                                        if(point.pointCategories == '체험낚시배' || point.pointCategories == '낚시배'){
                                                          context.pushNamed(
                                                            'boat_detailed',
@@ -517,6 +519,12 @@ class _Home1WidgetState extends State<Home1Widget> {
                                                            'pointRefSW': serializeParam(point.reference, ParamType.DocumentReference)
                                                          }.withoutNulls);
                                                        }
+
+                                                       /*
+                                                       context.pushNamed('reviewDetailed',
+                                                        queryParameters: {'reviewRef': review.reference.path}
+                                                       );
+                                                        */
                                                      },
                                                      child: Row(
                                                        crossAxisAlignment: CrossAxisAlignment.center,
@@ -543,22 +551,50 @@ class _Home1WidgetState extends State<Home1Widget> {
                                                            children: [
                                                              Row(
                                                                children: [
-                                                                 Text(
-                                                                    point.pointName,
-                                                                   style: FlutterFlowTheme.of(context)
-                                                                       .bodyMedium
-                                                                       .override(
-                                                                     fontFamily:
-                                                                     'PretendardSeries',
-                                                                     fontSize: 16.0,
-                                                                     letterSpacing: 0.0,
-                                                                     fontWeight: FontWeight.w600,
-                                                                     useGoogleFonts: GoogleFonts
-                                                                         .asMap()
-                                                                         .containsKey(
-                                                                         'PretendardSeries'),
-                                                                   ),
+                                                                 Row(
+                                                                   children: [
+                                                                     Text(
+                                                                        point.pointName,
+                                                                       style: FlutterFlowTheme.of(context)
+                                                                           .bodyMedium
+                                                                           .override(
+                                                                         fontFamily:
+                                                                         'PretendardSeries',
+                                                                         fontSize: 16.0,
+                                                                         letterSpacing: 0.0,
+                                                                         fontWeight: FontWeight.w600,
+                                                                         useGoogleFonts: GoogleFonts
+                                                                             .asMap()
+                                                                             .containsKey(
+                                                                             'PretendardSeries'),
+                                                                       ),
+                                                                     ),
+                                                                     PopupMenuButton(
+                                                                       icon: Image.asset('assets/images/댓글메뉴.png'),
+                                                                       itemBuilder: (context) => <PopupMenuEntry>[
+                                                                         PopupMenuItem(
+                                                                           child: ListTile(
+                                                                             leading: Image.asset('assets/images/댓글메뉴.png'),
+                                                                             title: Text('신고'),
+                                                                           ),
+                                                                         )
+                                                                       ],
+                                                                     ),
+                                                                   ],
                                                                  ),
+                                                                 /*
+                                                                 PopupMenuButton(
+                                                                   icon: Image.asset('assets/images/댓글메뉴.png'),
+                                                                   itemBuilder: (context) => <PopupMenuEntry>[
+                                                                     PopupMenuItem(
+                                                                       child: ListTile(
+                                                                         leading: Image.asset('assets/images/댓글메뉴.png'),
+                                                                         title: Text('신고'),
+                                                                       ),
+                                                                     )
+                                                                   ],
+                                                                 ),
+                                                                  */
                                                                  const SizedBox(
                                                                      width: 16
                                                                  ),

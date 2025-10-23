@@ -1470,25 +1470,41 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                             child: Column(
                                                               crossAxisAlignment: CrossAxisAlignment.start,
                                                               children: [
-                                                                Text(
-                                                                  columnTBUserReviewPointRecord
-                                                                      .reviewText,
-                                                                  style: FlutterFlowTheme.of(context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                    fontFamily:
-                                                                    'PretendardSeries',
-                                                                    color: FlutterFlowTheme.of(context).primaryText,
-                                                                    fontSize: 13.0,
-                                                                    letterSpacing: 0.0,
-                                                                    fontWeight: FontWeight.w400,
-                                                                    useGoogleFonts: GoogleFonts
-                                                                        .asMap()
-                                                                        .containsKey(
-                                                                        'PretendardSeries'),
+                                                                Row(
+                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                  children: [
+                                                                    Text(
+                                                                      columnTBUserReviewPointRecord
+                                                                          .reviewText,
+                                                                      style: FlutterFlowTheme.of(context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                        fontFamily:
+                                                                        'PretendardSeries',
+                                                                        color: FlutterFlowTheme.of(context).primaryText,
+                                                                        fontSize: 13.0,
+                                                                        letterSpacing: 0.0,
+                                                                        fontWeight: FontWeight.w400,
+                                                                        useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                            .containsKey(
+                                                                            'PretendardSeries'),
 
-                                                                  ),
-                                                                  maxLines: 3,
+                                                                      ),
+                                                                      maxLines: 3,
+                                                                    ),
+                                                                    PopupMenuButton(
+                                                                        icon: Image.asset('assets/images/댓글메뉴.png'),
+                                                                        itemBuilder: (context) => <PopupMenuEntry>[
+                                                                          PopupMenuItem(
+                                                                              child: ListTile(
+                                                                                leading: Image.asset('assets/images/댓글메뉴.png'),
+                                                                                title: Text('신고'),
+                                                                              ),
+                                                                          )
+                                                                      ],
+                                                                    )
+                                                                  ],
                                                                 ),
                                                                 SizedBox(
                                                                   height: 4,
@@ -1511,9 +1527,27 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                                     const SizedBox(
                                                                       width: 12,
                                                                     ),
+                                                                    Text('${containerUsersRecord
+                                                                        .displayName} ',
+                                                                      style:
+                                                                      FlutterFlowTheme.of(context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                        fontFamily:
+                                                                        'PretendardSeries',
+                                                                        color: FlutterFlowTheme.of(context).primaryText,
+                                                                        fontSize: 14,
+                                                                        fontWeight: FontWeight.w600,
+                                                                        letterSpacing: 0.0,
+                                                                        useGoogleFonts:
+                                                                        GoogleFonts
+                                                                            .asMap()
+                                                                            .containsKey(
+                                                                            'PretendardSeries'),
+                                                                      ),
+                                                                    ),
                                                                     Text(
-                                                                      '${containerUsersRecord
-                                                                          .displayName} | ${columnTBUserReviewPointRecord
+                                                                      ' | ${columnTBUserReviewPointRecord
                                                                           .timestamp?.year} - ${columnTBUserReviewPointRecord
                                                                           .timestamp?.month} - ${columnTBUserReviewPointRecord
                                                                           .timestamp?.day}',
@@ -1534,6 +1568,28 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                                             'PretendardSeries'),
                                                                       ),
                                                                     ),
+                                                                    InkWell(
+                                                                      child:
+                                                                      Text(
+                                                                        '답글달기',
+                                                                        style:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                          fontFamily:
+                                                                          'PretendardSeries',
+                                                                          color: FlutterFlowTheme.of(context).primaryText,
+                                                                          fontSize: 14,
+                                                                          fontWeight: FontWeight.w600,
+                                                                          letterSpacing: 0.0,
+                                                                          useGoogleFonts:
+                                                                          GoogleFonts
+                                                                              .asMap()
+                                                                              .containsKey(
+                                                                              'PretendardSeries'),
+                                                                        ),
+                                                                      ),
+                                                                    )
                                                                   ],
                                                                 ),
                                                               ],
