@@ -63,225 +63,227 @@ class _NewProfileImageState extends State<NewProfileImage> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      elevation: 2.0,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(12.0),
-          topRight: Radius.circular(12.0),
-        ),
-      ),
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).primaryBackground,
-          boxShadow: const [
-            BoxShadow(
-              blurRadius: 4.0,
-              color: Color(0x33000000),
-              offset: Offset(
-                0.0,
-                2.0,
-              ),
-            )
-          ],
-          borderRadius: const BorderRadius.only(
+    return SafeArea(
+      child: Material(
+        color: Colors.transparent,
+        elevation: 2.0,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
             topLeft: Radius.circular(12.0),
             topRight: Radius.circular(12.0),
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(
-                height: 16,
-              ),
-              uplodedImageView((FFAppState().newProfileImage.isNotEmpty)),
-              const SizedBox(
-                height: 12,
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      final selectedMedia = await selectMedia(
-                        maxWidth: 640.00,
-                        maxHeight: 1280.00,
-                        multiImage: false,
-                      );
-                      if (selectedMedia != null &&
-                          selectedMedia.every(
-                                  (m) => validateFileFormat(m.storagePath, context))) {
-                        safeSetState(() => _model.isDataUploading1 = true);
-                        var selectedUploadedFiles = <FFUploadedFile>[];
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: FlutterFlowTheme.of(context).primaryBackground,
+            boxShadow: const [
+              BoxShadow(
+                blurRadius: 4.0,
+                color: Color(0x33000000),
+                offset: Offset(
+                  0.0,
+                  2.0,
+                ),
+              )
+            ],
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(12.0),
+              topRight: Radius.circular(12.0),
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(
+                  height: 16,
+                ),
+                uplodedImageView((FFAppState().newProfileImage.isNotEmpty)),
+                const SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        final selectedMedia = await selectMedia(
+                          maxWidth: 640.00,
+                          maxHeight: 1280.00,
+                          multiImage: false,
+                        );
+                        if (selectedMedia != null &&
+                            selectedMedia.every(
+                                    (m) => validateFileFormat(m.storagePath, context))) {
+                          safeSetState(() => _model.isDataUploading1 = true);
+                          var selectedUploadedFiles = <FFUploadedFile>[];
 
-                        List<String> downloadUrls = <String>[];
-                        try {
-                          selectedUploadedFiles = selectedMedia
-                              .map((m) => FFUploadedFile(
-                            name: m.storagePath.split('/').last,
-                            bytes: m.bytes,
-                            height: m.dimensions?.height,
-                            width: m.dimensions?.width,
-                            blurHash: m.blurHash,
-                          ))
-                              .toList();
+                          List<String> downloadUrls = <String>[];
+                          try {
+                            selectedUploadedFiles = selectedMedia
+                                .map((m) => FFUploadedFile(
+                              name: m.storagePath.split('/').last,
+                              bytes: m.bytes,
+                              height: m.dimensions?.height,
+                              width: m.dimensions?.width,
+                              blurHash: m.blurHash,
+                            ))
+                                .toList();
 
-                          downloadUrls = (await Future.wait(
-                            selectedMedia.map(
-                                  (m) async => await uploadData(m.storagePath, m.bytes),
-                            ),
-                          ))
-                              .where((u) => u != null)
-                              .map((u) => u!)
-                              .toList();
-                        } finally {
-                          _model.isDataUploading1 = false;
+                            downloadUrls = (await Future.wait(
+                              selectedMedia.map(
+                                    (m) async => await uploadData(m.storagePath, m.bytes),
+                              ),
+                            ))
+                                .where((u) => u != null)
+                                .map((u) => u!)
+                                .toList();
+                          } finally {
+                            _model.isDataUploading1 = false;
+                          }
+                          if (selectedUploadedFiles.length == selectedMedia.length &&
+                              downloadUrls.length == selectedMedia.length) {
+                            safeSetState(() {
+                              _model.uploadedLocalFile1 = selectedUploadedFiles.first;
+                              _model.uploadedFileUrl1 = downloadUrls.first;
+                            });
+                          } else {
+                            safeSetState(() {});
+                            return;
+                          }
                         }
-                        if (selectedUploadedFiles.length == selectedMedia.length &&
-                            downloadUrls.length == selectedMedia.length) {
-                          safeSetState(() {
-                            _model.uploadedLocalFile1 = selectedUploadedFiles.first;
-                            _model.uploadedFileUrl1 = downloadUrls.first;
-                          });
-                        } else {
-                          safeSetState(() {});
-                          return;
-                        }
-                      }
 
-                      FFAppState().newProfileImage = _model.uploadedFileUrl1;
-                      safeSetState(() {});
-                    },
-                    child: Container(
-                      width: 100.0,
-                      height: 100.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.photo_camera_outlined,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            size: 28.0,
-                          ),
-                          Text(
-                            '카메라',
-                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily:
-                              FlutterFlowTheme.of(context).bodyMediumFamily,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w600,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context)
-                                      .bodyMediumFamily),
+                        FFAppState().newProfileImage = _model.uploadedFileUrl1;
+                        safeSetState(() {});
+                      },
+                      child: Container(
+                        width: 100.0,
+                        height: 100.0,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.photo_camera_outlined,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 28.0,
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      final selectedMedia = await selectMedia(
-                        mediaSource: MediaSource.photoGallery,
-                        multiImage: false,
-                      );
-                      if (selectedMedia != null &&
-                          selectedMedia.every(
-                                  (m) => validateFileFormat(m.storagePath, context))) {
-                        safeSetState(() => _model.isDataUploading2 = true);
-                        var selectedUploadedFiles = <FFUploadedFile>[];
-
-                        var downloadUrls = <String>[];
-                        try {
-                          selectedUploadedFiles = selectedMedia
-                              .map((m) => FFUploadedFile(
-                            name: m.storagePath.split('/').last,
-                            bytes: m.bytes,
-                            height: m.dimensions?.height,
-                            width: m.dimensions?.width,
-                            blurHash: m.blurHash,
-                          ))
-                              .toList();
-
-                          downloadUrls = (await Future.wait(
-                            selectedMedia.map(
-                                  (m) async => await uploadData(m.storagePath, m.bytes),
+                            Text(
+                              '카메라',
+                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                fontFamily:
+                                FlutterFlowTheme.of(context).bodyMediumFamily,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w600,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .bodyMediumFamily),
+                              ),
                             ),
-                          ))
-                              .where((u) => u != null)
-                              .map((u) => u!)
-                              .toList();
-                        } finally {
-                          _model.isDataUploading2 = false;
-                        }
-                        if (selectedUploadedFiles.length == selectedMedia.length &&
-                            downloadUrls.length == selectedMedia.length) {
-                          safeSetState(() {
-                            _model.uploadedLocalFile2 = selectedUploadedFiles.first;
-                            _model.uploadedFileUrl2 = downloadUrls.first;
-                          });
-                        } else {
-                          safeSetState(() {});
-                          return;
-                        }
-                      }
-
-                      FFAppState().newProfileImage = _model.uploadedFileUrl2;;
-                      safeSetState(() {});
-                    },
-                    child: Container(
-                      width: 100.0,
-                      height: 100.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.folder_open,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            size: 28.0,
-                          ),
-                          Text(
-                            '파일 업로드',
-                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily:
-                              FlutterFlowTheme.of(context).bodyMediumFamily,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w600,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context)
-                                      .bodyMediumFamily),
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ].divide(const SizedBox(width: 12.0)),
-              ),
-            ]
-          )
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        final selectedMedia = await selectMedia(
+                          mediaSource: MediaSource.photoGallery,
+                          multiImage: false,
+                        );
+                        if (selectedMedia != null &&
+                            selectedMedia.every(
+                                    (m) => validateFileFormat(m.storagePath, context))) {
+                          safeSetState(() => _model.isDataUploading2 = true);
+                          var selectedUploadedFiles = <FFUploadedFile>[];
+
+                          var downloadUrls = <String>[];
+                          try {
+                            selectedUploadedFiles = selectedMedia
+                                .map((m) => FFUploadedFile(
+                              name: m.storagePath.split('/').last,
+                              bytes: m.bytes,
+                              height: m.dimensions?.height,
+                              width: m.dimensions?.width,
+                              blurHash: m.blurHash,
+                            ))
+                                .toList();
+
+                            downloadUrls = (await Future.wait(
+                              selectedMedia.map(
+                                    (m) async => await uploadData(m.storagePath, m.bytes),
+                              ),
+                            ))
+                                .where((u) => u != null)
+                                .map((u) => u!)
+                                .toList();
+                          } finally {
+                            _model.isDataUploading2 = false;
+                          }
+                          if (selectedUploadedFiles.length == selectedMedia.length &&
+                              downloadUrls.length == selectedMedia.length) {
+                            safeSetState(() {
+                              _model.uploadedLocalFile2 = selectedUploadedFiles.first;
+                              _model.uploadedFileUrl2 = downloadUrls.first;
+                            });
+                          } else {
+                            safeSetState(() {});
+                            return;
+                          }
+                        }
+
+                        FFAppState().newProfileImage = _model.uploadedFileUrl2;;
+                        safeSetState(() {});
+                      },
+                      child: Container(
+                        width: 100.0,
+                        height: 100.0,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.folder_open,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 28.0,
+                            ),
+                            Text(
+                              '파일 업로드',
+                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                fontFamily:
+                                FlutterFlowTheme.of(context).bodyMediumFamily,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w600,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .bodyMediumFamily),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ].divide(const SizedBox(width: 12.0)),
+                ),
+              ]
+            )
+          ),
         ),
       ),
     );

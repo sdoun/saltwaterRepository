@@ -608,10 +608,12 @@ List<dynamic>? fcsTmpForTommorow(
 
   print('Tomorrow String is $tomorrowString');
 
-  for (var item in fcstList!) {
-    if (item["fcstDate"] == tomorrowString && item["category"] == 'TMP') {
-      print('TMP is ${item["fcstValue"]}');
-      return [item["fcstValue"]];
+  if(fcstList != null){
+    for (var item in fcstList) {
+      if (item["fcstDate"] == tomorrowString && item["category"] == 'TMP') {
+        print('TMP is ${item["fcstValue"]}');
+        return [item["fcstValue"]];
+      }
     }
   }
   print('there are no TMP');

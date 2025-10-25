@@ -149,8 +149,7 @@ class _UserEditWidgetState extends State<UserEditWidget> {
                                           onTap: () =>
                                               FocusScope.of(context).unfocus(),
                                           child: Padding(
-                                            padding: MediaQuery.viewInsetsOf(
-                                                context),
+                                            padding: MediaQuery.viewInsetsOf(context),
                                             child: const NewProfileImage(),
                                           ),
                                         ),

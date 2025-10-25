@@ -1026,6 +1026,7 @@ class _WeatherDetailedAdditionalState extends State<WeatherDetailedAdditional> {
                                                 SizedBox(height: 8,),
                                               ],
                                             ),
+                                            if(wsdBarData.isNotEmpty)
                                             Container(
                                               color: FlutterFlowTheme.of(context).primaryBackground,
                                               height: 80,
@@ -1071,6 +1072,28 @@ class _WeatherDetailedAdditionalState extends State<WeatherDetailedAdditional> {
                                                 )
                                               )
                                             ),
+                                            if(wsdBarData.isEmpty)
+                                              Container(
+                                                color: FlutterFlowTheme.of(context).primaryBackground,
+                                                height: 96,
+                                                //width: 64*_model.skyModelList!.length.toDouble()+32,
+                                                child: Text(
+                                                    '네트워크 혹은 서버 문제로 데이터를 불러오지 못했습니다.',
+                                                  style: FlutterFlowTheme.of(context).bodyMedium
+                                                      .override(
+                                                    fontFamily: 'PretendardSeries',
+                                                    fontSize: 14.0,
+                                                    color: FlutterFlowTheme.of(context).secondaryText,
+                                                    letterSpacing:
+                                                    0.0,
+                                                    fontWeight: FontWeight.w500,
+                                                    useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                        .containsKey(
+                                                        'PretendardSeries'),
+                                                  ),
+                                                ),
+                                              )
                                           ],
                                         ),
                                         const SizedBox(
@@ -1191,7 +1214,9 @@ class _WeatherDetailedAdditionalState extends State<WeatherDetailedAdditional> {
                                               color: FlutterFlowTheme.of(context).primaryBackground,
                                               height: 96,
                                               width: 64*_model.skyModelList!.length.toDouble()+32,
-                                              child: BarChart(
+                                              child: 
+                                                wsdBarData.isNotEmpty ?
+                                              BarChart(
                                                   BarChartData(
                                                       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
                                                       barTouchData: BarTouchData(
@@ -1230,7 +1255,23 @@ class _WeatherDetailedAdditionalState extends State<WeatherDetailedAdditional> {
                                                       titlesData: FlTitlesData(show: false),
                                                       borderData: FlBorderData(show:  false)
                                                   )
-                                              )
+                                              ) :
+                                                    Text(
+                                                      '네트워크 혹은 서버 문제로 데이터를 불러오지 못했습니다.',
+                                                      style: FlutterFlowTheme.of(context).bodyMedium
+                                                          .override(
+                                                        fontFamily: 'PretendardSeries',
+                                                        fontSize: 14.0,
+                                                        color: FlutterFlowTheme.of(context).secondaryText,
+                                                        letterSpacing:
+                                                        0.0,
+                                                        fontWeight: FontWeight.w500,
+                                                        useGoogleFonts: GoogleFonts
+                                                            .asMap()
+                                                            .containsKey(
+                                                            'PretendardSeries'),
+                                                      ),
+                                                    )
                                           ),
                                           Row(
                                             children: List.generate(

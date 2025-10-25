@@ -125,7 +125,7 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
         ),
         MidTmpCall.call(
           regId: record.midRegId,
-          tmFc: '0600',
+          tmFc: '${getCurrentTimestamp.year}${getCurrentTimestamp.month}${getCurrentTimestamp.day}0600',
         ),
         MidFcstCall.call(
           numOfRows: 1,
@@ -146,10 +146,16 @@ class _WeatherDetailedWidgetState extends State<WeatherDetailedWidget> {
         _model.midFcstResponse = results[4];
         _model.realtimeWtrTmpResponse = results[5];
         print(results[0].jsonBody);
+        print(results[0].headers);
+        print(results[0].statusCode);
         print(results[1].jsonBody);
+        print(results[1].statusCode);
         print(results[2].jsonBody);
+        print(results[2].statusCode);
         print(results[3].jsonBody);
+        print(results[3].statusCode);
         print(results[4].jsonBody);
+        print(results[4].statusCode);
         print('wtrTmp response : ${results[5].jsonBody ?? 'no result'}');
         isLoading = false;
       });

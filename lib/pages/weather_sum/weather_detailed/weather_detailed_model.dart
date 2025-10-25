@@ -83,7 +83,7 @@ class WeatherDetailedModel extends FlutterFlowModel<WeatherDetailedWidget> {
 
   ApiCallResponse? midFcstResponse;
 
-  List<SkyModel>? skyModelList;
+  List<SkyModel>? skyModelList = [];
   List<SkyModel>? tmpModelList;
   List<SkyModel>? windDirectionModelList;
   List<SkyModel> wsdModelList = [];

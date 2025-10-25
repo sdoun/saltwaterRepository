@@ -1407,17 +1407,112 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                                             },
                                                                             child: SizedBox(
                                                                               height: 24,
-                                                                              child: Image.asset('assets/images/리뷰수정.png'),
+                                                                              child: Image.asset('assets/images/댓글수정.png'),
                                                                             ),
                                                                           ),
                                                                           InkWell(
                                                                             onTap: (){
-                                                                              columnTBUserReviewPointRecord.deleteRecord(columnTBUserReviewPointRecord.reference);
+                                                                              showDialog(
+                                                                                context: context,
+                                                                                builder: (context){
+                                                                                  return Dialog(
+                                                                                    child: Container(
+                                                                                      height: 100,
+                                                                                      width: 128,
+                                                                                      child: Padding(
+                                                                                        padding: const EdgeInsets.all(20.0),
+                                                                                        child: Column(
+                                                                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                          children: [
+                                                                                            Text(
+                                                                                              '리뷰를 삭제하시겠습니까?',
+                                                                                              style: FlutterFlowTheme.of(context)
+                                                                                                  .bodyMedium
+                                                                                                  .override(
+                                                                                                fontFamily:
+                                                                                                'PretendardSeries',
+                                                                                                fontSize: 16.0,
+                                                                                                letterSpacing: 0.0,
+                                                                                                fontWeight: FontWeight.w600,
+                                                                                                useGoogleFonts: GoogleFonts
+                                                                                                    .asMap()
+                                                                                                    .containsKey(
+                                                                                                    'PretendardSeries'),
+                                                                                              ),
+                                                                                            ),
+                                                                                            SizedBox(height: 8,),
+                                                                                            Row(
+                                                                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                                              children: [
+                                                                                                InkWell(
+                                                                                                  onTap: () async{
+                                                                                                    columnTBUserReviewPointRecord.deleteRecord(columnTBUserReviewPointRecord.reference);
+                                                                                                    context.pop();
+                                                                                                  },
+                                                                                                  child: Container(
+                                                                                                    child: Padding(
+                                                                                                      padding: EdgeInsetsGeometry.all(8),
+                                                                                                      child: Text(
+                                                                                                        '예',
+                                                                                                        style: FlutterFlowTheme.of(context)
+                                                                                                            .bodyMedium
+                                                                                                            .override(
+                                                                                                            fontFamily:
+                                                                                                            'PretendardSeries',
+                                                                                                            fontSize: 14.0,
+                                                                                                            letterSpacing: 0.0,
+                                                                                                            fontWeight: FontWeight.w600,
+                                                                                                            useGoogleFonts: GoogleFonts
+                                                                                                                .asMap()
+                                                                                                                .containsKey(
+                                                                                                                'PretendardSeries'),
+                                                                                                            color: FlutterFlowTheme.of(context).primaryText
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                ),
+                                                                                                InkWell(
+                                                                                                  onTap: (){
+                                                                                                    context.pop();
+                                                                                                  },
+                                                                                                  child: Container(
+                                                                                                    child: Padding(
+                                                                                                      padding: EdgeInsetsGeometry.all(8),
+                                                                                                      child: Text(
+                                                                                                        '아니오',
+                                                                                                        style: FlutterFlowTheme.of(context)
+                                                                                                            .bodyMedium
+                                                                                                            .override(
+                                                                                                            fontFamily:
+                                                                                                            'PretendardSeries',
+                                                                                                            fontSize: 14.0,
+                                                                                                            letterSpacing: 0.0,
+                                                                                                            fontWeight: FontWeight.w400,
+                                                                                                            useGoogleFonts: GoogleFonts
+                                                                                                                .asMap()
+                                                                                                                .containsKey(
+                                                                                                                'PretendardSeries'),
+                                                                                                            color: FlutterFlowTheme.of(context).secondaryText
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                )
+                                                                                              ],
+                                                                                            )
+                                                                                          ],
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  );
+                                                                                },
+                                                                              );
                                                                             },
                                                                             child:
                                                                             SizedBox(
                                                                               height: 24,
-                                                                              child: Image.asset('assets/images/리뷰삭제.png'),
+                                                                              child: Image.asset('assets/images/댓글삭제.png'),
                                                                             ),
                                                                           ),
                                                                         ],
@@ -1452,12 +1547,12 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                                       },
                                                                       child: SizedBox(
                                                                           height: 24,
-                                                                          child: Image.asset('assets/images/낚시경보.png')
+                                                                          child: Image.asset('assets/images/댓글신고.png')
                                                                       )
                                                                   )
                                                                 ],
                                                               ),
-                                                            ],
+                                                            ].divide(SizedBox(width: 4,)),
                                                           ),
                                                           InkWell(
                                                             onTap: () async {
@@ -1493,17 +1588,6 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                                       ),
                                                                       maxLines: 3,
                                                                     ),
-                                                                    PopupMenuButton(
-                                                                        icon: Image.asset('assets/images/댓글메뉴.png'),
-                                                                        itemBuilder: (context) => <PopupMenuEntry>[
-                                                                          PopupMenuItem(
-                                                                              child: ListTile(
-                                                                                leading: Image.asset('assets/images/댓글메뉴.png'),
-                                                                                title: Text('신고'),
-                                                                              ),
-                                                                          )
-                                                                      ],
-                                                                    )
                                                                   ],
                                                                 ),
                                                                 SizedBox(
