@@ -1425,6 +1425,10 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                                                     builder: (context){
                                                                                       return Dialog(
                                                                                         child: Container(
+                                                                                          decoration: BoxDecoration(
+                                                                                              color: FlutterFlowTheme.of(context).primaryBackground,
+                                                                                              borderRadius: BorderRadius.circular(12)
+                                                                                          ),
                                                                                           height: 100,
                                                                                           width: 128,
                                                                                           child: Padding(
@@ -1458,6 +1462,10 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                                                                         context.pop();
                                                                                                       },
                                                                                                       child: Container(
+                                                                                                        decoration: BoxDecoration(
+                                                                                                          color: FlutterFlowTheme.of(context).primaryBackground,
+                                                                                                          borderRadius: BorderRadius.circular(12)
+                                                                                                        ),
                                                                                                         child: Padding(
                                                                                                           padding: EdgeInsetsGeometry.all(8),
                                                                                                           child: Text(
@@ -1706,7 +1714,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                                           );
                                                                         })
                                                                      */
-                                                                  ],
+                                                                  ].divide(SizedBox(width: 4,)),
                                                                 ),
                                                               ),
                                                   
