@@ -842,10 +842,12 @@ class _PointDetailedWidgetState extends State<StoreboatDetailed> {
                                                             width: 16
                                                         ),
                                                         Row(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
                                                           children: [
                                                             Visibility(
                                                                 visible: currentUserReference == containerUsersRecord.reference,
                                                                 child: Row(
+                                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                                   children: [
                                                                     InkWell(
                                                                       onTap: () async {

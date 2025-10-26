@@ -1381,10 +1381,12 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                                       width: 16
                                                                   ),
                                                                   Row(
+                                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                                     children: [
                                                                       Visibility(
                                                                           visible: currentUserReference == containerUsersRecord.reference,
                                                                           child: Row(
+                                                                              crossAxisAlignment: CrossAxisAlignment.start,
                                                                             children: [
                                                                               InkWell(
                                                                                 onTap: () async {
@@ -1648,8 +1650,8 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                                         ),
                                                                         Text(
                                                                           ' | ${columnTBUserReviewPointRecord
-                                                                              .timestamp?.year} - ${columnTBUserReviewPointRecord
-                                                                              .timestamp?.month} - ${columnTBUserReviewPointRecord
+                                                                              .timestamp?.year} / ${columnTBUserReviewPointRecord
+                                                                              .timestamp?.month} / ${columnTBUserReviewPointRecord
                                                                               .timestamp?.day}',
                                                                           style:
                                                                           FlutterFlowTheme.of(context)
@@ -1668,6 +1670,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                                                 'PretendardSeries'),
                                                                           ),
                                                                         ),
+                                                                        /*
                                                                         InkWell(
                                                                           child:
                                                                           Text(
@@ -1690,6 +1693,7 @@ class _PointDetailedWidgetState extends State<PointDetailedWidget> {
                                                                             ),
                                                                           ),
                                                                         )
+                                                                         */
                                                                       ],
                                                                     ),
                                                                     /*

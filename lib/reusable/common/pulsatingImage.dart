@@ -19,7 +19,7 @@ class _PulsatingImageState extends State<PulsatingImage> with SingleTickerProvid
       vsync: this,
     )..repeat(reverse: true);
 
-    _animation = Tween<double>(begin: 0.8, end: 1.2).animate(_controller);
+    _animation = Tween<double>(begin: 0.6, end: 0.9).animate(_controller);
   }
 
   @override
