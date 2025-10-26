@@ -192,6 +192,60 @@ class _UserPageWidgetState extends State<UserPageWidget> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Basicscaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          automaticallyImplyLeading: false,
+          leading: Align(
+            alignment: const AlignmentDirectional(-1.0, -3.7),
+            child: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
+              child: FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30.0,
+                borderWidth: 1.0,
+                buttonSize: 60.0,
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.black,
+                  size: 30.0,
+                ),
+                onPressed: () async {
+                  context.pop();
+                },
+              ),
+            ),
+          ),
+          title: Align(
+            alignment: const AlignmentDirectional(0.0, -1.0),
+            child: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
+              child: Text(
+                '찜',
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                  fontFamily: 'PretendardSeries',
+                  fontSize: 20.0,
+                  letterSpacing: 0.0,
+                  fontWeight: FontWeight.w800,
+                  useGoogleFonts:
+                  GoogleFonts.asMap().containsKey('PretendardSeries'),
+                ),
+              ),
+            ),
+          ),
+          actions: const [FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 60.0,
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.transparent,
+              size: 30.0,
+            ),
+          ),],
+          centerTitle: false,
+          elevation: 2.0,
+        ),
         key: scaffoldKey,
         body: SafeArea(
           top: true,

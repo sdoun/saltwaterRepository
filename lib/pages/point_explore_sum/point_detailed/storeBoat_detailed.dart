@@ -821,21 +821,25 @@ class _PointDetailedWidgetState extends State<StoreboatDetailed> {
                                                   children: [
                                                     Row(
                                                       children: [
-                                                        Text(
-                                                          columnTBUserReviewPointRecord
-                                                              .reviewTitle,
-                                                          style: FlutterFlowTheme.of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                            fontFamily:
-                                                            'PretendardSeries',
-                                                            fontSize: 16.0,
-                                                            letterSpacing: 0.0,
-                                                            fontWeight: FontWeight.w600,
-                                                            useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                                .containsKey(
-                                                                'PretendardSeries'),
+                                                        Container(
+                                                          width: 128,
+                                                          child: Text(
+                                                            columnTBUserReviewPointRecord
+                                                                .reviewTitle,
+                                                            style: FlutterFlowTheme.of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                              fontFamily:
+                                                              'PretendardSeries',
+                                                              fontSize: 16.0,
+                                                              letterSpacing: 0.0,
+                                                              fontWeight: FontWeight.w600,
+                                                              useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                                  .containsKey(
+                                                                  'PretendardSeries'),
+                                                            ),
+                                                            overflow: TextOverflow.ellipsis,
                                                           ),
                                                         ),
                                                         const SizedBox(

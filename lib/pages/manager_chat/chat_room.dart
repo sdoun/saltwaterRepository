@@ -166,7 +166,7 @@ class _ChatRoomState extends State<ChatRoom> {
               child: Padding(
                 padding: const EdgeInsets.only(top: 24.0, bottom: 24),
                 child: Text(
-                  '낚시장소, 장비, 조횡정보 등 낚시에 관한\n모든 것을 물어보세요. \n최대한 빠르고 정확하게 답변해드리겠습니다.',
+                  'AI가 아닌 정보원이 직접 답변해드리고\n있습니다. 정보 수집, 업데이트 등으로 \n인해 답변이 지연되는 경우 양해 부탁드립니다.',
                   style: FlutterFlowTheme.of(context)
                       .labelMedium
                       .override(
