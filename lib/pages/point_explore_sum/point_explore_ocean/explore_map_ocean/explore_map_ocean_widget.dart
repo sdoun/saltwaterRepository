@@ -118,8 +118,11 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
               return snapshot.where((record) {
                 bool matchesName = _model.pointList == [] ||
                     _model.pointList!.contains(record.pointName);
-                bool matchesCategory = '해변, 갯바위' == '' ||
+                bool matchesCategory = //'해변, 갯바위' == '' ||
                     record.pointCategories == '해변, 갯바위';
+                if(matchesCategory && matchesName){
+                  print('matched record ${record.pointName}');
+                }
                 return matchesName && matchesCategory;
               }).toList();
             })..listen((snapshot) {
@@ -162,6 +165,7 @@ class _ExploreMapOceanWidgetState extends State<ExploreMapOceanWidget> {
                 );
               }
               List<TBPointRecord> exploreMapOceanTBPointRecordList = snapshot.data!;
+              print('ocean length ${exploreMapOceanTBPointRecordList.length}');
 
               return GestureDetector(
                 onTap: () => FocusScope.of(context).unfocus(),

@@ -52,6 +52,9 @@ Future<List<String>?> pointListFromFilter(
     // Get the 'point_tags_boolen' field value
     // Create a list to store tags from boolean structure
     List<String> tagsFromBoolenStruct = [];
+    if(filter1st == null){
+      filter1st = [];
+    }
     bool oceanTypeFit = filter1st!.isEmpty || (filter1st?.any((item) => tags.contains(item)) ?? true);
     // Add true items from 'point_tags_boolen' to tagsFromBoolenStruct
 
